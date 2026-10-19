@@ -1,0 +1,10 @@
+pandas
+numpy
+scipy
+pyproj
+requests
+rasterio
+psycopg2-binary
+python-dotenv
+flask
+earthengine-api

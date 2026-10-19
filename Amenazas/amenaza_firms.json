@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "fuente": "NASA FIRMS",
+    "source": "VIIRS_SNPP_NRT",
+    "endpoint": "https://firms.modaps.eosdis.nasa.gov/api/area/csv",
+    "bbox": {
+      "west": -72.859597,
+      "south": -43.051961,
+      "east": -72.323612,
+      "north": -41.987667
+    },
+    "margen_grados": 0.05,
+    "day_range": 5,
+    "fecha": null,
+    "generado": "2026-10-19T17:30:16+00:00",
+    "nodos_origen": "Infraestructura/nodosv2.json",
+    "aristas_origen": "Infraestructura/aristasv2.json",
+    "crs_metrico": "EPSG:32718",
+    "umbral_amenaza_m": 1000.0,
+    "penalizacion_km": 1000.0,
+    "regla_peso": "Si la distancia de un tramo al foco es <= 1000 m, evitar = true y costo_resiliente_km = costo_km + 1000. El Dijkstra de la fase 2 no usa este costo: solo costo_km. El costo penalizado queda para el algoritmo de la fase 3.",
+    "n_focos": 0,
+    "n_nodos_afectados": 0,
+    "n_aristas_afectadas": 0,
+    "resultado": "sin_focos_en_area"
+  },
+  "focos": [],
+  "nodos_afectados": [],
+  "aristas_afectadas": []
+}
