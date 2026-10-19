@@ -17,13 +17,23 @@ El enunciado pide un archivo por cada JSON que diga qué significa cada campo.
 - `Metadata/metadata_gee.json` y `metadata_gee_estructura.md`
 - `Amenazas/amenaza_firms.json` y `amenaza_firms_estructura.md`
 
-## Sitio
-
-`Sitio Web/app.py` abre el mapa en el puerto 8000. Muestra cámaras, tramos, cobertura y focos, y una ruta de `pgr_dijkstra` calculada solo con `costo_km`.
+## Todo junto
 
 ```bash
-python "Sitio Web/app.py"
+python main.py
 ```
+
+Genera nodos, cobertura y focos, levanta Docker, carga la base y deja el mapa en [http://127.0.0.1:8000](http://127.0.0.1:8000).
+
+## Sitio
+
+El mapa muestra cámaras, tramos, cobertura y focos, y una ruta de `pgr_dijkstra` calculada solo con `costo_km`.
+
+```bash
+docker compose up -d
+```
+
+Queda en [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
 ## Carga
 

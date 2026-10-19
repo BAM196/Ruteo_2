@@ -14,11 +14,11 @@ const form = document.querySelector("#route-form");
 const map = L.map("map", { zoomControl: true });
 L.tileLayer(
   "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-  { attribution: "Imágenes Esri, Maxar, Earthstar Geographics" }
+  { attribution: "Imágenes Esri, Maxar, Earthstar Geographics" },
 ).addTo(map);
 L.tileLayer(
   "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
-  { attribution: "&copy; OpenStreetMap, &copy; CARTO", pane: "shadowPane" }
+  { attribution: "&copy; OpenStreetMap, &copy; CARTO", pane: "shadowPane" },
 ).addTo(map);
 
 const edgesLayer = L.geoJSON(null, {
@@ -35,13 +35,15 @@ const edgesLayer = L.geoJSON(null, {
 }).addTo(map);
 
 const nodesLayer = L.geoJSON(null, {
-  pointToLayer: (feature, latlng) => L.circleMarker(latlng, {
-    radius: 7,
-    color: "#f7f3ea",
-    weight: 2,
-    fillColor: LAND_COVER_COLORS[feature.properties.land_cover_code] || "#8d8478",
-    fillOpacity: 1,
-  }),
+  pointToLayer: (feature, latlng) =>
+    L.circleMarker(latlng, {
+      radius: 7,
+      color: "#f7f3ea",
+      weight: 2,
+      fillColor:
+        LAND_COVER_COLORS[feature.properties.land_cover_code] || "#8d8478",
+      fillOpacity: 1,
+    }),
   onEachFeature: (feature, layer) => {
     const props = feature.properties;
     const species = (props.species || [])
@@ -51,27 +53,28 @@ const nodesLayer = L.geoJSON(null, {
     const note = props.pixel_note ? `<br>${props.pixel_note}` : "";
     layer.bindPopup(
       `<strong>${props.name}</strong><br>` +
-      `${props.land_cover_label || "Sin cobertura"}<br>` +
-      `${species || "Sin especies"}<br>` +
-      `${props.records} registros${note}`
+        `${props.land_cover_label || "Sin cobertura"}<br>` +
+        `${species || "Sin especies"}<br>` +
+        `${props.records} registros${note}`,
     );
   },
 }).addTo(map);
 
 const firesLayer = L.geoJSON(null, {
-  pointToLayer: (feature, latlng) => L.circleMarker(latlng, {
-    radius: 9,
-    color: "#d4652f",
-    weight: 2,
-    fillColor: "#ffb020",
-    fillOpacity: 0.9,
-  }),
+  pointToLayer: (feature, latlng) =>
+    L.circleMarker(latlng, {
+      radius: 9,
+      color: "#d4652f",
+      weight: 2,
+      fillColor: "#ffb020",
+      fillOpacity: 0.9,
+    }),
   onEachFeature: (feature, layer) => {
     const props = feature.properties;
     layer.bindPopup(
       `<strong>Foco ${props.id}</strong><br>` +
-      `${props.acquired_on || "sin fecha"} · confianza ${props.confidence || "s/d"}<br>` +
-      `FRP ${props.frp ?? "s/d"} MW`
+        `${props.acquired_on || "sin fecha"} · confianza ${props.confidence || "s/d"}<br>` +
+        `FRP ${props.frp ?? "s/d"} MW`,
     );
   },
 }).addTo(map);
@@ -92,7 +95,9 @@ function fillCameras(features) {
     option.textContent = feature.properties.name;
     return option;
   });
-  startSelect.replaceChildren(...options.map((option) => option.cloneNode(true)));
+  startSelect.replaceChildren(
+    ...options.map((option) => option.cloneNode(true)),
+  );
   goalSelect.replaceChildren(...options);
 }
 
@@ -111,7 +116,8 @@ async function readJson(url) {
 }
 
 async function drawRoute(startId, goalId) {
-  const query = startId && goalId ? `?start_id=${startId}&goal_id=${goalId}` : "";
+  const query =
+    startId && goalId ? `?start_id=${startId}&goal_id=${goalId}` : "";
   const payload = await readJson(`/api/route${query}`);
   routeLayer.clearLayers();
   if (payload.geometry) {
