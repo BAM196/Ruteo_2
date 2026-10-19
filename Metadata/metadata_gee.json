@@ -1,0 +1,1648 @@
+{
+  "meta": {
+    "fuente": "ESA WorldCover 10 m 2021 v200",
+    "dataset_gee": "ESA/WorldCover/v200/2021",
+    "banda": "Map",
+    "modo_extraccion": "cog",
+    "generado": "2026-10-19T17:30:14+00:00",
+    "nodos_origen": "Infraestructura/nodosv2.json",
+    "cita": "Zanaga, D. et al. (2022). ESA WorldCover 10 m 2021 v200. https://doi.org/10.5281/zenodo.7254221",
+    "especies_objetivo": [
+      "Pudu puda",
+      "Leopardus guigna",
+      "Puma concolor",
+      "Lycalopex culpaeus",
+      "Galictis cuja"
+    ],
+    "especies_invasoras": [
+      "Neovison vison",
+      "Lepus europaeus",
+      "Canis lupus familiaris",
+      "Bos taurus"
+    ],
+    "clases_prioritarias_default": [
+      10
+    ],
+    "preferencias_default": "Si el usuario no indica un hábitat, no se bloquea ninguna clase. Se prioriza solo la clase que concentra más cámaras con especie objetivo. El resto queda visitable, con preferencia sin_prioridad. El Dijkstra de la fase 2 ignora esta marca y usa solo costo_km.",
+    "ejemplo_restriccion_usuario": "Si el usuario pide solo cobertura arbórea, los nodos con landcover_code distinto de 10 pasan a restriccion = 'excluir'. Eso es una preferencia simulada, no el comportamiento por defecto.",
+    "clases": {
+      "10": {
+        "en": "Tree cover",
+        "es": "Cobertura arbórea"
+      },
+      "20": {
+        "en": "Shrubland",
+        "es": "Matorral"
+      },
+      "30": {
+        "en": "Grassland",
+        "es": "Pastizal"
+      },
+      "40": {
+        "en": "Cropland",
+        "es": "Cultivo"
+      },
+      "50": {
+        "en": "Built-up",
+        "es": "Zona construida"
+      },
+      "60": {
+        "en": "Bare / sparse vegetation",
+        "es": "Suelo desnudo o vegetación escasa"
+      },
+      "70": {
+        "en": "Snow and ice",
+        "es": "Nieve y hielo"
+      },
+      "80": {
+        "en": "Permanent water bodies",
+        "es": "Cuerpo de agua permanente"
+      },
+      "90": {
+        "en": "Herbaceous wetland",
+        "es": "Humedal herbáceo"
+      },
+      "95": {
+        "en": "Mangroves",
+        "es": "Manglar"
+      },
+      "100": {
+        "en": "Moss and lichen",
+        "es": "Musgo y liquen"
+      }
+    },
+    "resumen_por_clase": {
+      "10": {
+        "clase": "Tree cover",
+        "clase_es": "Cobertura arbórea",
+        "n_nodos": 43,
+        "especies": [
+          {
+            "cientifico": "Bos taurus Linnaeus, 1758",
+            "comun": "Vaca",
+            "nodos": 5,
+            "registros": 5050
+          },
+          {
+            "cientifico": "Pudu puda (Molina, 1782)",
+            "comun": "Pudú",
+            "nodos": 30,
+            "registros": 2322
+          },
+          {
+            "cientifico": "Leopardus guigna (Molina, 1782)",
+            "comun": "Güiña",
+            "nodos": 23,
+            "registros": 504
+          },
+          {
+            "cientifico": "Lepus europaeus Pallas, 1778",
+            "comun": "Liebre europea",
+            "nodos": 2,
+            "registros": 264
+          },
+          {
+            "cientifico": "Lycalopex culpaeus (Molina, 1782)",
+            "comun": "Zorro culpeo",
+            "nodos": 5,
+            "registros": 236
+          },
+          {
+            "cientifico": "Puma concolor (Linnaeus, 1771)",
+            "comun": "Puma",
+            "nodos": 9,
+            "registros": 152
+          },
+          {
+            "cientifico": "Canis lupus familiaris Linnaeus, 1758",
+            "comun": "Perro doméstico",
+            "nodos": 4,
+            "registros": 70
+          },
+          {
+            "cientifico": "Galictis cuja (Molina, 1782)",
+            "comun": "Quique",
+            "nodos": 5,
+            "registros": 50
+          },
+          {
+            "cientifico": "Neovison vison (Schreber, 1777)",
+            "comun": "Visón americano",
+            "nodos": 1,
+            "registros": 12
+          }
+        ]
+      },
+      "30": {
+        "clase": "Grassland",
+        "clase_es": "Pastizal",
+        "n_nodos": 1,
+        "especies": [
+          {
+            "cientifico": "Leopardus guigna (Molina, 1782)",
+            "comun": "Güiña",
+            "nodos": 1,
+            "registros": 10
+          }
+        ]
+      },
+      "80": {
+        "clase": "Permanent water bodies",
+        "clase_es": "Cuerpo de agua permanente",
+        "n_nodos": 4,
+        "especies": [
+          {
+            "cientifico": "Pudu puda (Molina, 1782)",
+            "comun": "Pudú",
+            "nodos": 2,
+            "registros": 206
+          },
+          {
+            "cientifico": "Leopardus guigna (Molina, 1782)",
+            "comun": "Güiña",
+            "nodos": 2,
+            "registros": 32
+          },
+          {
+            "cientifico": "Puma concolor (Linnaeus, 1771)",
+            "comun": "Puma",
+            "nodos": 2,
+            "registros": 14
+          },
+          {
+            "cientifico": "Canis lupus familiaris Linnaeus, 1758",
+            "comun": "Perro doméstico",
+            "nodos": 1,
+            "registros": 1
+          }
+        ]
+      }
+    }
+  },
+  "registros": [
+    {
+      "nodo_id": 1,
+      "nombre": "Camara AC110",
+      "lat": -43.001961,
+      "lon": -72.464575,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AC110",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AC110"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 12
+        },
+        {
+          "cientifico": "Galictis cuja (Molina, 1782)",
+          "comun": "Quique",
+          "registros": 4
+        },
+        {
+          "cientifico": "Puma concolor (Linnaeus, 1771)",
+          "comun": "Puma",
+          "registros": 4
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 2,
+      "nombre": "Camara AB109",
+      "lat": -42.993235,
+      "lon": -72.4772,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AB109",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AB109"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 16
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 3,
+      "nombre": "Camara AB108",
+      "lat": -42.984239,
+      "lon": -72.477568,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AB108",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AB108"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 68
+        },
+        {
+          "cientifico": "Canis lupus familiaris Linnaeus, 1758",
+          "comun": "Perro doméstico",
+          "registros": 6
+        },
+        {
+          "cientifico": "Puma concolor (Linnaeus, 1771)",
+          "comun": "Puma",
+          "registros": 6
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": true,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 4,
+      "nombre": "Camara AE108",
+      "lat": -42.983423,
+      "lon": -72.440808,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AE108",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AE108"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 12
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 5,
+      "nombre": "Camara AC107",
+      "lat": -42.974972,
+      "lon": -72.465684,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AC107",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AC107"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 10
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 6
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 6,
+      "nombre": "Camara AB106",
+      "lat": -42.966246,
+      "lon": -72.478304,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AB106",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AB106"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 60
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 12
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 7,
+      "nombre": "Camara AB105",
+      "lat": -42.95725,
+      "lon": -72.478671,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AB105",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AB105"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 6
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 4
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 8,
+      "nombre": "Camara Q104",
+      "lat": -42.951143,
+      "lon": -72.613761,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:Q104",
+        "CONAF:Fotomonitoreo:PNPDT:2022:Q104"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Bos taurus Linnaeus, 1758",
+          "comun": "Vaca",
+          "registros": 158
+        },
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 16
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 4
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": true,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 9,
+      "nombre": "Camara AC103",
+      "lat": -42.938987,
+      "lon": -72.467162,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AC103",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AC103"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Lepus europaeus Pallas, 1778",
+          "comun": "Liebre europea",
+          "registros": 164
+        },
+        {
+          "cientifico": "Lycalopex culpaeus (Molina, 1782)",
+          "comun": "Zorro culpeo",
+          "registros": 64
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": true,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 10,
+      "nombre": "Camara AD101",
+      "lat": -42.920722,
+      "lon": -72.455658,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AD101",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AD101"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Lycalopex culpaeus (Molina, 1782)",
+          "comun": "Zorro culpeo",
+          "registros": 24
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 11,
+      "nombre": "Camara AD99",
+      "lat": -42.90273,
+      "lon": -72.456399,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AD99",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AD99"
+      ],
+      "landcover_code": 30,
+      "landcover_clase": "Grassland",
+      "landcover_clase_es": "Pastizal",
+      "especies": [
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 10
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": false,
+      "preferencia_default": "sin_prioridad",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 12,
+      "nombre": "Camara AE97",
+      "lat": -42.884464,
+      "lon": -72.444905,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AE97",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AE97"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Lycalopex culpaeus (Molina, 1782)",
+          "comun": "Zorro culpeo",
+          "registros": 112
+        },
+        {
+          "cientifico": "Lepus europaeus Pallas, 1778",
+          "comun": "Liebre europea",
+          "registros": 100
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": true,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 13,
+      "nombre": "Camara AI95",
+      "lat": -42.865369,
+      "lon": -72.396729,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AI95",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AI95"
+      ],
+      "landcover_code": 80,
+      "landcover_clase": "Permanent water bodies",
+      "landcover_clase_es": "Cuerpo de agua permanente",
+      "especies": [
+        {
+          "cientifico": "Puma concolor (Linnaeus, 1771)",
+          "comun": "Puma",
+          "registros": 6
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": "Pixel de agua permanente. En un parque de fiordos el pixel de 10 m puede caer en el canal aunque la camara este en la orilla.",
+      "clase_prioritaria_default": false,
+      "preferencia_default": "sin_prioridad",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 14,
+      "nombre": "Camara D91",
+      "lat": -42.837373,
+      "lon": -72.777209,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:D91",
+        "CONAF:Fotomonitoreo:PNPDT:2022:D91"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Canis lupus familiaris Linnaeus, 1758",
+          "comun": "Perro doméstico",
+          "registros": 18
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 12
+        },
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 12
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": true,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 15,
+      "nombre": "Camara I88",
+      "lat": -42.809175,
+      "lon": -72.717069,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:I88",
+        "CONAF:Fotomonitoreo:PNPDT:2022:I88"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Bos taurus Linnaeus, 1758",
+          "comun": "Vaca",
+          "registros": 2794
+        },
+        {
+          "cientifico": "Canis lupus familiaris Linnaeus, 1758",
+          "comun": "Perro doméstico",
+          "registros": 12
+        },
+        {
+          "cientifico": "Puma concolor (Linnaeus, 1771)",
+          "comun": "Puma",
+          "registros": 6
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": true,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 16,
+      "nombre": "Camara O88",
+      "lat": -42.807689,
+      "lon": -72.643745,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:O88",
+        "CONAF:Fotomonitoreo:PNPDT:2022:O88"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 68
+        },
+        {
+          "cientifico": "Lycalopex culpaeus (Molina, 1782)",
+          "comun": "Zorro culpeo",
+          "registros": 22
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 17,
+      "nombre": "Camara K87",
+      "lat": -42.799687,
+      "lon": -72.692962,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:K87",
+        "CONAF:Fotomonitoreo:PNPDT:2022:K87"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Bos taurus Linnaeus, 1758",
+          "comun": "Vaca",
+          "registros": 1864
+        }
+      ],
+      "tiene_especie_objetivo": false,
+      "tiene_especie_invasora": true,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 18,
+      "nombre": "Camara O86",
+      "lat": -42.789694,
+      "lon": -72.644428,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:O86",
+        "CONAF:Fotomonitoreo:PNPDT:2022:O86"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 332
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 19,
+      "nombre": "Camara Q86",
+      "lat": -42.789188,
+      "lon": -72.619995,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:Q86",
+        "CONAF:Fotomonitoreo:PNPDT:2022:Q86"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 78
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 20,
+      "nombre": "Camara R85",
+      "lat": -42.779936,
+      "lon": -72.608125,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:R85",
+        "CONAF:Fotomonitoreo:PNPDT:2022:R85"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 48
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 21,
+      "nombre": "Camara O84",
+      "lat": -42.771698,
+      "lon": -72.64511,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:O84",
+        "CONAF:Fotomonitoreo:PNPDT:2022:O84"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 14
+        },
+        {
+          "cientifico": "Puma concolor (Linnaeus, 1771)",
+          "comun": "Puma",
+          "registros": 12
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 22,
+      "nombre": "Camara R84",
+      "lat": -42.770938,
+      "lon": -72.608472,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:R84",
+        "CONAF:Fotomonitoreo:PNPDT:2022:R84"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 6
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 23,
+      "nombre": "Camara Q83",
+      "lat": -42.762195,
+      "lon": -72.621029,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:Q83",
+        "CONAF:Fotomonitoreo:PNPDT:2022:Q83"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 54
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 24,
+      "nombre": "Camara R82",
+      "lat": -42.752943,
+      "lon": -72.609164,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2022:R82"
+      ],
+      "landcover_code": 80,
+      "landcover_clase": "Permanent water bodies",
+      "landcover_clase_es": "Cuerpo de agua permanente",
+      "especies": [
+        {
+          "cientifico": "Canis lupus familiaris Linnaeus, 1758",
+          "comun": "Perro doméstico",
+          "registros": 1
+        }
+      ],
+      "tiene_especie_objetivo": false,
+      "tiene_especie_invasora": true,
+      "nota_pixel": "Pixel de agua permanente. En un parque de fiordos el pixel de 10 m puede caer en el canal aunque la camara este en la orilla.",
+      "clase_prioritaria_default": false,
+      "preferencia_default": "sin_prioridad",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 25,
+      "nombre": "Camara T79",
+      "lat": -42.725438,
+      "lon": -72.585794,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:T79",
+        "CONAF:Fotomonitoreo:PNPDT:2022:T79"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 12
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 26,
+      "nombre": "Camara U78",
+      "lat": -42.716182,
+      "lon": -72.573941,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:U78",
+        "CONAF:Fotomonitoreo:PNPDT:2022:U78"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 10
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 27,
+      "nombre": "Camara T77",
+      "lat": -42.707443,
+      "lon": -72.586492,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:T77",
+        "CONAF:Fotomonitoreo:PNPDT:2022:T77"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 2
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 28,
+      "nombre": "Camara T75",
+      "lat": -42.689448,
+      "lon": -72.587189,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:T75",
+        "CONAF:Fotomonitoreo:PNPDT:2022:T75"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 10
+        },
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 6
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 29,
+      "nombre": "Camara U72",
+      "lat": -42.662197,
+      "lon": -72.576042,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:U72",
+        "CONAF:Fotomonitoreo:PNPDT:2022:U72"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 706
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 58
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 30,
+      "nombre": "Camara S71",
+      "lat": -42.653713,
+      "lon": -72.600771,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:S71",
+        "CONAF:Fotomonitoreo:PNPDT:2022:S71"
+      ],
+      "landcover_code": 80,
+      "landcover_clase": "Permanent water bodies",
+      "landcover_clase_es": "Cuerpo de agua permanente",
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 18
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 2
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": "Pixel de agua permanente. En un parque de fiordos el pixel de 10 m puede caer en el canal aunque la camara este en la orilla.",
+      "clase_prioritaria_default": false,
+      "preferencia_default": "sin_prioridad",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 31,
+      "nombre": "Camara U70",
+      "lat": -42.644202,
+      "lon": -72.576742,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:U70",
+        "CONAF:Fotomonitoreo:PNPDT:2022:U70"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 10
+        },
+        {
+          "cientifico": "Galictis cuja (Molina, 1782)",
+          "comun": "Quique",
+          "registros": 6
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 32,
+      "nombre": "Camara B66",
+      "lat": -42.612873,
+      "lon": -72.809597,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:B66",
+        "CONAF:Fotomonitoreo:PNPDT:2022:B66"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 18
+        },
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 16
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 33,
+      "nombre": "Camara U65",
+      "lat": -42.599214,
+      "lon": -72.578487,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:U65",
+        "CONAF:Fotomonitoreo:PNPDT:2022:U65"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 24
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 34,
+      "nombre": "Camara C63",
+      "lat": -42.585642,
+      "lon": -72.798365,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:C63",
+        "CONAF:Fotomonitoreo:PNPDT:2022:C63"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Bos taurus Linnaeus, 1758",
+          "comun": "Vaca",
+          "registros": 222
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 98
+        },
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 92
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": true,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 35,
+      "nombre": "Camara T62",
+      "lat": -42.572478,
+      "lon": -72.591705,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:T62",
+        "CONAF:Fotomonitoreo:PNPDT:2022:T62"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 6
+        },
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 6
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 36,
+      "nombre": "Camara R61",
+      "lat": -42.563989,
+      "lon": -72.616396,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:R61",
+        "CONAF:Fotomonitoreo:PNPDT:2022:R61"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 42
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 26
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 37,
+      "nombre": "Camara S61",
+      "lat": -42.563735,
+      "lon": -72.604224,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:S61",
+        "CONAF:Fotomonitoreo:PNPDT:2022:S61"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 26
+        },
+        {
+          "cientifico": "Lycalopex culpaeus (Molina, 1782)",
+          "comun": "Zorro culpeo",
+          "registros": 14
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 38,
+      "nombre": "Camara Z61",
+      "lat": -42.561921,
+      "lon": -72.519022,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:Z61",
+        "CONAF:Fotomonitoreo:PNPDT:2022:Z61"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 26
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 18
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 39,
+      "nombre": "Camara T60",
+      "lat": -42.554482,
+      "lon": -72.592398,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:T60",
+        "CONAF:Fotomonitoreo:PNPDT:2022:T60"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 106
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 52
+        },
+        {
+          "cientifico": "Galictis cuja (Molina, 1782)",
+          "comun": "Quique",
+          "registros": 36
+        },
+        {
+          "cientifico": "Neovison vison (Schreber, 1777)",
+          "comun": "Visón americano",
+          "registros": 12
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": true,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 40,
+      "nombre": "Camara AA60",
+      "lat": -42.552659,
+      "lon": -72.50721,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AA60",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AA60"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 66
+        },
+        {
+          "cientifico": "Galictis cuja (Molina, 1782)",
+          "comun": "Quique",
+          "registros": 2
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 41,
+      "nombre": "Camara Z59",
+      "lat": -42.543926,
+      "lon": -72.519736,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2022:Z59"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Puma concolor (Linnaeus, 1771)",
+          "comun": "Puma",
+          "registros": 3
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 42,
+      "nombre": "Camara AD57",
+      "lat": -42.524868,
+      "lon": -72.471793,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AD57",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AD57"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 396
+        },
+        {
+          "cientifico": "Puma concolor (Linnaeus, 1771)",
+          "comun": "Puma",
+          "registros": 8
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 6
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 43,
+      "nombre": "Camara AC56",
+      "lat": -42.516139,
+      "lon": -72.484318,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AC56",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AC56"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Puma concolor (Linnaeus, 1771)",
+          "comun": "Puma",
+          "registros": 86
+        },
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 58
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 18
+        },
+        {
+          "cientifico": "Galictis cuja (Molina, 1782)",
+          "comun": "Quique",
+          "registros": 2
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 44,
+      "nombre": "Camara AF56",
+      "lat": -42.515331,
+      "lon": -72.447833,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AF56",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AF56"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 32
+        },
+        {
+          "cientifico": "Puma concolor (Linnaeus, 1771)",
+          "comun": "Puma",
+          "registros": 24
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 45,
+      "nombre": "Camara AF54",
+      "lat": -42.497338,
+      "lon": -72.448565,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2022:AF54"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 14
+        },
+        {
+          "cientifico": "Puma concolor (Linnaeus, 1771)",
+          "comun": "Puma",
+          "registros": 3
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 46,
+      "nombre": "Camara AM27",
+      "lat": -42.252503,
+      "lon": -72.373612,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2022:AM27"
+      ],
+      "landcover_code": 80,
+      "landcover_clase": "Permanent water bodies",
+      "landcover_clase_es": "Cuerpo de agua permanente",
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 188
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 30
+        },
+        {
+          "cientifico": "Puma concolor (Linnaeus, 1771)",
+          "comun": "Puma",
+          "registros": 8
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": false,
+      "nota_pixel": "Pixel de agua permanente. En un parque de fiordos el pixel de 10 m puede caer en el canal aunque la camara este en la orilla.",
+      "clase_prioritaria_default": false,
+      "preferencia_default": "sin_prioridad",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 47,
+      "nombre": "Camara AH08",
+      "lat": -42.082924,
+      "lon": -72.441068,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AH08",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AH08"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Bos taurus Linnaeus, 1758",
+          "comun": "Vaca",
+          "registros": 12
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 4
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": true,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 48,
+      "nombre": "Camara AI03",
+      "lat": -42.037667,
+      "lon": -72.430805,
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AI03",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AI03"
+      ],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [
+        {
+          "cientifico": "Canis lupus familiaris Linnaeus, 1758",
+          "comun": "Perro doméstico",
+          "registros": 34
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 6
+        },
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 6
+        }
+      ],
+      "tiene_especie_objetivo": true,
+      "tiene_especie_invasora": true,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    }
+  ]
+}

@@ -1,0 +1,1306 @@
+{
+  "meta": {
+    "fuente": "GBIF Chile - fotomonitoreo CONAF 2021 (occurrence.txt)",
+    "area": "Parque Nacional Pumalín Douglas Tompkins",
+    "generado": "2026-10-19T17:25:40+00:00",
+    "filtro_localidad": "Pumal",
+    "bbox": "none",
+    "k_vecinos": 2,
+    "max_arista_m": 3000.0,
+    "crs": "EPSG:4326",
+    "crs_metrico": "EPSG:32718",
+    "n_nodos": 48,
+    "n_aristas": 67,
+    "nota_grafo": "Grafo no dirigido. En pgr_dijkstra usar directed => false, o cargar cada arista en los dos sentidos. El costo base es costo_km."
+  },
+  "nodos": [
+    {
+      "id": 1,
+      "lat": -43.001961,
+      "lon": -72.464575,
+      "nombre": "Camara AC110",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AC110",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AC110"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 20,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 12
+        },
+        {
+          "cientifico": "Galictis cuja (Molina, 1782)",
+          "comun": "Quique",
+          "registros": 4
+        },
+        {
+          "cientifico": "Puma concolor (Linnaeus, 1771)",
+          "comun": "Puma",
+          "registros": 4
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "lat": -42.993235,
+      "lon": -72.4772,
+      "nombre": "Camara AB109",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AB109",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AB109"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 16,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 16
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "lat": -42.984239,
+      "lon": -72.477568,
+      "nombre": "Camara AB108",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AB108",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AB108"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 80,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 68
+        },
+        {
+          "cientifico": "Canis lupus familiaris Linnaeus, 1758",
+          "comun": "Perro doméstico",
+          "registros": 6
+        },
+        {
+          "cientifico": "Puma concolor (Linnaeus, 1771)",
+          "comun": "Puma",
+          "registros": 6
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "lat": -42.983423,
+      "lon": -72.440808,
+      "nombre": "Camara AE108",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AE108",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AE108"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 12,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 12
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "lat": -42.974972,
+      "lon": -72.465684,
+      "nombre": "Camara AC107",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AC107",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AC107"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 16,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 10
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 6
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "lat": -42.966246,
+      "lon": -72.478304,
+      "nombre": "Camara AB106",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AB106",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AB106"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 72,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 60
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 12
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "lat": -42.95725,
+      "lon": -72.478671,
+      "nombre": "Camara AB105",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AB105",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AB105"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 10,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 6
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 4
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "lat": -42.951143,
+      "lon": -72.613761,
+      "nombre": "Camara Q104",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:Q104",
+        "CONAF:Fotomonitoreo:PNPDT:2022:Q104"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 178,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Bos taurus Linnaeus, 1758",
+          "comun": "Vaca",
+          "registros": 158
+        },
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 16
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 4
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "lat": -42.938987,
+      "lon": -72.467162,
+      "nombre": "Camara AC103",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AC103",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AC103"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 228,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Lepus europaeus Pallas, 1778",
+          "comun": "Liebre europea",
+          "registros": 164
+        },
+        {
+          "cientifico": "Lycalopex culpaeus (Molina, 1782)",
+          "comun": "Zorro culpeo",
+          "registros": 64
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "lat": -42.920722,
+      "lon": -72.455658,
+      "nombre": "Camara AD101",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AD101",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AD101"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 24,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Lycalopex culpaeus (Molina, 1782)",
+          "comun": "Zorro culpeo",
+          "registros": 24
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "lat": -42.90273,
+      "lon": -72.456399,
+      "nombre": "Camara AD99",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AD99",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AD99"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 10,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 10
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "lat": -42.884464,
+      "lon": -72.444905,
+      "nombre": "Camara AE97",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AE97",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AE97"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 212,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Lycalopex culpaeus (Molina, 1782)",
+          "comun": "Zorro culpeo",
+          "registros": 112
+        },
+        {
+          "cientifico": "Lepus europaeus Pallas, 1778",
+          "comun": "Liebre europea",
+          "registros": 100
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "lat": -42.865369,
+      "lon": -72.396729,
+      "nombre": "Camara AI95",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AI95",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AI95"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 6,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Puma concolor (Linnaeus, 1771)",
+          "comun": "Puma",
+          "registros": 6
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "lat": -42.837373,
+      "lon": -72.777209,
+      "nombre": "Camara D91",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:D91",
+        "CONAF:Fotomonitoreo:PNPDT:2022:D91"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 42,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Canis lupus familiaris Linnaeus, 1758",
+          "comun": "Perro doméstico",
+          "registros": 18
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 12
+        },
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 12
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "lat": -42.809175,
+      "lon": -72.717069,
+      "nombre": "Camara I88",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:I88",
+        "CONAF:Fotomonitoreo:PNPDT:2022:I88"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 2812,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Bos taurus Linnaeus, 1758",
+          "comun": "Vaca",
+          "registros": 2794
+        },
+        {
+          "cientifico": "Canis lupus familiaris Linnaeus, 1758",
+          "comun": "Perro doméstico",
+          "registros": 12
+        },
+        {
+          "cientifico": "Puma concolor (Linnaeus, 1771)",
+          "comun": "Puma",
+          "registros": 6
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "lat": -42.807689,
+      "lon": -72.643745,
+      "nombre": "Camara O88",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:O88",
+        "CONAF:Fotomonitoreo:PNPDT:2022:O88"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 90,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 68
+        },
+        {
+          "cientifico": "Lycalopex culpaeus (Molina, 1782)",
+          "comun": "Zorro culpeo",
+          "registros": 22
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "lat": -42.799687,
+      "lon": -72.692962,
+      "nombre": "Camara K87",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:K87",
+        "CONAF:Fotomonitoreo:PNPDT:2022:K87"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 1864,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Bos taurus Linnaeus, 1758",
+          "comun": "Vaca",
+          "registros": 1864
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "lat": -42.789694,
+      "lon": -72.644428,
+      "nombre": "Camara O86",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:O86",
+        "CONAF:Fotomonitoreo:PNPDT:2022:O86"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 332,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 332
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "lat": -42.789188,
+      "lon": -72.619995,
+      "nombre": "Camara Q86",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:Q86",
+        "CONAF:Fotomonitoreo:PNPDT:2022:Q86"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 78,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 78
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "lat": -42.779936,
+      "lon": -72.608125,
+      "nombre": "Camara R85",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:R85",
+        "CONAF:Fotomonitoreo:PNPDT:2022:R85"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 48,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 48
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "lat": -42.771698,
+      "lon": -72.64511,
+      "nombre": "Camara O84",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:O84",
+        "CONAF:Fotomonitoreo:PNPDT:2022:O84"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 26,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 14
+        },
+        {
+          "cientifico": "Puma concolor (Linnaeus, 1771)",
+          "comun": "Puma",
+          "registros": 12
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "lat": -42.770938,
+      "lon": -72.608472,
+      "nombre": "Camara R84",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:R84",
+        "CONAF:Fotomonitoreo:PNPDT:2022:R84"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 6,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 6
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "lat": -42.762195,
+      "lon": -72.621029,
+      "nombre": "Camara Q83",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:Q83",
+        "CONAF:Fotomonitoreo:PNPDT:2022:Q83"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 54,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 54
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "lat": -42.752943,
+      "lon": -72.609164,
+      "nombre": "Camara R82",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2022:R82"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 1,
+      "anios": [
+        2022
+      ],
+      "especies": [
+        {
+          "cientifico": "Canis lupus familiaris Linnaeus, 1758",
+          "comun": "Perro doméstico",
+          "registros": 1
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "lat": -42.725438,
+      "lon": -72.585794,
+      "nombre": "Camara T79",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:T79",
+        "CONAF:Fotomonitoreo:PNPDT:2022:T79"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 12,
+      "anios": [
+        2021,
+        2022
+      ],
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 12
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "lat": -42.716182,
+      "lon": -72.573941,
+      "nombre": "Camara U78",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:U78",
+        "CONAF:Fotomonitoreo:PNPDT:2022:U78"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 10,
+      "anios": [
+        2022
+      ],
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 10
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "lat": -42.707443,
+      "lon": -72.586492,
+      "nombre": "Camara T77",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:T77",
+        "CONAF:Fotomonitoreo:PNPDT:2022:T77"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 2,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 2
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "lat": -42.689448,
+      "lon": -72.587189,
+      "nombre": "Camara T75",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:T75",
+        "CONAF:Fotomonitoreo:PNPDT:2022:T75"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 16,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 10
+        },
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 6
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "lat": -42.662197,
+      "lon": -72.576042,
+      "nombre": "Camara U72",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:U72",
+        "CONAF:Fotomonitoreo:PNPDT:2022:U72"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 764,
+      "anios": [
+        2021,
+        2022
+      ],
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 706
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 58
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "lat": -42.653713,
+      "lon": -72.600771,
+      "nombre": "Camara S71",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:S71",
+        "CONAF:Fotomonitoreo:PNPDT:2022:S71"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 20,
+      "anios": [
+        2021,
+        2022
+      ],
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 18
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 2
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "lat": -42.644202,
+      "lon": -72.576742,
+      "nombre": "Camara U70",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:U70",
+        "CONAF:Fotomonitoreo:PNPDT:2022:U70"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 16,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 10
+        },
+        {
+          "cientifico": "Galictis cuja (Molina, 1782)",
+          "comun": "Quique",
+          "registros": 6
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "lat": -42.612873,
+      "lon": -72.809597,
+      "nombre": "Camara B66",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:B66",
+        "CONAF:Fotomonitoreo:PNPDT:2022:B66"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 34,
+      "anios": [
+        2021,
+        2022
+      ],
+      "especies": [
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 18
+        },
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 16
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "lat": -42.599214,
+      "lon": -72.578487,
+      "nombre": "Camara U65",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:U65",
+        "CONAF:Fotomonitoreo:PNPDT:2022:U65"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 24,
+      "anios": [
+        2021,
+        2022
+      ],
+      "especies": [
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 24
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "lat": -42.585642,
+      "lon": -72.798365,
+      "nombre": "Camara C63",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:C63",
+        "CONAF:Fotomonitoreo:PNPDT:2022:C63"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 412,
+      "anios": [
+        2021,
+        2022
+      ],
+      "especies": [
+        {
+          "cientifico": "Bos taurus Linnaeus, 1758",
+          "comun": "Vaca",
+          "registros": 222
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 98
+        },
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 92
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "lat": -42.572478,
+      "lon": -72.591705,
+      "nombre": "Camara T62",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:T62",
+        "CONAF:Fotomonitoreo:PNPDT:2022:T62"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 12,
+      "anios": [
+        2022
+      ],
+      "especies": [
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 6
+        },
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 6
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "lat": -42.563989,
+      "lon": -72.616396,
+      "nombre": "Camara R61",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:R61",
+        "CONAF:Fotomonitoreo:PNPDT:2022:R61"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 68,
+      "anios": [
+        2021,
+        2022
+      ],
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 42
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 26
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "lat": -42.563735,
+      "lon": -72.604224,
+      "nombre": "Camara S61",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:S61",
+        "CONAF:Fotomonitoreo:PNPDT:2022:S61"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 40,
+      "anios": [
+        2021,
+        2022
+      ],
+      "especies": [
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 26
+        },
+        {
+          "cientifico": "Lycalopex culpaeus (Molina, 1782)",
+          "comun": "Zorro culpeo",
+          "registros": 14
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "lat": -42.561921,
+      "lon": -72.519022,
+      "nombre": "Camara Z61",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:Z61",
+        "CONAF:Fotomonitoreo:PNPDT:2022:Z61"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 44,
+      "anios": [
+        2021,
+        2022
+      ],
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 26
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 18
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "lat": -42.554482,
+      "lon": -72.592398,
+      "nombre": "Camara T60",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:T60",
+        "CONAF:Fotomonitoreo:PNPDT:2022:T60"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 206,
+      "anios": [
+        2021,
+        2022
+      ],
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 106
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 52
+        },
+        {
+          "cientifico": "Galictis cuja (Molina, 1782)",
+          "comun": "Quique",
+          "registros": 36
+        },
+        {
+          "cientifico": "Neovison vison (Schreber, 1777)",
+          "comun": "Visón americano",
+          "registros": 12
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "lat": -42.552659,
+      "lon": -72.50721,
+      "nombre": "Camara AA60",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AA60",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AA60"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 68,
+      "anios": [
+        2021,
+        2022
+      ],
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 66
+        },
+        {
+          "cientifico": "Galictis cuja (Molina, 1782)",
+          "comun": "Quique",
+          "registros": 2
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "lat": -42.543926,
+      "lon": -72.519736,
+      "nombre": "Camara Z59",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2022:Z59"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 3,
+      "anios": [
+        2022
+      ],
+      "especies": [
+        {
+          "cientifico": "Puma concolor (Linnaeus, 1771)",
+          "comun": "Puma",
+          "registros": 3
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "lat": -42.524868,
+      "lon": -72.471793,
+      "nombre": "Camara AD57",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AD57",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AD57"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 410,
+      "anios": [
+        2021,
+        2022
+      ],
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 396
+        },
+        {
+          "cientifico": "Puma concolor (Linnaeus, 1771)",
+          "comun": "Puma",
+          "registros": 8
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 6
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "lat": -42.516139,
+      "lon": -72.484318,
+      "nombre": "Camara AC56",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AC56",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AC56"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 164,
+      "anios": [
+        2021,
+        2022
+      ],
+      "especies": [
+        {
+          "cientifico": "Puma concolor (Linnaeus, 1771)",
+          "comun": "Puma",
+          "registros": 86
+        },
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 58
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 18
+        },
+        {
+          "cientifico": "Galictis cuja (Molina, 1782)",
+          "comun": "Quique",
+          "registros": 2
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "lat": -42.515331,
+      "lon": -72.447833,
+      "nombre": "Camara AF56",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AF56",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AF56"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 56,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 32
+        },
+        {
+          "cientifico": "Puma concolor (Linnaeus, 1771)",
+          "comun": "Puma",
+          "registros": 24
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "lat": -42.497338,
+      "lon": -72.448565,
+      "nombre": "Camara AF54",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2022:AF54"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 17,
+      "anios": [
+        2021
+      ],
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 14
+        },
+        {
+          "cientifico": "Puma concolor (Linnaeus, 1771)",
+          "comun": "Puma",
+          "registros": 3
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "lat": -42.252503,
+      "lon": -72.373612,
+      "nombre": "Camara AM27",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2022:AM27"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 226,
+      "anios": [
+        2021,
+        2022
+      ],
+      "especies": [
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 188
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 30
+        },
+        {
+          "cientifico": "Puma concolor (Linnaeus, 1771)",
+          "comun": "Puma",
+          "registros": 8
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "lat": -42.082924,
+      "lon": -72.441068,
+      "nombre": "Camara AH08",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AH08",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AH08"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 16,
+      "anios": [
+        2021,
+        2022
+      ],
+      "especies": [
+        {
+          "cientifico": "Bos taurus Linnaeus, 1758",
+          "comun": "Vaca",
+          "registros": 12
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 4
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "lat": -42.037667,
+      "lon": -72.430805,
+      "nombre": "Camara AI03",
+      "codigos_estacion": [
+        "CONAF:Fotomonitoreo:PNPDT:2021:AI03",
+        "CONAF:Fotomonitoreo:PNPDT:2022:AI03"
+      ],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 46,
+      "anios": [
+        2021,
+        2022
+      ],
+      "especies": [
+        {
+          "cientifico": "Canis lupus familiaris Linnaeus, 1758",
+          "comun": "Perro doméstico",
+          "registros": 34
+        },
+        {
+          "cientifico": "Leopardus guigna (Molina, 1782)",
+          "comun": "Güiña",
+          "registros": 6
+        },
+        {
+          "cientifico": "Pudu puda (Molina, 1782)",
+          "comun": "Pudú",
+          "registros": 6
+        }
+      ]
+    }
+  ]
+}
