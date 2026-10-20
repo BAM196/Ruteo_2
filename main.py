@@ -13,6 +13,8 @@ STEPS = (
     ("Extrayendo cobertura de suelo", [sys.executable, "Metadata/extraer_gee.py"]),
     ("Extrayendo focos de incendio", [sys.executable, "Amenazas/extraer_firms.py"]),
     #("Extrayendo datos de animales", [sys.executable, "Metadata/extraer_fauna.py"]),
+    ("Extrayendo rutas de sendero", [sys.executable, "Metadata/extraer_senderos.py"]),
+    ("Extrayendo avistamiento de aves", [sys.executable, "Amenazas/extraer_ebird.py"]),
     ("Levantando la base y el sitio", ["docker", "compose", "up", "-d"]),
     (
         "Cargando infraestructura",
@@ -22,6 +24,8 @@ STEPS = (
     ("Cargando focos de incendio", [sys.executable, "Amenazas/cargar_firms.py"]),
     ("Cargando amenazas meteorológicas", [sys.executable, "Amenazas/cargar_meteo.py"]),
     #("Cargando datos de animales", [sys.executable, "Metadata/cargar_fauna.py"])
+    ("Cargando cobertura de suelo", [sys.executable, "Metadata/cargar_senderos.py"]),
+    ("Cargando focos de incendio", [sys.executable, "Amenazas/cargar_ebird.py"]),
 )
 
 

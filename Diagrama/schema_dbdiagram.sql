@@ -58,6 +58,34 @@ CREATE TABLE metadata_gee_especie (
   FOREIGN KEY (nodo_id) REFERENCES metadata_gee (nodo_id)
 );
 
+CREATE TABLE metadata_senderos (
+  id integer PRIMARY KEY,
+  nombre text NOT NULL,
+  tipo text NOT NULL,
+  descripcion text,
+  longitud_km float,
+  geom geometry
+);
+
+CREATE TABLE metadata_senderos_nodo (
+  sendero_id integer,
+  nodo_id integer,
+  distancia_m float NOT NULL,
+  PRIMARY KEY (sendero_id, nodo_id),
+  FOREIGN KEY (sendero_id) REFERENCES metadata_senderos (id),
+  FOREIGN KEY (nodo_id) REFERENCES nodos (id)
+);
+
+CREATE TABLE metadata_senderos_arista (
+  sendero_id integer,
+  arista_id integer,
+  distancia_m float NOT NULL,
+  buffer_privacidad boolean NOT NULL,
+  PRIMARY KEY (sendero_id, arista_id),
+  FOREIGN KEY (sendero_id) REFERENCES metadata_senderos (id),
+  FOREIGN KEY (arista_id) REFERENCES aristas (id)
+);
+
 CREATE TABLE amenazas_firms (
   id integer PRIMARY KEY,
   acq_date date,
@@ -91,5 +119,36 @@ CREATE TABLE amenazas_firms_arista (
   FOREIGN KEY (foco_id) REFERENCES amenazas_firms (id),
   FOREIGN KEY (arista_id) REFERENCES aristas (id)
 );
---no funciona
---CREATE INDEX IF NOT EXISTS idx_meteo_alertas_nodo_geom ON meteo_alertas_nodo USING GIST (alerta_id, nodo_id);
+
+CREATE TABLE amenazas_ebird (
+  id text PRIMARY KEY,
+  especie_cientifico text NOT NULL,
+  especie_comun text,
+  fecha_obs timestamp,
+  cantidad integer,
+  localidad text,
+  geom geometry
+);
+
+CREATE TABLE amenazas_ebird_nodo (
+  avistamiento_id text,
+  nodo_id integer,
+  distancia_m float NOT NULL,
+  PRIMARY KEY (avistamiento_id, nodo_id),
+  FOREIGN KEY (avistamiento_id) REFERENCES amenazas_ebird (id),
+  FOREIGN KEY (nodo_id) REFERENCES nodos (id)
+);
+
+CREATE TABLE amenazas_ebird_arista (
+  avistamiento_id text,
+  arista_id integer,
+  source integer,
+  target integer,
+  distancia_m float NOT NULL,
+  costo_km float,
+  costo_resiliente_km float,
+  evitar boolean NOT NULL,
+  PRIMARY KEY (avistamiento_id, arista_id),
+  FOREIGN KEY (avistamiento_id) REFERENCES amenazas_ebird (id),
+  FOREIGN KEY (arista_id) REFERENCES aristas (id)
+);

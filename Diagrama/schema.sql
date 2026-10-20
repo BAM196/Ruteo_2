@@ -52,6 +52,30 @@ CREATE TABLE IF NOT EXISTS metadata_gee_especie (
     PRIMARY KEY (nodo_id, cientifico)
 );
 
+CREATE TABLE IF NOT EXISTS metadata_senderos (
+    id INTEGER PRIMARY KEY,
+    nombre TEXT NOT NULL,
+    tipo TEXT NOT NULL, -- 'trazado' o 'punto_interes'
+    descripcion TEXT,
+    longitud_km DOUBLE PRECISION NOT NULL DEFAULT 0.0,
+    geom geometry(Geometry, 4326) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS metadata_senderos_nodo (
+    sendero_id INTEGER REFERENCES metadata_senderos(id) ON DELETE CASCADE,
+    nodo_id INTEGER REFERENCES nodos(id) ON DELETE CASCADE,
+    distancia_m DOUBLE PRECISION NOT NULL,
+    PRIMARY KEY (sendero_id, nodo_id)
+);
+
+CREATE TABLE IF NOT EXISTS metadata_senderos_arista (
+    sendero_id INTEGER REFERENCES metadata_senderos(id) ON DELETE CASCADE,
+    arista_id INTEGER REFERENCES aristas(id) ON DELETE CASCADE,
+    distancia_m DOUBLE PRECISION NOT NULL,
+    buffer_privacidad BOOLEAN NOT NULL DEFAULT FALSE,
+    PRIMARY KEY (sendero_id, arista_id)
+);
+
 CREATE TABLE IF NOT EXISTS amenazas_firms (
     id INTEGER PRIMARY KEY,
     acq_date DATE,
@@ -102,6 +126,28 @@ CREATE TABLE IF NOT EXISTS meteo_alertas_arista (
     arista_id INTEGER REFERENCES aristas(id) ON DELETE CASCADE,
     source INTEGER,
     target INTEGER,
+CREATE TABLE IF NOT EXISTS amenazas_ebird (
+    id TEXT PRIMARY KEY, -- subId alfanumérico entregado por eBird
+    especie_cientifico TEXT NOT NULL,
+    especie_comun TEXT,
+    fecha_obs TIMESTAMP,
+    cantidad INTEGER,
+    localidad TEXT,
+    geom geometry(Point, 4326) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS amenazas_ebird_nodo (
+    avistamiento_id TEXT REFERENCES amenazas_ebird(id) ON DELETE CASCADE,
+    nodo_id INTEGER REFERENCES nodos(id) ON DELETE CASCADE,
+    distancia_m DOUBLE PRECISION NOT NULL,
+    PRIMARY KEY (avistamiento_id, nodo_id)
+);
+
+CREATE TABLE IF NOT EXISTS amenazas_ebird_arista (
+    avistamiento_id TEXT REFERENCES amenazas_ebird(id) ON DELETE CASCADE,
+    arista_id INTEGER REFERENCES aristas(id) ON DELETE CASCADE,
+    source INTEGER REFERENCES nodos(id),
+    target INTEGER REFERENCES nodos(id),
     distancia_m DOUBLE PRECISION NOT NULL,
     costo_km DOUBLE PRECISION,
     costo_resiliente_km DOUBLE PRECISION,
@@ -110,7 +156,12 @@ CREATE TABLE IF NOT EXISTS meteo_alertas_arista (
 );
 
 CREATE INDEX IF NOT EXISTS idx_meteo_alertas_geom ON meteo_alertas USING GIST (geom);
+    PRIMARY KEY (avistamiento_id, arista_id)
+);
+
 CREATE INDEX IF NOT EXISTS idx_nodos_geom ON nodos USING GIST (geom);
 CREATE INDEX IF NOT EXISTS idx_aristas_geom ON aristas USING GIST (geom);
 CREATE INDEX IF NOT EXISTS idx_metadata_gee_geom ON metadata_gee USING GIST (geom);
+CREATE INDEX IF NOT EXISTS idx_metadata_senderos_geom ON metadata_senderos USING GIST (geom);
 CREATE INDEX IF NOT EXISTS idx_amenazas_firms_geom ON amenazas_firms USING GIST (geom);
+CREATE INDEX IF NOT EXISTS idx_amenazas_ebird_geom ON amenazas_ebird USING GIST (geom);

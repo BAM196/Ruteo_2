@@ -204,6 +204,14 @@ fieldset label span {
   font-size: 1.15rem;
 }
 
+.swatch.trail {
+  background-color: #d97706;
+}
+
+.swatch.ebird {
+  background-color: #7c3aed;
+}
+
 @media (max-width: 800px) {
   body {
     flex-direction: column;
