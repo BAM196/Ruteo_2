@@ -11,14 +11,14 @@ const errorBox = document.querySelector("#route-error");
 const routeButton = document.querySelector("#route-button");
 const form = document.querySelector("#route-form");
 
-const map = L.map("map", { zoomControl: true });
+const map = L.map("map", {zoomControl: true});
 L.tileLayer(
   "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-  { attribution: "Imágenes Esri, Maxar, Earthstar Geographics" },
+  {attribution: "Imágenes Esri, Maxar, Earthstar Geographics"},
 ).addTo(map);
 L.tileLayer(
   "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
-  { attribution: "&copy; OpenStreetMap, &copy; CARTO", pane: "shadowPane" },
+  {attribution: "&copy; OpenStreetMap, &copy; CARTO", pane: "shadowPane"},
 ).addTo(map);
 
 const edgesLayer = L.geoJSON(null, {
@@ -79,8 +79,28 @@ const firesLayer = L.geoJSON(null, {
   },
 }).addTo(map);
 
+const meteoLayer = L.geoJSON(null, {
+  pointToLayer: (feature, latlng) =>
+    L.circleMarker(latlng, {
+      radius: 8,
+      color: "#1d4ed8",
+      weight: 2,
+      fillColor: "#3b82f6",
+      fillOpacity: 0.85,
+    }),
+  onEachFeature: (feature, layer) => {
+    const props = feature.properties;
+    layer.bindPopup(
+      `<strong>Alerta Meteorológica</strong><br>` +
+        `Temp: ${props.temperature ?? "s/d"} °C<br>` +
+        `Humedad: ${props.humidity ?? "s/d"}%<br>` +
+        `Viento: ${props.wind_speed ?? "s/d"} km/h`,
+    );
+  },
+}).addTo(map);
+
 const routeLayer = L.geoJSON(null, {
-  style: { color: "#d4652f", weight: 5, opacity: 0.95 },
+  style: {color: "#d4652f", weight: 5, opacity: 0.95},
 }).addTo(map);
 
 function showError(message) {
@@ -137,6 +157,7 @@ function bindToggles() {
     ["#toggle-edges", edgesLayer],
     ["#toggle-nodes", nodesLayer],
     ["#toggle-fires", firesLayer],
+    ["#toggle-meteo", meteoLayer],
     ["#toggle-route", routeLayer],
   ];
   pairs.forEach(([selector, layer]) => {
@@ -154,14 +175,16 @@ async function loadPark() {
   showError("");
   routeButton.disabled = true;
   try {
-    const [nodes, edges, fires] = await Promise.all([
+    const [nodes, edges, fires, meteo] = await Promise.all([
       readJson("/api/nodes"),
       readJson("/api/edges"),
       readJson("/api/fires"),
+      readJson("/api/meteo"),
     ]);
     nodesLayer.addData(nodes);
     edgesLayer.addData(edges);
     firesLayer.addData(fires);
+    meteoLayer.addData(meteo);
     fillCameras(nodes.features);
     const route = await drawRoute();
     const bounds = nodesLayer.getBounds();
@@ -171,10 +194,14 @@ async function loadPark() {
     const fireText = fires.features.length
       ? `${fires.features.length} focos`
       : "sin focos activos";
+    const meteoText = meteo.features.length
+      ? `${meteo.features.length} alertas`
+      : "sin alertas";
     summary.textContent =
       `${nodes.features.length} cámaras · ` +
       `${cameraName(nodes.features, route.start_id)} a ${cameraName(nodes.features, route.goal_id)} · ` +
-      `${route.distance_km} km · ${fireText}`;
+      `${route.distance_km} km · ${fireText} · ${meteoText}`;
+
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       showError("");

@@ -103,7 +103,29 @@ FIRE_SQL = """
         ORDER BY id
     ) features
 """
+meteo_alertas_sql = """
+    SELECT json_build_object(
+        'type', 'FeatureCollection',
+        'features', COALESCE(json_agg(feature), '[]'::json)
+    )
+    FROM (
+        SELECT json_build_object(
+            'type', 'Feature',
+            'geometry', ST_AsGeoJSON(geom)::json,
+            'properties', json_build_object(
+                'id', id,
+                'node_id', nodo_id,
+                'date', fecha,
+                'temperature', temperatura,
+                'humidity', humedad,
+                'wind_speed', viento
+            )
+        ) AS feature
+        FROM meteo_alertas
+        ORDER BY fecha DESC
+    ) features
 
+"""
 
 def connect():
     return psycopg2.connect(
@@ -156,6 +178,12 @@ def fires():
     except psycopg2.Error:
         return database_error()
 
+@app.get("/api/meteo")
+def meteo_alertas():
+    try:
+        return jsonify(query_value(meteo_alertas_sql))
+    except psycopg2.Error:
+        return database_error()
 
 def endpoint_pair():
     sql = """

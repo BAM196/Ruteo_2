@@ -91,3 +91,5 @@ CREATE TABLE amenazas_firms_arista (
   FOREIGN KEY (foco_id) REFERENCES amenazas_firms (id),
   FOREIGN KEY (arista_id) REFERENCES aristas (id)
 );
+--no funciona
+--CREATE INDEX IF NOT EXISTS idx_meteo_alertas_nodo_geom ON meteo_alertas_nodo USING GIST (alerta_id, nodo_id);

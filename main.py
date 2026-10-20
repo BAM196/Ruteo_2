@@ -12,6 +12,7 @@ STEPS = (
     ),
     ("Extrayendo cobertura de suelo", [sys.executable, "Metadata/extraer_gee.py"]),
     ("Extrayendo focos de incendio", [sys.executable, "Amenazas/extraer_firms.py"]),
+    #("Extrayendo datos de animales", [sys.executable, "Metadata/extraer_fauna.py"]),
     ("Levantando la base y el sitio", ["docker", "compose", "up", "-d"]),
     (
         "Cargando infraestructura",
@@ -19,6 +20,8 @@ STEPS = (
     ),
     ("Cargando cobertura de suelo", [sys.executable, "Metadata/cargar_gee.py"]),
     ("Cargando focos de incendio", [sys.executable, "Amenazas/cargar_firms.py"]),
+    ("Cargando amenazas meteorológicas", [sys.executable, "Amenazas/cargar_meteo.py"]),
+    #("Cargando datos de animales", [sys.executable, "Metadata/cargar_fauna.py"])
 )
 
 

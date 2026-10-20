@@ -12,7 +12,7 @@
     "margen_grados": 0.05,
     "day_range": 5,
     "fecha": null,
-    "generado": "2026-10-19T17:30:16+00:00",
+    "generado": "2026-10-20T03:11:52+00:00",
     "nodos_origen": "Infraestructura/nodosv2.json",
     "aristas_origen": "Infraestructura/aristasv2.json",
     "crs_metrico": "EPSG:32718",
