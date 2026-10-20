@@ -19,6 +19,12 @@ El enunciado pide un archivo por cada JSON que diga qué significa cada campo.
 - `Metadata/metadata_senderos.json` y `metadata_senderos_estructura.md`
 - `Amenazas/amenaza_ebird.json` y `amenaza_ebird_estructura.md`
 
+## Preparación
+
+Antes de ejecutar el proyecto es necesario descomprimir el archivo .zip presente en la carpeta data, quedando: data/ocurrence.txt
+
+Además, crear y rellenar archivo .env desde .env.example
+
 ## Todo junto
 
 ```bash
