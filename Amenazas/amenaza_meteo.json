@@ -1,0 +1,12 @@
+{
+  "meta": {
+    "fuente": "Open-Meteo API",
+    "endpoint": "https://api.open-meteo.com/v1/forecast",
+    "generado": "2026-10-20T00:09:49+00:00",
+    "umbral_amenaza_m": 1000.0,
+    "n_aristas_afectadas": 0
+  },
+  "alertas_meteorologicas": [],
+  "nodos_afectados": [],
+  "aristas_afectadas": []
+}
