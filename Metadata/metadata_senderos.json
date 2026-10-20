@@ -6,7 +6,7 @@
     "aristas_origen": "Infraestructura/aristasv2.json",
     "crs_metrico": "EPSG:32718",
     "umbral_privacidad_m": 50.0,
-    "generado": "2026-10-20T04:20:34+00:00",
+    "generado": "2026-10-20T06:22:49+00:00",
     "total_elementos": 22,
     "regla_privacidad": "Si un tramo de vuelo está a <= 50 m del sendero, se marca buffer_privacidad = true para restringir la captura en horas de uso público."
   },

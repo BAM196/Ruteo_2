@@ -124,7 +124,7 @@ meteo_alertas_sql = """
         FROM meteo_alertas
         ORDER BY fecha DESC
     ) features
-
+"""
 TRAIL_SQL = """
     SELECT json_build_object(
         'type', 'FeatureCollection',
@@ -226,6 +226,20 @@ def fires():
 def meteo_alertas():
     try:
         return jsonify(query_value(meteo_alertas_sql))
+    except psycopg2.Error:
+        return database_error()
+
+@app.get("/api/trails")
+def trails():
+    try:
+        return jsonify(query_value(TRAIL_SQL))
+    except psycopg2.Error:
+        return database_error()
+
+@app.get("/api/ebird")
+def ebird():
+    try:
+        return jsonify(query_value(EBIRD_SQL))
     except psycopg2.Error:
         return database_error()
 

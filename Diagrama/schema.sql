@@ -126,6 +126,13 @@ CREATE TABLE IF NOT EXISTS meteo_alertas_arista (
     arista_id INTEGER REFERENCES aristas(id) ON DELETE CASCADE,
     source INTEGER,
     target INTEGER,
+    distancia_m DOUBLE PRECISION NOT NULL,
+    costo_km DOUBLE PRECISION,
+    costo_resiliente_km DOUBLE PRECISION,
+    evitar BOOLEAN NOT NULL,
+    PRIMARY KEY (alerta_id, arista_id)
+);
+
 CREATE TABLE IF NOT EXISTS amenazas_ebird (
     id TEXT PRIMARY KEY, -- subId alfanumérico entregado por eBird
     especie_cientifico TEXT NOT NULL,
@@ -152,12 +159,9 @@ CREATE TABLE IF NOT EXISTS amenazas_ebird_arista (
     costo_km DOUBLE PRECISION,
     costo_resiliente_km DOUBLE PRECISION,
     evitar BOOLEAN NOT NULL,
-    PRIMARY KEY (alerta_id, arista_id)
-);
-
-CREATE INDEX IF NOT EXISTS idx_meteo_alertas_geom ON meteo_alertas USING GIST (geom);
     PRIMARY KEY (avistamiento_id, arista_id)
 );
+
 
 CREATE INDEX IF NOT EXISTS idx_nodos_geom ON nodos USING GIST (geom);
 CREATE INDEX IF NOT EXISTS idx_aristas_geom ON aristas USING GIST (geom);

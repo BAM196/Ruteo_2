@@ -4,13 +4,13 @@
     "endpoint": "https://api.ebird.org/v2/data/obs/geo/recent",
     "dias_atras": 14,
     "umbral_amenaza_m": 500.0,
-    "penalizacion_km": 1000.0,
-    "generado": "2026-10-20T04:20:35+00:00",
+    "penalizacion_km": 200.0,
+    "generado": "2026-10-20T06:22:51+00:00",
     "n_avistamientos": 10,
     "n_nodos_afectados": 0,
     "n_aristas_afectadas": 0,
     "resultado": "con_amenazas",
-    "regla_peso": "Si la distancia al avistamiento de rapaz es <= 500 m, evitar = true y costo_resiliente_km = costo_km + 1000."
+    "regla_peso": "Si la distancia al avistamiento de rapaz es <= 500 m, evitar = true y costo_resiliente_km = costo_km + 200."
   },
   "avistamientos": [
     {

@@ -77,8 +77,11 @@ const trailsLayer = L.geoJSON(null, {
     }),
   onEachFeature: (feature, layer) => {
     const props = feature.properties;
-    const len = props.length_km > 0 ? `<br>Longitud: ${props.length_km} km` : "";
-    const desc = props.description ? `<br><small>${props.description}</small>` : "";
+    const len =
+      props.length_km > 0 ? `<br>Longitud: ${props.length_km} km` : "";
+    const desc = props.description
+      ? `<br><small>${props.description}</small>`
+      : "";
     layer.bindPopup(
       `<strong>${props.name}</strong> (${props.type})${len}${desc}`,
     );
