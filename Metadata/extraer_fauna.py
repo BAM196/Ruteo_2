@@ -1,4 +1,3 @@
-```python
 import os
 import urllib.request
 from pathlib import Path
@@ -169,4 +168,3 @@ if descargar_fauna(URL_DATASET, CSV_DESCARGADO):
 
     except Exception as error:
         print(f"Error al procesar el archivo: {error}")
-```
