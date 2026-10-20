@@ -2,153 +2,196 @@
 -- geom es Point en nodos, metadata_gee y amenazas_firms, y LineString en aristas
 -- La base real se crea con Diagrama/schema.sql
 
-CREATE TABLE nodos (
-  id integer PRIMARY KEY,
-  nombre text NOT NULL,
-  localidad text,
-  n_registros integer,
-  anios text,
-  codigos_estacion text,
-  geom geometry
-);
 
-CREATE TABLE nodo_especie (
-  nodo_id integer,
-  cientifico text,
-  comun text,
-  registros integer NOT NULL,
-  PRIMARY KEY (nodo_id, cientifico),
-  FOREIGN KEY (nodo_id) REFERENCES nodos (id)
-);
+Table "nodos" {
+  "id" INTEGER [pk]
+  "nombre" TEXT [not null]
+  "localidad" TEXT
+  "n_registros" INTEGER
+  "anios" TEXT
+  "codigos_estacion" TEXT
+  "point" geometry [not null]
+}
 
-CREATE TABLE aristas (
-  id integer PRIMARY KEY,
-  source integer NOT NULL,
-  target integer NOT NULL,
-  distancia_m float,
-  costo_km float NOT NULL,
-  tipo text NOT NULL,
-  excede_max boolean NOT NULL,
-  geom geometry,
-  FOREIGN KEY (source) REFERENCES nodos (id),
-  FOREIGN KEY (target) REFERENCES nodos (id)
-);
+Table "nodo_especie" {
+  "nodo_id" INTEGER
+  "cientifico" TEXT [not null]
+  "comun" TEXT
+  "registros" INTEGER [not null]
 
-CREATE TABLE metadata_gee (
-  nodo_id integer PRIMARY KEY,
-  nombre text,
-  landcover_code integer,
-  landcover_clase text,
-  landcover_clase_es text,
-  tiene_especie_objetivo boolean,
-  tiene_especie_invasora boolean,
-  clase_prioritaria_default boolean,
-  preferencia_default text,
-  nota_pixel text,
-  geom geometry,
-  FOREIGN KEY (nodo_id) REFERENCES nodos (id)
-);
+  Indexes {
+    (nodo_id, cientifico) [pk]
+  }
+}
 
-CREATE TABLE metadata_gee_especie (
-  nodo_id integer,
-  cientifico text,
-  comun text,
-  registros integer NOT NULL,
-  PRIMARY KEY (nodo_id, cientifico),
-  FOREIGN KEY (nodo_id) REFERENCES metadata_gee (nodo_id)
-);
+Table "aristas" {
+  "id" INTEGER [pk]
+  "source" INTEGER [not null]
+  "target" INTEGER [not null]
+  "distancia_m" DOUBLE [not null]
+  "costo_km" DOUBLE [not null]
+  "tipo" TEXT [not null]
+  "excede_max" BOOLEAN [not null]
+  "point" geometry [not null]
+}
 
-CREATE TABLE metadata_senderos (
-  id integer PRIMARY KEY,
-  nombre text NOT NULL,
-  tipo text NOT NULL,
-  descripcion text,
-  longitud_km float,
-  geom geometry
-);
+Table "metadata_gee" {
+  "nodo_id" INTEGER [pk]
+  "nombre" TEXT
+  "landcover_code" INTEGER
+  "landcover_clase" TEXT
+  "landcover_clase_es" TEXT
+  "tiene_especie_objetivo" BOOLEAN
+  "tiene_especie_invasora" BOOLEAN
+  "clase_prioritaria_default" BOOLEAN
+  "preferencia_default" TEXT
+  "nota_pixel" TEXT
+  "point" geometry
+}
 
-CREATE TABLE metadata_senderos_nodo (
-  sendero_id integer,
-  nodo_id integer,
-  distancia_m float NOT NULL,
-  PRIMARY KEY (sendero_id, nodo_id),
-  FOREIGN KEY (sendero_id) REFERENCES metadata_senderos (id),
-  FOREIGN KEY (nodo_id) REFERENCES nodos (id)
-);
+Table "metadata_gee_especie" {
+  "nodo_id" INTEGER
+  "cientifico" TEXT [not null]
+  "comun" TEXT
+  "registros" INTEGER [not null]
 
-CREATE TABLE metadata_senderos_arista (
-  sendero_id integer,
-  arista_id integer,
-  distancia_m float NOT NULL,
-  buffer_privacidad boolean NOT NULL,
-  PRIMARY KEY (sendero_id, arista_id),
-  FOREIGN KEY (sendero_id) REFERENCES metadata_senderos (id),
-  FOREIGN KEY (arista_id) REFERENCES aristas (id)
-);
+  Indexes {
+    (nodo_id, cientifico) [pk]
+  }
+}
 
-CREATE TABLE amenazas_firms (
-  id integer PRIMARY KEY,
-  acq_date date,
-  acq_time text,
-  satellite text,
-  confidence text,
-  frp float,
-  daynight text,
-  geom geometry
-);
+Table "metadata_senderos" {
+  "id" INTEGER [pk]
+  "nombre" TEXT [not null]
+  "tipo" TEXT [not null]
+  "descripcion" TEXT
+  "longitud_km" DOUBLE [not null, default: 0.0]
+  "point" geometry [not null]
+}
 
-CREATE TABLE amenazas_firms_nodo (
-  foco_id integer,
-  nodo_id integer,
-  distancia_m float NOT NULL,
-  PRIMARY KEY (foco_id, nodo_id),
-  FOREIGN KEY (foco_id) REFERENCES amenazas_firms (id),
-  FOREIGN KEY (nodo_id) REFERENCES nodos (id)
-);
+Table "metadata_senderos_nodo" {
+  "sendero_id" INTEGER
+  "nodo_id" INTEGER
+  "distancia_m" DOUBLE [not null]
 
-CREATE TABLE amenazas_firms_arista (
-  foco_id integer,
-  arista_id integer,
-  source integer,
-  target integer,
-  distancia_m float NOT NULL,
-  costo_km float,
-  costo_resiliente_km float,
-  evitar boolean NOT NULL,
-  PRIMARY KEY (foco_id, arista_id),
-  FOREIGN KEY (foco_id) REFERENCES amenazas_firms (id),
-  FOREIGN KEY (arista_id) REFERENCES aristas (id)
-);
+  Indexes {
+    (sendero_id, nodo_id) [pk]
+  }
+}
 
-CREATE TABLE amenazas_ebird (
-  id text PRIMARY KEY,
-  especie_cientifico text NOT NULL,
-  especie_comun text,
-  fecha_obs timestamp,
-  cantidad integer,
-  localidad text,
-  geom geometry
-);
+Table "metadata_senderos_arista" {
+  "sendero_id" INTEGER
+  "arista_id" INTEGER
+  "distancia_m" DOUBLE [not null]
+  "buffer_privacidad" BOOLEAN [not null, default: FALSE]
 
-CREATE TABLE amenazas_ebird_nodo (
-  avistamiento_id text,
-  nodo_id integer,
-  distancia_m float NOT NULL,
-  PRIMARY KEY (avistamiento_id, nodo_id),
-  FOREIGN KEY (avistamiento_id) REFERENCES amenazas_ebird (id),
-  FOREIGN KEY (nodo_id) REFERENCES nodos (id)
-);
+  Indexes {
+    (sendero_id, arista_id) [pk]
+  }
+}
 
-CREATE TABLE amenazas_ebird_arista (
-  avistamiento_id text,
-  arista_id integer,
-  source integer,
-  target integer,
-  distancia_m float NOT NULL,
-  costo_km float,
-  costo_resiliente_km float,
-  evitar boolean NOT NULL,
-  PRIMARY KEY (avistamiento_id, arista_id),
-  FOREIGN KEY (avistamiento_id) REFERENCES amenazas_ebird (id),
-  FOREIGN KEY (arista_id) REFERENCES aristas (id)
-);
+Table "amenazas_firms" {
+  "id" INTEGER [pk]
+  "acq_date" DATE
+  "acq_time" TEXT
+  "satellite" TEXT
+  "confidence" TEXT
+  "frp" DOUBLE
+  "daynight" TEXT
+  "point" geometry [not null]
+}
+
+Table "amenazas_firms_nodo" {
+  "foco_id" INTEGER
+  "nodo_id" INTEGER
+  "distancia_m" DOUBLE [not null]
+
+  Indexes {
+    (foco_id, nodo_id) [pk]
+  }
+}
+
+Table "amenazas_firms_arista" {
+  "foco_id" INTEGER
+  "arista_id" INTEGER
+  "source" INTEGER
+  "target" INTEGER
+  "distancia_m" DOUBLE [not null]
+  "costo_km" DOUBLE
+  "costo_resiliente_km" DOUBLE
+  "evitar" BOOLEAN [not null]
+
+  Indexes {
+    (foco_id, arista_id) [pk]
+  }
+}
+
+Table "meteo_alertas" {
+  "id" SERIAL [pk]
+  "nodo_id" INTEGER
+  "fecha" DATE [not null]
+  "temperatura" DOUBLE [not null]
+  "humedad" DOUBLE [not null]
+  "viento" DOUBLE [not null]
+  "point" geometry [not null]
+}
+
+Table "meteo_alertas_nodo" {
+  "alerta_id" INTEGER
+  "nodo_id" INTEGER
+  "distancia_m" DOUBLE [not null]
+
+  Indexes {
+    (alerta_id, nodo_id) [pk]
+  }
+}
+
+Table "meteo_alertas_arista" {
+  "alerta_id" INTEGER
+  "arista_id" INTEGER
+  "source" INTEGER
+  "target" INTEGER
+  "distancia_m" DOUBLE [not null]
+  "costo_km" DOUBLE
+  "costo_resiliente_km" DOUBLE
+  "evitar" BOOLEAN [not null]
+
+  Indexes {
+    (alerta_id, arista_id) [pk]
+  }
+}
+
+Table "amenazas_ebird" {
+  "id" TEXT [pk]
+  "especie_cientifico" TEXT [not null]
+  "especie_comun" TEXT
+  "fecha_obs" TIMESTAMP
+  "cantidad" INTEGER
+  "localidad" TEXT
+  "point" geometry [not null]
+}
+
+Table "amenazas_ebird_nodo" {
+  "avistamiento_id" TEXT
+  "nodo_id" INTEGER
+  "distancia_m" DOUBLE [not null]
+
+  Indexes {
+    (avistamiento_id, nodo_id) [pk]
+  }
+}
+
+Table "amenazas_ebird_arista" {
+  "avistamiento_id" TEXT
+  "arista_id" INTEGER
+  "source" INTEGER
+  "target" INTEGER
+  "distancia_m" DOUBLE [not null]
+  "costo_km" DOUBLE
+  "costo_resiliente_km" DOUBLE
+  "evitar" BOOLEAN [not null]
+
+  Indexes {
+    (avistamiento_id, arista_id) [pk]
+  }
+}
