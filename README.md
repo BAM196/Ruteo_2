@@ -16,6 +16,8 @@ El enunciado pide un archivo por cada JSON que diga qué significa cada campo.
 - `Infraestructura/aristasv2.json` y `aristasv2_estructura.md`
 - `Metadata/metadata_gee.json` y `metadata_gee_estructura.md`
 - `Amenazas/amenaza_firms.json` y `amenaza_firms_estructura.md`
+- `Metadata/metadata_senderos.json` y `metadata_senderos_estructura.md`
+- `Amenazas/amenaza_ebird.json` y `amenaza_ebird_estructura.md`
 
 ## Todo junto
 
@@ -45,4 +47,6 @@ python Metadata/cargar_gee.py
 python Amenazas/cargar_firms.py
 python Amenazas/cargar_meteo.py
 Python Metadata/extraer_fauna.py
+python Amenazas/cargar_ebird.py
+Python Metadata/extraer_senderos.py
 ```
