@@ -37,7 +37,7 @@ Queda en [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
 ## Carga
 
-Con el contenedor arriba y `POSTGRES_PASSWORD` en `.env`:
+Con el contenedor arriba, con zip de data descomprimido y archivo occurrence.txt presente y `POSTGRES_PASSWORD` en `.env`:
 
 ```bash
 python Infraestructura/cargar_infraestructura.py
