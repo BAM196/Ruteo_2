@@ -66,13 +66,7 @@ def consultar_clima_nodo(lat: float, lon: float) -> dict:
     params = {
         "latitude": lat,
         "longitude": lon,
-        "current": (
-                "cloud_cover,"
-                "wind_speed_80m,"
-                "wind_direction_80m,"
-                "wind_gusts_10m,"
-                "precipitation"
-            ),
+        "current": "temperature_2m,relative_humidity_2m,wind_speed_10m",
         "timezone": "auto"
     }
     
