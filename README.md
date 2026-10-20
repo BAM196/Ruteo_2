@@ -44,6 +44,5 @@ python Infraestructura/cargar_infraestructura.py
 python Metadata/cargar_gee.py
 python Amenazas/cargar_firms.py
 python Amenazas/cargar_meteo.py
-Python Metadata/
-extraer_fauna.py
+Python Metadata/extraer_fauna.py
 ```
