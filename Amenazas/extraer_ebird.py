@@ -16,7 +16,7 @@ SALIDA = AQUI / "amenaza_ebird.json"
 
 DIAS = int(os.getenv("EBIRD_BACK_DAYS", "14"))
 UMBRAL_M = float(os.getenv("UMBRAL_EBIRD_M", "500"))
-PENALIZACION_KM = float(os.getenv("PENALIZACION_KM", "1000"))
+PENALIZACION_KM = float(os.getenv("PENALIZACION_KM", "200"))
 CRS_METRICO = "EPSG:32718"
 
 
