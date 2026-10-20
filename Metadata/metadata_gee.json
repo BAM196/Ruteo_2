@@ -4,7 +4,7 @@
     "dataset_gee": "ESA/WorldCover/v200/2021",
     "banda": "Map",
     "modo_extraccion": "cog",
-    "generado": "2026-10-19T17:30:14+00:00",
+    "generado": "2026-10-20T04:20:22+00:00",
     "nodos_origen": "Infraestructura/nodosv2.json",
     "cita": "Zanaga, D. et al. (2022). ESA WorldCover 10 m 2021 v200. https://doi.org/10.5281/zenodo.7254221",
     "especies_objetivo": [

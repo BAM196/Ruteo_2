@@ -60,6 +60,51 @@ const nodesLayer = L.geoJSON(null, {
   },
 }).addTo(map);
 
+const trailsLayer = L.geoJSON(null, {
+  style: () => ({
+    color: "#d97706",
+    weight: 3.5,
+    dashArray: "6, 6",
+    opacity: 0.9,
+  }),
+  pointToLayer: (feature, latlng) =>
+    L.circleMarker(latlng, {
+      radius: 5,
+      color: "#ffffff",
+      weight: 1.5,
+      fillColor: "#b45309",
+      fillOpacity: 0.95,
+    }),
+  onEachFeature: (feature, layer) => {
+    const props = feature.properties;
+    const len = props.length_km > 0 ? `<br>Longitud: ${props.length_km} km` : "";
+    const desc = props.description ? `<br><small>${props.description}</small>` : "";
+    layer.bindPopup(
+      `<strong>${props.name}</strong> (${props.type})${len}${desc}`,
+    );
+  },
+}).addTo(map);
+
+const ebirdLayer = L.geoJSON(null, {
+  pointToLayer: (feature, latlng) =>
+    L.circleMarker(latlng, {
+      radius: 7,
+      color: "#ffffff",
+      weight: 2,
+      fillColor: "#7c3aed",
+      fillOpacity: 0.9,
+    }),
+  onEachFeature: (feature, layer) => {
+    const props = feature.properties;
+    layer.bindPopup(
+      `<strong>⚠️ Amenaza aérea: ${props.common_name || "Rapaz / Gaviota"}</strong><br>` +
+        `<em>${props.scientific_name}</em><br>` +
+        `Fecha: ${props.observed_at || "Reciente"} · Cantidad: ${props.count || 1}<br>` +
+        `Localidad: ${props.location || "Sector parque"}`,
+    );
+  },
+}).addTo(map);
+
 const firesLayer = L.geoJSON(null, {
   pointToLayer: (feature, latlng) =>
     L.circleMarker(latlng, {
@@ -136,17 +181,22 @@ function bindToggles() {
   const pairs = [
     ["#toggle-edges", edgesLayer],
     ["#toggle-nodes", nodesLayer],
+    ["#toggle-trails", trailsLayer],
+    ["#toggle-ebird", ebirdLayer],
     ["#toggle-fires", firesLayer],
     ["#toggle-route", routeLayer],
   ];
   pairs.forEach(([selector, layer]) => {
-    document.querySelector(selector).addEventListener("change", (event) => {
-      if (event.target.checked) {
-        layer.addTo(map);
-      } else {
-        map.removeLayer(layer);
-      }
-    });
+    const el = document.querySelector(selector);
+    if (el) {
+      el.addEventListener("change", (event) => {
+        if (event.target.checked) {
+          layer.addTo(map);
+        } else {
+          map.removeLayer(layer);
+        }
+      });
+    }
   });
 }
 
@@ -154,27 +204,41 @@ async function loadPark() {
   showError("");
   routeButton.disabled = true;
   try {
-    const [nodes, edges, fires] = await Promise.all([
+    const [nodes, edges, fires, trails, ebird] = await Promise.all([
       readJson("/api/nodes"),
       readJson("/api/edges"),
       readJson("/api/fires"),
+      readJson("/api/trails"),
+      readJson("/api/ebird"),
     ]);
+
     nodesLayer.addData(nodes);
     edgesLayer.addData(edges);
     firesLayer.addData(fires);
+    trailsLayer.addData(trails);
+    ebirdLayer.addData(ebird);
+
     fillCameras(nodes.features);
     const route = await drawRoute();
+
     const bounds = nodesLayer.getBounds();
     if (bounds.isValid()) {
       map.fitBounds(bounds.pad(0.08));
     }
+
     const fireText = fires.features.length
-      ? `${fires.features.length} focos`
+      ? `${fires.features.length} focos FIRMS`
       : "sin focos activos";
+    const ebirdText = ebird.features.length
+      ? `${ebird.features.length} aves detectadas`
+      : "sin amenazas de aves";
+
     summary.textContent =
       `${nodes.features.length} cámaras · ` +
+      `${trails.features.length} senderos/hitos · ` +
       `${cameraName(nodes.features, route.start_id)} a ${cameraName(nodes.features, route.goal_id)} · ` +
-      `${route.distance_km} km · ${fireText}`;
+      `${route.distance_km} km · ${fireText} · ${ebirdText}`;
+
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       showError("");
@@ -184,7 +248,7 @@ async function loadPark() {
         summary.textContent =
           `${cameraName(nodes.features, nextRoute.start_id)} a ` +
           `${cameraName(nodes.features, nextRoute.goal_id)} · ${nextRoute.distance_km} km. ` +
-          "Solo distancia, sin cobertura ni incendios.";
+          "Solo distancia, sin cobertura, senderos ni amenazas aplicadas.";
       } catch (error) {
         showError(error.message);
       } finally {
