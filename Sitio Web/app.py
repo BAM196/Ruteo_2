@@ -104,6 +104,51 @@ FIRE_SQL = """
     ) features
 """
 
+TRAIL_SQL = """
+    SELECT json_build_object(
+        'type', 'FeatureCollection',
+        'features', COALESCE(json_agg(feature), '[]'::json)
+    )
+    FROM (
+        SELECT json_build_object(
+            'type', 'Feature',
+            'geometry', ST_AsGeoJSON(geom)::json,
+            'properties', json_build_object(
+                'id', id,
+                'name', nombre,
+                'type', tipo,
+                'description', descripcion,
+                'length_km', longitud_km
+            )
+        ) AS feature
+        FROM metadata_senderos
+        ORDER BY id
+    ) features
+"""
+
+EBIRD_SQL = """
+    SELECT json_build_object(
+        'type', 'FeatureCollection',
+        'features', COALESCE(json_agg(feature), '[]'::json)
+    )
+    FROM (
+        SELECT json_build_object(
+            'type', 'Feature',
+            'geometry', ST_AsGeoJSON(geom)::json,
+            'properties', json_build_object(
+                'id', id,
+                'common_name', especie_comun,
+                'scientific_name', especie_cientifico,
+                'observed_at', to_char(fecha_obs, 'YYYY-MM-DD HH24:MI'),
+                'count', cantidad,
+                'location', localidad
+            )
+        ) AS feature
+        FROM amenazas_ebird
+        ORDER BY fecha_obs DESC NULLS LAST
+    ) features
+"""
+
 
 def connect():
     return psycopg2.connect(
@@ -153,6 +198,21 @@ def edges():
 def fires():
     try:
         return jsonify(query_value(FIRE_SQL))
+    except psycopg2.Error:
+        return database_error()
+
+@app.get("/api/trails")
+def trails():
+    try:
+        return jsonify(query_value(TRAIL_SQL))
+    except psycopg2.Error:
+        return database_error()
+
+
+@app.get("/api/ebird")
+def ebird():
+    try:
+        return jsonify(query_value(EBIRD_SQL))
     except psycopg2.Error:
         return database_error()
 

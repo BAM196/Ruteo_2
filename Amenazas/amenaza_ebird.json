@@ -1,0 +1,179 @@
+{
+  "meta": {
+    "fuente": "eBird API 2.0 (The Cornell Lab of Ornithology)",
+    "endpoint": "https://api.ebird.org/v2/data/obs/geo/recent",
+    "dias_atras": 14,
+    "umbral_amenaza_m": 500.0,
+    "penalizacion_km": 1000.0,
+    "generado": "2026-10-20T04:20:35+00:00",
+    "n_avistamientos": 10,
+    "n_nodos_afectados": 0,
+    "n_aristas_afectadas": 0,
+    "resultado": "con_amenazas",
+    "regla_peso": "Si la distancia al avistamiento de rapaz es <= 500 m, evitar = true y costo_resiliente_km = costo_km + 1000."
+  },
+  "avistamientos": [
+    {
+      "id": "S402870370",
+      "cientifico": "Chroicocephalus maculipennis",
+      "comun": "Brown-hooded Gull",
+      "fecha_obs": "2026-10-16 16:55",
+      "cantidad": 35,
+      "localidad": "-42.39426, -72.88900",
+      "lat": -42.394263,
+      "lon": -72.889001,
+      "nodo_mas_cercano": {
+        "id": 34,
+        "distancia_m": 22526.7
+      },
+      "nodos_dentro_umbral": [],
+      "aristas_dentro_umbral": []
+    },
+    {
+      "id": "S402870370",
+      "cientifico": "Larus dominicanus",
+      "comun": "Kelp Gull",
+      "fecha_obs": "2026-10-16 16:55",
+      "cantidad": 120,
+      "localidad": "-42.39426, -72.88900",
+      "lat": -42.394263,
+      "lon": -72.889001,
+      "nodo_mas_cercano": {
+        "id": 34,
+        "distancia_m": 22526.7
+      },
+      "nodos_dentro_umbral": [],
+      "aristas_dentro_umbral": []
+    },
+    {
+      "id": "S402870370",
+      "cientifico": "Sterna hirundinacea",
+      "comun": "South American Tern",
+      "fecha_obs": "2026-10-16 16:55",
+      "cantidad": 9,
+      "localidad": "-42.39426, -72.88900",
+      "lat": -42.394263,
+      "lon": -72.889001,
+      "nodo_mas_cercano": {
+        "id": 34,
+        "distancia_m": 22526.7
+      },
+      "nodos_dentro_umbral": [],
+      "aristas_dentro_umbral": []
+    },
+    {
+      "id": "S402630891",
+      "cientifico": "Vanellus chilensis",
+      "comun": "Southern Lapwing",
+      "fecha_obs": "2026-10-15 19:23",
+      "cantidad": 2,
+      "localidad": "Río Blanco--Desembocadura",
+      "lat": -42.9222175,
+      "lon": -72.7198792,
+      "nodo_mas_cercano": {
+        "id": 8,
+        "distancia_m": 9239.1
+      },
+      "nodos_dentro_umbral": [],
+      "aristas_dentro_umbral": []
+    },
+    {
+      "id": "S402617726",
+      "cientifico": "Cathartes aura",
+      "comun": "Turkey Vulture",
+      "fecha_obs": "2026-10-15 13:40",
+      "cantidad": 2,
+      "localidad": "Chaitén--Costanera",
+      "lat": -42.9170581,
+      "lon": -72.7129022,
+      "nodo_mas_cercano": {
+        "id": 8,
+        "distancia_m": 8935.2
+      },
+      "nodos_dentro_umbral": [],
+      "aristas_dentro_umbral": []
+    },
+    {
+      "id": "S402518775",
+      "cientifico": "Caracara plancus",
+      "comun": "Crested Caracara",
+      "fecha_obs": "2026-10-15 08:13",
+      "cantidad": 2,
+      "localidad": "Ruta 7--Mirador Panorámico",
+      "lat": -42.7222015,
+      "lon": -72.5959715,
+      "nodo_mas_cercano": {
+        "id": 25,
+        "distancia_m": 907.9
+      },
+      "nodos_dentro_umbral": [],
+      "aristas_dentro_umbral": []
+    },
+    {
+      "id": "S402587339",
+      "cientifico": "Strix rufipes",
+      "comun": "Rufous-legged Owl",
+      "fecha_obs": "2026-10-15 01:01",
+      "cantidad": 1,
+      "localidad": "Chaitén, Los Lagos, CL (-42.49, -72.354)",
+      "lat": -42.4901736,
+      "lon": -72.3537427,
+      "nodo_mas_cercano": {
+        "id": 45,
+        "distancia_m": 7836.9
+      },
+      "nodos_dentro_umbral": [],
+      "aristas_dentro_umbral": []
+    },
+    {
+      "id": "S402587952",
+      "cientifico": "Buteo albigula",
+      "comun": "White-throated Hawk",
+      "fecha_obs": "2026-10-13 13:11",
+      "cantidad": 1,
+      "localidad": "Chaitén, Los Lagos, CL (-42.479, -72.343)",
+      "lat": -42.4790627,
+      "lon": -72.3428776,
+      "nodo_mas_cercano": {
+        "id": 45,
+        "distancia_m": 8924.5
+      },
+      "nodos_dentro_umbral": [],
+      "aristas_dentro_umbral": []
+    },
+    {
+      "id": "S402029191",
+      "cientifico": "Glaucidium nana",
+      "comun": "Austral Pygmy-Owl",
+      "fecha_obs": "2026-10-13 06:16",
+      "cantidad": 1,
+      "localidad": "Chaitén, Los Lagos, CL (-42.492, -72.351)",
+      "lat": -42.4916278,
+      "lon": -72.3508814,
+      "nodo_mas_cercano": {
+        "id": 45,
+        "distancia_m": 8056.5
+      },
+      "nodos_dentro_umbral": [],
+      "aristas_dentro_umbral": []
+    },
+    {
+      "id": "S401130244",
+      "cientifico": "Coragyps atratus",
+      "comun": "Black Vulture",
+      "fecha_obs": "2026-10-10 18:20",
+      "cantidad": 2,
+      "localidad": "Hualaihué, Los Lagos, CL (-42.488, -72.336)",
+      "lat": -42.4878668,
+      "lon": -72.3363162,
+      "nodo_mas_cercano": {
+        "id": 45,
+        "distancia_m": 9289.1
+      },
+      "nodos_dentro_umbral": [],
+      "aristas_dentro_umbral": []
+    }
+  ],
+  "nodos_afectados": [],
+  "aristas_afectadas": []
+}
