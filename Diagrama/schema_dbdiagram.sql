@@ -1,5 +1,4 @@
 -- Este archivo no crea la base, es solo para crear el diagrama en dbdiagram.io
--- geom es Point en nodos, metadata_gee y amenazas_firms, y LineString en aristas
 -- La base real se crea con Diagrama/schema.sql
 
 
@@ -195,3 +194,34 @@ Table "amenazas_ebird_arista" {
     (avistamiento_id, arista_id) [pk]
   }
 }
+
+Ref: "nodo_especie"."nodo_id" > "nodos"."id" [delete: cascade]
+
+Ref: "aristas"."source" > "nodos"."id"
+Ref: "aristas"."target" > "nodos"."id"
+
+Ref: "metadata_gee"."nodo_id" > "nodos"."id" [delete: cascade]
+Ref: "metadata_gee_especie"."nodo_id" > "metadata_gee"."nodo_id" [delete: cascade]
+
+Ref: "metadata_senderos_nodo"."sendero_id" > "metadata_senderos"."id" [delete: cascade]
+Ref: "metadata_senderos_nodo"."nodo_id" > "nodos"."id" [delete: cascade]
+Ref: "metadata_senderos_arista"."sendero_id" > "metadata_senderos"."id" [delete: cascade]
+Ref: "metadata_senderos_arista"."arista_id" > "aristas"."id" [delete: cascade]
+
+Ref: "amenazas_firms_nodo"."foco_id" > "amenazas_firms"."id" [delete: cascade]
+Ref: "amenazas_firms_nodo"."nodo_id" > "nodos"."id" [delete: cascade]
+Ref: "amenazas_firms_arista"."foco_id" > "amenazas_firms"."id" [delete: cascade]
+Ref: "amenazas_firms_arista"."arista_id" > "aristas"."id" [delete: cascade]
+
+Ref: "meteo_alertas"."nodo_id" > "nodos"."id" [delete: cascade]
+Ref: "meteo_alertas_nodo"."alerta_id" > "meteo_alertas"."id" [delete: cascade]
+Ref: "meteo_alertas_nodo"."nodo_id" > "nodos"."id" [delete: cascade]
+Ref: "meteo_alertas_arista"."alerta_id" > "meteo_alertas"."id" [delete: cascade]
+Ref: "meteo_alertas_arista"."arista_id" > "aristas"."id" [delete: cascade]
+
+Ref: "amenazas_ebird_nodo"."avistamiento_id" > "amenazas_ebird"."id" [delete: cascade]
+Ref: "amenazas_ebird_nodo"."nodo_id" > "nodos"."id" [delete: cascade]
+Ref: "amenazas_ebird_arista"."avistamiento_id" > "amenazas_ebird"."id" [delete: cascade]
+Ref: "amenazas_ebird_arista"."arista_id" > "aristas"."id" [delete: cascade]
+Ref: "amenazas_ebird_arista"."source" > "nodos"."id"
+Ref: "amenazas_ebird_arista"."target" > "nodos"."id"
