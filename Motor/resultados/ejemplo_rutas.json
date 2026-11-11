@@ -1,0 +1,473 @@
+{
+  "consulta": {
+    "origen_id": 16,
+    "destino_id": 22,
+    "restricciones": {
+      "solo_bosque": false,
+      "excluir_nodos": []
+    },
+    "autonomia_m": 7979.999999999999,
+    "theta": 0.5,
+    "overrides_prob": {
+      "aristas": {
+        "27": 0.8
+      }
+    },
+    "semilla": 0
+  },
+  "parametros": {
+    "origen": 16,
+    "destino": 22,
+    "theta": 0.5,
+    "d_max_m": 7979.999999999999,
+    "d_ref_m": 5242.6,
+    "solo_bosque": false,
+    "excluir_nodos": [],
+    "r_min": null,
+    "nodos_excluidos_total": []
+  },
+  "nodos_excluidos": {},
+  "rutas": [
+    {
+      "tecnica": "dijkstra_distancia",
+      "etiqueta": "pgr_dijkstra (distancia)",
+      "tiempo_ms": 0.05,
+      "parametros": {
+        "origen": 16,
+        "destino": 22,
+        "theta": 0.5,
+        "d_max_m": 7979.999999999999,
+        "d_ref_m": 5242.6,
+        "solo_bosque": false,
+        "excluir_nodos": [],
+        "r_min": null,
+        "nodos_excluidos_total": []
+      },
+      "extra": {
+        "motor": "Dijkstra en Python (modo sin base, mismas reglas que pgr_dijkstra)",
+        "sql": null
+      },
+      "nodos": [
+        16,
+        19,
+        20,
+        22
+      ],
+      "aristas": [
+        23,
+        27,
+        28
+      ],
+      "geojson": {
+        "type": "Feature",
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [
+              -72.643745,
+              -42.807689
+            ],
+            [
+              -72.619995,
+              -42.789188
+            ],
+            [
+              -72.608125,
+              -42.779936
+            ],
+            [
+              -72.608472,
+              -42.770938
+            ]
+          ]
+        },
+        "properties": {
+          "tecnica": "dijkstra_distancia",
+          "etiqueta": "pgr_dijkstra (distancia)",
+          "leyenda": "pgr_dijkstra (distancia) | 5,2 km | R = 0,200 | 0 ms",
+          "R": 0.19999999999999996,
+          "factible": true
+        }
+      },
+      "distancia_m": 5242.6,
+      "riesgo_log": 1.6094379124341005,
+      "p_supervivencia": 0.19999999999999998,
+      "costo": 1.3047199562170502,
+      "factible": true,
+      "mensaje": "ok",
+      "R": 0.19999999999999996,
+      "R_montecarlo": 0.1983,
+      "ic95": [
+        0.19048510098737034,
+        0.20611489901262967
+      ],
+      "delta_R": 0.0,
+      "R_si_se_volara": 0.19999999999999996,
+      "analitico_en_ic": true,
+      "leyenda": "pgr_dijkstra (distancia) | 5,2 km | R = 0,200 | 0 ms",
+      "ranking": 4
+    },
+    {
+      "tecnica": "milp",
+      "etiqueta": "Gurobi (MILP)",
+      "tiempo_ms": 23.56,
+      "parametros": {
+        "origen": 16,
+        "destino": 22,
+        "theta": 0.5,
+        "d_max_m": 7979.999999999999,
+        "d_ref_m": 5242.6,
+        "solo_bosque": false,
+        "excluir_nodos": [],
+        "r_min": null,
+        "nodos_excluidos_total": []
+      },
+      "extra": {
+        "solver": "Gurobi",
+        "version": "14.0.0",
+        "estado": "OPTIMAL",
+        "n_variables": 164,
+        "n_restricciones": 145,
+        "time_limit_s": 30.0,
+        "mip_gap_param": 0.0,
+        "tiempo_solver_ms": 10.0,
+        "objetivo": 0.7296108133559684,
+        "cota_inferior": 0.7296108133559684,
+        "gap": 0.0
+      },
+      "nodos": [
+        16,
+        18,
+        21,
+        23,
+        22
+      ],
+      "aristas": [
+        22,
+        26,
+        29,
+        30
+      ],
+      "geojson": {
+        "type": "Feature",
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [
+              -72.643745,
+              -42.807689
+            ],
+            [
+              -72.644428,
+              -42.789694
+            ],
+            [
+              -72.64511,
+              -42.771698
+            ],
+            [
+              -72.621029,
+              -42.762195
+            ],
+            [
+              -72.608472,
+              -42.770938
+            ]
+          ]
+        },
+        "properties": {
+          "tecnica": "milp",
+          "etiqueta": "Gurobi (MILP)",
+          "leyenda": "Gurobi (MILP) | 7,7 km | R = 1,000 | 24 ms",
+          "R": 1.0,
+          "factible": true
+        }
+      },
+      "distancia_m": 7650.1,
+      "riesgo_log": 0.0,
+      "p_supervivencia": 1.0,
+      "costo": 0.7296108133559684,
+      "factible": true,
+      "mensaje": "ok",
+      "R": 1.0,
+      "R_montecarlo": 1.0,
+      "ic95": [
+        1.0,
+        1.0
+      ],
+      "delta_R": 0.8,
+      "R_si_se_volara": 1.0,
+      "analitico_en_ic": true,
+      "leyenda": "Gurobi (MILP) | 7,7 km | R = 1,000 | 24 ms",
+      "ranking": 3
+    },
+    {
+      "tecnica": "dijkstra_ponderado",
+      "etiqueta": "pgr_dijkstra (ponderado)",
+      "tiempo_ms": 0.07,
+      "parametros": {
+        "origen": 16,
+        "destino": 22,
+        "theta": 0.5,
+        "d_max_m": 7979.999999999999,
+        "d_ref_m": 5242.6,
+        "solo_bosque": false,
+        "excluir_nodos": [],
+        "r_min": null,
+        "nodos_excluidos_total": []
+      },
+      "extra": {
+        "motor": "Dijkstra en Python (modo sin base, mismas reglas que pgr_dijkstra)",
+        "agg_cost": 0.7296108133559683,
+        "nota": "pgr_dijkstra no impone D_max: se revisa después",
+        "sql": null
+      },
+      "nodos": [
+        16,
+        18,
+        21,
+        23,
+        22
+      ],
+      "aristas": [
+        22,
+        26,
+        29,
+        30
+      ],
+      "geojson": {
+        "type": "Feature",
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [
+              -72.643745,
+              -42.807689
+            ],
+            [
+              -72.644428,
+              -42.789694
+            ],
+            [
+              -72.64511,
+              -42.771698
+            ],
+            [
+              -72.621029,
+              -42.762195
+            ],
+            [
+              -72.608472,
+              -42.770938
+            ]
+          ]
+        },
+        "properties": {
+          "tecnica": "dijkstra_ponderado",
+          "etiqueta": "pgr_dijkstra (ponderado)",
+          "leyenda": "pgr_dijkstra (ponderado) | 7,7 km | R = 1,000 | 0 ms",
+          "R": 1.0,
+          "factible": true
+        }
+      },
+      "distancia_m": 7650.1,
+      "riesgo_log": 0.0,
+      "p_supervivencia": 1.0,
+      "costo": 0.7296108133559684,
+      "factible": true,
+      "mensaje": "ok",
+      "R": 1.0,
+      "R_montecarlo": 1.0,
+      "ic95": [
+        1.0,
+        1.0
+      ],
+      "delta_R": 0.8,
+      "R_si_se_volara": 1.0,
+      "analitico_en_ic": true,
+      "leyenda": "pgr_dijkstra (ponderado) | 7,7 km | R = 1,000 | 0 ms",
+      "ranking": 1
+    },
+    {
+      "tecnica": "aco",
+      "etiqueta": "ACO (config_zhang)",
+      "tiempo_ms": 8.29,
+      "parametros": {
+        "origen": 16,
+        "destino": 22,
+        "theta": 0.5,
+        "d_max_m": 7979.999999999999,
+        "d_ref_m": 5242.6,
+        "solo_bosque": false,
+        "excluir_nodos": [],
+        "r_min": null,
+        "nodos_excluidos_total": []
+      },
+      "extra": {
+        "config": "config_zhang",
+        "fuente_config": "Zhang, Gajpal, Appadoo y Abdulkader (2018), Int. J. Production Economics 203, 404-413",
+        "parametros_aco": {
+          "alpha": 5,
+          "beta": 5,
+          "rho": 0.1,
+          "hormigas": 10,
+          "iteraciones": 150,
+          "sin_mejora": 25,
+          "tau_min": 0.03,
+          "tau_max": 0.9,
+          "q0_calendario": "fijo",
+          "q0": 0.0,
+          "heuristica": "euclidiana",
+          "elite": 10,
+          "tramo_max": 3,
+          "pasos_busqueda_local": 10
+        },
+        "semilla": 0,
+        "iteraciones_corridas": 26,
+        "soluciones_evaluadas": 519,
+        "convergencia": [
+          0.7296108133559684,
+          0.7296108133559684,
+          0.7296108133559684,
+          0.7296108133559684,
+          0.7296108133559684,
+          0.7296108133559684,
+          0.7296108133559684,
+          0.7296108133559684,
+          0.7296108133559684,
+          0.7296108133559684,
+          0.7296108133559684,
+          0.7296108133559684,
+          0.7296108133559684,
+          0.7296108133559684,
+          0.7296108133559684,
+          0.7296108133559684,
+          0.7296108133559684,
+          0.7296108133559684,
+          0.7296108133559684,
+          0.7296108133559684,
+          0.7296108133559684,
+          0.7296108133559684,
+          0.7296108133559684,
+          0.7296108133559684,
+          0.7296108133559684,
+          0.7296108133559684
+        ],
+        "f": 0.7296108133559684
+      },
+      "nodos": [
+        16,
+        18,
+        21,
+        23,
+        22
+      ],
+      "aristas": [
+        22,
+        26,
+        29,
+        30
+      ],
+      "geojson": {
+        "type": "Feature",
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [
+              -72.643745,
+              -42.807689
+            ],
+            [
+              -72.644428,
+              -42.789694
+            ],
+            [
+              -72.64511,
+              -42.771698
+            ],
+            [
+              -72.621029,
+              -42.762195
+            ],
+            [
+              -72.608472,
+              -42.770938
+            ]
+          ]
+        },
+        "properties": {
+          "tecnica": "aco",
+          "etiqueta": "ACO (config_zhang)",
+          "leyenda": "ACO (config_zhang) | 7,7 km | R = 1,000 | 8 ms",
+          "R": 1.0,
+          "factible": true
+        }
+      },
+      "distancia_m": 7650.1,
+      "riesgo_log": 0.0,
+      "p_supervivencia": 1.0,
+      "costo": 0.7296108133559684,
+      "factible": true,
+      "mensaje": "ok",
+      "R": 1.0,
+      "R_montecarlo": 1.0,
+      "ic95": [
+        1.0,
+        1.0
+      ],
+      "delta_R": 0.8,
+      "R_si_se_volara": 1.0,
+      "analitico_en_ic": true,
+      "leyenda": "ACO (config_zhang) | 7,7 km | R = 1,000 | 8 ms",
+      "ranking": 2
+    }
+  ],
+  "resiliencia": {
+    "metrica": "R(P) = prod_v (1 - q_v) * prod_a (1 - p_a)",
+    "regla_falla": "r ~ Uniforme(0, 100); falla si r <= 100 * p",
+    "n_montecarlo": 10000,
+    "mas_resiliente": "dijkstra_ponderado",
+    "mas_resiliente_etiqueta": "pgr_dijkstra (ponderado)",
+    "empate_en_R": [
+      "dijkstra_ponderado",
+      "aco",
+      "milp"
+    ],
+    "criterio_desempate": "a igual R gana la ruta más corta y luego la más rápida de calcular",
+    "ranking": [
+      "dijkstra_ponderado",
+      "aco",
+      "milp",
+      "dijkstra_distancia"
+    ],
+    "R_referencia_dijkstra": 0.19999999999999996
+  },
+  "mas_resiliente": "dijkstra_ponderado",
+  "probabilidades": {
+    "meta": {
+      "generado": "2026-11-11T23:44:21+00:00",
+      "datos": {
+        "fuente": "json",
+        "n_nodos": 48,
+        "n_aristas": 67,
+        "n_focos": 0,
+        "n_avistamientos": 10,
+        "n_lecturas_meteo": 48
+      },
+      "amenazas_activas": [
+        "firms",
+        "meteo",
+        "ebird"
+      ],
+      "overrides_prob": {
+        "aristas": {
+          "27": 0.8
+        }
+      }
+    },
+    "nodos_con_riesgo": {},
+    "aristas_con_riesgo": {
+      "27": 0.8
+    }
+  }
+}

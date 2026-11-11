@@ -1,0 +1,78 @@
+por_defecto: config_zhang
+
+comunes:
+  gamma:
+    valor: 1000
+    nota: >-
+      Decisión propia. Penalización por cada d_ref de exceso sobre D_max en
+      f = C(P) + gamma · max(0, D(P) − D_max) / d_ref. Además, toda ruta
+      factible gana sobre cualquier no factible (comparación lexicográfica).
+  margen_corte:
+    valor: 0.5
+    nota: >-
+      Decisión propia. Una hormiga se corta si su distancia supera D_max en
+      más de un 50 %. Las que se pasan poco siguen, y la penalización las guía.
+  q0:
+    nota: >-
+      Mai et al. (2023, Ec. 15) hacen variar q0 por iteración en dos tramos con
+      k0 = 0,7K: q0 = ((K - k)/K) q0_inicial si k < k0, y
+      q0 = ((k - k0)/K) q0_inicial + q0_inicial/2 si k >= k0. El paper no da el
+      valor de q0_inicial (no está en su Tabla 4): q0_inicial = 0,9 es una
+      decisión propia y se barre en la tabla de sensibilidad. config_zhang usa
+      q0 = 0 (regla probabilística pura).
+  tau0:
+    nota: >-
+      Decisión propia: tau0 = tau_max. Zhang usa 0,01, pero queda bajo la cota
+      tau_min = 0,03 de Mai.
+  eta:
+    nota: >-
+      Decisión propia: eta_ij = 1 / (c_ij + h_j), normalizada por el máximo de
+      los candidatos en cada paso (con beta = 8, una eta sin normalizar domina).
+      h_j sale de "heuristica": "euclidiana" = distancia en línea recta de j al
+      destino (como el factor D de Mai); "dijkstra" = costo exacto de j al
+      destino, que sin autonomía activa ya es el óptimo y vuelve trivial al ACO.
+
+config_mai:
+  fuente: Mai, Dong y Chen (2023), Intelligence & Robotics 3(4), 666-684
+  alpha: 1
+  beta: 8
+  rho: 0.2
+  hormigas: 10
+  iteraciones: 500
+  sin_mejora: null
+  tau_min: 0.03
+  tau_max: 0.9
+  q0_calendario: mai
+  q0_inicial: 0.9
+  q0_k0: 0.7
+  heuristica: euclidiana
+  elite: 0
+  tramo_max: 3
+  pasos_busqueda_local: 10
+
+config_zhang:
+  fuente: Zhang, Gajpal, Appadoo y Abdulkader (2018), Int. J. Production Economics 203, 404-413
+  alpha: 5
+  beta: 5
+  rho: 0.1
+  hormigas: 10
+  iteraciones: 150
+  sin_mejora: 25
+  tau_min: 0.03
+  tau_max: 0.9
+  q0_calendario: fijo
+  q0: 0.0
+  heuristica: euclidiana
+  elite: 10
+  tramo_max: 3
+  pasos_busqueda_local: 10
+
+sensibilidad:
+  alpha: [1, 2, 5, 8]
+  beta: [1, 2, 5, 8]
+  rho: [0.2, 0.5]
+  hormigas: [10, 30]
+  q0_inicial: [0.0, 0.5, 0.9]
+  iteraciones: 100
+  semillas: 5
+  base: config_mai

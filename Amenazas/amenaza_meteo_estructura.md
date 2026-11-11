@@ -1,37 +1,59 @@
 # amenaza_meteo.json
 
-Focos con puntos de amenaza de la actividad climática (temperatura, humedad, viento) solicitados por medio de la API (Weather Forecast API)
+Condiciones meteorológicas actuales en cada cámara, obtenidas de la API de Open-Meteo (Weather Forecast API, sin clave). Lo genera `Amenazas/extraer_meteo.py` y lo carga `Amenazas/cargar_meteo.py`.
 
-## Justificación Técnica
+## Por qué es una amenaza
 
-Las condciciones climáticas afectan directamente la toma de muestras y el estado del dispositivo, causando imágenes poco claras y daños a la aeronave, llevando a rutas incompletas y perdida de equipo.
+El viento, la temperatura y la lluvia limitan el vuelo del dron. La ficha del DJI Mavic 3T da estos límites:
 
-## Regla de Peso y Penalización
+- **Viento:** 12 m/s como máximo.
+- **Temperatura:** operación de −10 a 40 °C.
+- **Lluvia:** no declara clasificación IP, así que no es resistente al agua.
 
-- **Umbral de territorialidad:** $3000\text{ m}$ alrededor del avistamiento.
-- Si un tramo o cámara cae a $\le 3000\text{ m}$:
-  - `evitar = true`
-  - `costo_resiliente_km = costo_km + 3000`
-- Al igual que en NASA FIRMS, el Dijkstra de fase 2 utiliza solo `costo_km`, dejando `costo_resiliente_km` para la heurística resiliente de fase 3.
+En la fase 3 la lectura se convierte en una probabilidad de falla (`Motor/motor/probabilidades.py`, parámetros en `Motor/config/amenazas.yaml`).
+
+## Variables pedidas a la API
+
+Son las mismas que se citan en el informe:
+
+| Variable de Open-Meteo | Campo en el JSON | Unidad |
+| --- | --- | --- |
+| `temperature_2m` | `temperatura` | °C |
+| `relative_humidity_2m` | `humedad` | % |
+| `wind_speed_10m` | `viento` | m/s (se pide `wind_speed_unit=ms`; por defecto la API entrega km/h) |
+| `wind_gusts_10m` | `rafaga` | m/s |
+| `precipitation` | `precipitacion_mm` | mm acumulados en el intervalo (15 min) |
+
+Se hace una sola consulta con las coordenadas de las 48 cámaras.
 
 ## meta
 
-`fuente`: Open-Meteo API
-`endpoint`: https://api.open-meteo.com/v1/forecast
-`generado`: `2026-10-20T00:09:49+00:00`
-`umbral_amenaza_m`: 1000.0,
+| Campo | Significado |
+| --- | --- |
+| `fuente`, `endpoint` | API consultada |
+| `generado` | Fecha y hora UTC de la consulta |
+| `variables` | Lista de variables pedidas |
+| `unidades_api` | Unidades que devolvió la API (`current_units`), como evidencia de que el viento viene en m/s |
+| `unidad_viento`, `unidad_lluvia` | Unidades del JSON: `m/s` y `mm/h` |
+| `intervalo_s` | Duración del intervalo de la lectura actual (900 s) |
+| `limites_fabricante` | `v_max_ms`, `temperatura_min_c` y `temperatura_max_c`, leídos de `Motor/config/amenazas.yaml` |
+| `regla_evitar` | Cuándo se marca `evitar = true` |
+| `n_lecturas`, `n_evitar` | Lecturas guardadas y cuántas superan los límites del fabricante |
 
-## alertas_meteorologicas[]
+## lecturas[]
 
-`nodo_id`: nodo afectado
-`fecha`: tiempo del evento
-`temperatura`: temperatura ambiente
-`humedad`: humedad del ambiente
-`viento`: velocidad del viento a nivel de vuelo
-`geom`: `lat`, `lon`
+| Campo | Significado |
+| --- | --- |
+| `nodo_id`, `nombre`, `lat`, `lon` | Cámara consultada |
+| `fecha` | Hora local de la lectura (`current.time`) |
+| `temperatura`, `humedad`, `viento`, `rafaga` | Valores medidos (ver la tabla de unidades) |
+| `precipitacion_mm` | Lluvia del intervalo, tal como la entrega la API |
+| `lluvia_mm_h` | Lluvia convertida a mm/h: `precipitacion_mm × 3600 / intervalo_s` |
+| `evitar` | `true` si el viento o la ráfaga supera 12 m/s, o si la temperatura sale de −10 a 40 °C |
+| `motivo` | Explicación de `evitar` |
 
-## nodos_afectados[], aristas_afectadas[]
+## En la base
 
-Nodo: `nodo_id`, `fecha`, `temperatura`, `humedad`, `viento`, `geom`
-
-arista: `alerta_id`, `source`, `target`, `distancia_m`, `costo_km`, `costo_resiliente_km`, `evitar`
+- `meteo_alertas`: una fila por lectura, con las columnas `rafaga`, `lluvia_mm_h`, `unidad_viento` y `evitar` agregadas en la fase 3.
+- `meteo_alertas_nodo`: enlaza cada lectura con su cámara.
+- `meteo_alertas_arista`: enlaza cada lectura con las aristas que tocan esa cámara.

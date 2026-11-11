@@ -132,6 +132,10 @@ Table "meteo_alertas" {
   "temperatura" DOUBLE [not null]
   "humedad" DOUBLE [not null]
   "viento" DOUBLE [not null]
+  "rafaga" DOUBLE
+  "lluvia_mm_h" DOUBLE
+  "unidad_viento" TEXT
+  "evitar" BOOLEAN
   "point" geometry [not null]
 }
 
@@ -213,6 +217,32 @@ Ref: "amenazas_firms_nodo"."nodo_id" > "nodos"."id" [delete: cascade]
 Ref: "amenazas_firms_arista"."foco_id" > "amenazas_firms"."id" [delete: cascade]
 Ref: "amenazas_firms_arista"."arista_id" > "aristas"."id" [delete: cascade]
 
+Table "prob_fallo_nodo" {
+  "nodo_id" INTEGER
+  "amenaza" TEXT [not null, note: 'firms, meteo, ebird o escenario']
+  "p_fallo" DOUBLE [not null]
+  "detalle" JSONB
+  "generado" TIMESTAMPTZ [not null]
+
+  Indexes {
+    (nodo_id, amenaza) [pk]
+  }
+}
+
+Table "prob_fallo_arista" {
+  "arista_id" INTEGER
+  "amenaza" TEXT [not null, note: 'firms, meteo, ebird o escenario']
+  "p_fallo" DOUBLE [not null]
+  "detalle" JSONB
+  "generado" TIMESTAMPTZ [not null]
+
+  Indexes {
+    (arista_id, amenaza) [pk]
+  }
+}
+
+Ref: "prob_fallo_nodo"."nodo_id" > "nodos"."id" [delete: cascade]
+Ref: "prob_fallo_arista"."arista_id" > "aristas"."id" [delete: cascade]
 Ref: "meteo_alertas"."nodo_id" > "nodos"."id" [delete: cascade]
 Ref: "meteo_alertas_nodo"."alerta_id" > "meteo_alertas"."id" [delete: cascade]
 Ref: "meteo_alertas_nodo"."nodo_id" > "nodos"."id" [delete: cascade]

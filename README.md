@@ -56,3 +56,11 @@ Python Metadata/extraer_fauna.py
 python Amenazas/cargar_ebird.py
 Python Metadata/extraer_senderos.py
 ```
+
+## Fase 3: motor de rutas (puntos 5, 6 y 8)
+
+El servicio `motor` (Docker, puerto 8001) calcula la probabilidad de falla por nodo y arista, las 4 rutas (`pgr_dijkstra` por distancia, Gurobi, `pgr_dijkstra` ponderado y ACO) y la métrica de resiliencia de cada una. `python main.py` lo levanta y carga las probabilidades. La documentación completa y el contrato de la API están en [Motor/README.md](Motor/README.md).
+
+- `Motor/prob_fallo.json` y `Motor/prob_fallo_estructura.md`
+- `Amenazas/amenaza_meteo.json` y `amenaza_meteo_estructura.md` (lecturas de las 48 cámaras, viento en m/s)
+- API: http://127.0.0.1:8001/docs
