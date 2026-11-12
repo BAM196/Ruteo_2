@@ -13,6 +13,9 @@ class Consulta:
     theta: float = 0.5
     autonomia_m: float | None = None
     solo_bosque: bool = False
+    evitar_senderos: bool = False
+    evitar_clima: bool = False
+    evitar_aves: bool = False
     excluir_nodos: list = field(default_factory=list)
     overrides_prob: dict = field(default_factory=dict)
     r_min: float | None = None
@@ -28,6 +31,9 @@ class Consulta:
             theta=float(d.get("theta", 0.5)),
             autonomia_m=float(d.get("autonomia_m") or d_max_defecto),
             solo_bosque=bool(r.get("solo_bosque", False)),
+            evitar_senderos=bool(r.get("evitar_senderos", False)),
+            evitar_clima=bool(r.get("evitar_clima", False)),
+            evitar_aves=bool(r.get("evitar_aves", False)),
             excluir_nodos=[int(x) for x in r.get("excluir_nodos", [])],
             overrides_prob=d.get("overrides_prob") or {},
             r_min=d.get("r_min"),
@@ -69,6 +75,9 @@ class Problema:
         self.aristas_excluidas = set()
         for aid, a in esc.aristas.items():
             if (a["source"] in excl or a["target"] in excl or not a.get("viable", True)
+                    or (consulta.evitar_senderos and a.get("buffer_privacidad", False))
+                    or (consulta.evitar_clima and a.get("clima", False))
+                    or (consulta.evitar_aves and a.get("aves", False))
                     or self.p[aid] >= cota or (self.d_max and a["distancia_m"] > self.d_max)):
                 self.aristas_excluidas.add(aid)
 
@@ -157,6 +166,8 @@ class Problema:
     def parametros(self) -> dict:
         return {"origen": self.s, "destino": self.t, "theta": self.theta, "d_max_m": self.d_max,
                 "d_ref_m": self.d_ref, "solo_bosque": self.c.solo_bosque,
+                "evitar_senderos": self.c.evitar_senderos,
+                "evitar_clima": self.c.evitar_clima, "evitar_aves": self.c.evitar_aves,
                 "excluir_nodos": sorted(self.excl_usuario), "r_min": self.c.r_min,
                 "nodos_excluidos_total": sorted(self.nodos_excluidos)}
 

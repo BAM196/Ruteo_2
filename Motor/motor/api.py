@@ -13,6 +13,9 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], all
 
 class Restricciones(BaseModel):
     solo_bosque: bool = False
+    evitar_senderos: bool = False
+    evitar_clima: bool = False
+    evitar_aves: bool = False
     excluir_nodos: list[int] = Field(default_factory=list)
 
 

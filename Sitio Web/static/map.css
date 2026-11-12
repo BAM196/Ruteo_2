@@ -120,6 +120,36 @@ button:disabled {
   margin: 18px 0 0;
 }
 
+.fauna-box {
+  margin-top: 18px;
+}
+
+.fauna-box h2 {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+}
+
+.fauna-list {
+  max-height: 220px;
+  margin: 8px 0 0;
+  padding-left: 20px;
+  overflow-y: auto;
+}
+
+.fauna-list li {
+  margin-bottom: 8px;
+}
+
+.fauna-list small {
+  display: block;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.fauna-list .fauna-scientific {
+  font-style: italic;
+}
+
 .error {
   margin: 8px 0 0;
   color: #8a2e16;
