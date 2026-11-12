@@ -51,6 +51,15 @@ def test_solo_bosque(esc, con_amenaza):
     assert rutas["dijkstra_ponderado"]["nodos"] == [1, 3, 7]
 
 
+def test_evitar_senderos_excluye_aristas_marcadas(esc, consulta):
+    c = copy.deepcopy(consulta)
+    c["restricciones"]["evitar_senderos"] = True
+    rutas, _ = _todas(esc, c)
+    for ruta in rutas.values():
+        assert 2 not in ruta["aristas"]
+        assert ruta["nodos"] == [1, 3, 7]
+
+
 def test_autonomia_activa_diferencia_tecnica_2_y_3(esc, con_amenaza):
     c = copy.deepcopy(con_amenaza)
     c["autonomia_m"] = 2100

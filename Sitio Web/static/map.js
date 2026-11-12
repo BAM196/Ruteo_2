@@ -23,11 +23,16 @@ const thetaInput = document.querySelector("#theta");
 const thetaValue = document.querySelector("#theta-value");
 const autonomyInput = document.querySelector("#autonomy");
 const forestOnly = document.querySelector("#forest-only");
+const avoidTrails = document.querySelector("#avoid-trails");
+const avoidRain = document.querySelector("#avoid-rain");
+const avoidBirds = document.querySelector("#avoid-birds");
 const threatBox = document.querySelector("#threat-box");
 const threatEdge = document.querySelector("#threat-edge");
 const threatP = document.querySelector("#threat-p");
 const summary = document.querySelector("#route-summary");
 const errorBox = document.querySelector("#route-error");
+const faunaSummary = document.querySelector("#fauna-summary");
+const faunaList = document.querySelector("#fauna-list");
 const routeButton = document.querySelector("#route-button");
 const form = document.querySelector("#route-form");
 const routesBox = document.querySelector("#routes-box");
@@ -196,12 +201,69 @@ function option(value, text) {
 }
 
 function fillCameras(features) {
-  const make = () => features.map((f) => option(f.properties.id, `${f.properties.id} · ${f.properties.name}`));
+  const make = () =>
+    features.map((f) =>
+      option(f.properties.id, `${f.properties.id} · ${f.properties.name}`),
+    );
   startSelect.replaceChildren(...make());
   goalSelect.replaceChildren(...make());
   excludeSelect.replaceChildren(...make());
-  if (features.some((f) => f.properties.id === DEFAULT_START)) startSelect.value = String(DEFAULT_START);
-  if (features.some((f) => f.properties.id === DEFAULT_GOAL)) goalSelect.value = String(DEFAULT_GOAL);
+  if (features.some((f) => f.properties.id === DEFAULT_START))
+    startSelect.value = String(DEFAULT_START);
+  if (features.some((f) => f.properties.id === DEFAULT_GOAL))
+    goalSelect.value = String(DEFAULT_GOAL);
+}
+
+function renderFauna(features) {
+  const speciesByName = new Map();
+
+  features.forEach((feature) => {
+    const nodeId = feature.properties.id;
+    (feature.properties.species || []).forEach((species) => {
+      const scientific = (species.scientific || "").trim();
+      const common = (species.common || "").trim();
+      const key = scientific || common;
+      if (!key) return;
+
+      let item = speciesByName.get(key);
+      if (!item) {
+        item = {scientific, common, records: 0, cameras: new Set()};
+        speciesByName.set(key, item);
+      }
+      item.records += Number(species.records) || 0;
+      item.cameras.add(nodeId);
+    });
+  });
+
+  const species = [...speciesByName.values()].sort(
+    (a, b) => b.records - a.records || (a.common || a.scientific).localeCompare(b.common || b.scientific),
+  );
+  faunaList.replaceChildren();
+
+  species.forEach((animal) => {
+    const item = document.createElement("li");
+    const name = document.createElement("strong");
+    name.textContent = animal.common || animal.scientific;
+    item.append(name);
+
+    if (animal.common && animal.scientific) {
+      const scientific = document.createElement("small");
+      scientific.className = "fauna-scientific";
+      scientific.textContent = animal.scientific;
+      item.append(scientific);
+    }
+
+    const stats = document.createElement("small");
+    stats.textContent =
+      `${animal.records.toLocaleString("es-CL")} registros · ` +
+      `${animal.cameras.size} cámaras`;
+    item.append(stats);
+    faunaList.append(item);
+  });
+
+  faunaSummary.textContent = species.length
+    ? `${species.length} especies registradas`
+    : "No hay especies registradas en las cámaras.";
 }
 
 function fillEdges(features) {
@@ -224,7 +286,12 @@ async function readJson(url, options) {
   const payload = await response.json();
   if (!response.ok) {
     const detail = payload.detail;
-    const text = typeof detail === "string" ? detail : detail ? JSON.stringify(detail) : payload.error;
+    const text =
+      typeof detail === "string"
+        ? detail
+        : detail
+          ? JSON.stringify(detail)
+          : payload.error;
     throw new Error(text || "No se pudo completar la consulta.");
   }
   return payload;
@@ -238,19 +305,26 @@ function buildQuery() {
     autonomia_m: autonomyInput.value ? Number(autonomyInput.value) : null,
     restricciones: {
       solo_bosque: forestOnly.checked,
-      excluir_nodos: Array.from(excludeSelect.selectedOptions).map((o) => Number(o.value)),
+      evitar_senderos: avoidTrails.checked,
+      excluir_nodos: Array.from(excludeSelect.selectedOptions).map((o) =>
+        Number(o.value),
+      ),
     },
     overrides_prob: {},
   };
   if (threatBox.open && threatEdge.value) {
-    query.overrides_prob = {aristas: {[threatEdge.value]: Number(threatP.value)}};
+    query.overrides_prob = {
+      aristas: {[threatEdge.value]: Number(threatP.value)},
+    };
   }
   return query;
 }
 
 function drawThreat(query) {
   threatLayer.clearLayers();
-  const ids = Object.keys((query.overrides_prob || {}).aristas || {}).map(Number);
+  const ids = Object.keys((query.overrides_prob || {}).aristas || {}).map(
+    Number,
+  );
   edgeFeatures
     .filter((f) => ids.includes(f.properties.id))
     .forEach((f) => threatLayer.addData(f));
@@ -269,7 +343,9 @@ function formatR(value) {
 function drawRoutes(payload) {
   clearRoutes();
   const order = ["dijkstra_distancia", "milp", "dijkstra_ponderado", "aco"];
-  const routes = [...payload.rutas].sort((a, b) => order.indexOf(a.tecnica) - order.indexOf(b.tecnica));
+  const routes = [...payload.rutas].sort(
+    (a, b) => order.indexOf(a.tecnica) - order.indexOf(b.tecnica),
+  );
   const tie = (payload.resiliencia && payload.resiliencia.empate_en_R) || [];
 
   routes.forEach((route) => {
@@ -325,9 +401,12 @@ function drawRoutes(payload) {
 
   const winnerRoute = routes.find((r) => r.tecnica === payload.mas_resiliente);
   if (!winnerRoute) {
-    routesWinner.textContent = "Ninguna ruta es factible con estas condiciones.";
+    routesWinner.textContent =
+      "Ninguna ruta es factible con estas condiciones.";
   } else if (tie.length > 1) {
-    const names = routes.filter((r) => tie.includes(r.tecnica)).map((r) => r.etiqueta);
+    const names = routes
+      .filter((r) => tie.includes(r.tecnica))
+      .map((r) => r.etiqueta);
     routesWinner.textContent = `Más resilientes (empate en R = ${formatR(winnerRoute.R)}): ${names.join(", ")}.`;
   } else {
     routesWinner.textContent = `Más resiliente: ${winnerRoute.etiqueta} (R = ${formatR(winnerRoute.R)}).`;
@@ -418,6 +497,7 @@ async function loadPark() {
     cameras = nodes.features;
     edgeFeatures = edges.features;
     fillCameras(cameras);
+    renderFauna(cameras);
     fillEdges(edgeFeatures);
 
     const bounds = nodesLayer.getBounds();
@@ -445,7 +525,9 @@ async function loadPark() {
 }
 
 thetaInput.addEventListener("input", () => {
-  thetaValue.textContent = Number(thetaInput.value).toFixed(2).replace(".", ",");
+  thetaValue.textContent = Number(thetaInput.value)
+    .toFixed(2)
+    .replace(".", ",");
 });
 
 form.addEventListener("submit", (event) => {

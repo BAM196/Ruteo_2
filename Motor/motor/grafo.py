@@ -95,6 +95,7 @@ def desde_juguete(path: Path) -> Escenario:
             "distancia_m": float(a["distancia_m"]),
             "costo_km": float(a["distancia_m"]) / 1000,
             "coords": coords, "excede_max": False, "viable": a.get("viable", True),
+            "buffer_privacidad": bool(a.get("buffer_privacidad", False)),
         }
     meteo = {
         int(k): lectura_meteo(v.get("temperatura"), v.get("humedad"), v.get("viento"),
@@ -111,6 +112,13 @@ def desde_repo(raiz: Path = RAIZ) -> Escenario:
     doc_a = _leer(raiz / "Infraestructura" / "aristasv2.json")
     gee = _leer(raiz / "Metadata" / "metadata_gee.json") or {"registros": []}
     lc = {r["nodo_id"]: r.get("landcover_code") for r in gee.get("registros", [])}
+    senderos = _leer(raiz / "Metadata" / "metadata_senderos.json") or {}
+    aristas_privadas = {
+        ar["id"]
+        for s in senderos.get("senderos", [])
+        for ar in s.get("aristas_cercanas", [])
+        if ar.get("buffer_privacidad", False)
+    }
 
     nodos = {
         n["id"]: {"id": n["id"], "nombre": n.get("nombre"), "lon": n["lon"], "lat": n["lat"],
@@ -122,7 +130,7 @@ def desde_repo(raiz: Path = RAIZ) -> Escenario:
             "id": a["id"], "source": a["source"], "target": a["target"],
             "distancia_m": float(a["distancia_m"]), "costo_km": float(a["costo_km"]),
             "coords": a["coordenadas"], "excede_max": bool(a.get("excede_max")),
-            "viable": a.get("viable", True),
+            "viable": a.get("viable", True), "buffer_privacidad": a["id"] in aristas_privadas,
         }
         for a in doc_a["aristas"]
     }
@@ -174,15 +182,23 @@ def desde_bd(conn=None) -> Escenario:
             nodos = {r[0]: {"id": r[0], "nombre": r[1], "lon": r[2], "lat": r[3],
                             "landcover_code": r[4]} for r in cur.fetchall()}
 
-            viable = "viable" if "viable" in _columnas(cur, "aristas") else "TRUE"
+            viable = "a.viable" if "viable" in _columnas(cur, "aristas") else "TRUE"
             cur.execute(f"""
-                SELECT id, source, target, distancia_m, costo_km,
-                       ST_AsGeoJSON(geom)::json -> 'coordinates', excede_max, {viable}
-                FROM aristas ORDER BY id
+                SELECT a.id, a.source, a.target, a.distancia_m, a.costo_km,
+                       ST_AsGeoJSON(a.geom)::json -> 'coordinates', a.excede_max, {viable},
+                       COALESCE(s.buffer_privacidad, FALSE)
+                FROM aristas a
+                LEFT JOIN (
+                    SELECT arista_id, BOOL_OR(buffer_privacidad) AS buffer_privacidad
+                    FROM metadata_senderos_arista
+                    GROUP BY arista_id
+                ) s ON s.arista_id = a.id
+                ORDER BY a.id
             """)
             aristas = {r[0]: {"id": r[0], "source": r[1], "target": r[2],
                               "distancia_m": float(r[3]), "costo_km": float(r[4]),
-                              "coords": r[5], "excede_max": bool(r[6]), "viable": bool(r[7])}
+                              "coords": r[5], "excede_max": bool(r[6]), "viable": bool(r[7]),
+                              "buffer_privacidad": bool(r[8])}
                        for r in cur.fetchall()}
 
             cur.execute("""
