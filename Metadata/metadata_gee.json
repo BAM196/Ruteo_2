@@ -4,7 +4,7 @@
     "dataset_gee": "ESA/WorldCover/v200/2021",
     "banda": "Map",
     "modo_extraccion": "cog",
-    "generado": "2026-11-12T23:23:08+00:00",
+    "generado": "2026-11-12T23:45:42+00:00",
     "nodos_origen": "Infraestructura/nodosv2.json",
     "cita": "Zanaga, D. et al. (2022). ESA WorldCover 10 m 2021 v200. https://doi.org/10.5281/zenodo.7254221",
     "especies_objetivo": [
@@ -75,7 +75,7 @@
       "10": {
         "clase": "Tree cover",
         "clase_es": "Cobertura arbórea",
-        "n_nodos": 243,
+        "n_nodos": 246,
         "especies": [
           {
             "cientifico": "Bos taurus Linnaeus, 1758",
@@ -180,7 +180,7 @@
       "60": {
         "clase": "Bare / sparse vegetation",
         "clase_es": "Suelo desnudo o vegetación escasa",
-        "n_nodos": 6,
+        "n_nodos": 5,
         "especies": []
       },
       "90": {
@@ -4174,6 +4174,176 @@
     },
     {
       "nodo_id": 197,
+      "nombre": "WP Desvio C2-C5 Izq-1",
+      "lat": -42.981078,
+      "lon": -72.480341,
+      "codigos_estacion": [],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [],
+      "tiene_especie_objetivo": false,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 198,
+      "nombre": "WP Desvio C2-C5 Der-1",
+      "lat": -42.987128,
+      "lon": -72.462541,
+      "codigos_estacion": [],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [],
+      "tiene_especie_objetivo": false,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 199,
+      "nombre": "WP Desvio C2-C6 Izq-1",
+      "lat": -42.979956,
+      "lon": -72.487554,
+      "codigos_estacion": [],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [],
+      "tiene_especie_objetivo": false,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 200,
+      "nombre": "WP Desvio C2-C6 Der-1",
+      "lat": -42.979524,
+      "lon": -72.46795,
+      "codigos_estacion": [],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [],
+      "tiene_especie_objetivo": false,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 201,
+      "nombre": "WP Desvio C3-C4 Izq-1",
+      "lat": -42.976635,
+      "lon": -72.459484,
+      "codigos_estacion": [],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [],
+      "tiene_especie_objetivo": false,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 202,
+      "nombre": "WP Desvio C3-C4 Der-1",
+      "lat": -42.991029,
+      "lon": -72.458891,
+      "codigos_estacion": [],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [],
+      "tiene_especie_objetivo": false,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 203,
+      "nombre": "WP Desvio C3-C6 Izq-1",
+      "lat": -42.975458,
+      "lon": -72.487738,
+      "codigos_estacion": [],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [],
+      "tiene_especie_objetivo": false,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 204,
+      "nombre": "WP Desvio C3-C6 Der-1",
+      "lat": -42.975026,
+      "lon": -72.468135,
+      "codigos_estacion": [],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [],
+      "tiene_especie_objetivo": false,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 205,
+      "nombre": "WP Desvio C3-C7 Izq-1",
+      "lat": -42.97096,
+      "lon": -72.487921,
+      "codigos_estacion": [],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [],
+      "tiene_especie_objetivo": false,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 206,
+      "nombre": "WP Desvio C3-C7 Der-1",
+      "lat": -42.970528,
+      "lon": -72.468319,
+      "codigos_estacion": [],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [],
+      "tiene_especie_objetivo": false,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 207,
       "nombre": "WP Desvio C4-C5 Izq-1",
       "lat": -42.985733,
       "lon": -72.457365,
@@ -4190,7 +4360,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 198,
+      "nodo_id": 208,
       "nombre": "WP Desvio C4-C5 Der-1",
       "lat": -42.972663,
       "lon": -72.449129,
@@ -4207,10 +4377,10 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 199,
-      "nombre": "WP Desvio C6-C8 Izq-1",
-      "lat": -42.965834,
-      "lon": -72.547511,
+      "nodo_id": 209,
+      "nombre": "WP Desvio C5-C7 Izq-1",
+      "lat": -42.969523,
+      "lon": -72.480812,
       "codigos_estacion": [],
       "landcover_code": 10,
       "landcover_clase": "Tree cover",
@@ -4224,10 +4394,10 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 200,
-      "nombre": "WP Desvio C6-C8 Der-1",
-      "lat": -42.951596,
-      "lon": -72.544569,
+      "nodo_id": 210,
+      "nombre": "WP Desvio C5-C7 Der-1",
+      "lat": -42.962699,
+      "lon": -72.463545,
       "codigos_estacion": [],
       "landcover_code": 10,
       "landcover_clase": "Tree cover",
@@ -4241,7 +4411,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 201,
+      "nodo_id": 211,
       "nombre": "WP Desvio C7-C8 Izq-1",
       "lat": -42.961404,
       "lon": -72.546821,
@@ -4258,7 +4428,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 202,
+      "nodo_id": 212,
       "nombre": "WP Desvio C7-C8 Der-1",
       "lat": -42.94703,
       "lon": -72.545616,
@@ -4275,7 +4445,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 203,
+      "nodo_id": 213,
       "nombre": "WP Desvio C7-C9 Izq-1",
       "lat": -42.945093,
       "lon": -72.48181,
@@ -4292,7 +4462,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 204,
+      "nodo_id": 214,
       "nombre": "WP Desvio C7-C9 Der-1",
       "lat": -42.951143,
       "lon": -72.464021,
@@ -4309,7 +4479,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 205,
+      "nodo_id": 215,
       "nombre": "WP Desvio C8-C16 Izq-1",
       "lat": -42.880511,
       "lon": -72.63845,
@@ -4326,7 +4496,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 206,
+      "nodo_id": 216,
       "nombre": "WP Desvio C8-C16 Der-1",
       "lat": -42.878323,
       "lon": -72.619095,
@@ -4343,7 +4513,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 207,
+      "nodo_id": 217,
       "nombre": "WP Desvio C9-C10 Izq-1",
       "lat": -42.92683,
       "lon": -72.470301,
@@ -4360,7 +4530,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 208,
+      "nodo_id": 218,
       "nombre": "WP Desvio C9-C10 Der-1",
       "lat": -42.932879,
       "lon": -72.452516,
@@ -4377,41 +4547,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 209,
-      "nombre": "WP Desvio C10-C12 Izq-1",
-      "lat": -42.901059,
-      "lon": -72.459849,
-      "codigos_estacion": [],
-      "landcover_code": 60,
-      "landcover_clase": "Bare / sparse vegetation",
-      "landcover_clase_es": "Suelo desnudo o vegetación escasa",
-      "especies": [],
-      "tiene_especie_objetivo": false,
-      "tiene_especie_invasora": false,
-      "nota_pixel": null,
-      "clase_prioritaria_default": false,
-      "preferencia_default": "sin_prioridad",
-      "restriccion_default": null
-    },
-    {
-      "nodo_id": 210,
-      "nombre": "WP Desvio C10-C12 Der-1",
-      "lat": -42.904127,
-      "lon": -72.44071,
-      "codigos_estacion": [],
-      "landcover_code": 10,
-      "landcover_clase": "Tree cover",
-      "landcover_clase_es": "Cobertura arbórea",
-      "especies": [],
-      "tiene_especie_objetivo": false,
-      "tiene_especie_invasora": false,
-      "nota_pixel": null,
-      "clase_prioritaria_default": true,
-      "preferencia_default": "priorizar",
-      "restriccion_default": null
-    },
-    {
-      "nodo_id": 211,
+      "nodo_id": 219,
       "nombre": "WP Desvio C11-C12 Izq-1",
       "lat": -42.890573,
       "lon": -72.459538,
@@ -4428,7 +4564,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 212,
+      "nodo_id": 220,
       "nombre": "WP Desvio C11-C12 Der-1",
       "lat": -42.89662,
       "lon": -72.441763,
@@ -4445,41 +4581,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 213,
-      "nombre": "WP Desvio C11-C13 Izq-1",
-      "lat": -42.878571,
-      "lon": -72.432902,
-      "codigos_estacion": [],
-      "landcover_code": 10,
-      "landcover_clase": "Tree cover",
-      "landcover_clase_es": "Cobertura arbórea",
-      "especies": [],
-      "tiene_especie_objetivo": false,
-      "tiene_especie_invasora": false,
-      "nota_pixel": null,
-      "clase_prioritaria_default": true,
-      "preferencia_default": "priorizar",
-      "restriccion_default": null
-    },
-    {
-      "nodo_id": 214,
-      "nombre": "WP Desvio C11-C13 Der-1",
-      "lat": -42.889535,
-      "lon": -72.420207,
-      "codigos_estacion": [],
-      "landcover_code": 10,
-      "landcover_clase": "Tree cover",
-      "landcover_clase_es": "Cobertura arbórea",
-      "especies": [],
-      "tiene_especie_objetivo": false,
-      "tiene_especie_invasora": false,
-      "nota_pixel": null,
-      "clase_prioritaria_default": true,
-      "preferencia_default": "priorizar",
-      "restriccion_default": null
-    },
-    {
-      "nodo_id": 215,
+      "nodo_id": 221,
       "nombre": "WP Desvio C12-C13 Izq-1",
       "lat": -42.86858,
       "lon": -72.425457,
@@ -4496,7 +4598,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 216,
+      "nodo_id": 222,
       "nombre": "WP Desvio C12-C13 Der-1",
       "lat": -42.881257,
       "lon": -72.416168,
@@ -4513,7 +4615,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 217,
+      "nodo_id": 223,
       "nombre": "WP Desvio C14-C15 Izq-1",
       "lat": -42.817204,
       "lon": -72.752387,
@@ -4530,7 +4632,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 218,
+      "nodo_id": 224,
       "nombre": "WP Desvio C14-C15 Der-1",
       "lat": -42.829351,
       "lon": -72.741876,
@@ -4547,41 +4649,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 219,
-      "nombre": "WP Desvio C14-C17 Izq-1",
-      "lat": -42.812383,
-      "lon": -72.740152,
-      "codigos_estacion": [],
-      "landcover_code": 10,
-      "landcover_clase": "Tree cover",
-      "landcover_clase_es": "Cobertura arbórea",
-      "especies": [],
-      "tiene_especie_objetivo": false,
-      "tiene_especie_invasora": false,
-      "nota_pixel": null,
-      "clase_prioritaria_default": true,
-      "preferencia_default": "priorizar",
-      "restriccion_default": null
-    },
-    {
-      "nodo_id": 220,
-      "nombre": "WP Desvio C14-C17 Der-1",
-      "lat": -42.824692,
-      "lon": -72.729992,
-      "codigos_estacion": [],
-      "landcover_code": 10,
-      "landcover_clase": "Tree cover",
-      "landcover_clase_es": "Cobertura arbórea",
-      "especies": [],
-      "tiene_especie_objetivo": false,
-      "tiene_especie_invasora": false,
-      "nota_pixel": null,
-      "clase_prioritaria_default": true,
-      "preferencia_default": "priorizar",
-      "restriccion_default": null
-    },
-    {
-      "nodo_id": 221,
+      "nodo_id": 225,
       "nombre": "WP Desvio C15-C17 Izq-1",
       "lat": -42.798081,
       "lon": -72.709624,
@@ -4598,7 +4666,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 222,
+      "nodo_id": 226,
       "nombre": "WP Desvio C15-C17 Der-1",
       "lat": -42.810782,
       "lon": -72.700404,
@@ -4615,7 +4683,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 223,
+      "nodo_id": 227,
       "nombre": "WP Desvio C16-C19 Izq-1",
       "lat": -42.793492,
       "lon": -72.638974,
@@ -4632,7 +4700,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 224,
+      "nodo_id": 228,
       "nombre": "WP Desvio C16-C19 Der-1",
       "lat": -42.803386,
       "lon": -72.624762,
@@ -4649,7 +4717,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 225,
+      "nodo_id": 229,
       "nombre": "WP Desvio C17-C18 Izq-1",
       "lat": -42.787758,
       "lon": -72.671325,
@@ -4666,7 +4734,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 226,
+      "nodo_id": 230,
       "nombre": "WP Desvio C17-C18 Der-1",
       "lat": -42.801628,
       "lon": -72.66606,
@@ -4683,7 +4751,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 227,
+      "nodo_id": 231,
       "nombre": "WP Desvio C18-C21 Izq-1",
       "lat": -42.780897,
       "lon": -72.654541,
@@ -4700,7 +4768,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 228,
+      "nodo_id": 232,
       "nombre": "WP Desvio C18-C21 Der-1",
       "lat": -42.780495,
       "lon": -72.634997,
@@ -4717,7 +4785,143 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 229,
+      "nodo_id": 233,
+      "nombre": "WP Desvio C19-C21 Izq-1",
+      "lat": -42.785676,
+      "lon": -72.639271,
+      "codigos_estacion": [],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [],
+      "tiene_especie_objetivo": false,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 234,
+      "nombre": "WP Desvio C19-C21 Der-1",
+      "lat": -42.775211,
+      "lon": -72.625839,
+      "codigos_estacion": [],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [],
+      "tiene_especie_objetivo": false,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 235,
+      "nombre": "WP Desvio C19-C22 Izq-1",
+      "lat": -42.777026,
+      "lon": -72.623096,
+      "codigos_estacion": [],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [],
+      "tiene_especie_objetivo": false,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 236,
+      "nombre": "WP Desvio C19-C22 Der-1",
+      "lat": -42.7831,
+      "lon": -72.605369,
+      "codigos_estacion": [],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [],
+      "tiene_especie_objetivo": false,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 237,
+      "nombre": "WP Desvio C20-C23 Izq-1",
+      "lat": -42.774467,
+      "lon": -72.623194,
+      "codigos_estacion": [],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [],
+      "tiene_especie_objetivo": false,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 238,
+      "nombre": "WP Desvio C20-C23 Der-1",
+      "lat": -42.767664,
+      "lon": -72.605963,
+      "codigos_estacion": [],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [],
+      "tiene_especie_objetivo": false,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 239,
+      "nombre": "WP Desvio C21-C22 Izq-1",
+      "lat": -42.764121,
+      "lon": -72.627066,
+      "codigos_estacion": [],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [],
+      "tiene_especie_objetivo": false,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 240,
+      "nombre": "WP Desvio C21-C22 Der-1",
+      "lat": -42.778518,
+      "lon": -72.626516,
+      "codigos_estacion": [],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [],
+      "tiene_especie_objetivo": false,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 241,
       "nombre": "WP Desvio C21-C23 Izq-1",
       "lat": -42.760599,
       "lon": -72.637683,
@@ -4734,7 +4938,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 230,
+      "nodo_id": 242,
       "nombre": "WP Desvio C21-C23 Der-1",
       "lat": -42.773295,
       "lon": -72.628454,
@@ -4751,7 +4955,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 231,
+      "nodo_id": 243,
       "nombre": "WP Desvio C24-C25 Izq-1",
       "lat": -42.735369,
       "lon": -72.605755,
@@ -4768,7 +4972,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 232,
+      "nodo_id": 244,
       "nombre": "WP Desvio C24-C25 Der-1",
       "lat": -42.743013,
       "lon": -72.589197,
@@ -4785,41 +4989,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 233,
-      "nombre": "WP Desvio C26-C28 Izq-1",
-      "lat": -42.705287,
-      "lon": -72.589737,
-      "codigos_estacion": [],
-      "landcover_code": 10,
-      "landcover_clase": "Tree cover",
-      "landcover_clase_es": "Cobertura arbórea",
-      "especies": [],
-      "tiene_especie_objetivo": false,
-      "tiene_especie_invasora": false,
-      "nota_pixel": null,
-      "clase_prioritaria_default": true,
-      "preferencia_default": "priorizar",
-      "restriccion_default": null
-    },
-    {
-      "nodo_id": 234,
-      "nombre": "WP Desvio C26-C28 Der-1",
-      "lat": -42.700343,
-      "lon": -72.571397,
-      "codigos_estacion": [],
-      "landcover_code": 10,
-      "landcover_clase": "Tree cover",
-      "landcover_clase_es": "Cobertura arbórea",
-      "especies": [],
-      "tiene_especie_objetivo": false,
-      "tiene_especie_invasora": false,
-      "nota_pixel": null,
-      "clase_prioritaria_default": true,
-      "preferencia_default": "priorizar",
-      "restriccion_default": null
-    },
-    {
-      "nodo_id": 235,
+      "nodo_id": 245,
       "nombre": "WP Desvio C28-C29 Izq-1",
       "lat": -42.673741,
       "lon": -72.590957,
@@ -4836,7 +5006,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 236,
+      "nodo_id": 246,
       "nombre": "WP Desvio C28-C29 Der-1",
       "lat": -42.677903,
       "lon": -72.572271,
@@ -4853,7 +5023,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 237,
+      "nodo_id": 247,
       "nombre": "WP Desvio C29-C30 Izq-1",
       "lat": -42.664486,
       "lon": -72.59252,
@@ -4870,7 +5040,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 238,
+      "nodo_id": 248,
       "nombre": "WP Desvio C29-C30 Der-1",
       "lat": -42.651426,
       "lon": -72.584295,
@@ -4887,7 +5057,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 239,
+      "nodo_id": 249,
       "nombre": "WP Desvio C30-C31 Izq-1",
       "lat": -42.642612,
       "lon": -72.593365,
@@ -4904,7 +5074,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 240,
+      "nodo_id": 250,
       "nombre": "WP Desvio C30-C31 Der-1",
       "lat": -42.655304,
       "lon": -72.584145,
@@ -4921,7 +5091,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 241,
+      "nodo_id": 251,
       "nombre": "WP Desvio C31-C33 Izq-1",
       "lat": -42.621914,
       "lon": -72.587362,
@@ -4938,7 +5108,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 242,
+      "nodo_id": 252,
       "nombre": "WP Desvio C31-C33 Der-1",
       "lat": -42.621501,
       "lon": -72.567868,
@@ -4955,7 +5125,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 243,
+      "nodo_id": 253,
       "nombre": "WP Desvio C32-C34 Izq-1",
       "lat": -42.597158,
       "lon": -72.813304,
@@ -4972,7 +5142,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 244,
+      "nodo_id": 254,
       "nombre": "WP Desvio C32-C34 Der-1",
       "lat": -42.601357,
       "lon": -72.794655,
@@ -4989,41 +5159,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 245,
-      "nombre": "WP Desvio C32-C36 Izq-1",
-      "lat": -42.581658,
-      "lon": -72.716114,
-      "codigos_estacion": [],
-      "landcover_code": 10,
-      "landcover_clase": "Tree cover",
-      "landcover_clase_es": "Cobertura arbórea",
-      "especies": [],
-      "tiene_especie_objetivo": false,
-      "tiene_especie_invasora": false,
-      "nota_pixel": null,
-      "clase_prioritaria_default": true,
-      "preferencia_default": "priorizar",
-      "restriccion_default": null
-    },
-    {
-      "nodo_id": 246,
-      "nombre": "WP Desvio C32-C36 Der-1",
-      "lat": -42.595284,
-      "lon": -72.7098,
-      "codigos_estacion": [],
-      "landcover_code": 10,
-      "landcover_clase": "Tree cover",
-      "landcover_clase_es": "Cobertura arbórea",
-      "especies": [],
-      "tiene_especie_objetivo": false,
-      "tiene_especie_invasora": false,
-      "nota_pixel": null,
-      "clase_prioritaria_default": true,
-      "preferencia_default": "priorizar",
-      "restriccion_default": null
-    },
-    {
-      "nodo_id": 247,
+      "nodo_id": 255,
       "nombre": "WP Desvio C33-C35 Izq-1",
       "lat": -42.588317,
       "lon": -72.594251,
@@ -5040,7 +5176,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 248,
+      "nodo_id": 256,
       "nombre": "WP Desvio C33-C35 Der-1",
       "lat": -42.583375,
       "lon": -72.575945,
@@ -5057,41 +5193,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 249,
-      "nombre": "WP Desvio C33-C37 Izq-1",
-      "lat": -42.584877,
-      "lon": -72.599948,
-      "codigos_estacion": [],
-      "landcover_code": 10,
-      "landcover_clase": "Tree cover",
-      "landcover_clase_es": "Cobertura arbórea",
-      "especies": [],
-      "tiene_especie_objetivo": false,
-      "tiene_especie_invasora": false,
-      "nota_pixel": null,
-      "clase_prioritaria_default": true,
-      "preferencia_default": "priorizar",
-      "restriccion_default": null
-    },
-    {
-      "nodo_id": 250,
-      "nombre": "WP Desvio C33-C37 Der-1",
-      "lat": -42.578073,
-      "lon": -72.582772,
-      "codigos_estacion": [],
-      "landcover_code": 10,
-      "landcover_clase": "Tree cover",
-      "landcover_clase_es": "Cobertura arbórea",
-      "especies": [],
-      "tiene_especie_objetivo": false,
-      "tiene_especie_invasora": false,
-      "nota_pixel": null,
-      "clase_prioritaria_default": true,
-      "preferencia_default": "priorizar",
-      "restriccion_default": null
-    },
-    {
-      "nodo_id": 251,
+      "nodo_id": 257,
       "nombre": "WP Desvio C34-C36 Izq-1",
       "lat": -42.567741,
       "lon": -72.708912,
@@ -5108,7 +5210,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 252,
+      "nodo_id": 258,
       "nombre": "WP Desvio C34-C36 Der-1",
       "lat": -42.581961,
       "lon": -72.705814,
@@ -5125,7 +5227,41 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 253,
+      "nodo_id": 259,
+      "nombre": "WP Desvio C35-C36 Izq-1",
+      "lat": -42.574764,
+      "lon": -72.60816,
+      "codigos_estacion": [],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [],
+      "tiene_especie_objetivo": false,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 260,
+      "nombre": "WP Desvio C35-C36 Der-1",
+      "lat": -42.561705,
+      "lon": -72.599943,
+      "codigos_estacion": [],
+      "landcover_code": 10,
+      "landcover_clase": "Tree cover",
+      "landcover_clase_es": "Cobertura arbórea",
+      "especies": [],
+      "tiene_especie_objetivo": false,
+      "tiene_especie_invasora": false,
+      "nota_pixel": null,
+      "clase_prioritaria_default": true,
+      "preferencia_default": "priorizar",
+      "restriccion_default": null
+    },
+    {
+      "nodo_id": 261,
       "nombre": "WP Desvio C35-C39 Izq-1",
       "lat": -42.563685,
       "lon": -72.601789,
@@ -5142,7 +5278,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 254,
+      "nodo_id": 262,
       "nombre": "WP Desvio C35-C39 Der-1",
       "lat": -42.563275,
       "lon": -72.582314,
@@ -5159,7 +5295,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 255,
+      "nodo_id": 263,
       "nombre": "WP Desvio C36-C39 Izq-1",
       "lat": -42.552889,
       "lon": -72.608997,
@@ -5176,7 +5312,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 256,
+      "nodo_id": 264,
       "nombre": "WP Desvio C36-C39 Der-1",
       "lat": -42.565583,
       "lon": -72.599795,
@@ -5193,7 +5329,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 257,
+      "nodo_id": 265,
       "nombre": "WP Desvio C38-C41 Izq-1",
       "lat": -42.553134,
       "lon": -72.529115,
@@ -5210,7 +5346,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 258,
+      "nodo_id": 266,
       "nombre": "WP Desvio C38-C41 Der-1",
       "lat": -42.552712,
       "lon": -72.509644,
@@ -5227,7 +5363,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 259,
+      "nodo_id": 267,
       "nombre": "WP Desvio C39-C41 Izq-1",
       "lat": -42.542144,
       "lon": -72.557941,
@@ -5244,7 +5380,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 260,
+      "nodo_id": 268,
       "nombre": "WP Desvio C39-C41 Der-1",
       "lat": -42.556276,
       "lon": -72.554186,
@@ -5261,7 +5397,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 261,
+      "nodo_id": 269,
       "nombre": "WP Desvio C41-C43 Izq-1",
       "lat": -42.525094,
       "lon": -72.509107,
@@ -5278,7 +5414,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 262,
+      "nodo_id": 270,
       "nombre": "WP Desvio C41-C43 Der-1",
       "lat": -42.534973,
       "lon": -72.494938,
@@ -5295,7 +5431,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 263,
+      "nodo_id": 271,
       "nombre": "WP Desvio C42-C44 Izq-1",
       "lat": -42.513759,
       "lon": -72.464424,
@@ -5312,7 +5448,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 264,
+      "nodo_id": 272,
       "nombre": "WP Desvio C42-C44 Der-1",
       "lat": -42.526441,
       "lon": -72.455199,
@@ -5329,75 +5465,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 265,
-      "nombre": "WP Desvio C42-C45 Izq-1",
-      "lat": -42.50729,
-      "lon": -72.468432,
-      "codigos_estacion": [],
-      "landcover_code": 10,
-      "landcover_clase": "Tree cover",
-      "landcover_clase_es": "Cobertura arbórea",
-      "especies": [],
-      "tiene_especie_objetivo": false,
-      "tiene_especie_invasora": false,
-      "nota_pixel": null,
-      "clase_prioritaria_default": true,
-      "preferencia_default": "priorizar",
-      "restriccion_default": null
-    },
-    {
-      "nodo_id": 266,
-      "nombre": "WP Desvio C42-C45 Der-1",
-      "lat": -42.514916,
-      "lon": -72.45192,
-      "codigos_estacion": [],
-      "landcover_code": 10,
-      "landcover_clase": "Tree cover",
-      "landcover_clase_es": "Cobertura arbórea",
-      "especies": [],
-      "tiene_especie_objetivo": false,
-      "tiene_especie_invasora": false,
-      "nota_pixel": null,
-      "clase_prioritaria_default": true,
-      "preferencia_default": "priorizar",
-      "restriccion_default": null
-    },
-    {
-      "nodo_id": 267,
-      "nombre": "WP Desvio C43-C44 Izq-1",
-      "lat": -42.508539,
-      "lon": -72.466367,
-      "codigos_estacion": [],
-      "landcover_code": 10,
-      "landcover_clase": "Tree cover",
-      "landcover_clase_es": "Cobertura arbórea",
-      "especies": [],
-      "tiene_especie_objetivo": false,
-      "tiene_especie_invasora": false,
-      "nota_pixel": null,
-      "clase_prioritaria_default": true,
-      "preferencia_default": "priorizar",
-      "restriccion_default": null
-    },
-    {
-      "nodo_id": 268,
-      "nombre": "WP Desvio C43-C44 Der-1",
-      "lat": -42.522934,
-      "lon": -72.465784,
-      "codigos_estacion": [],
-      "landcover_code": 10,
-      "landcover_clase": "Tree cover",
-      "landcover_clase_es": "Cobertura arbórea",
-      "especies": [],
-      "tiene_especie_objetivo": false,
-      "tiene_especie_invasora": false,
-      "nota_pixel": null,
-      "clase_prioritaria_default": true,
-      "preferencia_default": "priorizar",
-      "restriccion_default": null
-    },
-    {
-      "nodo_id": 269,
+      "nodo_id": 273,
       "nombre": "WP Desvio C45-C46 Izq-1",
       "lat": -42.373331,
       "lon": -72.420492,
@@ -5414,7 +5482,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 270,
+      "nodo_id": 274,
       "nombre": "WP Desvio C45-C46 Der-1",
       "lat": -42.376519,
       "lon": -72.40155,
@@ -5431,7 +5499,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 271,
+      "nodo_id": 275,
       "nombre": "WP Desvio C46-C47 Izq-1",
       "lat": -42.169763,
       "lon": -72.41667,
@@ -5448,7 +5516,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 272,
+      "nodo_id": 276,
       "nombre": "WP Desvio C46-C47 Der-1",
       "lat": -42.165677,
       "lon": -72.398106,
@@ -5465,41 +5533,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 273,
-      "nombre": "WP Desvio C46-C48 Izq-1",
-      "lat": -42.14649,
-      "lon": -72.411753,
-      "codigos_estacion": [],
-      "landcover_code": 10,
-      "landcover_clase": "Tree cover",
-      "landcover_clase_es": "Cobertura arbórea",
-      "especies": [],
-      "tiene_especie_objetivo": false,
-      "tiene_especie_invasora": false,
-      "nota_pixel": null,
-      "clase_prioritaria_default": true,
-      "preferencia_default": "priorizar",
-      "restriccion_default": null
-    },
-    {
-      "nodo_id": 274,
-      "nombre": "WP Desvio C46-C48 Der-1",
-      "lat": -42.143691,
-      "lon": -72.39277,
-      "codigos_estacion": [],
-      "landcover_code": 10,
-      "landcover_clase": "Tree cover",
-      "landcover_clase_es": "Cobertura arbórea",
-      "especies": [],
-      "tiene_especie_objetivo": false,
-      "tiene_especie_invasora": false,
-      "nota_pixel": null,
-      "clase_prioritaria_default": true,
-      "preferencia_default": "priorizar",
-      "restriccion_default": null
-    },
-    {
-      "nodo_id": 275,
+      "nodo_id": 277,
       "nombre": "WP Desvio C47-C48 Izq-1",
       "lat": -42.059095,
       "lon": -72.445463,
@@ -5516,7 +5550,7 @@
       "restriccion_default": null
     },
     {
-      "nodo_id": 276,
+      "nodo_id": 278,
       "nombre": "WP Desvio C47-C48 Der-1",
       "lat": -42.061495,
       "lon": -72.426406,

@@ -5,7 +5,7 @@
     "dias_atras": 14,
     "umbral_amenaza_m": 500.0,
     "penalizacion_km": 200.0,
-    "generado": "2026-11-12T22:03:15+00:00",
+    "generado": "2026-11-12T23:48:29+00:00",
     "n_avistamientos": 7,
     "n_nodos_afectados": 0,
     "n_aristas_afectadas": 0,
@@ -23,8 +23,8 @@
       "lat": -42.9182658,
       "lon": -72.7095984,
       "nodo_mas_cercano": {
-        "id": 8,
-        "distancia_m": 8634.0
+        "id": 215,
+        "distancia_m": 7166.8
       },
       "nodos_dentro_umbral": [],
       "aristas_dentro_umbral": []
@@ -39,8 +39,8 @@
       "lat": -42.4887895,
       "lon": -72.4365916,
       "nodo_mas_cercano": {
-        "id": 45,
-        "distancia_m": 1367.9
+        "id": 181,
+        "distancia_m": 1116.2
       },
       "nodos_dentro_umbral": [],
       "aristas_dentro_umbral": []
@@ -55,8 +55,8 @@
       "lat": -42.4887895,
       "lon": -72.4365916,
       "nodo_mas_cercano": {
-        "id": 45,
-        "distancia_m": 1367.9
+        "id": 181,
+        "distancia_m": 1116.2
       },
       "nodos_dentro_umbral": [],
       "aristas_dentro_umbral": []
@@ -71,8 +71,8 @@
       "lat": -42.4887895,
       "lon": -72.4365916,
       "nodo_mas_cercano": {
-        "id": 45,
-        "distancia_m": 1367.9
+        "id": 181,
+        "distancia_m": 1116.2
       },
       "nodos_dentro_umbral": [],
       "aristas_dentro_umbral": []
@@ -87,8 +87,8 @@
       "lat": -42.4794695,
       "lon": -72.3388479,
       "nodo_mas_cercano": {
-        "id": 45,
-        "distancia_m": 9237.6
+        "id": 182,
+        "distancia_m": 8901.1
       },
       "nodos_dentro_umbral": [],
       "aristas_dentro_umbral": []
@@ -103,8 +103,8 @@
       "lat": -42.4800041,
       "lon": -72.3432273,
       "nodo_mas_cercano": {
-        "id": 45,
-        "distancia_m": 8873.1
+        "id": 182,
+        "distancia_m": 8537.5
       },
       "nodos_dentro_umbral": [],
       "aristas_dentro_umbral": []
@@ -119,8 +119,8 @@
       "lat": -42.9222175,
       "lon": -72.7198792,
       "nodo_mas_cercano": {
-        "id": 8,
-        "distancia_m": 9239.1
+        "id": 215,
+        "distancia_m": 8105.6
       },
       "nodos_dentro_umbral": [],
       "aristas_dentro_umbral": []

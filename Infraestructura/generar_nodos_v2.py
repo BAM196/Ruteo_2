@@ -128,6 +128,8 @@ def construir_nodos(df: pd.DataFrame) -> list[dict]:
     return [{"id": n["id"], **{k: v for k, v in n.items() if k != "id"}} for n in nodos]
 
 
+K_VECINOS = int(os.getenv("K_VECINOS", "4"))
+
 def construir_aristas(nodos: list[dict]) -> list[dict]:
     n = len(nodos)
     if n < 2:
@@ -136,11 +138,14 @@ def construir_aristas(nodos: list[dict]) -> list[dict]:
     xy = np.array([tr.transform(nd["lon"], nd["lat"]) for nd in nodos])
 
     k = min(K_VECINOS + 1, n)
-    _, idx = cKDTree(xy).query(xy, k=k)
+    dists, idx = cKDTree(xy).query(xy, k=k)
+    
+    # Solo conectar vecinos K-cercanos que NO excedan MAX_ARISTA_M
     pares = {
         tuple(sorted((i, int(j))))
         for i in range(n)
-        for j in np.atleast_1d(idx[i])[1:]
+        for j, d_ij in zip(np.atleast_1d(idx[i])[1:], np.atleast_1d(dists[i])[1:])
+        if d_ij <= MAX_ARISTA_M
     }
 
     uf = UnionFind(n)
@@ -148,19 +153,14 @@ def construir_aristas(nodos: list[dict]) -> list[dict]:
         uf.union(a, b)
     n_comp = len({uf.find(i) for i in range(n)})
 
+    # El MST se encarga de unir los sectores separados sin tirar líneas sobre el glaciar
     tipo = {p: "knn" for p in pares}
     if n_comp > 1:
-        if n > MAX_NODOS_MST:
-            print(
-                f"AVISO: {n_comp} componentes y {n} nodos (> {MAX_NODOS_MST}); "
-                "no se reparó la conectividad."
-            )
-        else:
-            dist = cdist(xy, xy)
-            mst = minimum_spanning_tree(csr_matrix(dist)).tocoo()
-            for a, b in zip(mst.row, mst.col):
-                if uf.union(int(a), int(b)):
-                    tipo[tuple(sorted((int(a), int(b))))] = "conexion"
+        dist = cdist(xy, xy)
+        mst = minimum_spanning_tree(csr_matrix(dist)).tocoo()
+        for a, b in zip(mst.row, mst.col):
+            if uf.union(int(a), int(b)):
+                tipo[tuple(sorted((int(a), int(b))))] = "conexion"
 
     aristas = []
     for eid, (a, b) in enumerate(sorted(tipo), start=1):

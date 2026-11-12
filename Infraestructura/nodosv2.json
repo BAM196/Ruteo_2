@@ -2,18 +2,18 @@
   "meta": {
     "fuente": "GBIF Chile - fotomonitoreo CONAF 2021 (occurrence.txt)",
     "area": "Parque Nacional Pumalín Douglas Tompkins",
-    "generado": "2026-11-12T23:23:01+00:00",
+    "generado": "2026-11-12T23:45:34+00:00",
     "filtro_localidad": "Pumal",
     "bbox": "none",
-    "k_vecinos": 2,
+    "k_vecinos": 4,
     "max_arista_m": 3000.0,
     "radio_anillo_camara_m": 450.0,
     "offset_lateral_arista_m": 800.0,
     "crs": "EPSG:4326",
     "crs_metrico": "EPSG:32718",
     "n_camaras": 48,
-    "n_nodos": 276,
-    "n_aristas": 691,
+    "n_nodos": 278,
+    "n_aristas": 700,
     "nota_grafo": "Grafo no dirigido con nodos cámara (es_camara=true) y waypoints de exploración/evasión (es_camara=false). En pgr_dijkstra usar directed => false."
   },
   "nodos": [
@@ -3327,6 +3327,136 @@
     },
     {
       "id": 197,
+      "lat": -42.981078,
+      "lon": -72.480341,
+      "nombre": "WP Desvio C2-C5 Izq-1",
+      "es_camara": false,
+      "tipo_nodo": "waypoint_arista",
+      "codigos_estacion": [],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 0,
+      "anios": [],
+      "especies": []
+    },
+    {
+      "id": 198,
+      "lat": -42.987128,
+      "lon": -72.462541,
+      "nombre": "WP Desvio C2-C5 Der-1",
+      "es_camara": false,
+      "tipo_nodo": "waypoint_arista",
+      "codigos_estacion": [],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 0,
+      "anios": [],
+      "especies": []
+    },
+    {
+      "id": 199,
+      "lat": -42.979956,
+      "lon": -72.487554,
+      "nombre": "WP Desvio C2-C6 Izq-1",
+      "es_camara": false,
+      "tipo_nodo": "waypoint_arista",
+      "codigos_estacion": [],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 0,
+      "anios": [],
+      "especies": []
+    },
+    {
+      "id": 200,
+      "lat": -42.979524,
+      "lon": -72.46795,
+      "nombre": "WP Desvio C2-C6 Der-1",
+      "es_camara": false,
+      "tipo_nodo": "waypoint_arista",
+      "codigos_estacion": [],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 0,
+      "anios": [],
+      "especies": []
+    },
+    {
+      "id": 201,
+      "lat": -42.976635,
+      "lon": -72.459484,
+      "nombre": "WP Desvio C3-C4 Izq-1",
+      "es_camara": false,
+      "tipo_nodo": "waypoint_arista",
+      "codigos_estacion": [],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 0,
+      "anios": [],
+      "especies": []
+    },
+    {
+      "id": 202,
+      "lat": -42.991029,
+      "lon": -72.458891,
+      "nombre": "WP Desvio C3-C4 Der-1",
+      "es_camara": false,
+      "tipo_nodo": "waypoint_arista",
+      "codigos_estacion": [],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 0,
+      "anios": [],
+      "especies": []
+    },
+    {
+      "id": 203,
+      "lat": -42.975458,
+      "lon": -72.487738,
+      "nombre": "WP Desvio C3-C6 Izq-1",
+      "es_camara": false,
+      "tipo_nodo": "waypoint_arista",
+      "codigos_estacion": [],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 0,
+      "anios": [],
+      "especies": []
+    },
+    {
+      "id": 204,
+      "lat": -42.975026,
+      "lon": -72.468135,
+      "nombre": "WP Desvio C3-C6 Der-1",
+      "es_camara": false,
+      "tipo_nodo": "waypoint_arista",
+      "codigos_estacion": [],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 0,
+      "anios": [],
+      "especies": []
+    },
+    {
+      "id": 205,
+      "lat": -42.97096,
+      "lon": -72.487921,
+      "nombre": "WP Desvio C3-C7 Izq-1",
+      "es_camara": false,
+      "tipo_nodo": "waypoint_arista",
+      "codigos_estacion": [],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 0,
+      "anios": [],
+      "especies": []
+    },
+    {
+      "id": 206,
+      "lat": -42.970528,
+      "lon": -72.468319,
+      "nombre": "WP Desvio C3-C7 Der-1",
+      "es_camara": false,
+      "tipo_nodo": "waypoint_arista",
+      "codigos_estacion": [],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 0,
+      "anios": [],
+      "especies": []
+    },
+    {
+      "id": 207,
       "lat": -42.985733,
       "lon": -72.457365,
       "nombre": "WP Desvio C4-C5 Izq-1",
@@ -3339,7 +3469,7 @@
       "especies": []
     },
     {
-      "id": 198,
+      "id": 208,
       "lat": -42.972663,
       "lon": -72.449129,
       "nombre": "WP Desvio C4-C5 Der-1",
@@ -3352,10 +3482,10 @@
       "especies": []
     },
     {
-      "id": 199,
-      "lat": -42.965834,
-      "lon": -72.547511,
-      "nombre": "WP Desvio C6-C8 Izq-1",
+      "id": 209,
+      "lat": -42.969523,
+      "lon": -72.480812,
+      "nombre": "WP Desvio C5-C7 Izq-1",
       "es_camara": false,
       "tipo_nodo": "waypoint_arista",
       "codigos_estacion": [],
@@ -3365,10 +3495,10 @@
       "especies": []
     },
     {
-      "id": 200,
-      "lat": -42.951596,
-      "lon": -72.544569,
-      "nombre": "WP Desvio C6-C8 Der-1",
+      "id": 210,
+      "lat": -42.962699,
+      "lon": -72.463545,
+      "nombre": "WP Desvio C5-C7 Der-1",
       "es_camara": false,
       "tipo_nodo": "waypoint_arista",
       "codigos_estacion": [],
@@ -3378,7 +3508,7 @@
       "especies": []
     },
     {
-      "id": 201,
+      "id": 211,
       "lat": -42.961404,
       "lon": -72.546821,
       "nombre": "WP Desvio C7-C8 Izq-1",
@@ -3391,7 +3521,7 @@
       "especies": []
     },
     {
-      "id": 202,
+      "id": 212,
       "lat": -42.94703,
       "lon": -72.545616,
       "nombre": "WP Desvio C7-C8 Der-1",
@@ -3404,7 +3534,7 @@
       "especies": []
     },
     {
-      "id": 203,
+      "id": 213,
       "lat": -42.945093,
       "lon": -72.48181,
       "nombre": "WP Desvio C7-C9 Izq-1",
@@ -3417,7 +3547,7 @@
       "especies": []
     },
     {
-      "id": 204,
+      "id": 214,
       "lat": -42.951143,
       "lon": -72.464021,
       "nombre": "WP Desvio C7-C9 Der-1",
@@ -3430,7 +3560,7 @@
       "especies": []
     },
     {
-      "id": 205,
+      "id": 215,
       "lat": -42.880511,
       "lon": -72.63845,
       "nombre": "WP Desvio C8-C16 Izq-1",
@@ -3443,7 +3573,7 @@
       "especies": []
     },
     {
-      "id": 206,
+      "id": 216,
       "lat": -42.878323,
       "lon": -72.619095,
       "nombre": "WP Desvio C8-C16 Der-1",
@@ -3456,7 +3586,7 @@
       "especies": []
     },
     {
-      "id": 207,
+      "id": 217,
       "lat": -42.92683,
       "lon": -72.470301,
       "nombre": "WP Desvio C9-C10 Izq-1",
@@ -3469,7 +3599,7 @@
       "especies": []
     },
     {
-      "id": 208,
+      "id": 218,
       "lat": -42.932879,
       "lon": -72.452516,
       "nombre": "WP Desvio C9-C10 Der-1",
@@ -3482,33 +3612,7 @@
       "especies": []
     },
     {
-      "id": 209,
-      "lat": -42.901059,
-      "lon": -72.459849,
-      "nombre": "WP Desvio C10-C12 Izq-1",
-      "es_camara": false,
-      "tipo_nodo": "waypoint_arista",
-      "codigos_estacion": [],
-      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
-      "n_registros": 0,
-      "anios": [],
-      "especies": []
-    },
-    {
-      "id": 210,
-      "lat": -42.904127,
-      "lon": -72.44071,
-      "nombre": "WP Desvio C10-C12 Der-1",
-      "es_camara": false,
-      "tipo_nodo": "waypoint_arista",
-      "codigos_estacion": [],
-      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
-      "n_registros": 0,
-      "anios": [],
-      "especies": []
-    },
-    {
-      "id": 211,
+      "id": 219,
       "lat": -42.890573,
       "lon": -72.459538,
       "nombre": "WP Desvio C11-C12 Izq-1",
@@ -3521,7 +3625,7 @@
       "especies": []
     },
     {
-      "id": 212,
+      "id": 220,
       "lat": -42.89662,
       "lon": -72.441763,
       "nombre": "WP Desvio C11-C12 Der-1",
@@ -3534,33 +3638,7 @@
       "especies": []
     },
     {
-      "id": 213,
-      "lat": -42.878571,
-      "lon": -72.432902,
-      "nombre": "WP Desvio C11-C13 Izq-1",
-      "es_camara": false,
-      "tipo_nodo": "waypoint_arista",
-      "codigos_estacion": [],
-      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
-      "n_registros": 0,
-      "anios": [],
-      "especies": []
-    },
-    {
-      "id": 214,
-      "lat": -42.889535,
-      "lon": -72.420207,
-      "nombre": "WP Desvio C11-C13 Der-1",
-      "es_camara": false,
-      "tipo_nodo": "waypoint_arista",
-      "codigos_estacion": [],
-      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
-      "n_registros": 0,
-      "anios": [],
-      "especies": []
-    },
-    {
-      "id": 215,
+      "id": 221,
       "lat": -42.86858,
       "lon": -72.425457,
       "nombre": "WP Desvio C12-C13 Izq-1",
@@ -3573,7 +3651,7 @@
       "especies": []
     },
     {
-      "id": 216,
+      "id": 222,
       "lat": -42.881257,
       "lon": -72.416168,
       "nombre": "WP Desvio C12-C13 Der-1",
@@ -3586,7 +3664,7 @@
       "especies": []
     },
     {
-      "id": 217,
+      "id": 223,
       "lat": -42.817204,
       "lon": -72.752387,
       "nombre": "WP Desvio C14-C15 Izq-1",
@@ -3599,7 +3677,7 @@
       "especies": []
     },
     {
-      "id": 218,
+      "id": 224,
       "lat": -42.829351,
       "lon": -72.741876,
       "nombre": "WP Desvio C14-C15 Der-1",
@@ -3612,33 +3690,7 @@
       "especies": []
     },
     {
-      "id": 219,
-      "lat": -42.812383,
-      "lon": -72.740152,
-      "nombre": "WP Desvio C14-C17 Izq-1",
-      "es_camara": false,
-      "tipo_nodo": "waypoint_arista",
-      "codigos_estacion": [],
-      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
-      "n_registros": 0,
-      "anios": [],
-      "especies": []
-    },
-    {
-      "id": 220,
-      "lat": -42.824692,
-      "lon": -72.729992,
-      "nombre": "WP Desvio C14-C17 Der-1",
-      "es_camara": false,
-      "tipo_nodo": "waypoint_arista",
-      "codigos_estacion": [],
-      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
-      "n_registros": 0,
-      "anios": [],
-      "especies": []
-    },
-    {
-      "id": 221,
+      "id": 225,
       "lat": -42.798081,
       "lon": -72.709624,
       "nombre": "WP Desvio C15-C17 Izq-1",
@@ -3651,7 +3703,7 @@
       "especies": []
     },
     {
-      "id": 222,
+      "id": 226,
       "lat": -42.810782,
       "lon": -72.700404,
       "nombre": "WP Desvio C15-C17 Der-1",
@@ -3664,7 +3716,7 @@
       "especies": []
     },
     {
-      "id": 223,
+      "id": 227,
       "lat": -42.793492,
       "lon": -72.638974,
       "nombre": "WP Desvio C16-C19 Izq-1",
@@ -3677,7 +3729,7 @@
       "especies": []
     },
     {
-      "id": 224,
+      "id": 228,
       "lat": -42.803386,
       "lon": -72.624762,
       "nombre": "WP Desvio C16-C19 Der-1",
@@ -3690,7 +3742,7 @@
       "especies": []
     },
     {
-      "id": 225,
+      "id": 229,
       "lat": -42.787758,
       "lon": -72.671325,
       "nombre": "WP Desvio C17-C18 Izq-1",
@@ -3703,7 +3755,7 @@
       "especies": []
     },
     {
-      "id": 226,
+      "id": 230,
       "lat": -42.801628,
       "lon": -72.66606,
       "nombre": "WP Desvio C17-C18 Der-1",
@@ -3716,7 +3768,7 @@
       "especies": []
     },
     {
-      "id": 227,
+      "id": 231,
       "lat": -42.780897,
       "lon": -72.654541,
       "nombre": "WP Desvio C18-C21 Izq-1",
@@ -3729,7 +3781,7 @@
       "especies": []
     },
     {
-      "id": 228,
+      "id": 232,
       "lat": -42.780495,
       "lon": -72.634997,
       "nombre": "WP Desvio C18-C21 Der-1",
@@ -3742,7 +3794,111 @@
       "especies": []
     },
     {
-      "id": 229,
+      "id": 233,
+      "lat": -42.785676,
+      "lon": -72.639271,
+      "nombre": "WP Desvio C19-C21 Izq-1",
+      "es_camara": false,
+      "tipo_nodo": "waypoint_arista",
+      "codigos_estacion": [],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 0,
+      "anios": [],
+      "especies": []
+    },
+    {
+      "id": 234,
+      "lat": -42.775211,
+      "lon": -72.625839,
+      "nombre": "WP Desvio C19-C21 Der-1",
+      "es_camara": false,
+      "tipo_nodo": "waypoint_arista",
+      "codigos_estacion": [],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 0,
+      "anios": [],
+      "especies": []
+    },
+    {
+      "id": 235,
+      "lat": -42.777026,
+      "lon": -72.623096,
+      "nombre": "WP Desvio C19-C22 Izq-1",
+      "es_camara": false,
+      "tipo_nodo": "waypoint_arista",
+      "codigos_estacion": [],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 0,
+      "anios": [],
+      "especies": []
+    },
+    {
+      "id": 236,
+      "lat": -42.7831,
+      "lon": -72.605369,
+      "nombre": "WP Desvio C19-C22 Der-1",
+      "es_camara": false,
+      "tipo_nodo": "waypoint_arista",
+      "codigos_estacion": [],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 0,
+      "anios": [],
+      "especies": []
+    },
+    {
+      "id": 237,
+      "lat": -42.774467,
+      "lon": -72.623194,
+      "nombre": "WP Desvio C20-C23 Izq-1",
+      "es_camara": false,
+      "tipo_nodo": "waypoint_arista",
+      "codigos_estacion": [],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 0,
+      "anios": [],
+      "especies": []
+    },
+    {
+      "id": 238,
+      "lat": -42.767664,
+      "lon": -72.605963,
+      "nombre": "WP Desvio C20-C23 Der-1",
+      "es_camara": false,
+      "tipo_nodo": "waypoint_arista",
+      "codigos_estacion": [],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 0,
+      "anios": [],
+      "especies": []
+    },
+    {
+      "id": 239,
+      "lat": -42.764121,
+      "lon": -72.627066,
+      "nombre": "WP Desvio C21-C22 Izq-1",
+      "es_camara": false,
+      "tipo_nodo": "waypoint_arista",
+      "codigos_estacion": [],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 0,
+      "anios": [],
+      "especies": []
+    },
+    {
+      "id": 240,
+      "lat": -42.778518,
+      "lon": -72.626516,
+      "nombre": "WP Desvio C21-C22 Der-1",
+      "es_camara": false,
+      "tipo_nodo": "waypoint_arista",
+      "codigos_estacion": [],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 0,
+      "anios": [],
+      "especies": []
+    },
+    {
+      "id": 241,
       "lat": -42.760599,
       "lon": -72.637683,
       "nombre": "WP Desvio C21-C23 Izq-1",
@@ -3755,7 +3911,7 @@
       "especies": []
     },
     {
-      "id": 230,
+      "id": 242,
       "lat": -42.773295,
       "lon": -72.628454,
       "nombre": "WP Desvio C21-C23 Der-1",
@@ -3768,7 +3924,7 @@
       "especies": []
     },
     {
-      "id": 231,
+      "id": 243,
       "lat": -42.735369,
       "lon": -72.605755,
       "nombre": "WP Desvio C24-C25 Izq-1",
@@ -3781,7 +3937,7 @@
       "especies": []
     },
     {
-      "id": 232,
+      "id": 244,
       "lat": -42.743013,
       "lon": -72.589197,
       "nombre": "WP Desvio C24-C25 Der-1",
@@ -3794,33 +3950,7 @@
       "especies": []
     },
     {
-      "id": 233,
-      "lat": -42.705287,
-      "lon": -72.589737,
-      "nombre": "WP Desvio C26-C28 Izq-1",
-      "es_camara": false,
-      "tipo_nodo": "waypoint_arista",
-      "codigos_estacion": [],
-      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
-      "n_registros": 0,
-      "anios": [],
-      "especies": []
-    },
-    {
-      "id": 234,
-      "lat": -42.700343,
-      "lon": -72.571397,
-      "nombre": "WP Desvio C26-C28 Der-1",
-      "es_camara": false,
-      "tipo_nodo": "waypoint_arista",
-      "codigos_estacion": [],
-      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
-      "n_registros": 0,
-      "anios": [],
-      "especies": []
-    },
-    {
-      "id": 235,
+      "id": 245,
       "lat": -42.673741,
       "lon": -72.590957,
       "nombre": "WP Desvio C28-C29 Izq-1",
@@ -3833,7 +3963,7 @@
       "especies": []
     },
     {
-      "id": 236,
+      "id": 246,
       "lat": -42.677903,
       "lon": -72.572271,
       "nombre": "WP Desvio C28-C29 Der-1",
@@ -3846,7 +3976,7 @@
       "especies": []
     },
     {
-      "id": 237,
+      "id": 247,
       "lat": -42.664486,
       "lon": -72.59252,
       "nombre": "WP Desvio C29-C30 Izq-1",
@@ -3859,7 +3989,7 @@
       "especies": []
     },
     {
-      "id": 238,
+      "id": 248,
       "lat": -42.651426,
       "lon": -72.584295,
       "nombre": "WP Desvio C29-C30 Der-1",
@@ -3872,7 +4002,7 @@
       "especies": []
     },
     {
-      "id": 239,
+      "id": 249,
       "lat": -42.642612,
       "lon": -72.593365,
       "nombre": "WP Desvio C30-C31 Izq-1",
@@ -3885,7 +4015,7 @@
       "especies": []
     },
     {
-      "id": 240,
+      "id": 250,
       "lat": -42.655304,
       "lon": -72.584145,
       "nombre": "WP Desvio C30-C31 Der-1",
@@ -3898,7 +4028,7 @@
       "especies": []
     },
     {
-      "id": 241,
+      "id": 251,
       "lat": -42.621914,
       "lon": -72.587362,
       "nombre": "WP Desvio C31-C33 Izq-1",
@@ -3911,7 +4041,7 @@
       "especies": []
     },
     {
-      "id": 242,
+      "id": 252,
       "lat": -42.621501,
       "lon": -72.567868,
       "nombre": "WP Desvio C31-C33 Der-1",
@@ -3924,7 +4054,7 @@
       "especies": []
     },
     {
-      "id": 243,
+      "id": 253,
       "lat": -42.597158,
       "lon": -72.813304,
       "nombre": "WP Desvio C32-C34 Izq-1",
@@ -3937,7 +4067,7 @@
       "especies": []
     },
     {
-      "id": 244,
+      "id": 254,
       "lat": -42.601357,
       "lon": -72.794655,
       "nombre": "WP Desvio C32-C34 Der-1",
@@ -3950,33 +4080,7 @@
       "especies": []
     },
     {
-      "id": 245,
-      "lat": -42.581658,
-      "lon": -72.716114,
-      "nombre": "WP Desvio C32-C36 Izq-1",
-      "es_camara": false,
-      "tipo_nodo": "waypoint_arista",
-      "codigos_estacion": [],
-      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
-      "n_registros": 0,
-      "anios": [],
-      "especies": []
-    },
-    {
-      "id": 246,
-      "lat": -42.595284,
-      "lon": -72.7098,
-      "nombre": "WP Desvio C32-C36 Der-1",
-      "es_camara": false,
-      "tipo_nodo": "waypoint_arista",
-      "codigos_estacion": [],
-      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
-      "n_registros": 0,
-      "anios": [],
-      "especies": []
-    },
-    {
-      "id": 247,
+      "id": 255,
       "lat": -42.588317,
       "lon": -72.594251,
       "nombre": "WP Desvio C33-C35 Izq-1",
@@ -3989,7 +4093,7 @@
       "especies": []
     },
     {
-      "id": 248,
+      "id": 256,
       "lat": -42.583375,
       "lon": -72.575945,
       "nombre": "WP Desvio C33-C35 Der-1",
@@ -4002,33 +4106,7 @@
       "especies": []
     },
     {
-      "id": 249,
-      "lat": -42.584877,
-      "lon": -72.599948,
-      "nombre": "WP Desvio C33-C37 Izq-1",
-      "es_camara": false,
-      "tipo_nodo": "waypoint_arista",
-      "codigos_estacion": [],
-      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
-      "n_registros": 0,
-      "anios": [],
-      "especies": []
-    },
-    {
-      "id": 250,
-      "lat": -42.578073,
-      "lon": -72.582772,
-      "nombre": "WP Desvio C33-C37 Der-1",
-      "es_camara": false,
-      "tipo_nodo": "waypoint_arista",
-      "codigos_estacion": [],
-      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
-      "n_registros": 0,
-      "anios": [],
-      "especies": []
-    },
-    {
-      "id": 251,
+      "id": 257,
       "lat": -42.567741,
       "lon": -72.708912,
       "nombre": "WP Desvio C34-C36 Izq-1",
@@ -4041,7 +4119,7 @@
       "especies": []
     },
     {
-      "id": 252,
+      "id": 258,
       "lat": -42.581961,
       "lon": -72.705814,
       "nombre": "WP Desvio C34-C36 Der-1",
@@ -4054,7 +4132,33 @@
       "especies": []
     },
     {
-      "id": 253,
+      "id": 259,
+      "lat": -42.574764,
+      "lon": -72.60816,
+      "nombre": "WP Desvio C35-C36 Izq-1",
+      "es_camara": false,
+      "tipo_nodo": "waypoint_arista",
+      "codigos_estacion": [],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 0,
+      "anios": [],
+      "especies": []
+    },
+    {
+      "id": 260,
+      "lat": -42.561705,
+      "lon": -72.599943,
+      "nombre": "WP Desvio C35-C36 Der-1",
+      "es_camara": false,
+      "tipo_nodo": "waypoint_arista",
+      "codigos_estacion": [],
+      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
+      "n_registros": 0,
+      "anios": [],
+      "especies": []
+    },
+    {
+      "id": 261,
       "lat": -42.563685,
       "lon": -72.601789,
       "nombre": "WP Desvio C35-C39 Izq-1",
@@ -4067,7 +4171,7 @@
       "especies": []
     },
     {
-      "id": 254,
+      "id": 262,
       "lat": -42.563275,
       "lon": -72.582314,
       "nombre": "WP Desvio C35-C39 Der-1",
@@ -4080,7 +4184,7 @@
       "especies": []
     },
     {
-      "id": 255,
+      "id": 263,
       "lat": -42.552889,
       "lon": -72.608997,
       "nombre": "WP Desvio C36-C39 Izq-1",
@@ -4093,7 +4197,7 @@
       "especies": []
     },
     {
-      "id": 256,
+      "id": 264,
       "lat": -42.565583,
       "lon": -72.599795,
       "nombre": "WP Desvio C36-C39 Der-1",
@@ -4106,7 +4210,7 @@
       "especies": []
     },
     {
-      "id": 257,
+      "id": 265,
       "lat": -42.553134,
       "lon": -72.529115,
       "nombre": "WP Desvio C38-C41 Izq-1",
@@ -4119,7 +4223,7 @@
       "especies": []
     },
     {
-      "id": 258,
+      "id": 266,
       "lat": -42.552712,
       "lon": -72.509644,
       "nombre": "WP Desvio C38-C41 Der-1",
@@ -4132,7 +4236,7 @@
       "especies": []
     },
     {
-      "id": 259,
+      "id": 267,
       "lat": -42.542144,
       "lon": -72.557941,
       "nombre": "WP Desvio C39-C41 Izq-1",
@@ -4145,7 +4249,7 @@
       "especies": []
     },
     {
-      "id": 260,
+      "id": 268,
       "lat": -42.556276,
       "lon": -72.554186,
       "nombre": "WP Desvio C39-C41 Der-1",
@@ -4158,7 +4262,7 @@
       "especies": []
     },
     {
-      "id": 261,
+      "id": 269,
       "lat": -42.525094,
       "lon": -72.509107,
       "nombre": "WP Desvio C41-C43 Izq-1",
@@ -4171,7 +4275,7 @@
       "especies": []
     },
     {
-      "id": 262,
+      "id": 270,
       "lat": -42.534973,
       "lon": -72.494938,
       "nombre": "WP Desvio C41-C43 Der-1",
@@ -4184,7 +4288,7 @@
       "especies": []
     },
     {
-      "id": 263,
+      "id": 271,
       "lat": -42.513759,
       "lon": -72.464424,
       "nombre": "WP Desvio C42-C44 Izq-1",
@@ -4197,7 +4301,7 @@
       "especies": []
     },
     {
-      "id": 264,
+      "id": 272,
       "lat": -42.526441,
       "lon": -72.455199,
       "nombre": "WP Desvio C42-C44 Der-1",
@@ -4210,59 +4314,7 @@
       "especies": []
     },
     {
-      "id": 265,
-      "lat": -42.50729,
-      "lon": -72.468432,
-      "nombre": "WP Desvio C42-C45 Izq-1",
-      "es_camara": false,
-      "tipo_nodo": "waypoint_arista",
-      "codigos_estacion": [],
-      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
-      "n_registros": 0,
-      "anios": [],
-      "especies": []
-    },
-    {
-      "id": 266,
-      "lat": -42.514916,
-      "lon": -72.45192,
-      "nombre": "WP Desvio C42-C45 Der-1",
-      "es_camara": false,
-      "tipo_nodo": "waypoint_arista",
-      "codigos_estacion": [],
-      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
-      "n_registros": 0,
-      "anios": [],
-      "especies": []
-    },
-    {
-      "id": 267,
-      "lat": -42.508539,
-      "lon": -72.466367,
-      "nombre": "WP Desvio C43-C44 Izq-1",
-      "es_camara": false,
-      "tipo_nodo": "waypoint_arista",
-      "codigos_estacion": [],
-      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
-      "n_registros": 0,
-      "anios": [],
-      "especies": []
-    },
-    {
-      "id": 268,
-      "lat": -42.522934,
-      "lon": -72.465784,
-      "nombre": "WP Desvio C43-C44 Der-1",
-      "es_camara": false,
-      "tipo_nodo": "waypoint_arista",
-      "codigos_estacion": [],
-      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
-      "n_registros": 0,
-      "anios": [],
-      "especies": []
-    },
-    {
-      "id": 269,
+      "id": 273,
       "lat": -42.373331,
       "lon": -72.420492,
       "nombre": "WP Desvio C45-C46 Izq-1",
@@ -4275,7 +4327,7 @@
       "especies": []
     },
     {
-      "id": 270,
+      "id": 274,
       "lat": -42.376519,
       "lon": -72.40155,
       "nombre": "WP Desvio C45-C46 Der-1",
@@ -4288,7 +4340,7 @@
       "especies": []
     },
     {
-      "id": 271,
+      "id": 275,
       "lat": -42.169763,
       "lon": -72.41667,
       "nombre": "WP Desvio C46-C47 Izq-1",
@@ -4301,7 +4353,7 @@
       "especies": []
     },
     {
-      "id": 272,
+      "id": 276,
       "lat": -42.165677,
       "lon": -72.398106,
       "nombre": "WP Desvio C46-C47 Der-1",
@@ -4314,33 +4366,7 @@
       "especies": []
     },
     {
-      "id": 273,
-      "lat": -42.14649,
-      "lon": -72.411753,
-      "nombre": "WP Desvio C46-C48 Izq-1",
-      "es_camara": false,
-      "tipo_nodo": "waypoint_arista",
-      "codigos_estacion": [],
-      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
-      "n_registros": 0,
-      "anios": [],
-      "especies": []
-    },
-    {
-      "id": 274,
-      "lat": -42.143691,
-      "lon": -72.39277,
-      "nombre": "WP Desvio C46-C48 Der-1",
-      "es_camara": false,
-      "tipo_nodo": "waypoint_arista",
-      "codigos_estacion": [],
-      "localidad": "Parque Nacional Pumalín Douglas Tompkins",
-      "n_registros": 0,
-      "anios": [],
-      "especies": []
-    },
-    {
-      "id": 275,
+      "id": 277,
       "lat": -42.059095,
       "lon": -72.445463,
       "nombre": "WP Desvio C47-C48 Izq-1",
@@ -4353,7 +4379,7 @@
       "especies": []
     },
     {
-      "id": 276,
+      "id": 278,
       "lat": -42.061495,
       "lon": -72.426406,
       "nombre": "WP Desvio C47-C48 Der-1",
