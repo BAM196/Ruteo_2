@@ -120,6 +120,36 @@ button:disabled {
   margin: 18px 0 0;
 }
 
+.fauna-box {
+  margin-top: 18px;
+}
+
+.fauna-box h2 {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+}
+
+.fauna-list {
+  max-height: 220px;
+  margin: 8px 0 0;
+  padding-left: 20px;
+  overflow-y: auto;
+}
+
+.fauna-list li {
+  margin-bottom: 8px;
+}
+
+.fauna-list small {
+  display: block;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.fauna-list .fauna-scientific {
+  font-style: italic;
+}
+
 .error {
   margin: 8px 0 0;
   color: #8a2e16;
@@ -277,4 +307,123 @@ fieldset label span {
   legend {
     margin-bottom: 4px;
   }
+}
+
+input[type="number"] {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font: inherit;
+  color: var(--ink);
+  background: white;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--ink);
+}
+
+select[multiple] {
+  padding: 4px;
+}
+
+.hint {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+label.check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 400;
+}
+
+details {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: white;
+}
+
+details[open] > summary {
+  margin-bottom: 10px;
+}
+
+details > label + label {
+  margin-top: 10px;
+}
+
+details > summary {
+  cursor: pointer;
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+#routes-box h2 {
+  margin: 22px 0 8px;
+  font-family: Fraunces, serif;
+  font-size: 1.4rem;
+  font-weight: 560;
+}
+
+.routes {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.routes li {
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: white;
+}
+
+.routes li.best {
+  border-color: var(--ink);
+  box-shadow: inset 3px 0 0 var(--ink);
+}
+
+.routes label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.86rem;
+  font-weight: 400;
+}
+
+.routes input {
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+.route-note {
+  display: block;
+  margin: 4px 0 0 24px;
+  color: #8a2e16;
+  font-size: 0.78rem;
+}
+
+.winner {
+  margin: 10px 0 0;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.swatch.line {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 5px;
+  border-radius: 99px;
+}
+
+.swatch.threat {
+  width: 18px;
+  height: 4px;
+  border-radius: 0;
+  background: repeating-linear-gradient(90deg, #dc2626 0 3px, transparent 3px 7px);
 }

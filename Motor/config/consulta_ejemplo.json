@@ -1,0 +1,9 @@
+{
+  "origen_id": 16,
+  "destino_id": 22,
+  "restricciones": {"solo_bosque": false, "excluir_nodos": []},
+  "autonomia_m": null,
+  "theta": 0.5,
+  "overrides_prob": {"aristas": {"27": 0.8}},
+  "semilla": 0
+}

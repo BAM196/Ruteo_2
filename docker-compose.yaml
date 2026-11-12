@@ -43,6 +43,27 @@ services:
     depends_on:
       - postgis
 
+  motor:
+    build:
+      context: ./Motor
+      dockerfile: Dockerfile.motor
+    container_name: motor-rutas
+    restart: always
+    environment:
+      POSTGRES_HOST: postgis
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: gisdb
+      POSTGRES_USER: gisuser
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Define POSTGRES_PASSWORD en .env}
+      MOTOR_FUENTE: db
+    ports:
+      - "8001:8001"
+    volumes:
+      - .:/repo
+    working_dir: /repo/Motor
+    depends_on:
+      - postgis
+
 volumes:
   postgres_data:
 

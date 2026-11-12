@@ -4,15 +4,15 @@
     "source": "VIIRS_SNPP_NRT",
     "endpoint": "https://firms.modaps.eosdis.nasa.gov/api/area/csv",
     "bbox": {
-      "west": -72.859597,
-      "south": -43.051961,
-      "east": -72.323612,
-      "north": -41.987667
+      "west": -72.864274,
+      "south": -43.054091,
+      "east": -72.318809,
+      "north": -41.983618
     },
     "margen_grados": 0.05,
     "day_range": 5,
     "fecha": null,
-    "generado": "2026-10-20T06:22:40+00:00",
+    "generado": "2026-11-12T23:45:43+00:00",
     "nodos_origen": "Infraestructura/nodosv2.json",
     "aristas_origen": "Infraestructura/aristasv2.json",
     "crs_metrico": "EPSG:32718",

@@ -56,6 +56,8 @@ def main():
             cur.execute(
                 """
                 TRUNCATE
+                    prob_fallo_nodo,
+                    prob_fallo_arista,
                     amenazas_firms_nodo,
                     amenazas_firms_arista,
                     amenazas_firms,

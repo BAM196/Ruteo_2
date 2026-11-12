@@ -1,0 +1,150 @@
+dron:
+  modelo: DJI Mavic 3T (Mavic 3 Enterprise Series)
+  ficha: https://enterprise.dji.com/mavic-3-enterprise/specs
+  tiempo_vuelo_min:
+    valor: 38
+    fuente: Ficha DJI Mavic 3 Enterprise, "Max Hovering Time (no wind) 38 minutes"
+    justificacion: >-
+      Se usa el tiempo en vuelo estacionario (38 min) y no el de vuelo
+      máximo (45 min) porque es el valor más conservador de la ficha.
+  velocidad_crucero_ms:
+    valor: 10
+    fuente: Supuesto de diseño. La ficha da 15 m/s como máximo en modo normal.
+    justificacion: >-
+      Para fotomonitoreo con cámara térmica no se vuela a velocidad máxima:
+      se usa dos tercios de la velocidad máxima de la ficha.
+  margen_seguridad:
+    valor: 0.30
+    fuente: Supuesto de diseño
+    justificacion: >-
+      Reserva de batería para viento, maniobras y aterrizaje. Una reserva
+      del 30 % deja la autonomía útil en 70 %.
+  ida_y_vuelta:
+    valor: true
+    fuente: Decisión D1 del grupo
+    justificacion: >-
+      El dron parte donde está el investigador y debe volver a él, así que
+      la ruta de ida puede usar como máximo la mitad de la distancia total.
+
+cota_superior: 0.999999
+
+amenazas:
+  firms:
+    activa: true
+    descripcion: Focos de incendio activos (NASA FIRMS, VIIRS 375 m).
+    modelo: "p = p0(confianza) · max(0, 1 − d/R); varios focos se combinan como independientes"
+    radio_m:
+      valor: 1000
+      fuente: >-
+        Schroeder, W., Oliva, P., Giglio, L. y Csiszar, I. A. (2014). The New
+        VIIRS 375 m active fire detection data product. Remote Sensing of
+        Environment, 143, 85-96.
+      justificacion: >-
+        El píxel VIIRS mide 375 m, así que la posición del foco tiene una
+        incertidumbre del orden de medio píxel a un píxel. 1.000 m cubre el
+        píxel completo más el humo y el calor cercano. Es el mismo umbral de
+        la fase 2, que el profesor aprobó (T2 #37).
+    p0_por_confianza:
+      valor: {h: 0.9, n: 0.7, l: 0.4, desconocida: 0.7}
+      fuente: >-
+        Supuesto de diseño. La confianza (low, nominal, high) es la clase que
+        entrega FIRMS para VIIRS (Schroeder et al., 2014).
+      justificacion: >-
+        La probabilidad sobre el foco mismo es alta, pero no 1, porque el dron
+        puede sobrevolar a altura segura. Baja según la confianza de la
+        detección. Se prueba sensibilidad.
+
+  meteo:
+    activa: true
+    descripcion: Condiciones medidas por Open-Meteo en cada cámara.
+    modelo: >-
+      p_nodo = 1 − (1 − p_viento)(1 − p_temp)(1 − p_lluvia);
+      p_arista = max(p_u, p_v) (conservador)
+    variables_api: [temperature_2m, relative_humidity_2m, wind_speed_10m, wind_gusts_10m, precipitation]
+    unidad_viento: "m/s (se pide wind_speed_unit=ms a Open-Meteo)"
+    v_max_ms:
+      valor: 12
+      fuente: Ficha DJI Mavic 3 Enterprise, "Max Wind Speed Resistance 12 m/s"
+      justificacion: >-
+        Sobre este viento el fabricante no garantiza el vuelo: es el extremo
+        de la rampa (p = 1).
+    v_seguro_ms:
+      valor: 8
+      fuente: Supuesto de diseño
+      justificacion: >-
+        Dos tercios del límite del fabricante. Bajo 8 m/s se considera que el
+        viento no compromete el vuelo; entre 8 y 12 m/s la probabilidad sube
+        linealmente. Se usa la ráfaga (wind_gusts_10m) y no el viento medio,
+        porque la ráfaga es la que desestabiliza. Se prueba sensibilidad.
+    temperatura_min_c:
+      valor: -10
+      fuente: Ficha DJI Mavic 3 Enterprise, "Operating Temperature -10° to 40° C"
+      justificacion: Fuera del rango de operación la falla es segura (p = 1).
+    temperatura_max_c:
+      valor: 40
+      fuente: Ficha DJI Mavic 3 Enterprise, "Operating Temperature -10° to 40° C"
+      justificacion: Fuera del rango de operación la falla es segura (p = 1).
+    lluvia_max_mm_h:
+      valor: 2.5
+      fuente: >-
+        American Meteorological Society, Glossary of Meteorology, entrada
+        "Rain": lluvia ligera hasta 2,5 mm/h, moderada de 2,6 a 7,6 mm/h. La
+        ficha del Mavic 3 Enterprise no declara clasificación IP (no es
+        resistente al agua).
+      justificacion: >-
+        La probabilidad sube linealmente de 0 (sin lluvia) a 1 cuando la lluvia
+        llega a moderada (2,5 mm/h). El umbral es un supuesto de diseño
+        anclado en esa clasificación.
+
+  ebird:
+    activa: true
+    descripcion: Avistamientos recientes de aves (eBird API 2.0).
+    modelo: >-
+      p = p0 · f_recencia · f_cantidad · max(0, 1 − d/R);
+      varios avistamientos se combinan como independientes
+    distancia_precaucion_m:
+      valor: 100
+      fuente: >-
+        Vas, E., Lescroël, A., Duriez, O., Boguszewski, G. y Grémillet, D.
+        (2015). Approaching birds with drones: first experiments and ethical
+        guidelines. Biology Letters, 11(2), 20140754.
+        https://doi.org/10.1098/rsbl.2014.0754 (PMC4360097)
+      justificacion: >-
+        El artículo recomienda "launching drones farther than 100 m from the
+        birds and adjusting approach distance according to species". Es una
+        distancia de lanzamiento por precaución, no un radio de perturbación
+        medido: en el experimento las aves reaccionaron a distancias mucho
+        menores (4-8 m en patos, 5-30 m en flamencos, 4-10 m en chorlos).
+        Se usa 100 m como radio de precaución. Son otras especies y otro
+        ecosistema que el parque, y el artículo indica ajustar la distancia
+        según la especie.
+    incertidumbre_ubicacion_m:
+      valor: 400
+      fuente: Supuesto de diseño
+      justificacion: >-
+        eBird entrega la ubicación de la lista (checklist o hotspot), no la del
+        ave, y una lista puede cubrir un recorrido. Se suma un margen de 400 m.
+        El radio total queda en 500 m, el mismo de la fase 2, pero ahora con
+        su origen explicado.
+    p0:
+      valor: 0.5
+      fuente: Supuesto de diseño
+      justificacion: >-
+        Probabilidad de que un encuentro con aves en el radio obligue a abortar
+        el tramo. Se prueba sensibilidad.
+    cantidad_referencia:
+      valor: 10
+      fuente: Supuesto de diseño
+      justificacion: f_cantidad = min(1, cantidad / 10). Grupos de 10 o más aves cuentan completos.
+    ventana_dias:
+      valor: 14
+      fuente: Ventana de consulta de extraer_ebird.py (parámetro back = 14 de la API eBird)
+      justificacion: >-
+        f_recencia = max(0, 1 − edad/14). La edad se mide contra el avistamiento
+        más reciente del conjunto (el momento de la extracción).
+
+  senderos:
+    activa: false
+    descripcion: >-
+      Decisión D3: los senderos son metadata (contexto de privacidad), no una
+      amenaza de falla del dron. No entran al cálculo de probabilidades.

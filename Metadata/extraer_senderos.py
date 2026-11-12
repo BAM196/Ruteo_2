@@ -48,6 +48,59 @@ def distancia_punto_a_segmento(p: np.ndarray, a: np.ndarray, b: np.ndarray) -> f
     return float(np.linalg.norm(p - (a + t * ab)))
 
 
+def segmentos_se_tocan(a: np.ndarray, b: np.ndarray, c: np.ndarray, d: np.ndarray) -> bool:
+    def orientacion(p, q, r):
+        pq = q - p
+        pr = r - p
+        return float(pq[0] * pr[1] - pq[1] * pr[0])
+
+    def sobre_segmento(p, q, r, tolerancia_orientacion):
+        return (
+            abs(orientacion(p, r, q)) <= tolerancia_orientacion
+            and min(p[0], r[0]) - tolerancia_m <= q[0] <= max(p[0], r[0]) + tolerancia_m
+            and min(p[1], r[1]) - tolerancia_m <= q[1] <= max(p[1], r[1]) + tolerancia_m
+        )
+
+    tolerancia_m = 1e-6
+    tol_ab = tolerancia_m * max(float(np.linalg.norm(b - a)), 1.0)
+    tol_cd = tolerancia_m * max(float(np.linalg.norm(d - c)), 1.0)
+    o1, o2 = orientacion(a, b, c), orientacion(a, b, d)
+    o3, o4 = orientacion(c, d, a), orientacion(c, d, b)
+
+    if ((o1 > tol_ab and o2 < -tol_ab) or (o1 < -tol_ab and o2 > tol_ab)) and (
+        (o3 > tol_cd and o4 < -tol_cd) or (o3 < -tol_cd and o4 > tol_cd)
+    ):
+        return True
+
+    return (
+        sobre_segmento(a, c, b, tol_ab)
+        or sobre_segmento(a, d, b, tol_ab)
+        or sobre_segmento(c, a, d, tol_cd)
+        or sobre_segmento(c, b, d, tol_cd)
+    )
+
+
+def distancia_segmento_a_segmento(
+    a: np.ndarray, b: np.ndarray, c: np.ndarray, d: np.ndarray
+) -> float:
+    if segmentos_se_tocan(a, b, c, d):
+        return 0.0
+    return min(
+        distancia_punto_a_segmento(a, c, d),
+        distancia_punto_a_segmento(b, c, d),
+        distancia_punto_a_segmento(c, a, b),
+        distancia_punto_a_segmento(d, a, b),
+    )
+
+
+def distancia_entre_lineas(linea_a: list[np.ndarray], linea_b: list[np.ndarray]) -> float:
+    return min(
+        distancia_segmento_a_segmento(linea_a[i], linea_a[i + 1], linea_b[j], linea_b[j + 1])
+        for i in range(len(linea_a) - 1)
+        for j in range(len(linea_b) - 1)
+    )
+
+
 def parsear_coordenadas(texto: str) -> list[tuple[float, float, float]]:
     puntos = []
     for item in texto.strip().split():
@@ -128,16 +181,15 @@ def cruzar_senderos(senderos: list[dict], nodos: list[dict], aristas: list[dict]
                     nodos_cerca.append({"id": nid, "distancia_m": round(d_min, 1)})
             s["nodos_cercanos"] = sorted(nodos_cerca, key=lambda x: x["distancia_m"])
 
-            # Distancia a aristas
+            # Usa la geometría completa de cada arista, no solo su punto medio.
             aristas_cerca = []
             for ar in aristas:
-                p_a = xy_nodos[ar["source"]]
-                p_b = xy_nodos[ar["target"]]
-                mid = (p_a + p_b) / 2.0
-                d_ar = min(
-                    distancia_punto_a_segmento(mid, pts_proy[i], pts_proy[i+1])
-                    for i in range(len(pts_proy)-1)
-                )
+                coords_ar = ar.get("coordenadas") or [
+                    [nodos[ar["source"]]["lon"], nodos[ar["source"]]["lat"]],
+                    [nodos[ar["target"]]["lon"], nodos[ar["target"]]["lat"]],
+                ]
+                pts_ar = [proyectar(tr, c[0], c[1]) for c in coords_ar]
+                d_ar = distancia_entre_lineas(pts_ar, pts_proy)
                 if d_ar <= 500.0:
                     aristas_cerca.append({
                         "id": ar["id"],
@@ -174,7 +226,8 @@ def main():
             "total_elementos": len(senderos),
             "regla_privacidad": (
                 f"Si un tramo de vuelo está a <= {UMBRAL_PRIVACIDAD_M:.0f} m del sendero, "
-                "se marca buffer_privacidad = true para restringir la captura en horas de uso público."
+                "se marca buffer_privacidad = true para restringir la captura en horas de uso público. "
+                "La distancia se mide entre las geometrías completas del tramo y del sendero."
             )
         },
         "senderos": senderos

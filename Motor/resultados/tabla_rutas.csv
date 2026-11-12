@@ -1,0 +1,5 @@
+tecnica,etiqueta,nodos,distancia_m,R_analitico,R_montecarlo,ic95_inf,ic95_sup,delta_R,costo_C,tiempo_ms,factible,mensaje,mas_resiliente
+dijkstra_distancia,pgr_dijkstra (distancia),16-19-20-22,5242.6,0.2,0.1983,0.190485,0.206115,0.0,1.30472,0.05,True,ok,False
+milp,Gurobi (MILP),16-18-21-23-22,7650.1,1.0,1.0,1.0,1.0,0.8,0.729611,23.56,True,ok,False
+dijkstra_ponderado,pgr_dijkstra (ponderado),16-18-21-23-22,7650.1,1.0,1.0,1.0,1.0,0.8,0.729611,0.07,True,ok,True
+aco,ACO (config_zhang),16-18-21-23-22,7650.1,1.0,1.0,1.0,1.0,0.8,0.729611,8.29,True,ok,False

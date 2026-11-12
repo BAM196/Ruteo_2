@@ -4,12 +4,46 @@ const LAND_COVER_COLORS = {
   80: "#2a6f97",
 };
 
+const MOTOR_URL = `${window.location.protocol}//${window.location.hostname}:8001`;
+const DEFAULT_START = 16;
+const DEFAULT_GOAL = 22;
+const DEFAULT_THREAT_EDGE = 27;
+
+const TECHNIQUES = {
+  dijkstra_distancia: {color: "#d4652f", weight: 13},
+  milp: {color: "#2563eb", weight: 10},
+  dijkstra_ponderado: {color: "#16a34a", weight: 6},
+  aco: {color: "#f0abfc", weight: 2.5},
+};
+
 const startSelect = document.querySelector("#start-id");
 const goalSelect = document.querySelector("#goal-id");
+const excludeSelect = document.querySelector("#exclude-ids");
+const thetaInput = document.querySelector("#theta");
+const thetaValue = document.querySelector("#theta-value");
+const autonomyInput = document.querySelector("#autonomy");
+const forestOnly = document.querySelector("#forest-only");
+const avoidTrails = document.querySelector("#avoid-trails");
+const avoidRain = document.querySelector("#avoid-rain");
+const avoidBirds = document.querySelector("#avoid-birds");
+const threatBox = document.querySelector("#threat-box");
+const threatEdge = document.querySelector("#threat-edge");
+const threatP = document.querySelector("#threat-p");
 const summary = document.querySelector("#route-summary");
 const errorBox = document.querySelector("#route-error");
+const faunaSummary = document.querySelector("#fauna-summary");
+const faunaList = document.querySelector("#fauna-list");
 const routeButton = document.querySelector("#route-button");
 const form = document.querySelector("#route-form");
+const routesBox = document.querySelector("#routes-box");
+const routesList = document.querySelector("#routes-list");
+const routesWinner = document.querySelector("#routes-winner");
+
+function esCamara(feature) {
+  const props = feature.properties || {};
+  if (typeof props.is_camera === "boolean") return props.is_camera;
+  return /^c[aá]mara/i.test(String(props.name || "").trim());
+}
 
 const map = L.map("map", {zoomControl: true});
 L.tileLayer(
@@ -35,15 +69,18 @@ const edgesLayer = L.geoJSON(null, {
 }).addTo(map);
 
 const nodesLayer = L.geoJSON(null, {
-  pointToLayer: (feature, latlng) =>
-    L.circleMarker(latlng, {
-      radius: 7,
+  pointToLayer: (feature, latlng) => {
+    const camara = esCamara(feature);
+    return L.circleMarker(latlng, {
+      radius: camara ? 7 : 4.5,
       color: "#f7f3ea",
-      weight: 2,
-      fillColor:
-        LAND_COVER_COLORS[feature.properties.land_cover_code] || "#8d8478",
-      fillOpacity: 1,
-    }),
+      weight: camara ? 2 : 1.2,
+      fillColor: camara
+        ? LAND_COVER_COLORS[feature.properties.land_cover_code] || "#8d8478"
+        : "#22c55e",
+      fillOpacity: camara ? 1 : 0.85,
+    });
+  },
   onEachFeature: (feature, layer) => {
     const props = feature.properties;
     const species = (props.species || [])
@@ -139,65 +176,289 @@ const meteoLayer = L.geoJSON(null, {
   onEachFeature: (feature, layer) => {
     const props = feature.properties;
     layer.bindPopup(
-      `<strong>Alerta Meteorológica</strong><br>` +
+      `<strong>Clima en la cámara</strong><br>` +
         `Temp: ${props.temperature ?? "s/d"} °C<br>` +
         `Humedad: ${props.humidity ?? "s/d"}%<br>` +
-        `Viento: ${props.wind_speed ?? "s/d"} km/h`,
+        `Viento: ${props.wind_speed ?? "s/d"} m/s`,
     );
   },
 }).addTo(map);
 
-const routeLayer = L.geoJSON(null, {
-  style: {color: "#d4652f", weight: 5, opacity: 0.95},
+const routeLayers = {};
+const threatLayer = L.geoJSON(null, {
+  style: {color: "#dc2626", weight: 7, opacity: 1, dashArray: "4, 9"},
 }).addTo(map);
+
+let allNodes = [];
+let cameras = [];
+let edgeFeatures = [];
 
 function showError(message) {
   errorBox.hidden = !message;
   errorBox.textContent = message || "";
 }
 
+function cameraName(id) {
+  const match = allNodes.find((feature) => feature.properties.id === id);
+  return match ? match.properties.name : `Nodo ${id}`;
+}
+
+function option(value, text) {
+  const el = document.createElement("option");
+  el.value = value;
+  el.textContent = text;
+  return el;
+}
+
 function fillCameras(features) {
-  const options = features.map((feature) => {
-    const option = document.createElement("option");
-    option.value = feature.properties.id;
-    option.textContent = feature.properties.name;
-    return option;
+  const make = () =>
+    features.map((f) =>
+      option(f.properties.id, `${f.properties.id} · ${f.properties.name}`),
+    );
+  startSelect.replaceChildren(...make());
+  goalSelect.replaceChildren(...make());
+  excludeSelect.replaceChildren(...make());
+  if (features.some((f) => f.properties.id === DEFAULT_START))
+    startSelect.value = String(DEFAULT_START);
+  if (features.some((f) => f.properties.id === DEFAULT_GOAL))
+    goalSelect.value = String(DEFAULT_GOAL);
+}
+
+function renderFauna(features) {
+  const speciesByName = new Map();
+
+  features.forEach((feature) => {
+    const nodeId = feature.properties.id;
+    (feature.properties.species || []).forEach((species) => {
+      const scientific = (species.scientific || "").trim();
+      const common = (species.common || "").trim();
+      const key = scientific || common;
+      if (!key) return;
+
+      let item = speciesByName.get(key);
+      if (!item) {
+        item = {scientific, common, records: 0, cameras: new Set()};
+        speciesByName.set(key, item);
+      }
+      item.records += Number(species.records) || 0;
+      item.cameras.add(nodeId);
+    });
   });
-  startSelect.replaceChildren(
-    ...options.map((option) => option.cloneNode(true)),
+
+  const species = [...speciesByName.values()].sort(
+    (a, b) => b.records - a.records || (a.common || a.scientific).localeCompare(b.common || b.scientific),
   );
-  goalSelect.replaceChildren(...options);
+  faunaList.replaceChildren();
+
+  species.forEach((animal) => {
+    const item = document.createElement("li");
+    const name = document.createElement("strong");
+    name.textContent = animal.common || animal.scientific;
+    item.append(name);
+
+    if (animal.common && animal.scientific) {
+      const scientific = document.createElement("small");
+      scientific.className = "fauna-scientific";
+      scientific.textContent = animal.scientific;
+      item.append(scientific);
+    }
+
+    const stats = document.createElement("small");
+    stats.textContent =
+      `${animal.records.toLocaleString("es-CL")} registros · ` +
+      `${animal.cameras.size} cámaras`;
+    item.append(stats);
+    faunaList.append(item);
+  });
+
+  faunaSummary.textContent = species.length
+    ? `${species.length} especies registradas`
+    : "No hay especies registradas en las cámaras.";
 }
 
-function cameraName(features, id) {
-  const match = features.find((feature) => feature.properties.id === id);
-  return match ? match.properties.name : `Cámara ${id}`;
+function fillEdges(features) {
+  const options = [option("", "Ninguno")].concat(
+    features.map((f) =>
+      option(
+        f.properties.id,
+        `${f.properties.id} · ${cameraName(f.properties.source)} – ${cameraName(f.properties.target)}`,
+      ),
+    ),
+  );
+  threatEdge.replaceChildren(...options);
+  if (features.some((f) => f.properties.id === DEFAULT_THREAT_EDGE)) {
+    threatEdge.value = String(DEFAULT_THREAT_EDGE);
+  }
 }
 
-async function readJson(url) {
-  const response = await fetch(url);
+async function readJson(url, options) {
+  const response = await fetch(url, options);
   const payload = await response.json();
   if (!response.ok) {
-    throw new Error(payload.error || "No se pudo completar la consulta.");
+    const detail = payload.detail;
+    const text =
+      typeof detail === "string"
+        ? detail
+        : detail
+          ? JSON.stringify(detail)
+          : payload.error;
+    throw new Error(text || "No se pudo completar la consulta.");
   }
   return payload;
 }
 
-async function drawRoute(startId, goalId) {
-  const query =
-    startId && goalId ? `?start_id=${startId}&goal_id=${goalId}` : "";
-  const payload = await readJson(`/api/route${query}`);
-  routeLayer.clearLayers();
-  if (payload.geometry) {
-    routeLayer.addData({
-      type: "Feature",
-      geometry: payload.geometry,
-      properties: {},
-    });
+function buildQuery() {
+  const query = {
+    origen_id: Number(startSelect.value),
+    destino_id: Number(goalSelect.value),
+    theta: Number(thetaInput.value),
+    autonomia_m: autonomyInput.value ? Number(autonomyInput.value) : null,
+    restricciones: {
+      solo_bosque: forestOnly.checked,
+      evitar_senderos: avoidTrails.checked,
+      excluir_nodos: Array.from(excludeSelect.selectedOptions).map((o) =>
+        Number(o.value),
+      ),
+    },
+    overrides_prob: {},
+  };
+  if (threatBox.open && threatEdge.value) {
+    query.overrides_prob = {
+      aristas: {[threatEdge.value]: Number(threatP.value)},
+    };
   }
-  startSelect.value = String(payload.start_id);
-  goalSelect.value = String(payload.goal_id);
-  return payload;
+  return query;
+}
+
+function drawThreat(query) {
+  threatLayer.clearLayers();
+  const ids = Object.keys((query.overrides_prob || {}).aristas || {}).map(
+    Number,
+  );
+  edgeFeatures
+    .filter((f) => ids.includes(f.properties.id))
+    .forEach((f) => threatLayer.addData(f));
+}
+
+function clearRoutes() {
+  Object.values(routeLayers).forEach((layer) => map.removeLayer(layer));
+  Object.keys(routeLayers).forEach((key) => delete routeLayers[key]);
+  routesList.replaceChildren();
+}
+
+function formatR(value) {
+  return value.toFixed(3).replace(".", ",");
+}
+
+function drawRoutes(payload) {
+  clearRoutes();
+  const order = ["dijkstra_distancia", "milp", "dijkstra_ponderado", "aco"];
+  const routes = [...payload.rutas].sort(
+    (a, b) => order.indexOf(a.tecnica) - order.indexOf(b.tecnica),
+  );
+  const tie = (payload.resiliencia && payload.resiliencia.empate_en_R) || [];
+
+  routes.forEach((route) => {
+    const style = TECHNIQUES[route.tecnica] || {color: "#444", weight: 4};
+    if (route.geojson) {
+      routeLayers[route.tecnica] = L.geoJSON(route.geojson, {
+        style: {
+          color: style.color,
+          weight: style.weight,
+          opacity: 0.95,
+          dashArray: route.factible ? null : "10, 8",
+        },
+        onEachFeature: (_feature, layer) =>
+          layer.bindPopup(
+            `<strong>${route.etiqueta}</strong><br>` +
+              `${route.leyenda}<br>` +
+              `Cámaras: ${route.nodos.join(" → ")}<br>` +
+              (route.factible ? "Factible" : `No factible: ${route.mensaje}`),
+          ),
+      }).addTo(map);
+    }
+
+    const item = document.createElement("li");
+    const label = document.createElement("label");
+    const box = document.createElement("input");
+    box.type = "checkbox";
+    box.checked = Boolean(route.geojson);
+    box.disabled = !route.geojson;
+    box.addEventListener("change", () => {
+      const layer = routeLayers[route.tecnica];
+      if (!layer) return;
+      if (box.checked) layer.addTo(map);
+      else map.removeLayer(layer);
+    });
+    const swatch = document.createElement("i");
+    swatch.className = "swatch line";
+    swatch.style.background = style.color;
+    const text = document.createElement("span");
+    const winner = route.tecnica === payload.mas_resiliente;
+    const tied = tie.includes(route.tecnica);
+    text.textContent = `${winner || tied ? "★ " : ""}${route.leyenda}`;
+    label.append(box, swatch, text);
+    item.append(label);
+    if (!route.factible) {
+      const note = document.createElement("small");
+      note.className = "route-note";
+      note.textContent = route.mensaje;
+      item.append(note);
+    }
+    if (winner || tied) item.classList.add("best");
+    routesList.append(item);
+  });
+
+  const winnerRoute = routes.find((r) => r.tecnica === payload.mas_resiliente);
+  if (!winnerRoute) {
+    routesWinner.textContent =
+      "Ninguna ruta es factible con estas condiciones.";
+  } else if (tie.length > 1) {
+    const names = routes
+      .filter((r) => tie.includes(r.tecnica))
+      .map((r) => r.etiqueta);
+    routesWinner.textContent = `Más resilientes (empate en R = ${formatR(winnerRoute.R)}): ${names.join(", ")}.`;
+  } else {
+    routesWinner.textContent = `Más resiliente: ${winnerRoute.etiqueta} (R = ${formatR(winnerRoute.R)}).`;
+  }
+  routesBox.hidden = false;
+
+  const group = L.featureGroup(Object.values(routeLayers));
+  if (group.getLayers().length) map.fitBounds(group.getBounds().pad(0.3));
+}
+
+async function computeRoutes() {
+  showError("");
+  if (startSelect.value === goalSelect.value) {
+    showError("El origen y el destino son la misma cámara.");
+    return;
+  }
+  routeButton.disabled = true;
+  summary.textContent = "Calculando las cuatro rutas…";
+  const query = buildQuery();
+  try {
+    const payload = await readJson(`${MOTOR_URL}/api/rutas`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(query),
+    });
+    drawRoutes(payload);
+    drawThreat(query);
+    threatLayer.bringToFront();
+    const p = payload.parametros;
+    summary.textContent =
+      `${cameraName(p.origen)} a ${cameraName(p.destino)} · θ = ${String(p.theta).replace(".", ",")} · ` +
+      `autonomía ${Math.round(p.d_max_m).toLocaleString("es-CL")} m`;
+  } catch (error) {
+    summary.textContent = "No se pudieron calcular las rutas.";
+    showError(
+      error instanceof TypeError
+        ? `No hay conexión con el motor en ${MOTOR_URL}. ¿Está corriendo el contenedor "motor"?`
+        : error.message,
+    );
+  } finally {
+    routeButton.disabled = false;
+  }
 }
 
 function bindToggles() {
@@ -208,7 +469,6 @@ function bindToggles() {
     ["#toggle-ebird", ebirdLayer],
     ["#toggle-fires", firesLayer],
     ["#toggle-meteo", meteoLayer],
-    ["#toggle-route", routeLayer],
   ];
   pairs.forEach(([selector, layer]) => {
     const el = document.querySelector(selector);
@@ -244,8 +504,12 @@ async function loadPark() {
     trailsLayer.addData(trails);
     ebirdLayer.addData(ebird);
 
-    fillCameras(nodes.features);
-    const route = await drawRoute();
+    allNodes = nodes.features;
+    cameras = allNodes.filter(esCamara);
+    edgeFeatures = edges.features;
+    fillCameras(cameras);
+    renderFauna(cameras);
+    fillEdges(edgeFeatures);
 
     const bounds = nodesLayer.getBounds();
     if (bounds.isValid()) {
@@ -255,35 +519,14 @@ async function loadPark() {
     const fireText = fires.features.length
       ? `${fires.features.length} focos FIRMS`
       : "sin focos activos";
-    const meteoText = meteo.features.length
-      ? `${meteo.features.length} alertas`
-      : "sin alertas";
     const ebirdText = ebird.features.length
-      ? `${ebird.features.length} aves detectadas`
+      ? `${ebird.features.length} avistamientos de aves`
       : "sin amenazas de aves";
 
     summary.textContent =
-      `${nodes.features.length} cámaras · ` +
-      `${trails.features.length} senderos/hitos · ` +
-      `${cameraName(nodes.features, route.start_id)} a ${cameraName(nodes.features, route.goal_id)} · ` +
-      `${route.distance_km} km · ${fireText} · ${meteoText}· ${ebirdText}`;
-
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      showError("");
-      routeButton.disabled = true;
-      try {
-        const nextRoute = await drawRoute(startSelect.value, goalSelect.value);
-        summary.textContent =
-          `${cameraName(nodes.features, nextRoute.start_id)} a ` +
-          `${cameraName(nodes.features, nextRoute.goal_id)} · ${nextRoute.distance_km} km. ` +
-          "Solo distancia, sin cobertura, senderos ni amenazas aplicadas.";
-      } catch (error) {
-        showError(error.message);
-      } finally {
-        routeButton.disabled = false;
-      }
-    });
+      `${cameras.length} cámaras (${allNodes.length} nodos) · ${trails.features.length} senderos/hitos · ` +
+      `${fireText} · ${meteo.features.length} lecturas de clima · ${ebirdText}. ` +
+      "Elige origen y destino y calcula las rutas.";
   } catch (error) {
     summary.textContent = "No se pudo cargar el parque.";
     showError(error.message);
@@ -291,6 +534,17 @@ async function loadPark() {
     routeButton.disabled = false;
   }
 }
+
+thetaInput.addEventListener("input", () => {
+  thetaValue.textContent = Number(thetaInput.value)
+    .toFixed(2)
+    .replace(".", ",");
+});
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  computeRoutes();
+});
 
 bindToggles();
 loadPark();
