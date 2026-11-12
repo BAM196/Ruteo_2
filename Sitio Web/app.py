@@ -33,6 +33,7 @@ NODE_SQL = """
             'properties', json_build_object(
                 'id', n.id,
                 'name', n.nombre,
+                'is_camera', (n.nombre ILIKE 'Camara%%'),
                 'records', n.n_registros,
                 'station_codes', n.codigos_estacion,
                 'land_cover_code', m.landcover_code,
@@ -246,9 +247,9 @@ def ebird():
 def endpoint_pair():
     sql = """
         SELECT id FROM (
-            (SELECT id, 1 AS ord FROM nodos ORDER BY ST_Y(geom) ASC LIMIT 1)
+            (SELECT id, 1 AS ord FROM nodos WHERE nombre ILIKE 'Camara%%' ORDER BY ST_Y(geom) ASC LIMIT 1)
             UNION ALL
-            (SELECT id, 2 AS ord FROM nodos ORDER BY ST_Y(geom) DESC LIMIT 1)
+            (SELECT id, 2 AS ord FROM nodos WHERE nombre ILIKE 'Camara%%' ORDER BY ST_Y(geom) DESC LIMIT 1)
         ) ends
         ORDER BY ord
     """

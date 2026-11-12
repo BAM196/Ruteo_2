@@ -34,6 +34,12 @@ const routesBox = document.querySelector("#routes-box");
 const routesList = document.querySelector("#routes-list");
 const routesWinner = document.querySelector("#routes-winner");
 
+function esCamara(feature) {
+  const props = feature.properties || {};
+  if (typeof props.is_camera === "boolean") return props.is_camera;
+  return /^c[aá]mara/i.test(String(props.name || "").trim());
+}
+
 const map = L.map("map", {zoomControl: true});
 L.tileLayer(
   "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
@@ -58,15 +64,18 @@ const edgesLayer = L.geoJSON(null, {
 }).addTo(map);
 
 const nodesLayer = L.geoJSON(null, {
-  pointToLayer: (feature, latlng) =>
-    L.circleMarker(latlng, {
-      radius: 7,
+  pointToLayer: (feature, latlng) => {
+    const camara = esCamara(feature);
+    return L.circleMarker(latlng, {
+      radius: camara ? 7 : 4.5,
       color: "#f7f3ea",
-      weight: 2,
-      fillColor:
-        LAND_COVER_COLORS[feature.properties.land_cover_code] || "#8d8478",
-      fillOpacity: 1,
-    }),
+      weight: camara ? 2 : 1.2,
+      fillColor: camara
+        ? LAND_COVER_COLORS[feature.properties.land_cover_code] || "#8d8478"
+        : "#22c55e",
+      fillOpacity: camara ? 1 : 0.85,
+    });
+  },
   onEachFeature: (feature, layer) => {
     const props = feature.properties;
     const species = (props.species || [])
@@ -175,6 +184,7 @@ const threatLayer = L.geoJSON(null, {
   style: {color: "#dc2626", weight: 7, opacity: 1, dashArray: "4, 9"},
 }).addTo(map);
 
+let allNodes = [];
 let cameras = [];
 let edgeFeatures = [];
 
@@ -184,8 +194,8 @@ function showError(message) {
 }
 
 function cameraName(id) {
-  const match = cameras.find((feature) => feature.properties.id === id);
-  return match ? match.properties.name : `Cámara ${id}`;
+  const match = allNodes.find((feature) => feature.properties.id === id);
+  return match ? match.properties.name : `Nodo ${id}`;
 }
 
 function option(value, text) {
@@ -415,7 +425,8 @@ async function loadPark() {
     trailsLayer.addData(trails);
     ebirdLayer.addData(ebird);
 
-    cameras = nodes.features;
+    allNodes = nodes.features;
+    cameras = allNodes.filter(esCamara);
     edgeFeatures = edges.features;
     fillCameras(cameras);
     fillEdges(edgeFeatures);
@@ -433,7 +444,7 @@ async function loadPark() {
       : "sin amenazas de aves";
 
     summary.textContent =
-      `${nodes.features.length} cámaras · ${trails.features.length} senderos/hitos · ` +
+      `${cameras.length} cámaras (${allNodes.length} nodos) · ${trails.features.length} senderos/hitos · ` +
       `${fireText} · ${meteo.features.length} lecturas de clima · ${ebirdText}. ` +
       "Elige origen y destino y calcula las rutas.";
   } catch (error) {

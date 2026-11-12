@@ -39,7 +39,11 @@ def leer_nodos() -> list[dict]:
     if not NODOS_PATH.exists():
         sys.exit(f"No existe {NODOS_PATH}.")
     data = json.loads(NODOS_PATH.read_text(encoding="utf-8"))
-    return data["nodos"] if isinstance(data, dict) else data
+    nodos = data["nodos"] if isinstance(data, dict) else data
+    return [
+        n for n in nodos
+        if n.get("es_camara", n.get("tipo_nodo", "camara") == "camara")
+    ]
 
 
 def consultar(nodos: list[dict]) -> list[dict]:
