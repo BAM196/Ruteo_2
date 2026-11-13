@@ -1,6 +1,6 @@
 # resultados/
 
-Lo genera `python -m motor.evaluacion` (en Docker: `docker compose run --rm motor python -m motor.evaluacion`). Usa la consulta de `config/consulta_ejemplo.json`: de la cámara 16 a la 22, con la arista 27 amenazada (p = 0,8) y θ = 0,5.
+Lo genera `python -m motor.evaluacion` (en Docker: `docker compose run --rm motor python -m motor.evaluacion`). Usa la consulta de `config/consulta_ejemplo.json`: de la cámara 33 (U65) a la 36 (R61), con la arista 50 amenazada (p = 0,8) y θ = 0,5.
 
 ## ejemplo_rutas.json
 
@@ -8,7 +8,7 @@ La respuesta completa de `POST /api/rutas` para la consulta de ejemplo. La estru
 
 ## tabla_rutas.csv y tabla_rutas_autonomia.csv
 
-Una fila por técnica. La segunda tabla repite la consulta con autonomía de 7.000 m, para mostrar la diferencia entre la técnica 2 y la 3.
+Una fila por técnica. La segunda tabla repite la consulta con autonomía de 5.500 m, para mostrar la diferencia entre la técnica 2 y la 3.
 
 | Columna | Significado |
 | --- | --- |

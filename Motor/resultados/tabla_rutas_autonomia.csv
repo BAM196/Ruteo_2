@@ -1,5 +1,5 @@
 tecnica,etiqueta,nodos,distancia_m,R_analitico,R_montecarlo,ic95_inf,ic95_sup,delta_R,costo_C,tiempo_ms,factible,mensaje,mas_resiliente
-dijkstra_distancia,pgr_dijkstra (distancia),16-19-20-22,5242.6,0.2,0.1983,0.190485,0.206115,0.0,1.30472,0.04,True,ok,True
-milp,Gurobi (MILP),16-19-20-22,5242.6,0.2,0.1983,0.190485,0.206115,0.0,1.30472,4.9,True,ok,False
-dijkstra_ponderado,pgr_dijkstra (ponderado),16-18-21-23-22,7650.1,,,,,,0.729611,0.06,False,supera la autonomía (7650 m > 7000 m),False
-aco,ACO (config_zhang),16-19-20-22,5242.6,0.2,0.1983,0.190485,0.206115,0.0,1.30472,9.18,True,ok,False
+dijkstra_distancia,pgr_dijkstra (distancia),33-35-36,5398.3,0.2,0.1954,0.187628,0.203172,0.0,1.30472,3.79,True,ok,True
+milp,Gurobi (MILP),33-35-36,5398.3,0.2,0.1954,0.187628,0.203172,0.0,1.30472,61.92,True,ok,False
+dijkstra_ponderado,pgr_dijkstra (ponderado),33-255-153-259-36,5648.4,,,,,,0.523166,11.74,False,supera la autonomía (5648 m > 5500 m),False
+aco,ACO (config_zhang),33-255-153-259-36,5648.4,,,,,,0.523166,23.35,False,Ninguna ruta cumplió D_max: se devuelve la menos mala.; supera la autonomía (5648 m > 5500 m),False

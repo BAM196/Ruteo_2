@@ -5,9 +5,9 @@ const LAND_COVER_COLORS = {
 };
 
 const MOTOR_URL = `${window.location.protocol}//${window.location.hostname}:8001`;
-const DEFAULT_START = 16;
-const DEFAULT_GOAL = 22;
-const DEFAULT_THREAT_EDGE = 27;
+const DEFAULT_START = 33;
+const DEFAULT_GOAL = 36;
+const DEFAULT_THREAT_EDGE = 50;
 
 const TECHNIQUES = {
   dijkstra_distancia: {color: "#d4652f", weight: 13},
@@ -38,6 +38,10 @@ const form = document.querySelector("#route-form");
 const routesBox = document.querySelector("#routes-box");
 const routesList = document.querySelector("#routes-list");
 const routesWinner = document.querySelector("#routes-winner");
+const failButton = document.querySelector("#fail-button");
+const failSeed = document.querySelector("#fail-seed");
+const failSummary = document.querySelector("#fail-summary");
+const failList = document.querySelector("#fail-list");
 
 function esCamara(feature) {
   const props = feature.properties || {};
@@ -189,9 +193,23 @@ const threatLayer = L.geoJSON(null, {
   style: {color: "#dc2626", weight: 7, opacity: 1, dashArray: "4, 9"},
 }).addTo(map);
 
+const failureLayer = L.layerGroup().addTo(map);
+
 let allNodes = [];
 let cameras = [];
 let edgeFeatures = [];
+let lastRoutes = [];
+let lastFailures = null;
+
+function formatNumber(value, decimals) {
+  return Number(value).toFixed(decimals).replace(".", ",");
+}
+
+function edgeName(id) {
+  const edge = edgeFeatures.find((f) => f.properties.id === id);
+  if (!edge) return `Tramo ${id}`;
+  return `Tramo ${id} (${cameraName(edge.properties.source)} – ${cameraName(edge.properties.target)})`;
+}
 
 function showError(message) {
   errorBox.hidden = !message;
@@ -316,18 +334,22 @@ function buildQuery() {
     restricciones: {
       solo_bosque: forestOnly.checked,
       evitar_senderos: avoidTrails.checked,
+      evitar_clima: avoidRain.checked,
+      evitar_aves: avoidBirds.checked,
       excluir_nodos: Array.from(excludeSelect.selectedOptions).map((o) =>
         Number(o.value),
       ),
     },
-    overrides_prob: {},
+    overrides_prob: threatOverrides(),
   };
-  if (threatBox.open && threatEdge.value) {
-    query.overrides_prob = {
-      aristas: {[threatEdge.value]: Number(threatP.value)},
-    };
-  }
   return query;
+}
+
+function threatOverrides() {
+  if (threatBox.open && threatEdge.value) {
+    return {aristas: {[threatEdge.value]: Number(threatP.value)}};
+  }
+  return {};
 }
 
 function drawThreat(query) {
@@ -352,10 +374,12 @@ function formatR(value) {
 
 function drawRoutes(payload) {
   clearRoutes();
+  clearFailures();
   const order = ["dijkstra_distancia", "milp", "dijkstra_ponderado", "aco"];
   const routes = [...payload.rutas].sort(
     (a, b) => order.indexOf(a.tecnica) - order.indexOf(b.tecnica),
   );
+  lastRoutes = routes;
   const tie = (payload.resiliencia && payload.resiliencia.empate_en_R) || [];
 
   routes.forEach((route) => {
@@ -461,6 +485,126 @@ async function computeRoutes() {
   }
 }
 
+function clearFailures() {
+  failureLayer.clearLayers();
+  lastFailures = null;
+  failSummary.hidden = true;
+  failSummary.textContent = "";
+  failList.replaceChildren();
+  routesList.querySelectorAll(".route-fail").forEach((el) => el.remove());
+}
+
+function markRouteSurvival() {
+  routesList.querySelectorAll(".route-fail").forEach((el) => el.remove());
+  if (!lastFailures) return;
+  const failedNodes = new Set(lastFailures.nodos.filter((n) => n.falla).map((n) => n.id));
+  const failedEdges = new Set(lastFailures.aristas.filter((a) => a.falla).map((a) => a.id));
+  const items = routesList.querySelectorAll("li");
+  lastRoutes.forEach((route, index) => {
+    const item = items[index];
+    if (!item || !route.nodos || !route.nodos.length) return;
+    const edges = route.aristas.filter((id) => failedEdges.has(id));
+    const nodes = route.nodos.filter((id) => failedNodes.has(id));
+    const note = document.createElement("small");
+    if (!edges.length && !nodes.length) {
+      note.className = "route-fail ok";
+      note.textContent = "Sorteo: la ruta se completa.";
+    } else {
+      note.className = "route-fail bad";
+      const parts = edges.map((id) => edgeName(id)).concat(nodes.map((id) => cameraName(id)));
+      note.textContent = `Sorteo: la misión falla en ${parts.join(", ")}.`;
+    }
+    item.append(note);
+  });
+}
+
+function drawFailures(result) {
+  failureLayer.clearLayers();
+  const failedEdges = result.aristas.filter((a) => a.falla);
+  const failedNodes = result.nodos.filter((n) => n.falla);
+
+  failedEdges.forEach((edge) => {
+    const feature = edgeFeatures.find((f) => f.properties.id === edge.id);
+    if (!feature) return;
+    L.geoJSON(feature, {style: {color: "#111827", weight: 9, opacity: 0.9}})
+      .bindPopup(
+        `<strong>Falla</strong><br>${edgeName(edge.id)}<br>` +
+          `r = ${formatNumber(edge.r, 1)} ≤ umbral ${formatNumber(edge.umbral, 1)}`,
+      )
+      .addTo(failureLayer);
+  });
+
+  failedNodes.forEach((node) => {
+    const feature = allNodes.find((f) => f.properties.id === node.id);
+    if (!feature) return;
+    const [lon, lat] = feature.geometry.coordinates;
+    L.circleMarker([lat, lon], {radius: 11, color: "#111827", weight: 3, fillColor: "#dc2626", fillOpacity: 0.9})
+      .bindPopup(
+        `<strong>Falla</strong><br>${cameraName(node.id)}<br>` +
+          `r = ${formatNumber(node.r, 1)} ≤ umbral ${formatNumber(node.umbral, 1)}`,
+      )
+      .addTo(failureLayer);
+  });
+  failureLayer.eachLayer((layer) => layer.bringToFront && layer.bringToFront());
+}
+
+function listFailures(result) {
+  const risky = result.aristas
+    .filter((a) => a.p_fallo > 0)
+    .map((a) => ({...a, nombre: edgeName(a.id)}))
+    .concat(result.nodos.filter((n) => n.p_fallo > 0).map((n) => ({...n, nombre: cameraName(n.id)})))
+    .sort((a, b) => b.p_fallo - a.p_fallo);
+
+  failList.replaceChildren();
+  const failed = risky.filter((e) => e.falla).length;
+  failSummary.hidden = false;
+  if (!risky.length) {
+    failSummary.textContent =
+      "Ningún elemento tiene probabilidad de falla mayor que 0, así que nada puede fallar. " +
+      "Abre \"Simular una amenaza\" para forzar una.";
+    return;
+  }
+  failSummary.textContent =
+    `${failed} de ${risky.length} elementos con probabilidad > 0 fallaron en este sorteo` +
+    (result.semilla !== null && result.semilla !== undefined ? ` (semilla ${result.semilla}).` : ".");
+
+  risky.slice(0, 15).forEach((e) => {
+    const item = document.createElement("li");
+    item.className = e.falla ? "bad" : "ok";
+    const verdict = e.falla ? "≤" : ">";
+    item.textContent =
+      `${e.nombre}: r = ${formatNumber(e.r, 1)} ${verdict} ${formatNumber(e.umbral, 1)} → ` +
+      (e.falla ? "falla" : "no falla");
+    failList.append(item);
+  });
+}
+
+async function simulateFailures() {
+  showError("");
+  failButton.disabled = true;
+  const body = {overrides_prob: threatOverrides()};
+  if (failSeed.value !== "") body.semilla = Number(failSeed.value);
+  try {
+    const result = await readJson(`${MOTOR_URL}/api/fallas`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(body),
+    });
+    lastFailures = result;
+    drawFailures(result);
+    listFailures(result);
+    markRouteSurvival();
+  } catch (error) {
+    showError(
+      error instanceof TypeError
+        ? `No hay conexión con el motor en ${MOTOR_URL}. ¿Está corriendo el contenedor "motor"?`
+        : error.message,
+    );
+  } finally {
+    failButton.disabled = false;
+  }
+}
+
 function bindToggles() {
   const pairs = [
     ["#toggle-edges", edgesLayer],
@@ -469,6 +613,7 @@ function bindToggles() {
     ["#toggle-ebird", ebirdLayer],
     ["#toggle-fires", firesLayer],
     ["#toggle-meteo", meteoLayer],
+    ["#toggle-failures", failureLayer],
   ];
   pairs.forEach(([selector, layer]) => {
     const el = document.querySelector(selector);
@@ -545,6 +690,8 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
   computeRoutes();
 });
+
+failButton.addEventListener("click", simulateFailures);
 
 bindToggles();
 loadPark();

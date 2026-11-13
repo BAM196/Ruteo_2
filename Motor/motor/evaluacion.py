@@ -188,7 +188,7 @@ def main():
         print("  " + r["leyenda"])
 
     c2 = copy.deepcopy(consulta)
-    c2["autonomia_m"] = 7000
+    c2["autonomia_m"] = 5500
     res2 = servicio.calcular_rutas(c2, esc)
     _csv(RESULTADOS / "tabla_rutas_autonomia.csv", tabla_rutas(res2))
 

@@ -44,7 +44,8 @@ class Consulta:
 
 class Problema:
     def __init__(self, esc, q_nodo: dict, p_arista: dict, consulta: Consulta,
-                 cota: float = 0.999999):
+                 cota: float = 0.999999, amenaza_nodo: dict | None = None,
+                 amenaza_arista: dict | None = None):
         self.esc = esc
         self.c = consulta
         self.s, self.t = consulta.origen_id, consulta.destino_id
@@ -57,6 +58,13 @@ class Problema:
         self.cota = cota
         self.d_ref = None
 
+        amenaza_nodo = amenaza_nodo or {}
+        amenaza_arista = amenaza_arista or {}
+        evitar = [k for k, activo in (("meteo", consulta.evitar_clima), ("ebird", consulta.evitar_aves)) if activo]
+
+        def con_amenaza_evitada(por_amenaza: dict) -> bool:
+            return any(por_amenaza.get(k, 0.0) > 0 for k in evitar)
+
         self.excl_usuario = set(consulta.excluir_nodos)
         excl = set(self.excl_usuario)
         motivos = {v: "excluido por el usuario" for v in self.excl_usuario}
@@ -66,6 +74,9 @@ class Problema:
             if consulta.solo_bosque and n.get("landcover_code") != BOSQUE:
                 excl.add(v)
                 motivos.setdefault(v, "no es bosque (solo_bosque)")
+            if con_amenaza_evitada(amenaza_nodo.get(v, {})):
+                excl.add(v)
+                motivos.setdefault(v, "riesgo por clima o aves (evitar)")
             if self.q[v] >= cota:
                 excl.add(v)
                 motivos.setdefault(v, "probabilidad de falla = 1")
@@ -76,8 +87,7 @@ class Problema:
         for aid, a in esc.aristas.items():
             if (a["source"] in excl or a["target"] in excl or not a.get("viable", True)
                     or (consulta.evitar_senderos and a.get("buffer_privacidad", False))
-                    or (consulta.evitar_clima and a.get("clima", False))
-                    or (consulta.evitar_aves and a.get("aves", False))
+                    or con_amenaza_evitada(amenaza_arista.get(aid, {}))
                     or self.p[aid] >= cota or (self.d_max and a["distancia_m"] > self.d_max)):
                 self.aristas_excluidas.add(aid)
 

@@ -7,12 +7,15 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 SITE_URL = "http://127.0.0.1:8000"
 MOTOR_URL = "http://127.0.0.1:8001/docs"
+FAUNA_CSV = ROOT / "data" / "Pumal237n Douglas Tompkins - Especies.csv"
+FAUNA_JSON = ROOT / "Metadata" / "fauna.json"
 
 EXTRACCION = (
     ("Generando nodos y aristas", [sys.executable, "Infraestructura/generar_nodos_v2.py"]),
     ("Extrayendo cobertura de suelo", [sys.executable, "Metadata/extraer_gee.py"]),
     ("Extrayendo focos de incendio (FIRMS)", [sys.executable, "Amenazas/extraer_firms.py"]),
     ("Extrayendo rutas de sendero", [sys.executable, "Metadata/extraer_senderos.py"]),
+    ("Extrayendo catálogo de fauna", [sys.executable, "Metadata/extraer_fauna.py"], FAUNA_CSV),
     ("Extrayendo avistamientos de aves (eBird)", [sys.executable, "Amenazas/extraer_ebird.py"]),
     ("Extrayendo condiciones meteorológicas (Open-Meteo)", [sys.executable, "Amenazas/extraer_meteo.py"]),
 )
@@ -27,6 +30,7 @@ CARGA = (
     ("Cargando focos de incendio (FIRMS)", [sys.executable, "Amenazas/cargar_firms.py"]),
     ("Cargando condiciones meteorológicas (Open-Meteo)", [sys.executable, "Amenazas/cargar_meteo.py"]),
     ("Cargando rutas de sendero", [sys.executable, "Metadata/cargar_senderos.py"]),
+    ("Cargando catálogo de fauna", [sys.executable, "Metadata/cargar_fauna.py"], FAUNA_JSON),
     ("Cargando avistamientos de aves (eBird)", [sys.executable, "Amenazas/cargar_ebird.py"]),
 )
 
@@ -38,8 +42,11 @@ MOTOR = (
 )
 
 
-def run_step(label, command):
+def run_step(label, command, requiere=None):
     print(label)
+    if requiere is not None and not requiere.exists():
+        print(f"Se omite: falta {requiere.relative_to(ROOT)}.")
+        return
     completed = subprocess.run(command, cwd=ROOT)
     if completed.returncode != 0:
         print(f"Falló: {label}.")
@@ -73,11 +80,11 @@ def esperar_base(intentos=30, pausa=2.0):
 
 
 def main():
-    for label, command in EXTRACCION + LEVANTAR:
-        run_step(label, command)
+    for paso in EXTRACCION + LEVANTAR:
+        run_step(*paso)
     esperar_base()
-    for label, command in CARGA + MOTOR:
-        run_step(label, command)
+    for paso in CARGA + MOTOR:
+        run_step(*paso)
     print(f"Listo. El mapa está en {SITE_URL} y la API del motor en {MOTOR_URL}.")
 
 

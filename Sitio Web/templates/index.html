@@ -78,12 +78,12 @@
         </label>
 
         <label class="check">
-          <input id="avoid-trails" type="checkbox" />
+          <input id="avoid-rain" type="checkbox" />
           <span>Evitar por clima</span>
         </label>
 
         <label class="check">
-          <input id="avoid-trails" type="checkbox" />
+          <input id="avoid-birds" type="checkbox" />
           <span>Evitar aves</span>
         </label>
 
@@ -118,16 +118,32 @@
       <p id="route-summary" class="summary">Cargando el parque…</p>
       <p id="route-error" class="error" hidden></p>
 
-      <section id="fauna-box" class="fauna-box">
-        <h2>Fauna registrada por cámaras</h2>
-        <p id="fauna-summary" class="hint">Cargando especies…</p>
-        <ul id="fauna-list" class="fauna-list"></ul>
-      </section>
-
       <section id="routes-box" hidden>
         <h2>Rutas</h2>
         <ul id="routes-list" class="routes"></ul>
         <p id="routes-winner" class="winner"></p>
+      </section>
+
+      <section id="fail-box" class="fail-box">
+        <h2>Simular fallas</h2>
+        <p class="hint">
+          Para cada cámara, waypoint y tramo se sortea un número r entre 0 y
+          100. El elemento falla si r ≤ 100 · p, con p su probabilidad de
+          falla. Si la amenaza simulada está abierta, se incluye en el sorteo.
+        </p>
+        <label>
+          Semilla (opcional)
+          <input id="fail-seed" type="number" min="0" step="1" placeholder="Vacía = sorteo nuevo cada vez" />
+        </label>
+        <button id="fail-button" type="button">Sortear fallas</button>
+        <p id="fail-summary" class="summary" hidden></p>
+        <ul id="fail-list" class="fail-list"></ul>
+      </section>
+
+      <section id="fauna-box" class="fauna-box">
+        <h2>Fauna registrada por cámaras</h2>
+        <p id="fauna-summary" class="hint">Cargando especies…</p>
+        <ul id="fauna-list" class="fauna-list"></ul>
       </section>
 
       <fieldset>
@@ -162,6 +178,11 @@
           <input id="toggle-meteo" type="checkbox" checked />
           Clima (Open-Meteo)
         </label>
+
+        <label>
+          <input id="toggle-failures" type="checkbox" checked />
+          Fallas sorteadas
+        </label>
       </fieldset>
 
       <ul class="legend">
@@ -172,6 +193,7 @@
         <li><i class="swatch trail"></i> Sendero oficial</li>
         <li><i class="swatch ebird"></i> Ave territorial (eBird)</li>
         <li><i class="swatch threat"></i> Tramo con amenaza simulada</li>
+        <li><i class="swatch failure"></i> Elemento que falló en el sorteo</li>
       </ul>
     </aside>
 

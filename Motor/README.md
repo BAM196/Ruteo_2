@@ -69,7 +69,7 @@ Motor/
 | `POST` | `/api/rutas` | Recibe la consulta del usuario y devuelve las 4 rutas con $R$, tiempo y leyenda |
 | `GET` | `/api/probabilidades` | Punto 5 para toda la red |
 | `POST` | `/api/probabilidades` | Igual, con `overrides_prob` en el cuerpo |
-| `POST` | `/api/fallas` | Aplica la regla D4 a toda la red (apoyo al punto 7) |
+| `POST` | `/api/fallas` | Punto 7: sortea r ~ U(0,100) para cada nodo y arista y marca falla si r ≤ 100·p. Recibe `overrides_prob` y una `semilla` opcional. El sitio lo usa en "Simular fallas" |
 | `GET` | `/health` | Estado de la base y del solver |
 
 La documentación interactiva queda en http://127.0.0.1:8001/docs. El sitio llama a la API desde el navegador (CORS abierto).
@@ -78,12 +78,12 @@ La documentación interactiva queda en http://127.0.0.1:8001/docs. El sitio llam
 
 ```json
 {
-  "origen_id": 16,
-  "destino_id": 22,
-  "restricciones": {"solo_bosque": false, "excluir_nodos": []},
+  "origen_id": 33,
+  "destino_id": 36,
+  "restricciones": {"solo_bosque": false, "evitar_senderos": false, "excluir_nodos": []},
   "autonomia_m": 7980,
   "theta": 0.5,
-  "overrides_prob": {"aristas": {"27": 0.8}},
+  "overrides_prob": {"aristas": {"50": 0.8}},
   "r_min": null,
   "semilla": 0
 }
@@ -93,6 +93,9 @@ La documentación interactiva queda en http://127.0.0.1:8001/docs. El sitio llam
 | --- | --- |
 | `origen_id`, `destino_id` | Cámaras de partida y de llegada (`nodos.id`) |
 | `restricciones.solo_bosque` | Si es `true`, se excluyen los nodos con `landcover_code ≠ 10` (salvo origen y destino) |
+| `restricciones.evitar_senderos` | Si es `true`, se excluyen las aristas marcadas con `buffer_privacidad` (cerca de un sendero) |
+| `restricciones.evitar_clima` | Si es `true`, se excluyen los nodos y aristas con probabilidad de falla por clima (`meteo`) mayor que 0 (salvo origen y destino) |
+| `restricciones.evitar_aves` | Si es `true`, se excluyen los nodos y aristas con probabilidad de falla por aves (`ebird`) mayor que 0 (salvo origen y destino) |
 | `restricciones.excluir_nodos` | Cámaras que la ruta no puede tocar |
 | `autonomia_m` | $D_{max}$ en metros. Si es `null`, se usa la del dron (7.980 m, ver más abajo) |
 | `theta` | Peso del riesgo, entre 0 y 1. 0 = solo distancia, 1 = solo riesgo |
@@ -110,15 +113,15 @@ La documentación interactiva queda en http://127.0.0.1:8001/docs. El sitio llam
     {
       "tecnica": "milp",
       "etiqueta": "Gurobi (MILP)",
-      "nodos": [16, 18, 21, 23, 22],
-      "aristas": [22, 26, 29, 30],
+      "nodos": [33, 255, 153, 259, 36],
+      "aristas": [605, 608, 623, 622],
       "geojson": {"type": "Feature", "geometry": {"type": "LineString", "coordinates": [[-72.6, -42.5], "..."]},
-                  "properties": {"tecnica": "milp", "leyenda": "Gurobi (MILP) | 7,7 km | R = 1,000 | 22 ms"}},
-      "distancia_m": 7650.1,
+                  "properties": {"tecnica": "milp", "leyenda": "Gurobi (MILP) | 5,6 km | R = 1,000 | 55 ms"}},
+      "distancia_m": 5648.4,
       "riesgo_log": 0.0,
       "p_supervivencia": 1.0,
-      "costo": 0.7296,
-      "tiempo_ms": 22.4,
+      "costo": 0.5232,
+      "tiempo_ms": 54.8,
       "factible": true,
       "mensaje": "ok",
       "R": 1.0,
@@ -126,15 +129,15 @@ La documentación interactiva queda en http://127.0.0.1:8001/docs. El sitio llam
       "ic95": [1.0, 1.0],
       "delta_R": 0.8,
       "ranking": 2,
-      "leyenda": "Gurobi (MILP) | 7,7 km | R = 1,000 | 22 ms",
-      "extra": {"solver": "Gurobi", "estado": "OPTIMAL", "objetivo": 0.7296, "gap": 0.0, "n_variables": 182}
+      "leyenda": "Gurobi (MILP) | 5,6 km | R = 1,000 | 55 ms",
+      "extra": {"solver": "Gurobi", "estado": "OPTIMAL", "objetivo": 0.5232, "gap": 0.0, "n_variables": 1628}
     }
   ],
   "mas_resiliente": "dijkstra_ponderado",
   "resiliencia": {"ranking": ["dijkstra_ponderado", "aco", "milp", "dijkstra_distancia"],
                   "empate_en_R": ["dijkstra_ponderado", "milp", "aco"]},
   "nodos_excluidos": {"6": "no es bosque (solo_bosque)"},
-  "probabilidades": {"aristas_con_riesgo": {"27": 0.8}}
+  "probabilidades": {"aristas_con_riesgo": {"50": 0.8}}
 }
 ```
 
@@ -197,7 +200,7 @@ $$\min\;(1-\theta+\varepsilon)\sum_{a\in A}\frac{d_a}{d_{ref}}\,x_a+\theta\Big(\
 
 **Por qué el término de riesgo es exacto y lineal:** con fallas independientes, $P_{sup}=\prod(1-p)$. Minimizar $-\ln P_{sup}=\sum w+\sum u$ equivale a maximizar la supervivencia. Como los costos son estrictamente positivos (gracias a $\varepsilon$), el óptimo no tiene ciclos sueltos.
 
-**Tamaño:** en el grafo real son 182 variables, bajo el límite de 2.000 de la licencia de `pip install gurobipy`.
+**Tamaño:** en el grafo final (278 nodos y 700 aristas) el modelo tiene unas 1.630 variables, bajo el límite de 2.000 de la licencia de `pip install gurobipy`. Si la red crece más, hay que pedir la licencia académica gratuita de Gurobi.
 
 ### Qué hace cada técnica
 
@@ -208,10 +211,11 @@ $$\min\;(1-\theta+\varepsilon)\sum_{a\in A}\frac{d_a}{d_{ref}}\,x_a+\theta\Big(\
 | 3. `pgr_dijkstra` (ponderado) | $c_{uv}=(1-\theta)\,d_{uv}/d_{ref}+\theta\,(w_{uv}+u_v)$ | Se revisa después | `cost` y `reverse_cost` por sentido; un costo de −1 excluye la arista |
 | 4. ACO | El mismo $C(P)$, más una penalización | Penalización $\gamma$ + `factible` | `config/aco.yaml` |
 
-La diferencia entre las técnicas 2 y 3 es que usan **la misma función de costo**, pero solo el modelo de optimización impone $D_{max}$. En `resultados/tabla_rutas_autonomia.csv`, con $D_{max}$ = 7.000 m:
+La diferencia entre las técnicas 2 y 3 es que usan **la misma función de costo**, pero solo el modelo de optimización impone $D_{max}$. En `resultados/tabla_rutas_autonomia.csv`, con $D_{max}$ = 5.500 m:
 
-- La técnica 3 elige el desvío de 7,65 km y queda no factible.
-- Gurobi devuelve la mejor ruta que sí cabe en la autonomía.
+- La técnica 3 elige el desvío de 5,65 km y queda no factible.
+- Gurobi devuelve la única ruta que sí cabe en la autonomía (la corta, con $R$ = 0,2).
+- El ACO tampoco la encuentra: la heurística castiga tanto el tramo amenazado que casi ninguna hormiga lo elige, y como la autonomía solo entra como penalización, devuelve el desvío no factible.
 
 ### ACO: qué se toma de cada paper y qué se adapta
 
@@ -248,29 +252,29 @@ Es la probabilidad de que la ruta se complete bajo las amenazas detectadas, y es
 
 ## Resultados (`python -m motor.evaluacion`)
 
-**Caso de ejemplo** (`config/consulta_ejemplo.json`): de la cámara 16 a la 22, con la arista 27 amenazada ($p$ = 0,8).
+**Caso de ejemplo** (`config/consulta_ejemplo.json`): de la cámara 33 (U65) a la 36 (R61), con la arista 50 (de la U65 a la T62) amenazada ($p$ = 0,8).
 
 | Técnica | Ruta | Distancia | $R$ | Tiempo |
 | --- | --- | --- | --- | --- |
-| `pgr_dijkstra` (distancia) | 16-19-20-22 | 5,2 km | 0,200 | < 1 ms |
-| Gurobi (MILP) | 16-18-21-23-22 | 7,7 km | 1,000 | ~22 ms |
-| `pgr_dijkstra` (ponderado) | 16-18-21-23-22 | 7,7 km | 1,000 | < 1 ms |
-| ACO (`config_zhang`) | 16-18-21-23-22 | 7,7 km | 1,000 | ~8 ms |
+| `pgr_dijkstra` (distancia) | 33-35-36 | 5,4 km | 0,200 | ~4 ms |
+| Gurobi (MILP) | 33-255-153-259-36 | 5,6 km | 1,000 | ~55 ms |
+| `pgr_dijkstra` (ponderado) | 33-255-153-259-36 | 5,6 km | 1,000 | ~13 ms |
+| ACO (`config_zhang`) | 33-255-153-259-36 | 5,6 km | 1,000 | ~26 ms |
 
-Las técnicas 2, 3 y 4 evitan la amenaza y empatan en $R$ ($\Delta R$ = +0,8). Los tiempos de la tabla son del modo sin base; dentro de Docker se suma el viaje a PostGIS.
+Las técnicas 2, 3 y 4 rodean la cámara T62 por tres waypoints del anillo y empatan en $R$ ($\Delta R$ = +0,8). Los tiempos son dentro de Docker, con PostGIS.
 
-**ACO: 30 corridas por configuración** (semillas 0 a 29, en el caso de ejemplo): brecha de 0 % en las 60 corridas. El caso tiene solo dos caminos posibles, así que la brecha ahí no discrimina.
+**ACO: 30 corridas por configuración** (semillas 0 a 29, en el caso de ejemplo): brecha de 0 % en las 60 corridas. El caso es pequeño, así que la brecha ahí no discrimina.
 
 **Banco de estrés** (`aco_banco_resumen.csv`): 12 pares al azar, 15 aristas amenazadas y $D_{max}$ = 60 km, para que existan muchas alternativas.
 
 | Configuración | Búsqueda local | Brecha promedio | Brecha máxima | Sin ruta factible |
 | --- | --- | --- | --- | --- |
-| `config_mai` | No | 6,2 % | 117,9 % | 5 de 50 |
-| `config_mai` | Sí | 0 % | 0 % | 5 de 50 |
-| `config_zhang` | No | 1,4 % | 60,7 % | 6 de 50 |
-| `config_zhang` | Sí | 0 % | 0 % | 6 de 50 |
+| `config_mai` | No | 1,2 % | 26,0 % | 4 de 50 |
+| `config_mai` | Sí | 0,8 % | 19,4 % | 3 de 50 |
+| `config_zhang` | No | 5,7 % | 33,3 % | 20 de 50 |
+| `config_zhang` | Sí | 0,9 % | 11,8 % | 20 de 50 |
 
-Gurobi siempre llega al óptimo; el ACO no siempre, que es el resultado esperado. La brecha de 3,2 % que reporta Zhang es de otro problema (varios vehículos) y no se compara con esta.
+Gurobi siempre llega al óptimo; el ACO no siempre, que es el resultado esperado. Con búsqueda local, `config_mai` llega al óptimo en 43 de 50 corridas y `config_zhang` en 26 de 50. La brecha de 3,2 % que reporta Zhang es de otro problema (varios vehículos) y no se compara con esta.
 
 ## Referencias
 

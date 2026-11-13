@@ -89,6 +89,12 @@ Table "metadata_senderos_arista" {
   }
 }
 
+Table "metadata_fauna" {
+  "id" INTEGER [pk]
+  "documento" JSONB [not null, note: 'fauna.json completo (meta y especies)']
+  "actualizado" TIMESTAMPTZ [not null]
+}
+
 Table "amenazas_firms" {
   "id" INTEGER [pk]
   "acq_date" DATE

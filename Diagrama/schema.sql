@@ -76,6 +76,12 @@ CREATE TABLE IF NOT EXISTS metadata_senderos_arista (
     PRIMARY KEY (sendero_id, arista_id)
 );
 
+CREATE TABLE IF NOT EXISTS metadata_fauna (
+    id INTEGER PRIMARY KEY,
+    documento JSONB NOT NULL,
+    actualizado TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
 CREATE TABLE IF NOT EXISTS amenazas_firms (
     id INTEGER PRIMARY KEY,
     acq_date DATE,

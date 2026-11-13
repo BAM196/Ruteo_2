@@ -2,7 +2,7 @@ import copy
 
 import pytest
 
-from motor import servicio
+from motor import grafo, servicio
 from motor.rutas import aco, dijkstra_distancia, dijkstra_ponderado, milp
 
 
@@ -55,9 +55,9 @@ def test_evitar_senderos_excluye_aristas_marcadas(esc, consulta):
     c = copy.deepcopy(consulta)
     c["restricciones"]["evitar_senderos"] = True
     rutas, _ = _todas(esc, c)
-    for ruta in rutas.values():
-        assert 2 not in ruta["aristas"]
-        assert ruta["nodos"] == [1, 3, 7]
+    for t in ("milp", "dijkstra_ponderado", "aco"):
+        assert 2 not in rutas[t]["aristas"]
+        assert rutas[t]["nodos"] == [1, 3, 6, 7]
 
 
 def test_autonomia_activa_diferencia_tecnica_2_y_3(esc, con_amenaza):
@@ -139,3 +139,31 @@ def test_q0_calendario_mai(esc, con_amenaza):
     assert a.q0_iteracion(99) == pytest.approx(0.29 * 0.9 + 0.45)
     _, pz, cz, _ = aco.parametros_config("config_zhang")
     assert aco.ACO(prob, pz, cz).q0_iteracion(10) == 0.0
+
+
+def test_evitar_clima_excluye_lo_que_tiene_riesgo_meteo(esc, consulta):
+    esc.meteo = {2: grafo.lectura_meteo(10, 80, 5, 10, 0, "m/s")}
+    c = copy.deepcopy(consulta)
+    c["restricciones"]["evitar_clima"] = True
+    rutas, res = _todas(esc, c)
+    for t in ("milp", "dijkstra_ponderado", "aco"):
+        assert 2 not in rutas[t]["nodos"]
+        assert rutas[t]["nodos"] == [1, 3, 6, 7]
+    assert "2" in res["nodos_excluidos"]
+
+
+def test_evitar_aves_excluye_lo_que_tiene_riesgo_ebird(esc, consulta):
+    from datetime import datetime
+
+    esc.aves = [{"id": "a", "lon": -72.5, "lat": -42.4865, "cantidad": 20, "fecha_obs": datetime(2026, 10, 20)}]
+    c = copy.deepcopy(consulta)
+    c["restricciones"]["evitar_aves"] = True
+    rutas, _ = _todas(esc, c)
+    for t in ("milp", "dijkstra_ponderado", "aco"):
+        assert 2 not in rutas[t]["aristas"]
+
+
+def test_sin_evitar_no_cambia_la_ruta(esc, consulta):
+    esc.meteo = {2: grafo.lectura_meteo(10, 80, 5, 10, 0, "m/s")}
+    rutas, _ = _todas(esc, consulta)
+    assert rutas["dijkstra_distancia"]["nodos"] == [1, 2, 7]

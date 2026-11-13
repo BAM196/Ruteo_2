@@ -30,7 +30,9 @@ def preparar(consulta: dict, esc: grafo.Escenario, cfg: dict | None = None):
     c = Consulta.desde_dict(consulta, d_max_por_defecto(cfg))
     doc = probabilidades.calcular(esc, cfg, c.overrides_prob)
     q, p = probabilidades.mapas(doc)
-    return Problema(esc, q, p, c, cfg["cota_superior"]), doc
+    amenaza_nodo = {n["id"]: n["por_amenaza"] for n in doc["nodos"]}
+    amenaza_arista = {a["id"]: a["por_amenaza"] for a in doc["aristas"]}
+    return Problema(esc, q, p, c, cfg["cota_superior"], amenaza_nodo, amenaza_arista), doc
 
 
 def calcular_rutas(consulta: dict, esc: grafo.Escenario | None = None, tecnicas=None,

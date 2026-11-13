@@ -427,3 +427,61 @@ details > summary {
   border-radius: 0;
   background: repeating-linear-gradient(90deg, #dc2626 0 3px, transparent 3px 7px);
 }
+
+#fail-box h2 {
+  margin: 22px 0 8px;
+  font-family: Fraunces, serif;
+  font-size: 1.4rem;
+  font-weight: 560;
+}
+
+.fail-box {
+  display: grid;
+  gap: 8px;
+}
+
+.fail-box .hint {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.fail-list {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.82rem;
+}
+
+.fail-list li {
+  padding: 4px 8px;
+  border-left: 3px solid var(--line);
+  background: white;
+}
+
+.fail-list li.bad,
+.route-fail.bad {
+  border-color: #dc2626;
+  color: #8a2e16;
+}
+
+.fail-list li.ok,
+.route-fail.ok {
+  border-color: #16a34a;
+  color: #166534;
+}
+
+.route-fail {
+  display: block;
+  margin: 4px 0 0 24px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.swatch.failure {
+  width: 18px;
+  height: 6px;
+  border-radius: 0;
+  background: #111827;
+}

@@ -26,9 +26,9 @@ def test_distancia_m_es_costo_km_por_mil(conn):
 
 def test_pgr_dijkstra_igual_a_python(conn):
     esc = grafo.desde_bd(conn)
-    for s, t in [(16, 22), (1, 7), (18, 24)]:
+    for s, t in [(33, 36), (28, 30), (16, 22)]:
         c = {"origen_id": s, "destino_id": t, "theta": 0.5,
-             "overrides_prob": {"aristas": {"27": 0.8, "29": 0.5}}}
+             "overrides_prob": {"aristas": {"50": 0.8, "44": 0.5}}}
         p1, _ = servicio.preparar(c, esc)
         p2, _ = servicio.preparar(c, esc)
         a = dijkstra_distancia.resolver(p1, conn)
