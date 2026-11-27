@@ -321,6 +321,12 @@ def e6(esc):
                           "distancia_km": redondo(p["distancia_m"] / 1000, 3), "R_plan": redondo(p["R"], 5),
                           "vuelos": len(p["vuelos"])})
     guardar("E6_theta.csv", filas)
+    figura_theta(filas)
+    figura_theta(filas, ingles=True)
+    RESUMEN["E6"] = filas
+
+
+def figura_theta(filas, ingles=False):
     import matplotlib
 
     matplotlib.use("Agg")
@@ -328,19 +334,20 @@ def e6(esc):
 
     plt.rcParams.update({"font.size": 9, "font.family": "DejaVu Sans"})
     fig, ax = plt.subplots(figsize=(3.46, 2.5))
-    estilos = {"T2 Gurobi": ("#2f6f9f", "o", "-"), "T3 Dijkstra ponderado": ("#c98a1b", "s", "--"), "T4 ACO": ("#7b3fa0", "^", ":")}
-    for t, (col, mk, ls) in estilos.items():
-        sub = [f for f in filas if f["tecnica"] == t and f["R_plan"] is not None]
-        ax.plot([f["tiempo_min"] for f in sub], [f["R_plan"] for f in sub], marker=mk, linestyle=ls, color=col,
-                label=t.split(" ", 1)[1], markersize=4, linewidth=1.2)
-    ax.set_xlabel("Tiempo del plan (min)")
-    ax.set_ylabel("R del plan")
+    estilos = {"T2 Gurobi": ("#2f6f9f", "o", "-", "Gurobi"),
+               "T3 Dijkstra ponderado": ("#c98a1b", "s", "--", "Weighted Dijkstra" if ingles else "Dijkstra ponderado"),
+               "T4 ACO": ("#7b3fa0", "^", ":", "ACO")}
+    for t, (col, mk, ls, nombre) in estilos.items():
+        sub = [f for f in filas if f["tecnica"] == t and f["R_plan"] not in (None, "")]
+        ax.plot([float(f["tiempo_min"]) for f in sub], [float(f["R_plan"]) for f in sub], marker=mk, linestyle=ls,
+                color=col, label=nombre, markersize=4, linewidth=1.2)
+    ax.set_xlabel("Plan time (min)" if ingles else "Tiempo del plan (min)")
+    ax.set_ylabel("Plan R" if ingles else "R del plan")
     ax.grid(alpha=0.3)
     ax.legend(frameon=False, fontsize=8)
     fig.tight_layout()
-    fig.savefig(FIG / "fig_theta.png", dpi=300)
+    fig.savefig(FIG / ("fig_theta_en.png" if ingles else "fig_theta.png"), dpi=300)
     plt.close(fig)
-    RESUMEN["E6"] = filas
 
 
 def problema_banco(esc_f, s, overrides, factor):
@@ -505,24 +512,30 @@ def e8(esc, semillas=30):
     media, desv = np.nanmean(arr, axis=0), np.nanstd(arr, axis=0)
     guardar("E8_convergencia.csv", [{"iteracion": k + 1, "brecha_media_pct": round(float(media[k]), 5),
                                      "brecha_desv_pct": round(float(desv[k]), 5)} for k in range(largo)])
+    figura_convergencia(media, desv)
+    figura_convergencia(media, desv, ingles=True)
+    RESUMEN["E8"] = {"instancias": [p[0] for p in probs], "semillas": semillas, "resumen": resumen, "mejor": mejor,
+                     "curva_en": grande[0], "iteraciones_curva": largo}
+
+
+def figura_convergencia(media, desv, ingles=False):
     import matplotlib
 
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
+    media, desv = np.asarray(media, dtype=float), np.asarray(desv, dtype=float)
     plt.rcParams.update({"font.size": 9, "font.family": "DejaVu Sans"})
     fig, ax = plt.subplots(figsize=(3.46, 2.4))
-    x = np.arange(1, largo + 1)
+    x = np.arange(1, len(media) + 1)
     ax.plot(x, media, color="#7b3fa0", linewidth=1.3)
     ax.fill_between(x, np.maximum(media - desv, 0), media + desv, color="#7b3fa0", alpha=0.2, linewidth=0)
-    ax.set_xlabel("Iteración")
-    ax.set_ylabel("Brecha con Gurobi (%)")
+    ax.set_xlabel("Iteration" if ingles else "Iteración")
+    ax.set_ylabel("Gap to Gurobi (%)" if ingles else "Brecha con Gurobi (%)")
     ax.grid(alpha=0.3)
     fig.tight_layout()
-    fig.savefig(FIG / "fig_convergencia.png", dpi=300)
+    fig.savefig(FIG / ("fig_convergencia_en.png" if ingles else "fig_convergencia.png"), dpi=300)
     plt.close(fig)
-    RESUMEN["E8"] = {"instancias": [p[0] for p in probs], "semillas": semillas, "resumen": resumen, "mejor": mejor,
-                     "curva_en": grande[0], "iteraciones_curva": largo}
 
 
 def e9(esc):
