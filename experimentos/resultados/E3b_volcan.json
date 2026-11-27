@@ -1,0 +1,105 @@
+{
+ "domo": {
+  "lat": -42.8349,
+  "lon": -72.6514,
+  "fuente": "Smithsonian GVP, volcán 358041 (WFS GVP-VOTW)"
+ },
+ "ventanas_consultadas": null,
+ "focos_a_3km_de_una_camara": 489,
+ "fechas_distintas": 290,
+ "tipos": {
+  "volcán activo": 466,
+  "incendio de vegetación presunto": 23
+ },
+ "focos_a_1km_del_domo": 455,
+ "tipos_a_1km_del_domo": {
+  "volcán activo": 443,
+  "incendio de vegetación presunto": 12
+ },
+ "anios_a_1km_del_domo": {
+  "2012": 133,
+  "2013": 137,
+  "2014": 56,
+  "2015": 52,
+  "2016": 52,
+  "2017": 18,
+  "2018": 6,
+  "2019": 1
+ },
+ "anios_todos": {
+  "2012": 142,
+  "2013": 147,
+  "2014": 57,
+  "2015": 61,
+  "2016": 57,
+  "2017": 18,
+  "2018": 6,
+  "2019": 1
+ },
+ "focos_fuera_de_1km_del_domo": 34,
+ "dist_domo_m": {
+  "min": 96.7,
+  "mediana": 448.2,
+  "max": 30725.7
+ },
+ "dist_camara_m_de_los_focos_del_domo": {
+  "min": 2415.3,
+  "max": 2999.9
+ },
+ "camaras_mas_cercanas_al_domo": [
+  {
+   "camara": "Camara O88",
+   "dist_m": 3087
+  },
+  {
+   "camara": "Camara O86",
+   "dist_m": 5054
+  },
+  {
+   "camara": "Camara K87",
+   "dist_m": 5182
+  }
+ ],
+ "foco_2015_02_27": [
+  {
+   "acq_date": "2015-02-27",
+   "acq_time": "1803",
+   "lat": "-42.59693",
+   "lon": "-72.80572",
+   "confidence": "n",
+   "frp": "2.13",
+   "daynight": "D",
+   "type": "0",
+   "camara_mas_cercana": "Camara C63",
+   "dist_camara_m": "1391.7",
+   "dist_domo_m": 29303.2
+  },
+  {
+   "acq_date": "2015-02-27",
+   "acq_time": "1943",
+   "lat": "-42.59827",
+   "lon": "-72.80846",
+   "confidence": "n",
+   "frp": "3.74",
+   "daynight": "D",
+   "type": "0",
+   "camara_mas_cercana": "Camara B66",
+   "dist_camara_m": "1624.9",
+   "dist_domo_m": 29266.8
+  },
+  {
+   "acq_date": "2015-02-27",
+   "acq_time": "1943",
+   "lat": "-42.59722",
+   "lon": "-72.80462",
+   "confidence": "n",
+   "frp": "3.74",
+   "daynight": "D",
+   "type": "0",
+   "camara_mas_cercana": "Camara C63",
+   "dist_camara_m": "1384.8",
+   "dist_domo_m": 29235.3
+  }
+ ],
+ "focos_a_1_7km_del_domo": 473
+}

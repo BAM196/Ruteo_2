@@ -1,42 +1,449 @@
 {
-  "meta": {
-    "descripcion": "Grafo de juguete de 7 nodos y 10 aristas con óptimos conocidos a mano. Origen 1, destino 7.",
-    "caminos": {
-      "1-2-7": "2000 m (el más corto)",
-      "1-3-6-7": "2200 m",
-      "1-3-7": "2400 m",
-      "1-4-5-7": "2500 m",
-      "1-2-3-7": "2500 m"
-    },
-    "esperado": {
-      "sin_amenazas": "las 4 técnicas eligen 1-2-7 (2000 m), R = 1",
-      "p(arista 2) = 0.9, theta = 0.5": "costo(1-2-7) = 0.5 + 0.5·ln(10) = 1.651; costo(1-3-6-7) = 0.5·1.1 = 0.55 -> óptimo 1-3-6-7",
-      "lo anterior + solo_bosque (nodo 6 es pastizal)": "óptimo 1-3-7 (2400 m)",
-      "lo anterior sin solo_bosque y D_max = 2100": "MILP: 1-2-7 (única ruta factible); Dijkstra ponderado: 1-3-6-7, no factible"
+ "nota": "Sector de juguete: 4 cámaras a 600 m, un desvío (nodo 5) y una cámara aislada a 6 km.",
+ "nodos": [
+  {
+   "id": 1,
+   "nombre": "Camara T1",
+   "lon": -72.5,
+   "lat": -42.5,
+   "es_camara": true,
+   "landcover_code": 10,
+   "especies": [
+    {
+     "cientifico": "Pudu puda (Molina, 1782)",
+     "comun": "Pudú",
+     "registros": 10
     }
+   ]
   },
-  "nodos": [
-    {"id": 1, "nombre": "Origen", "lon": -72.500, "lat": -42.500, "landcover_code": 10},
-    {"id": 2, "nombre": "N2", "lon": -72.500, "lat": -42.491, "landcover_code": 10},
-    {"id": 3, "nombre": "N3", "lon": -72.488, "lat": -42.495, "landcover_code": 10},
-    {"id": 4, "nombre": "N4", "lon": -72.512, "lat": -42.495, "landcover_code": 10},
-    {"id": 5, "nombre": "N5", "lon": -72.512, "lat": -42.486, "landcover_code": 10},
-    {"id": 6, "nombre": "N6", "lon": -72.490, "lat": -42.486, "landcover_code": 30},
-    {"id": 7, "nombre": "Destino", "lon": -72.500, "lat": -42.482, "landcover_code": 10}
-  ],
-  "aristas": [
-    {"id": 1, "source": 1, "target": 2, "distancia_m": 1000},
-    {"id": 2, "source": 2, "target": 7, "distancia_m": 1000, "buffer_privacidad": true},
-    {"id": 3, "source": 1, "target": 3, "distancia_m": 1200},
-    {"id": 4, "source": 3, "target": 7, "distancia_m": 1200},
-    {"id": 5, "source": 1, "target": 4, "distancia_m": 800},
-    {"id": 6, "source": 4, "target": 5, "distancia_m": 800},
-    {"id": 7, "source": 5, "target": 7, "distancia_m": 900},
-    {"id": 8, "source": 3, "target": 6, "distancia_m": 500},
-    {"id": 9, "source": 6, "target": 7, "distancia_m": 500},
-    {"id": 10, "source": 2, "target": 3, "distancia_m": 300}
-  ],
-  "focos": [],
-  "aves": [],
-  "meteo": {}
+  {
+   "id": 2,
+   "nombre": "Camara T2",
+   "lon": -72.4926895,
+   "lat": -42.5,
+   "es_camara": true,
+   "landcover_code": 10,
+   "especies": [
+    {
+     "cientifico": "Pudu puda (Molina, 1782)",
+     "comun": "Pudú",
+     "registros": 4
+    },
+    {
+     "cientifico": "Leopardus guigna (Molina, 1782)",
+     "comun": "Güiña",
+     "registros": 2
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "nombre": "Camara T3",
+   "lon": -72.5,
+   "lat": -42.4946101,
+   "es_camara": true,
+   "landcover_code": 10,
+   "especies": [
+    {
+     "cientifico": "Canis lupus familiaris Linnaeus, 1758",
+     "comun": "Perro doméstico",
+     "registros": 3
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "nombre": "Camara T4",
+   "lon": -72.4926895,
+   "lat": -42.4946101,
+   "es_camara": true,
+   "landcover_code": 30,
+   "especies": [
+    {
+     "cientifico": "Galictis cuja (Molina, 1782)",
+     "comun": "Quique",
+     "registros": 1
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "nombre": "WP Desvio",
+   "lon": -72.4890342,
+   "lat": -42.4973051,
+   "es_camara": false,
+   "landcover_code": 10,
+   "especies": []
+  },
+  {
+   "id": 6,
+   "nombre": "Camara T6",
+   "lon": -72.426895,
+   "lat": -42.5,
+   "es_camara": true,
+   "landcover_code": 10,
+   "especies": [
+    {
+     "cientifico": "Puma concolor (Linnaeus, 1771)",
+     "comun": "Puma",
+     "registros": 2
+    }
+   ]
+  }
+ ],
+ "aristas": [
+  {
+   "id": 1,
+   "source": 1,
+   "target": 2,
+   "distancia_m": 600.0,
+   "tipo": "knn",
+   "coordenadas": [
+    [
+     -72.5,
+     -42.5
+    ],
+    [
+     -72.4926895,
+     -42.5
+    ]
+   ]
+  },
+  {
+   "id": 2,
+   "source": 1,
+   "target": 3,
+   "distancia_m": 600.0,
+   "tipo": "knn",
+   "coordenadas": [
+    [
+     -72.5,
+     -42.5
+    ],
+    [
+     -72.5,
+     -42.4946101
+    ]
+   ]
+  },
+  {
+   "id": 3,
+   "source": 2,
+   "target": 4,
+   "distancia_m": 600.0,
+   "tipo": "knn",
+   "coordenadas": [
+    [
+     -72.4926895,
+     -42.5
+    ],
+    [
+     -72.4926895,
+     -42.4946101
+    ]
+   ]
+  },
+  {
+   "id": 4,
+   "source": 3,
+   "target": 4,
+   "distancia_m": 600.0,
+   "tipo": "knn",
+   "coordenadas": [
+    [
+     -72.5,
+     -42.4946101
+    ],
+    [
+     -72.4926895,
+     -42.4946101
+    ]
+   ]
+  },
+  {
+   "id": 5,
+   "source": 1,
+   "target": 4,
+   "distancia_m": 848.5,
+   "tipo": "knn",
+   "coordenadas": [
+    [
+     -72.5,
+     -42.5
+    ],
+    [
+     -72.4926895,
+     -42.4946101
+    ]
+   ]
+  },
+  {
+   "id": 6,
+   "source": 2,
+   "target": 3,
+   "distancia_m": 848.5,
+   "tipo": "knn",
+   "coordenadas": [
+    [
+     -72.4926895,
+     -42.5
+    ],
+    [
+     -72.5,
+     -42.4946101
+    ]
+   ]
+  },
+  {
+   "id": 7,
+   "source": 2,
+   "target": 5,
+   "distancia_m": 424.3,
+   "tipo": "knn",
+   "coordenadas": [
+    [
+     -72.4926895,
+     -42.5
+    ],
+    [
+     -72.4890342,
+     -42.4973051
+    ]
+   ]
+  },
+  {
+   "id": 8,
+   "source": 5,
+   "target": 4,
+   "distancia_m": 424.3,
+   "tipo": "knn",
+   "coordenadas": [
+    [
+     -72.4890342,
+     -42.4973051
+    ],
+    [
+     -72.4926895,
+     -42.4946101
+    ]
+   ]
+  }
+ ],
+ "bases": [
+  {
+   "id": 1,
+   "tipo": "camara",
+   "nodo_id": 1,
+   "nombre": "Camara T1",
+   "lon": -72.5,
+   "lat": -42.5,
+   "elevacion_m": 10,
+   "camaras": [
+    {
+     "camara_id": 1,
+     "distancia_m": 0.0,
+     "bloque_visible": true,
+     "fraccion_visible": 1.0
+    },
+    {
+     "camara_id": 2,
+     "distancia_m": 600.0,
+     "bloque_visible": true,
+     "fraccion_visible": 1.0
+    },
+    {
+     "camara_id": 3,
+     "distancia_m": 600.0,
+     "bloque_visible": true,
+     "fraccion_visible": 1.0
+    },
+    {
+     "camara_id": 4,
+     "distancia_m": 848.5,
+     "bloque_visible": true,
+     "fraccion_visible": 1.0
+    }
+   ],
+   "enlaces": [],
+   "aristas_visibles": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "aristas_bloqueadas": []
+  },
+  {
+   "id": 6,
+   "tipo": "camara",
+   "nodo_id": 6,
+   "nombre": "Camara T6",
+   "lon": -72.426895,
+   "lat": -42.5,
+   "elevacion_m": 10,
+   "camaras": [
+    {
+     "camara_id": 6,
+     "distancia_m": 0.0,
+     "bloque_visible": true,
+     "fraccion_visible": 1.0
+    }
+   ],
+   "enlaces": [],
+   "aristas_visibles": [],
+   "aristas_bloqueadas": []
+  },
+  {
+   "id": 100000,
+   "tipo": "sendero",
+   "nodo_id": null,
+   "nombre": "Sendero de prueba",
+   "lon": -72.4963447,
+   "lat": -42.5026949,
+   "elevacion_m": 5,
+   "camaras": [
+    {
+     "camara_id": 1,
+     "distancia_m": 424.3,
+     "bloque_visible": true,
+     "fraccion_visible": 1.0
+    },
+    {
+     "camara_id": 2,
+     "distancia_m": 424.3,
+     "bloque_visible": true,
+     "fraccion_visible": 1.0
+    },
+    {
+     "camara_id": 3,
+     "distancia_m": 948.7,
+     "bloque_visible": false,
+     "fraccion_visible": 1.0
+    },
+    {
+     "camara_id": 4,
+     "distancia_m": 948.7,
+     "bloque_visible": false,
+     "fraccion_visible": 1.0
+    }
+   ],
+   "enlaces": [
+    {
+     "id": 100000,
+     "nodo_id": 1,
+     "distancia_m": 424.3,
+     "largo_3d_m": 424.3,
+     "ascenso_ida_m": 0,
+     "ascenso_vuelta_m": 0,
+     "despeje_min_m": 80,
+     "puntos": [
+      [
+       -72.4963447,
+       -42.5026949,
+       85
+      ],
+      [
+       -72.5,
+       -42.5,
+       90
+      ]
+     ]
+    },
+    {
+     "id": 100001,
+     "nodo_id": 2,
+     "distancia_m": 424.3,
+     "largo_3d_m": 424.3,
+     "ascenso_ida_m": 0,
+     "ascenso_vuelta_m": 0,
+     "despeje_min_m": 80,
+     "puntos": [
+      [
+       -72.4963447,
+       -42.5026949,
+       85
+      ],
+      [
+       -72.4926895,
+       -42.5,
+       90
+      ]
+     ]
+    }
+   ],
+   "aristas_visibles": [
+    1
+   ],
+   "aristas_bloqueadas": [
+    {
+     "arista_id": 2,
+     "motivo": "linea_de_vista"
+    }
+   ]
+  }
+ ],
+ "especies": [
+  {
+   "cientifico": "Pudu puda",
+   "comun": "Pudú",
+   "origen": "nativa",
+   "categoria_los_lagos": "VU",
+   "peso_w": 3,
+   "objetivo": true,
+   "presion": false,
+   "registros": 14,
+   "camaras": 2
+  },
+  {
+   "cientifico": "Leopardus guigna",
+   "comun": "Güiña",
+   "origen": "nativa",
+   "categoria_los_lagos": "NT",
+   "peso_w": 2,
+   "objetivo": true,
+   "presion": false,
+   "registros": 2,
+   "camaras": 1
+  },
+  {
+   "cientifico": "Puma concolor",
+   "comun": "Puma",
+   "origen": "nativa",
+   "categoria_los_lagos": "NT",
+   "peso_w": 2,
+   "objetivo": true,
+   "presion": false,
+   "registros": 2,
+   "camaras": 1
+  },
+  {
+   "cientifico": "Galictis cuja",
+   "comun": "Quique",
+   "origen": "nativa",
+   "categoria_los_lagos": "LC",
+   "peso_w": 1,
+   "objetivo": false,
+   "presion": false,
+   "registros": 1,
+   "camaras": 1
+  },
+  {
+   "cientifico": "Canis lupus familiaris",
+   "comun": "Perro doméstico",
+   "origen": "doméstica",
+   "categoria_los_lagos": null,
+   "peso_w": null,
+   "objetivo": false,
+   "presion": true,
+   "registros": 3,
+   "camaras": 1
+  }
+ ],
+ "focos": [],
+ "aves": [],
+ "meteo": {}
 }

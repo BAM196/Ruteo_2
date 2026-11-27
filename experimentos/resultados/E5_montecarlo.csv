@@ -1,0 +1,5 @@
+tecnica,R_plan,R_montecarlo,diferencia,ic95_inf,ic95_sup,R_en_ic,sorteos
+T1 Dijkstra distancia,0.31809,0.3231,0.00501,0.31393,0.33227,True,10000
+T2 Gurobi,0.37791,0.3757,-0.00221,0.36621,0.38519,True,10000
+T3 Dijkstra ponderado,0.40915,0.4126,0.00345,0.40295,0.42225,True,10000
+T4 ACO,0.37791,0.3805,0.00259,0.37098,0.39002,True,10000

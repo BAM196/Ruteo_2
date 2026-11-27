@@ -20,81 +20,103 @@ def combinar(ps) -> float:
     return 1.0 - prod
 
 
-def rampa(x, x0, x1) -> float:
-    if x is None:
-        return 0.0
-    if x1 <= x0:
-        return 1.0 if x >= x1 else 0.0
-    return min(max((x - x0) / (x1 - x0), 0.0), 1.0)
+def phi(z: float) -> float:
+    return 0.5 * (1.0 + math.erf(z / math.sqrt(2.0)))
 
 
 def _puntos_cercanos(geom_xy, puntos_xy, es_linea):
     for item, pxy in puntos_xy:
-        d = grafo.distancia_punto_linea(pxy, geom_xy) if es_linea else float(
-            ((geom_xy - pxy) ** 2).sum() ** 0.5)
+        d = grafo.distancia_punto_linea(pxy, geom_xy) if es_linea else float(((geom_xy - pxy) ** 2).sum() ** 0.5)
         yield item, d
 
 
 def modelo_firms(geom_xy, es_linea, focos_xy, cfg):
-    R = valor(cfg["radio_m"])
-    p0s = valor(cfg["p0_por_confianza"])
+    R = float(valor(cfg["radio_m"]))
+    p_real = valor(cfg["p_real_por_confianza"])
+    escalon = valor(cfg.get("decaimiento", "lineal")) == "escalon"
     ps, cercanos = [], []
     for foco, d in _puntos_cercanos(geom_xy, focos_xy, es_linea):
         if d >= R:
             continue
         conf = str(foco.get("confidence") or "").strip().lower()[:1]
-        p0 = p0s.get(conf, p0s["desconocida"])
-        p = p0 * max(0.0, 1.0 - d / R)
+        p0 = p_real.get(conf, p_real["desconocida"])
+        p = p0 if escalon else p0 * max(0.0, 1.0 - d / R)
         ps.append(p)
-        cercanos.append({"foco_id": foco["id"], "distancia_m": round(d, 1),
-                         "confianza": foco.get("confidence"), "p": round(p, 6)})
+        cercanos.append({"foco_id": foco["id"], "distancia_m": round(d, 1), "confianza": foco.get("confidence"),
+                         "p_foco_real": p0, "p": round(p, 6)})
     return combinar(ps), {"focos_en_radio": cercanos, "radio_m": R}
 
 
+def radio_aves(cfg) -> float:
+    return float(valor(cfg["distancia_precaucion_m"])) + float(valor(cfg["r_mov_m"]))
+
+
 def modelo_ebird(geom_xy, es_linea, aves_xy, cfg, fecha_ref):
-    R = valor(cfg["distancia_precaucion_m"]) + valor(cfg["incertidumbre_ubicacion_m"])
-    p0 = valor(cfg["p0"])
-    n_ref = valor(cfg["cantidad_referencia"])
-    ventana = valor(cfg["ventana_dias"])
+    R = radio_aves(cfg)
+    p0 = float(valor(cfg["p0"]))
+    ventana = float(valor(cfg["ventana_dias"]))
     ps, cercanos = [], []
     for ave, d in _puntos_cercanos(geom_xy, aves_xy, es_linea):
         if d >= R:
             continue
-        f_cant = min(1.0, (ave.get("cantidad") or n_ref) / n_ref)
         f_rec = 1.0
         if ave.get("fecha_obs") and fecha_ref:
             edad = (fecha_ref - ave["fecha_obs"]).total_seconds() / 86400
             f_rec = max(0.0, 1.0 - max(edad, 0.0) / ventana)
-        p = p0 * f_rec * f_cant * max(0.0, 1.0 - d / R)
+        p_i = p0 * f_rec * max(0.0, 1.0 - d / R)
+        n = max(1, int(ave.get("cantidad") or 1))
+        p = 1.0 - (1.0 - p_i) ** n
         ps.append(p)
-        cercanos.append({"avistamiento_id": ave["id"], "especie": ave.get("comun"),
-                         "distancia_m": round(d, 1), "f_recencia": round(f_rec, 3),
-                         "f_cantidad": round(f_cant, 3), "p": round(p, 6)})
+        cercanos.append({"avistamiento_id": ave["id"], "especie": ave.get("comun"), "distancia_m": round(d, 1),
+                         "f_recencia": round(f_rec, 3), "n_aves": n, "p_por_ave": round(p_i, 6), "p": round(p, 6)})
     return combinar(ps), {"avistamientos_en_radio": cercanos, "radio_m": R}
 
 
-def modelo_meteo_nodo(lectura, cfg):
+def rafaga_a_altura(g10: float, cfg, altura: float = 80.0) -> float:
+    return g10 * (altura / float(valor(cfg["altura_referencia_m"]))) ** float(valor(cfg["alpha_perfil"]))
+
+
+def modelo_meteo_nodo(lectura, cfg, altura: float = 80.0):
     if not lectura:
         return 0.0, {"lectura": None, "nota": "sin lectura para este nodo"}
-    viento = lectura.get("rafaga_ms")
+    g10 = lectura.get("rafaga_ms")
     usa = "rafaga_ms"
-    if viento is None:
-        viento, usa = lectura.get("viento_ms"), "viento_ms"
-    p_viento = rampa(viento, valor(cfg["v_seguro_ms"]), valor(cfg["v_max_ms"]))
-    t = lectura.get("temperatura")
-    p_temp = 0.0 if t is None else float(
-        t < valor(cfg["temperatura_min_c"]) or t > valor(cfg["temperatura_max_c"]))
-    p_lluvia = rampa(lectura.get("lluvia_mm_h"), 0.0, valor(cfg["lluvia_max_mm_h"]))
+    if g10 is None:
+        g10, usa = lectura.get("viento_ms"), "viento_ms"
+    sigma = float(valor(cfg["sigma_rafaga_ms"]))
+    p_viento, g80 = 0.0, None
+    if g10 is not None:
+        g80 = rafaga_a_altura(g10, cfg, altura)
+        p_viento = 1.0 - phi((float(valor(cfg["rafaga_max_ms"])) - g80) / sigma)
+    st = float(valor(cfg["sigma_temperatura_c"]))
+    t_min = lectura.get("temperatura_min", lectura.get("temperatura"))
+    t_max = lectura.get("temperatura_max", lectura.get("temperatura"))
+    p_temp = 0.0
+    if t_min is not None and t_max is not None:
+        p_frio = phi((float(valor(cfg["temperatura_min_c"])) - t_min) / st)
+        p_calor = 1.0 - phi((float(valor(cfg["temperatura_max_c"])) - t_max) / st)
+        p_temp = min(1.0, p_frio + p_calor)
+    if lectura.get("prob_lluvia") is not None:
+        p_lluvia, regla = float(lectura["prob_lluvia"]) / 100.0, "probabilidad de precipitación"
+    elif lectura.get("precipitacion_mm") is not None:
+        p_lluvia, regla = (1.0 if lectura["precipitacion_mm"] > 0 else 0.0), "llovió en la ventana (1) o no (0)"
+    else:
+        p_lluvia, regla = 0.0, "sin dato de lluvia"
     p = combinar([p_viento, p_temp, p_lluvia])
     return p, {
-        "lectura": {k: (None if v is None else round(v, 3)) for k, v in lectura.items()},
-        "viento_usado": usa,
-        "p_viento": round(p_viento, 6), "p_temperatura": p_temp, "p_lluvia": round(p_lluvia, 6),
+        "lectura": {k: (round(v, 3) if isinstance(v, float) else v) for k, v in lectura.items()},
+        "viento_usado": usa, "rafaga_80m_ms": None if g80 is None else round(g80, 2),
+        "p_viento": round(p_viento, 6), "p_temperatura": round(p_temp, 6),
+        "p_lluvia": round(p_lluvia, 6), "regla_lluvia": regla,
     }
 
 
-def _fecha_ref_aves(aves):
-    fechas = [a["fecha_obs"] for a in aves if a.get("fecha_obs")]
+def fecha_referencia(esc) -> datetime | None:
+    if esc.fecha:
+        f = grafo.fecha(esc.fecha)
+        if f:
+            return f.replace(hour=12)
+    fechas = [a["fecha_obs"] for a in esc.aves if a.get("fecha_obs")]
     return max(fechas) if fechas else None
 
 
@@ -102,18 +124,17 @@ def _overrides(overrides, tipo):
     return {int(k): float(v) for k, v in ((overrides or {}).get(tipo) or {}).items()}
 
 
-def calcular(esc: grafo.Escenario, cfg: dict | None = None, overrides: dict | None = None) -> dict:
+def calcular(esc, cfg: dict | None = None, overrides: dict | None = None) -> dict:
     cfg = cfg or amenazas_cfg()
     cota = cfg["cota_superior"]
     am = cfg["amenazas"]
     activas = [k for k in AMENAZAS if am.get(k, {}).get("activa")]
-
     focos_xy = [(f, grafo.xy(f["lon"], f["lat"])) for f in esc.focos]
     aves_xy = [(a, grafo.xy(a["lon"], a["lat"])) for a in esc.aves]
-    fecha_ref = _fecha_ref_aves(esc.aves)
+    fecha_ref = fecha_referencia(esc)
     ov_n, ov_a = _overrides(overrides, "nodos"), _overrides(overrides, "aristas")
 
-    nodos_out, p_meteo_nodo = [], {}
+    nodos_out, p_meteo = [], {}
     for nid, n in sorted(esc.nodos.items()):
         g = grafo.xy(n["lon"], n["lat"])
         por, det = {}, {}
@@ -121,14 +142,13 @@ def calcular(esc: grafo.Escenario, cfg: dict | None = None, overrides: dict | No
             por["firms"], det["firms"] = modelo_firms(g, False, focos_xy, am["firms"])
         if "meteo" in activas:
             por["meteo"], det["meteo"] = modelo_meteo_nodo(esc.meteo.get(nid), am["meteo"])
-            p_meteo_nodo[nid] = por["meteo"]
+            p_meteo[nid] = por["meteo"]
         if "ebird" in activas:
             por["ebird"], det["ebird"] = modelo_ebird(g, False, aves_xy, am["ebird"], fecha_ref)
         if nid in ov_n:
-            por["escenario"], det["escenario"] = ov_n[nid], {"nota": "probabilidad forzada (overrides_prob)"}
+            por["escenario"], det["escenario"] = ov_n[nid], {"nota": "probabilidad simulada"}
         por = {k: acotar(v, cota) for k, v in por.items()}
-        nodos_out.append({"id": nid, "p_total": acotar(combinar(por.values()), cota),
-                          "por_amenaza": por, "detalle": det})
+        nodos_out.append({"id": nid, "p_total": acotar(combinar(por.values()), cota), "por_amenaza": por, "detalle": det})
 
     aristas_out = []
     for aid, a in sorted(esc.aristas.items()):
@@ -137,34 +157,34 @@ def calcular(esc: grafo.Escenario, cfg: dict | None = None, overrides: dict | No
         if "firms" in activas:
             por["firms"], det["firms"] = modelo_firms(linea, True, focos_xy, am["firms"])
         if "meteo" in activas:
-            pu, pv = p_meteo_nodo.get(a["source"], 0.0), p_meteo_nodo.get(a["target"], 0.0)
+            pu, pv = p_meteo.get(a["source"], 0.0), p_meteo.get(a["target"], 0.0)
             por["meteo"] = max(pu, pv)
-            det["meteo"] = {"regla": "max(p_u, p_v), conservador", "p_source": round(pu, 6),
-                            "p_target": round(pv, 6)}
+            det["meteo"] = {"regla": "max(p_u, p_v)", "p_source": round(pu, 6), "p_target": round(pv, 6)}
         if "ebird" in activas:
             por["ebird"], det["ebird"] = modelo_ebird(linea, True, aves_xy, am["ebird"], fecha_ref)
         if aid in ov_a:
-            por["escenario"], det["escenario"] = ov_a[aid], {"nota": "probabilidad forzada (overrides_prob)"}
+            por["escenario"], det["escenario"] = ov_a[aid], {"nota": "probabilidad simulada"}
         por = {k: acotar(v, cota) for k, v in por.items()}
         aristas_out.append({"id": aid, "source": a["source"], "target": a["target"],
-                            "p_total": acotar(combinar(por.values()), cota),
-                            "por_amenaza": por, "detalle": det})
+                            "p_total": acotar(combinar(por.values()), cota), "por_amenaza": por, "detalle": det})
 
     return {
         "meta": {
             "generado": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            "principio": cfg.get("principio"),
             "datos": esc.resumen(),
             "amenazas_activas": activas,
-            "combinacion": "q = 1 - prod_k (1 - q_k), amenazas independientes",
+            "combinacion": "q = 1 − Π_k (1 − q_k), amenazas independientes",
             "cota_superior": cota,
-            "nota_cota": "p = cota_superior equivale a exclusión del elemento en las técnicas 2, 3 y 4",
+            "nota_cota": "un elemento con p igual a la cota se excluye en las técnicas 2, 3 y 4",
             "overrides_prob": overrides or {},
-            "fecha_referencia_ebird": fecha_ref.isoformat() if fecha_ref else None,
+            "fecha_referencia": fecha_ref.isoformat() if fecha_ref else None,
+            "radio_aves_m": radio_aves(am["ebird"]),
             "parametros": am,
-            "limitacion": (
-                "Tratar las amenazas como independientes, y un nodo y sus aristas como "
-                "independientes entre sí, sobreestima el riesgo cuando un mismo foco "
-                "afecta a ambos. Es una aproximación conservadora."
+            "independencia": (
+                "Si las amenazas son independientes la combinación es exacta; si se correlacionan "
+                "positivamente, la probabilidad real de que falle alguna es menor, así que la fórmula "
+                "es una cota superior del riesgo y nunca baja de la mayor de las q_k."
             ),
         },
         "nodos": nodos_out,
@@ -173,8 +193,7 @@ def calcular(esc: grafo.Escenario, cfg: dict | None = None, overrides: dict | No
 
 
 def mapas(doc: dict) -> tuple[dict, dict]:
-    return ({n["id"]: n["p_total"] for n in doc["nodos"]},
-            {a["id"]: a["p_total"] for a in doc["aristas"]})
+    return ({n["id"]: n["p_total"] for n in doc["nodos"]}, {a["id"]: a["p_total"] for a in doc["aristas"]})
 
 
 def log_supervivencia(p: float) -> float:
@@ -182,9 +201,7 @@ def log_supervivencia(p: float) -> float:
 
 
 def aplicar_schema(cur):
-    schema = RAIZ / "Diagrama" / "schema.sql"
-    sql = schema.read_text(encoding="utf-8")
-    for sentencia in sql.split(";"):
+    for sentencia in (RAIZ / "Diagrama" / "schema.sql").read_text(encoding="utf-8").split(";"):
         if sentencia.strip():
             cur.execute(sentencia)
 
@@ -198,17 +215,17 @@ def cargar_bd(doc: dict, conn=None):
         with conn.cursor() as cur:
             aplicar_schema(cur)
             cur.execute("TRUNCATE prob_fallo_nodo, prob_fallo_arista")
+            cur.execute("SELECT id FROM nodos")
+            nodos_bd = {r[0] for r in cur.fetchall()}
+            cur.execute("SELECT id FROM aristas")
+            aristas_bd = {r[0] for r in cur.fetchall()}
             gen = doc["meta"]["generado"]
-            execute_values(cur, """
-                INSERT INTO prob_fallo_nodo (nodo_id, amenaza, p_fallo, detalle, generado)
-                VALUES %s
-            """, [(n["id"], k, p, Json(n["detalle"].get(k, {})), gen)
-                  for n in doc["nodos"] for k, p in n["por_amenaza"].items()])
-            execute_values(cur, """
-                INSERT INTO prob_fallo_arista (arista_id, amenaza, p_fallo, detalle, generado)
-                VALUES %s
-            """, [(a["id"], k, p, Json(a["detalle"].get(k, {})), gen)
-                  for a in doc["aristas"] for k, p in a["por_amenaza"].items()])
+            execute_values(cur, "INSERT INTO prob_fallo_nodo (nodo_id, amenaza, p_fallo, detalle, generado) VALUES %s",
+                           [(n["id"], k, p, Json(n["detalle"].get(k, {})), gen)
+                            for n in doc["nodos"] if n["id"] in nodos_bd for k, p in n["por_amenaza"].items()])
+            execute_values(cur, "INSERT INTO prob_fallo_arista (arista_id, amenaza, p_fallo, detalle, generado) VALUES %s",
+                           [(a["id"], k, p, Json(a["detalle"].get(k, {})), gen)
+                            for a in doc["aristas"] if a["id"] in aristas_bd for k, p in a["por_amenaza"].items()])
         conn.commit()
     finally:
         if propia:
@@ -216,23 +233,20 @@ def cargar_bd(doc: dict, conn=None):
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Punto 5: probabilidad de falla por nodo y arista.")
+    ap = argparse.ArgumentParser(description="Probabilidad de falla del dron por nodo y por arista.")
     ap.add_argument("--fuente", choices=["db", "json"], default=None)
     ap.add_argument("--cargar", action="store_true", help="cargar el resultado a la base")
     ap.add_argument("--salida", default=str(PROB_FALLO_JSON))
     args = ap.parse_args()
-
     fuente = args.fuente or fuente_por_defecto()
-    esc = grafo.cargar(fuente)
+    esc = grafo.cargar(fuente, usar_cache=False)
     doc = calcular(esc)
     with open(args.salida, "w", encoding="utf-8") as f:
-        json.dump(doc, f, ensure_ascii=False, indent=2, default=str)
-
-    con_riesgo_n = sum(1 for n in doc["nodos"] if n["p_total"] > 0)
-    con_riesgo_a = sum(1 for a in doc["aristas"] if a["p_total"] > 0)
-    print(f"Probabilidades calculadas ({fuente}): {len(doc['nodos'])} nodos "
-          f"({con_riesgo_n} con p > 0), {len(doc['aristas'])} aristas ({con_riesgo_a} con p > 0).")
-    print(f"Escrito: {args.salida}")
+        json.dump(doc, f, ensure_ascii=False, default=str)
+    n = sum(1 for x in doc["nodos"] if x["p_total"] > 0)
+    a = sum(1 for x in doc["aristas"] if x["p_total"] > 0)
+    print(f"Probabilidades ({fuente}): {len(doc['nodos'])} nodos ({n} con p > 0), "
+          f"{len(doc['aristas'])} aristas ({a} con p > 0). Escrito: {args.salida}")
     if args.cargar:
         cargar_bd(doc)
         print("Cargado en prob_fallo_nodo y prob_fallo_arista.")

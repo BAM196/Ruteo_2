@@ -2,16 +2,23 @@ import heapq
 import math
 from dataclasses import dataclass, field
 
+from ..config import parametros_mision
+from ..grafo import BOSQUE
+
 EPS = 1e-6
-BOSQUE = 10
+UMBRAL_EVITAR_CLIMA = 0.5
+MODOS = ("sector", "parque", "especie", "camaras")
 
 
 @dataclass
 class Consulta:
-    origen_id: int
-    destino_id: int
+    modo: str = "sector"
+    sector_id: int | None = None
+    especie: str | None = None
+    camaras: list = field(default_factory=list)
+    base_id: int | None = None
     theta: float = 0.5
-    autonomia_m: float | None = None
+    fecha: str | None = None
     solo_bosque: bool = False
     evitar_senderos: bool = False
     evitar_clima: bool = False
@@ -21,15 +28,22 @@ class Consulta:
     r_min: float | None = None
     semilla: int = 0
     aco_config: str | None = None
+    tecnicas: list | None = None
 
     @classmethod
-    def desde_dict(cls, d: dict, d_max_defecto: float) -> "Consulta":
+    def desde_dict(cls, d: dict) -> "Consulta":
         r = d.get("restricciones") or {}
+        modo = d.get("modo") or "sector"
+        if modo not in MODOS:
+            raise ValueError(f"Modo desconocido: {modo}")
         return cls(
-            origen_id=int(d["origen_id"]),
-            destino_id=int(d["destino_id"]),
+            modo=modo,
+            sector_id=None if d.get("sector_id") in (None, "") else int(d["sector_id"]),
+            especie=d.get("especie") or None,
+            camaras=[int(x) for x in d.get("camaras") or []],
+            base_id=None if d.get("base_id") in (None, "") else int(d["base_id"]),
             theta=float(d.get("theta", 0.5)),
-            autonomia_m=float(d.get("autonomia_m") or d_max_defecto),
+            fecha=d.get("fecha") or None,
             solo_bosque=bool(r.get("solo_bosque", False)),
             evitar_senderos=bool(r.get("evitar_senderos", False)),
             evitar_clima=bool(r.get("evitar_clima", False)),
@@ -39,147 +53,238 @@ class Consulta:
             r_min=d.get("r_min"),
             semilla=int(d.get("semilla", 0)),
             aco_config=d.get("aco_config"),
+            tecnicas=d.get("tecnicas"),
         )
 
 
-class Problema:
-    def __init__(self, esc, q_nodo: dict, p_arista: dict, consulta: Consulta,
-                 cota: float = 0.999999, amenaza_nodo: dict | None = None,
-                 amenaza_arista: dict | None = None):
+def _q(p: float) -> float:
+    return -math.log(1.0 - p)
+
+
+class Contexto:
+    def __init__(self, esc, doc_prob: dict, consulta: Consulta, cota: float = 0.999999, params: dict | None = None):
         self.esc = esc
         self.c = consulta
-        self.s, self.t = consulta.origen_id, consulta.destino_id
-        self.theta = min(max(consulta.theta, 0.0), 1.0)
-        self.d_max = consulta.autonomia_m
-        self.q = {v: q_nodo.get(v, 0.0) for v in esc.nodos}
-        self.p = {a: p_arista.get(a, 0.0) for a in esc.aristas}
-        self.u = {v: -math.log(1 - q) for v, q in self.q.items()}
-        self.w = {a: -math.log(1 - p) for a, p in self.p.items()}
         self.cota = cota
-        self.d_ref = None
-
-        amenaza_nodo = amenaza_nodo or {}
-        amenaza_arista = amenaza_arista or {}
-        evitar = [k for k, activo in (("meteo", consulta.evitar_clima), ("ebird", consulta.evitar_aves)) if activo]
-
-        def con_amenaza_evitada(por_amenaza: dict) -> bool:
-            return any(por_amenaza.get(k, 0.0) > 0 for k in evitar)
+        self.m = params or parametros_mision()
+        self.theta = min(max(consulta.theta, 0.0), 1.0)
+        self.p_nodo, self.p_arista, self.clima_nodo, self.clima_arista = {}, {}, {}, {}
+        self.amenaza_nodo, self.amenaza_arista = {}, {}
+        for n in doc_prob["nodos"]:
+            por = n["por_amenaza"]
+            self.amenaza_nodo[n["id"]] = por
+            self.p_nodo[n["id"]] = min(1 - math.prod(1 - p for k, p in por.items() if k != "meteo"), cota)
+            self.clima_nodo[n["id"]] = min(por.get("meteo", 0.0), cota)
+        for a in doc_prob["aristas"]:
+            por = a["por_amenaza"]
+            self.amenaza_arista[a["id"]] = por
+            self.p_arista[a["id"]] = min(1 - math.prod(1 - p for k, p in por.items() if k != "meteo"), cota)
+            self.clima_arista[a["id"]] = min(por.get("meteo", 0.0), cota)
+        self.u = {v: _q(p) for v, p in self.p_nodo.items()}
+        self.w = {a: _q(p) for a, p in self.p_arista.items()}
+        self.mu_nodo = {v: _q(p) for v, p in self.clima_nodo.items()}
+        self.mu_arista = {a: _q(p) for a, p in self.clima_arista.items()}
 
         self.excl_usuario = set(consulta.excluir_nodos)
-        excl = set(self.excl_usuario)
-        motivos = {v: "excluido por el usuario" for v in self.excl_usuario}
+        self.motivos_nodo = {v: "excluida por el usuario" for v in self.excl_usuario}
         for v, n in esc.nodos.items():
-            if v in (self.s, self.t):
-                continue
-            if consulta.solo_bosque and n.get("landcover_code") != BOSQUE:
-                excl.add(v)
-                motivos.setdefault(v, "no es bosque (solo_bosque)")
-            if con_amenaza_evitada(amenaza_nodo.get(v, {})):
-                excl.add(v)
-                motivos.setdefault(v, "riesgo por clima o aves (evitar)")
-            if self.q[v] >= cota:
-                excl.add(v)
-                motivos.setdefault(v, "probabilidad de falla = 1")
-        self.nodos_excluidos = excl
-        self.motivos_nodo = motivos
+            if consulta.solo_bosque and not n.get("es_base_sendero") and n.get("landcover_code") != BOSQUE:
+                self.motivos_nodo.setdefault(v, "no es bosque")
+            if consulta.evitar_clima and self.clima_nodo.get(v, 0.0) >= UMBRAL_EVITAR_CLIMA:
+                self.motivos_nodo.setdefault(v, "clima fuera de los límites del dron")
+            if consulta.evitar_aves and self.amenaza_nodo.get(v, {}).get("ebird", 0.0) > 0:
+                self.motivos_nodo.setdefault(v, "zona de influencia de aves")
+            if self.clima_nodo.get(v, 0.0) >= cota:
+                self.motivos_nodo.setdefault(v, "clima fuera de los límites del dron (lluvia o viento)")
+            if self.p_nodo.get(v, 0.0) >= cota:
+                self.motivos_nodo.setdefault(v, "probabilidad de falla igual a 1")
+        self.nodos_excluidos = set(self.motivos_nodo)
 
-        self.aristas_excluidas = set()
+        self.motivos_arista = {}
         for aid, a in esc.aristas.items():
-            if (a["source"] in excl or a["target"] in excl or not a.get("viable", True)
-                    or (consulta.evitar_senderos and a.get("buffer_privacidad", False))
-                    or con_amenaza_evitada(amenaza_arista.get(aid, {}))
-                    or self.p[aid] >= cota or (self.d_max and a["distancia_m"] > self.d_max)):
-                self.aristas_excluidas.add(aid)
+            por = self.amenaza_arista.get(aid, {})
+            if a.get("bloqueada"):
+                self.motivos_arista[aid] = "bloqueada por altura"
+            elif consulta.evitar_senderos and a.get("buffer_privacidad"):
+                self.motivos_arista[aid] = "cerca de un sendero"
+            elif consulta.evitar_clima and self.clima_arista.get(aid, 0.0) >= UMBRAL_EVITAR_CLIMA:
+                self.motivos_arista[aid] = "clima fuera de los límites del dron"
+            elif consulta.evitar_aves and por.get("ebird", 0.0) > 0:
+                self.motivos_arista[aid] = "zona de influencia de aves"
+            elif self.p_arista.get(aid, 0.0) >= cota or self.clima_arista.get(aid, 0.0) >= cota:
+                self.motivos_arista[aid] = "probabilidad de falla igual a 1"
+        self.aristas_excluidas = set(self.motivos_arista)
 
-    def arcos(self, permitidos=True):
-        for aid, a in self.esc.aristas.items():
-            if permitidos and aid in self.aristas_excluidas:
+    def tiempo_arista(self, aid: int, desde: int) -> float:
+        a = self.esc.aristas[aid]
+        subida = a["ascenso_ida_m"] if desde == a["source"] else a["ascenso_vuelta_m"]
+        return a["distancia_m"] / self.m["v_c"] + subida / self.m["v_sub"]
+
+
+@dataclass
+class Tramo:
+    i: int
+    j: int
+    nodos: list
+    aristas: list
+    distancia: float
+    tiempo: float
+    riesgo: float
+    clima: float
+    costo: float
+
+
+class ProblemaSector:
+    def __init__(self, ctx: Contexto, base: dict, camaras: list, sector_id=None):
+        self.ctx = ctx
+        self.esc = ctx.esc
+        self.base = base
+        self.b = base["nodo"]
+        self.sector_id = sector_id
+        self.theta = ctx.theta
+        self.m = ctx.m
+        self.t_util = self.m["t_util_s"]
+        self.s_i = self.m["s_i"]
+        self.t_ref = None
+        self.no_visitables = {}
+        pedidas = list(dict.fromkeys(camaras))
+        for c in pedidas:
+            if c in ctx.nodos_excluidos and c != self.b:
+                self.no_visitables[c] = ctx.motivos_nodo[c]
+            elif c not in base["camaras"] or not base["camaras"][c]["bloque_visible"]:
+                self.no_visitables[c] = "fuera del alcance o sin línea de vista desde la base"
+        self.camaras = [c for c in pedidas if c not in self.no_visitables]
+        self.permitidos = set(self.camaras) | {self.b}
+        self.arcos = []
+        for aid in sorted(base["visibles"]):
+            if aid in ctx.aristas_excluidas or aid not in self.esc.aristas:
                 continue
-            yield a["source"], a["target"], aid
-            yield a["target"], a["source"], aid
+            a = self.esc.aristas[aid]
+            u, v = a["source"], a["target"]
+            if not (self._paso_libre(u) and self._paso_libre(v)):
+                continue
+            self.arcos.append((u, v, aid))
+            self.arcos.append((v, u, aid))
+        self.tramos_dist = None
+        self.tramos_modelo = None
+
+    def _paso_libre(self, x) -> bool:
+        if x in self.permitidos:
+            return True
+        n = self.esc.nodos[x]
+        return x not in self.ctx.nodos_excluidos and not n.get("es_camara") and not n.get("es_base_sendero")
 
     def costo_arco(self, u, v, aid) -> float:
-        d = self.esc.aristas[aid]["distancia_m"]
-        return (1 - self.theta + EPS) * d / self.d_ref + self.theta * (self.w[aid] + self.u[v])
+        return ((1 - self.theta + EPS) * self.ctx.tiempo_arista(aid, u) / self.t_ref
+                + self.theta * (self.ctx.w[aid] + self.ctx.u[v]))
 
-    def adyacencia(self, costo="combinado", permitidos=True):
-        adj = {v: [] for v in self.esc.nodos}
-        for u, v, aid in self.arcos(permitidos):
-            c = self.esc.aristas[aid]["distancia_m"] if costo == "distancia" else self.costo_arco(u, v, aid)
-            adj[u].append((v, aid, c))
+    def costo_modelo(self, nodos, aristas, clima) -> float | None:
+        if self.t_ref is None:
+            return None
+        return sum(self.costo_arco(nodos[k], nodos[k + 1], a) for k, a in enumerate(aristas)) + self.theta * clima
+
+    def adyacencia(self, tipo: str) -> dict:
+        adj = {}
+        for u, v, aid in self.arcos:
+            if tipo == "distancia":
+                c = self.esc.aristas[aid]["largo_3d_m"]
+            else:
+                c = self.costo_arco(u, v, aid)
+            adj.setdefault(u, []).append((v, aid, c))
         return adj
 
-    def evaluar(self, nodos: list, aristas: list) -> dict:
-        dist = sum(self.esc.aristas[a]["distancia_m"] for a in aristas)
-        riesgo = sum(self.u[v] for v in nodos) + sum(self.w[a] for a in aristas)
-        costo = self.theta * self.u[nodos[0]] + sum(
-            self.costo_arco(nodos[i], nodos[i + 1], a) for i, a in enumerate(aristas))
-        usa_excluidos = [v for v in nodos if v in self.nodos_excluidos]
-        aristas_excl = [a for a in aristas if a in self.aristas_excluidas]
-        motivos = []
-        if self.d_max and dist > self.d_max + 1e-6:
-            motivos.append(f"supera la autonomía ({dist:.0f} m > {self.d_max:.0f} m)")
-        if usa_excluidos:
-            motivos.append(f"pasa por nodos excluidos {usa_excluidos}")
-        elif aristas_excl:
-            motivos.append(f"usa aristas excluidas {aristas_excl}")
-        if self.c.r_min and math.exp(-riesgo) < self.c.r_min:
-            motivos.append(f"R menor que r_min = {self.c.r_min}")
-        return {
-            "distancia_m": round(dist, 1),
-            "riesgo_log": riesgo,
-            "p_supervivencia": math.exp(-riesgo),
-            "costo": costo,
-            "factible": not motivos,
-            "mensaje": "; ".join(motivos) if motivos else "ok",
-        }
+    def puntos(self) -> list:
+        return [self.b] + self.camaras
 
-    def validar_extremos(self) -> str | None:
-        for v in (self.s, self.t):
-            if v not in self.esc.nodos:
-                return f"La cámara {v} no existe."
-        if self.s == self.t:
-            return "El origen y el destino son la misma cámara."
-        if self.s in self.excl_usuario or self.t in self.excl_usuario:
-            return "El origen o el destino está en la lista de nodos excluidos."
-        return None
+    def _tramo(self, i, j, nodos, aristas, tipo) -> Tramo:
+        ctx = self.ctx
+        dist = sum(self.esc.aristas[a]["largo_3d_m"] for a in aristas)
+        tiempo = sum(ctx.tiempo_arista(a, nodos[k]) for k, a in enumerate(aristas))
+        riesgo = sum(ctx.w[a] for a in aristas) + sum(ctx.u[v] for v in nodos[1:])
+        clima = max([ctx.mu_arista[a] for a in aristas] + [ctx.mu_nodo.get(v, 0.0) for v in nodos] + [0.0])
+        costo = dist if tipo == "distancia" else sum(self.costo_arco(nodos[k], nodos[k + 1], a)
+                                                     for k, a in enumerate(aristas))
+        return Tramo(i, j, nodos, aristas, dist, tiempo, riesgo, clima, costo)
 
-    def geojson(self, nodos: list, aristas: list, props: dict | None = None) -> dict:
-        coords = []
-        for i, aid in enumerate(aristas):
-            seg = [list(c) for c in self.esc.aristas[aid]["coords"]]
-            u = self.esc.nodos[nodos[i]]
-            ini, fin = seg[0], seg[-1]
-            if (ini[0] - u["lon"]) ** 2 + (ini[1] - u["lat"]) ** 2 > (fin[0] - u["lon"]) ** 2 + (fin[1] - u["lat"]) ** 2:
-                seg.reverse()
-            coords.extend(seg if not coords else seg[1:])
-        return {"type": "Feature", "geometry": {"type": "LineString", "coordinates": coords},
-                "properties": props or {}}
+    def calcular_tramos(self, tipo: str, conn=None) -> dict:
+        from .matriz import caminos
 
-    def resultado(self, tecnica, etiqueta, nodos, aristas, tiempo_ms, extra=None,
-                  mensaje=None) -> dict:
-        base = {"tecnica": tecnica, "etiqueta": etiqueta, "tiempo_ms": round(tiempo_ms, 2),
-                "parametros": self.parametros(), "extra": extra or {}}
-        if not nodos:
-            return {**base, "nodos": [], "aristas": [], "geojson": None, "distancia_m": None,
-                    "riesgo_log": None, "p_supervivencia": None, "costo": None,
-                    "factible": False, "mensaje": mensaje or "No se encontró ruta."}
-        ev = self.evaluar(nodos, aristas)
-        if mensaje and ev["factible"]:
-            ev["mensaje"] = mensaje
-        elif mensaje:
-            ev["mensaje"] = f"{mensaje}; {ev['mensaje']}"
-        return {**base, "nodos": nodos, "aristas": aristas,
-                "geojson": self.geojson(nodos, aristas, {"tecnica": tecnica, "etiqueta": etiqueta}),
-                **ev}
+        adj = self.adyacencia(tipo)
+        pts = self.puntos()
+        rutas, motor = caminos(self, adj, pts, tipo, conn)
+        tramos = {(i, j): self._tramo(i, j, *r, tipo) for (i, j), r in rutas.items()}
+        if self.b in self.camaras:
+            tramos[(self.b, self.b)] = Tramo(self.b, self.b, [self.b], [], 0.0, 0.0, 0.0,
+                                             self.ctx.mu_nodo.get(self.b, 0.0), 0.0)
+        if tipo == "distancia":
+            self.tramos_dist = tramos
+        else:
+            self.tramos_modelo = tramos
+        self.motor_tramos = motor
+        return tramos
 
-    def parametros(self) -> dict:
-        return {"origen": self.s, "destino": self.t, "theta": self.theta, "d_max_m": self.d_max,
-                "d_ref_m": self.d_ref, "solo_bosque": self.c.solo_bosque,
-                "evitar_senderos": self.c.evitar_senderos,
-                "evitar_clima": self.c.evitar_clima, "evitar_aves": self.c.evitar_aves,
-                "excluir_nodos": sorted(self.excl_usuario), "r_min": self.c.r_min,
-                "nodos_excluidos_total": sorted(self.nodos_excluidos)}
+    def viables(self, tramos: dict) -> tuple[list, dict]:
+        ok, motivos = [], {}
+        for c in self.camaras:
+            ida, vuelta = tramos.get((self.b, c)), tramos.get((c, self.b))
+            if c == self.b:
+                ok.append(c)
+            elif ida is None or vuelta is None:
+                motivos[c] = "sin camino volable desde la base"
+            elif ida.tiempo + self.s_i + vuelta.tiempo > self.t_util:
+                motivos[c] = "no cabe en una batería"
+            else:
+                ok.append(c)
+        return ok, motivos
+
+    def evaluar(self, vuelos: list, tramos: dict, tipo: str = "modelo") -> dict:
+        salida, total = [], {"distancia": 0.0, "tiempo_vuelo": 0.0, "riesgo": 0.0, "costo": 0.0}
+        factible, motivos = True, []
+        for k, seq in enumerate(vuelos):
+            if not seq:
+                continue
+            paradas = [self.b] + list(seq) + [self.b]
+            nodos, aristas, dist, tiempo, riesgo, clima, costo = [self.b], [], 0.0, 0.0, 0.0, 0.0, 0.0
+            for i, j in zip(paradas[:-1], paradas[1:]):
+                t = tramos.get((i, j))
+                if t is None and i == j:
+                    continue
+                if t is None:
+                    factible = False
+                    motivos.append(f"no hay tramo de {i} a {j}")
+                    continue
+                nodos += t.nodos[1:]
+                aristas += t.aristas
+                dist += t.distancia
+                tiempo += t.tiempo
+                riesgo += t.riesgo
+                clima = max(clima, t.clima)
+                costo += t.costo
+            muestreo = self.s_i * len(seq)
+            t_total = tiempo + muestreo
+            if t_total > self.t_util + 1e-6:
+                factible = False
+                motivos.append(f"el vuelo {k + 1} dura {t_total / 60:.1f} min y la batería útil es {self.t_util / 60:.1f} min")
+            costo_vuelo = self.costo_modelo(nodos, aristas, clima)
+            r = math.exp(-riesgo - clima)
+            salida.append({
+                "vuelo": len(salida) + 1, "camaras": list(seq), "nodos": nodos, "aristas": aristas,
+                "distancia_m": round(dist, 1), "tiempo_traslado_s": round(tiempo, 1),
+                "tiempo_muestreo_s": muestreo, "tiempo_s": round(t_total, 1),
+                "riesgo_log": riesgo, "clima_log": clima, "p_clima": 1 - math.exp(-clima),
+                "R": r, "costo": costo_vuelo,
+            })
+            total["distancia"] += dist
+            total["tiempo_vuelo"] += t_total
+            total["riesgo"] += riesgo + clima
+            total["costo"] = None if costo_vuelo is None or total["costo"] is None else total["costo"] + costo_vuelo
+        n = len(salida)
+        total["tiempo_sector"] = total["tiempo_vuelo"] + self.m["t_cambio_s"] * max(0, n - 1)
+        total["R"] = math.exp(-total["riesgo"]) if salida else None
+        if self.ctx.c.r_min and total["R"] is not None and total["R"] < self.ctx.c.r_min:
+            motivos.append(f"R del plan {total['R']:.3f} menor que el mínimo {self.ctx.c.r_min}")
+            factible = False
+        return {"vuelos": salida, "total": total, "factible": factible and bool(salida), "motivos": motivos}
 
 
 def dijkstra(adj: dict, s, t, prohibidos=frozenset()):
@@ -211,18 +316,45 @@ def dijkstra(adj: dict, s, t, prohibidos=frozenset()):
     return nodos[::-1], aristas[::-1], dist[t]
 
 
-def distancias_desde(adj_inverso: dict, t) -> dict:
-    dist = {t: 0.0}
-    heap = [(0.0, t)]
-    hecho = set()
-    while heap:
-        d, v = heapq.heappop(heap)
-        if v in hecho:
-            continue
-        hecho.add(v)
-        for u, _aid, c in adj_inverso.get(v, ()):
-            nd = d + c
-            if nd < dist.get(u, math.inf):
-                dist[u] = nd
-                heapq.heappush(heap, (nd, u))
-    return dist
+def vecino_mas_cercano(prob: ProblemaSector, tramos: dict, camaras: list, con_clima: bool = False) -> list:
+    pendientes = list(camaras)
+    vuelos, actual, seq, usado, clima = [], prob.b, [], 0.0, 0.0
+    while pendientes:
+        candidatos = []
+        for c in pendientes:
+            ida, vuelta = tramos.get((actual, c)), tramos.get((c, prob.b))
+            if ida is None or vuelta is None:
+                continue
+            if usado + ida.tiempo + prob.s_i + vuelta.tiempo <= prob.t_util + 1e-9:
+                extra = prob.theta * max(0.0, max(clima, ida.clima, vuelta.clima) - clima) if con_clima else 0.0
+                candidatos.append((ida.costo + extra, c, ida))
+        if candidatos:
+            _, c, ida = min(candidatos, key=lambda x: (x[0], x[1]))
+            seq.append(c)
+            usado += ida.tiempo + prob.s_i
+            clima = max(clima, ida.clima)
+            actual = c
+            pendientes.remove(c)
+        elif seq:
+            vuelos.append(seq)
+            actual, seq, usado, clima = prob.b, [], 0.0, 0.0
+        else:
+            break
+    if seq:
+        vuelos.append(seq)
+    return vuelos
+
+
+def resultado(prob: ProblemaSector, tecnica: str, etiqueta: str, vuelos: list, tramos: dict | None,
+              tiempo_ms: float, extra: dict | None = None, mensaje: str | None = None,
+              no_viables: dict | None = None) -> dict:
+    base = {"tecnica": tecnica, "etiqueta": etiqueta, "sector_id": prob.sector_id, "base_id": prob.base["id"],
+            "tiempo_ms": round(tiempo_ms, 2), "extra": extra or {},
+            "no_visitadas": {**prob.no_visitables, **(no_viables or {})}}
+    if not vuelos or tramos is None:
+        return {**base, "vuelos": [], "total": None, "factible": False,
+                "mensaje": mensaje or "No hay vuelos posibles con estas restricciones."}
+    ev = prob.evaluar(vuelos, tramos)
+    msgs = ([mensaje] if mensaje else []) + ev["motivos"]
+    return {**base, "vuelos": ev["vuelos"], "total": ev["total"], "factible": ev["factible"],
+            "mensaje": "; ".join(msgs) if msgs else "ok"}

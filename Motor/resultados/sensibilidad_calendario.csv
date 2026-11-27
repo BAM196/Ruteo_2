@@ -1,0 +1,16 @@
+fraccion_prioridad,temporada,dias,sectores,pendientes
+0.3,verano,51,31,0
+0.3,otono,36,29,2
+0.3,invierno,25,19,12
+0.3,primavera,37,29,2
+0.5,verano,51,31,0
+0.5,otono,36,29,2
+0.5,invierno,25,19,12
+0.5,primavera,37,29,2
+0.7,verano,51,31,0
+0.7,otono,36,29,2
+0.7,invierno,25,19,12
+0.7,primavera,37,29,2
+cambio de batería 3 min,pasada,42,14,
+cambio de batería 5 min,pasada,42,14,
+cambio de batería 8 min,pasada,42,14,

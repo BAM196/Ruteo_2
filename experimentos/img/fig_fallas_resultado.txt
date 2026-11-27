@@ -1,0 +1,21 @@
+Cada elemento sortea un número entre 0 y 100: falla si sale menor o igual que 100 · p. Un vuelo falla si falla alguno de sus elementos.
+
+pgr_dijkstra (distancia): el plan no se completa
+
+Vuelo 1: falla (tramo 32, r = 7,7 ≤ 19,8, tramo 102285, r = 26,1 ≤ 26,9)
+Vuelo 2: se completa
+
+Gurobi (MILP): el plan no se completa
+
+Vuelo 1: falla (tramo 102284, r = 4,5 ≤ 8,0)
+Vuelo 2: falla (tramo 32, r = 1,7 ≤ 19,8)
+
+pgr_dijkstra (ponderado): el plan se completa
+
+Vuelo 1: se completa
+Vuelo 2: se completa
+
+ACO (config_zhang): el plan se completa
+
+Vuelo 1: se completa
+Vuelo 2: se completa

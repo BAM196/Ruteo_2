@@ -1,0 +1,11 @@
+modo: sector
+sector: 20
+fecha: 2015-02-27
+theta: 0.5
+focos_simulados: 1
+restricciones: {'solo_bosque': True, 'evitar_senderos': False, 'evitar_clima': False, 'evitar_aves': False}
+tecnicas_visibles: ['dijkstra_distancia']
+capas_encendidas: ['Cámaras', 'Vuelos planificados', 'Bases del plan', 'Radio de operación', 'Bloques de muestreo', 'Tramos bloqueados', 'Focos de incendio', 'Amenaza simulada', 'Fallas sorteadas']
+zoom: 15
+centro: {'lat': -42.780064943227224, 'lng': -72.611815}
+Solo la técnica 1 (dijkstra_distancia), mismo encuadre que fig_caso_rutas.

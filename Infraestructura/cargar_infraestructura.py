@@ -56,6 +56,15 @@ def main():
             cur.execute(
                 """
                 TRUNCATE
+                    campana_dia,
+                    campanas,
+                    sector_camara,
+                    sectores,
+                    base_arista_visible,
+                    base_enlace,
+                    base_camara,
+                    bases,
+                    arista_perfil,
                     prob_fallo_nodo,
                     prob_fallo_arista,
                     amenazas_firms_nodo,
@@ -67,14 +76,14 @@ def main():
                     amenazas_ebird_nodo,
                     amenazas_ebird_arista,
                     amenazas_ebird,
-                    metadata_gee_especie,
-                    metadata_gee,
+                    metadata_cobertura,
                     metadata_senderos_nodo,
                     metadata_senderos_arista,
                     metadata_senderos,
                     nodo_especie,
                     aristas,
                     nodos
+                CASCADE
                 """
             )
             for n in nodos:

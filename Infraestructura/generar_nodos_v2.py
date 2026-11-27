@@ -347,7 +347,11 @@ def main():
     )
 
     meta = {
-        "fuente": "GBIF Chile - fotomonitoreo CONAF 2021 (occurrence.txt)",
+        "fuente": (
+            "Corporación Nacional Forestal (2024). Programa de fotomonitoreo de objetos de conservación y "
+            "amenazas en el Sistema Nacional de Áreas Protegidas (SNAP). Version 1.9. Occurrence dataset "
+            "(GBIF 9f7ed5a4-f73a-4d74-b0be-cef5bd700a37, CC BY-NC 4.0), filtrado a Pumalín"
+        ),
         "area": "Parque Nacional Pumalín Douglas Tompkins",
         "generado": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "filtro_localidad": LOCALIDAD,

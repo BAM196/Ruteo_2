@@ -1,0 +1,185 @@
+dron:
+  modelo: DJI Mavic 3T (Mavic 3 Enterprise Series)
+  ficha: https://enterprise.dji.com/mavic-3-enterprise/specs
+  tiempo_bateria_s:
+    valor: 2280
+    fuente: Ficha DJI Mavic 3 Enterprise, "Max Hover Time (no wind) 38 mins"
+    justificacion: >-
+      Se usa el tiempo en vuelo estacionario (38 min) y no los 45 min de vuelo
+      porque el muestreo es estacionario en cada punto (hover-and-capture).
+  velocidad_crucero_ms:
+    valor: 9.0
+    fuente: >-
+      Ficha DJI Mavic 3 Enterprise, nota del tiempo de vuelo: "Measured with
+      Mavic 3 Enterprise Series flying at a constant speed of 32.4 kph in a
+      windless environment at sea level".
+    justificacion: >-
+      32,4 km/h = 9 m/s es la velocidad a la que DJI midió la autonomía, así que
+      la cifra de la ficha vale para el traslado.
+  velocidad_max_ms:
+    valor: 15.0
+    fuente: Ficha DJI Mavic 3 Enterprise, "Max Horizontal Speed (no wind) 15 m/s" (modo normal)
+    justificacion: Velocidad con la que se calcula el peor regreso de la reserva.
+  velocidad_ascenso_ms:
+    valor: 6.0
+    fuente: Ficha DJI Mavic 3 Enterprise, "Max Ascent Speed 6 m/s (Normal Mode)"
+    justificacion: El ascenso por relieve se cobra a la velocidad máxima de ascenso en modo normal.
+  viento_limite_ms:
+    valor: 12.0
+    fuente: Ficha DJI Mavic 3 Enterprise, "Max Wind Speed Resistance 12 m/s"
+    justificacion: Viento en contra del peor regreso.
+  tiempo_aterrizaje_s:
+    valor: 60
+    fuente: Decisión del modelo
+    justificacion: Descenso de 80 m a la velocidad máxima de descenso más la maniobra final.
+  tiempo_cambio_bateria_s:
+    valor: 300
+    fuente: Decisión del modelo (aterrizar, cambiar la batería y revisar)
+    justificacion: >-
+      No hay una cifra publicada para este dron; se reporta con sensibilidad
+      en 3 y 8 minutos.
+  error_vertical_m:
+    valor: 0.5
+    fuente: Ficha DJI Mavic 3 Enterprise, "Hovering Accuracy Vertical ±0.5 m (with GNSS)"
+    justificacion: Error de altura del dron sin posicionamiento visual ni RTK, el caso más desfavorable.
+
+operacion:
+  radio_operacion_m:
+    valor: 1500
+    fuente: DGAC, DAN 151, 151.103 (f)(2) y (g)(11)
+    justificacion: >-
+      La DAN 91 exige autorización caso a caso y no fija distancias fuera de
+      zonas pobladas. La única cifra publicada por la DGAC es la de la DAN 151:
+      hasta 1.500 m en línea de vista con un máximo de dos observadores. Volar
+      más allá de la línea de vista está reservado a servicio público (151.105 (d)).
+  altura_vuelo_m:
+    valor: 80
+    fuente: Chang et al. (2025), Drones 9(1), 52, sección 2.4
+    justificacion: >-
+      Altura validada en terreno con el mismo dron: permite identificar
+      individuos en la imagen térmica y no provocó respuesta de los animales.
+  techo_m:
+    valor: 120
+    fuente: DGAC, DAN 151, 151.103 (g)(11)
+    justificacion: Altura máxima sobre la superficie.
+  ojo_operador_m:
+    valor: 1.7
+    fuente: Decisión del modelo
+    justificacion: >-
+      Altura del ojo del operador sobre la superficie del DEM. La línea de vista
+      es "una línea recta imaginaria" entre el operador y el dron (DAN 151, 151.103 (f)).
+  claro_operador_m:
+    valor: 60
+    fuente: Decisión del modelo
+    justificacion: >-
+      El operador se ubica en un claro o en un sendero. Los dos primeros píxeles
+      del DEM (60 m) alrededor de la base no cortan la línea de vista.
+  error_dem_m:
+    valor: 4.0
+    fuente: Copernicus DEM, "absolute vertical accuracy < 4 m (90 % linear error)"
+    justificacion: Error vertical del modelo de superficie.
+  margen_arboles_m:
+    valor: 20.0
+    fuente: Decisión del modelo
+    justificacion: >-
+      El DEM promedia el dosel en un píxel de 30 m. Un árbol emergente puede
+      superar ese promedio; se suma un margen de 20 m y se reporta con
+      sensibilidad en 10 y 30 m.
+  paso_perfil_m:
+    valor: 30
+    fuente: Resolución del Copernicus DEM GLO-30
+    justificacion: Una muestra del perfil por píxel del DEM.
+
+muestreo:
+  puntos_por_lado:
+    valor: 5
+    fuente: Chang et al. (2025), Tabla 1
+    justificacion: Unos 25 puntos por vuelo de muestreo, como en los vuelos del paper.
+  separacion_m:
+    valor: 50
+    fuente: Chang et al. (2025)
+    justificacion: La huella térmica a 80 m mide unos 65 m de lado; 50 m deja traslape.
+  tiempo_por_camara_s:
+    valor: 534
+    fuente: Chang et al. (2025), Tabla 1, promedio de los 9 vuelos (8 min 30 s a 10 min 2 s)
+    estado: verificado
+    justificacion: >-
+      Tiempo de muestrear un bloque de 5 × 5 puntos (200 × 200 m) a 3 m/s con
+      captura en vuelo estacionario: 534 s es el promedio de los 9 vuelos de la
+      Tabla 1 del paper, que duran entre 8 min 30 s y 10 min 2 s.
+
+prioridad:
+  peso_rli:
+    valor: {LC: 0, NT: 1, VU: 2, EN: 3, CR: 4}
+    fuente: Butchart et al. (2007), Improvements to the Red List Index, PLoS ONE 2(1), e140
+    justificacion: >-
+      Escala estándar de riesgo de extinción. El peso de la especie es
+      w = 1 + peso RLI, para que una nativa LC siga contando.
+  peso_valor:
+    valor: 0.5
+    fuente: Decisión del modelo
+    justificacion: >-
+      No hay base para preferir el valor de conservación sobre la presión de
+      exóticas. Se mide la estabilidad del orden con Kendall al variar el peso
+      entre 0,3 y 0,7.
+
+campanas:
+  visitas:
+    valor: 3
+    fuente: Chang et al. (2025), Tabla 2; MacKenzie et al. (2002)
+    justificacion: >-
+      2 visitas es el mínimo para separar presencia de detección; 3 deja una
+      visita de respaldo y es el diseño del paper base.
+  ventana_manana_h:
+    valor: 3
+    fuente: Decisión del modelo
+    estado: supuesto
+    justificacion: >-
+      Chang et al. (2025, sec. 2.5) solo indican volar "shortly after sunrise",
+      antes de que el suelo se caliente, sin dar un largo de ventana. Las 3 h
+      son un supuesto y se reportan con sensibilidad en 2,5 y 3,5 h.
+  inicio_ventana_min:
+    valor: 60
+    fuente: Decisión del modelo
+    justificacion: Primera hora completa después del amanecer.
+  fraccion_prioridad:
+    valor: 0.5
+    fuente: Decisión del modelo
+    justificacion: >-
+      Mitad de los días a los sectores más prioritarios y mitad a la rotación.
+      Evita los dos extremos (solo prioridad o solo rotación); se reporta con
+      sensibilidad.
+  anticipacion_dias_habiles:
+    valor: 7
+    fuente: DGAC, DAN 91, Anexo D, punto 10
+    justificacion: La solicitud de autorización se envía con 7 días hábiles de anticipación.
+  temporadas:
+    valor:
+      verano: [12, 1, 2]
+      otono: [3, 4, 5]
+      invierno: [6, 7, 8]
+      primavera: [9, 10, 11]
+    fuente: Estaciones del hemisferio sur
+    justificacion: Una ronda por temporada.
+
+resiliencia:
+  r_min_plan:
+    valor: 0.9
+    fuente: Decisión del modelo
+    justificacion: >-
+      Objetivo para el plan completo. Como R del plan es el producto de los
+      vuelos, cada vuelo de un plan de K vuelos debe cumplir en promedio 0,9^(1/K).
+  n_montecarlo:
+    valor: 10000
+    fuente: Estadística
+    justificacion: Media anchura del intervalo de 95 % de a lo más 1,96 · √(0,25 / N) ≈ 0,01.
+
+traslados:
+  velocidad_pie_kmh:
+    valor: 3.0
+    fuente: Decisión del modelo
+    justificacion: Caminata con equipo por sendero.
+  radio_vecinos_m:
+    valor: 15000
+    fuente: Decisión del modelo
+    justificacion: Solo se miden traslados entre bases a 15 km o menos en línea recta.

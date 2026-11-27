@@ -1,0 +1,5 @@
+ronda,temporada,dias_volables,cubre_parque,sectores,por_prioridad,por_rotacion,pendientes,mananas
+1,verano,48,True,31,0,0,0,14
+2,otono,33,False,28,5,23,3,11
+3,invierno,22,False,18,3,15,13,7
+4,primavera,35,False,28,5,23,3,12

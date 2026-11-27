@@ -1,0 +1,1977 @@
+{
+  "meta": {
+    "fuente": "Copernicus DEM GLO-30 (modelo digital de superficie, 30 m)",
+    "acceso": "Bucket público copernicus-dem-30m en AWS, sin credenciales",
+    "registro": "https://registry.opendata.aws/copernicus-dem/",
+    "tiles": [
+      "Copernicus_DSM_COG_10_S44_00_W073_00_DEM.tif",
+      "Copernicus_DSM_COG_10_S43_00_W073_00_DEM.tif",
+      "Copernicus_DSM_COG_10_S42_00_W073_00_DEM.tif"
+    ],
+    "archivo_raster": "data/dem_pumalin.tif",
+    "bbox": {
+      "oeste": -72.864274,
+      "sur": -43.054091,
+      "este": -72.318809,
+      "norte": -41.983618
+    },
+    "tipo_modelo": "Superficie (DSM): incluye el dosel del bosque, que es lo que el dron debe librar",
+    "error_vertical": "< 4 m (90 % linear error, absoluto)",
+    "unidad": "m sobre el nivel del mar (EGM2008)",
+    "cita": "European Space Agency (2024). Copernicus Global Digital Elevation Model. https://doi.org/10.5270/ESA-c5d3d65",
+    "generado": "2026-11-26T22:13:25+00:00",
+    "nodos_origen": "Infraestructura/nodosv2.json",
+    "n_nodos": 278,
+    "n_sin_dato": 0,
+    "elevacion_min_m": 0.0,
+    "elevacion_max_m": 1230.4
+  },
+  "nodos": [
+    {
+      "nodo_id": 1,
+      "nombre": "Camara AC110",
+      "lon": -72.464575,
+      "lat": -43.001961,
+      "elevacion_m": 569.7
+    },
+    {
+      "nodo_id": 2,
+      "nombre": "Camara AB109",
+      "lon": -72.4772,
+      "lat": -42.993235,
+      "elevacion_m": 119.6
+    },
+    {
+      "nodo_id": 3,
+      "nombre": "Camara AB108",
+      "lon": -72.477568,
+      "lat": -42.984239,
+      "elevacion_m": 150.7
+    },
+    {
+      "nodo_id": 4,
+      "nombre": "Camara AE108",
+      "lon": -72.440808,
+      "lat": -42.983423,
+      "elevacion_m": 760.5
+    },
+    {
+      "nodo_id": 5,
+      "nombre": "Camara AC107",
+      "lon": -72.465684,
+      "lat": -42.974972,
+      "elevacion_m": 160.5
+    },
+    {
+      "nodo_id": 6,
+      "nombre": "Camara AB106",
+      "lon": -72.478304,
+      "lat": -42.966246,
+      "elevacion_m": 259.1
+    },
+    {
+      "nodo_id": 7,
+      "nombre": "Camara AB105",
+      "lon": -72.478671,
+      "lat": -42.95725,
+      "elevacion_m": 300.6
+    },
+    {
+      "nodo_id": 8,
+      "nombre": "Camara Q104",
+      "lon": -72.613761,
+      "lat": -42.951143,
+      "elevacion_m": 159.8
+    },
+    {
+      "nodo_id": 9,
+      "nombre": "Camara AC103",
+      "lon": -72.467162,
+      "lat": -42.938987,
+      "elevacion_m": 298.2
+    },
+    {
+      "nodo_id": 10,
+      "nombre": "Camara AD101",
+      "lon": -72.455658,
+      "lat": -42.920722,
+      "elevacion_m": 717.2
+    },
+    {
+      "nodo_id": 11,
+      "nombre": "Camara AD99",
+      "lon": -72.456399,
+      "lat": -42.90273,
+      "elevacion_m": 386.9
+    },
+    {
+      "nodo_id": 12,
+      "nombre": "Camara AE97",
+      "lon": -72.444905,
+      "lat": -42.884464,
+      "elevacion_m": 611.7
+    },
+    {
+      "nodo_id": 13,
+      "nombre": "Camara AI95",
+      "lon": -72.396729,
+      "lat": -42.865369,
+      "elevacion_m": 551.0
+    },
+    {
+      "nodo_id": 14,
+      "nombre": "Camara D91",
+      "lon": -72.777209,
+      "lat": -42.837373,
+      "elevacion_m": 332.5
+    },
+    {
+      "nodo_id": 15,
+      "nombre": "Camara I88",
+      "lon": -72.717069,
+      "lat": -42.809175,
+      "elevacion_m": 62.5
+    },
+    {
+      "nodo_id": 16,
+      "nombre": "Camara O88",
+      "lon": -72.643745,
+      "lat": -42.807689,
+      "elevacion_m": 430.2
+    },
+    {
+      "nodo_id": 17,
+      "nombre": "Camara K87",
+      "lon": -72.692962,
+      "lat": -42.799687,
+      "elevacion_m": 68.0
+    },
+    {
+      "nodo_id": 18,
+      "nombre": "Camara O86",
+      "lon": -72.644428,
+      "lat": -42.789694,
+      "elevacion_m": 130.7
+    },
+    {
+      "nodo_id": 19,
+      "nombre": "Camara Q86",
+      "lon": -72.619995,
+      "lat": -42.789188,
+      "elevacion_m": 178.7
+    },
+    {
+      "nodo_id": 20,
+      "nombre": "Camara R85",
+      "lon": -72.608125,
+      "lat": -42.779936,
+      "elevacion_m": 189.3
+    },
+    {
+      "nodo_id": 21,
+      "nombre": "Camara O84",
+      "lon": -72.64511,
+      "lat": -42.771698,
+      "elevacion_m": 118.6
+    },
+    {
+      "nodo_id": 22,
+      "nombre": "Camara R84",
+      "lon": -72.608472,
+      "lat": -42.770938,
+      "elevacion_m": 408.1
+    },
+    {
+      "nodo_id": 23,
+      "nombre": "Camara Q83",
+      "lon": -72.621029,
+      "lat": -42.762195,
+      "elevacion_m": 130.0
+    },
+    {
+      "nodo_id": 24,
+      "nombre": "Camara R82",
+      "lon": -72.609164,
+      "lat": -42.752943,
+      "elevacion_m": 114.0
+    },
+    {
+      "nodo_id": 25,
+      "nombre": "Camara T79",
+      "lon": -72.585794,
+      "lat": -42.725438,
+      "elevacion_m": 344.9
+    },
+    {
+      "nodo_id": 26,
+      "nombre": "Camara U78",
+      "lon": -72.573941,
+      "lat": -42.716182,
+      "elevacion_m": 420.1
+    },
+    {
+      "nodo_id": 27,
+      "nombre": "Camara T77",
+      "lon": -72.586492,
+      "lat": -42.707443,
+      "elevacion_m": 117.6
+    },
+    {
+      "nodo_id": 28,
+      "nombre": "Camara T75",
+      "lon": -72.587189,
+      "lat": -42.689448,
+      "elevacion_m": 382.3
+    },
+    {
+      "nodo_id": 29,
+      "nombre": "Camara U72",
+      "lon": -72.576042,
+      "lat": -42.662197,
+      "elevacion_m": 209.2
+    },
+    {
+      "nodo_id": 30,
+      "nombre": "Camara S71",
+      "lon": -72.600771,
+      "lat": -42.653713,
+      "elevacion_m": 467.5
+    },
+    {
+      "nodo_id": 31,
+      "nombre": "Camara U70",
+      "lon": -72.576742,
+      "lat": -42.644202,
+      "elevacion_m": 280.0
+    },
+    {
+      "nodo_id": 32,
+      "nombre": "Camara B66",
+      "lon": -72.809597,
+      "lat": -42.612873,
+      "elevacion_m": 43.9
+    },
+    {
+      "nodo_id": 33,
+      "nombre": "Camara U65",
+      "lon": -72.578487,
+      "lat": -42.599214,
+      "elevacion_m": 325.6
+    },
+    {
+      "nodo_id": 34,
+      "nombre": "Camara C63",
+      "lon": -72.798365,
+      "lat": -42.585642,
+      "elevacion_m": 113.8
+    },
+    {
+      "nodo_id": 35,
+      "nombre": "Camara T62",
+      "lon": -72.591705,
+      "lat": -42.572478,
+      "elevacion_m": 117.1
+    },
+    {
+      "nodo_id": 36,
+      "nombre": "Camara R61",
+      "lon": -72.616396,
+      "lat": -42.563989,
+      "elevacion_m": 208.2
+    },
+    {
+      "nodo_id": 37,
+      "nombre": "Camara S61",
+      "lon": -72.604224,
+      "lat": -42.563735,
+      "elevacion_m": 34.1
+    },
+    {
+      "nodo_id": 38,
+      "nombre": "Camara Z61",
+      "lon": -72.519022,
+      "lat": -42.561921,
+      "elevacion_m": 199.9
+    },
+    {
+      "nodo_id": 39,
+      "nombre": "Camara T60",
+      "lon": -72.592398,
+      "lat": -42.554482,
+      "elevacion_m": 232.8
+    },
+    {
+      "nodo_id": 40,
+      "nombre": "Camara AA60",
+      "lon": -72.50721,
+      "lat": -42.552659,
+      "elevacion_m": 263.5
+    },
+    {
+      "nodo_id": 41,
+      "nombre": "Camara Z59",
+      "lon": -72.519736,
+      "lat": -42.543926,
+      "elevacion_m": 46.9
+    },
+    {
+      "nodo_id": 42,
+      "nombre": "Camara AD57",
+      "lon": -72.471793,
+      "lat": -42.524868,
+      "elevacion_m": 94.0
+    },
+    {
+      "nodo_id": 43,
+      "nombre": "Camara AC56",
+      "lon": -72.484318,
+      "lat": -42.516139,
+      "elevacion_m": 134.0
+    },
+    {
+      "nodo_id": 44,
+      "nombre": "Camara AF56",
+      "lon": -72.447833,
+      "lat": -42.515331,
+      "elevacion_m": 300.3
+    },
+    {
+      "nodo_id": 45,
+      "nombre": "Camara AF54",
+      "lon": -72.448565,
+      "lat": -42.497338,
+      "elevacion_m": 34.7
+    },
+    {
+      "nodo_id": 46,
+      "nombre": "Camara AM27",
+      "lon": -72.373612,
+      "lat": -42.252503,
+      "elevacion_m": 15.9
+    },
+    {
+      "nodo_id": 47,
+      "nombre": "Camara AH08",
+      "lon": -72.441068,
+      "lat": -42.082924,
+      "elevacion_m": 35.6
+    },
+    {
+      "nodo_id": 48,
+      "nombre": "Camara AI03",
+      "lon": -72.430805,
+      "lat": -42.037667,
+      "elevacion_m": 289.8
+    },
+    {
+      "nodo_id": 49,
+      "nombre": "WP Anillo C1-N",
+      "lon": -72.464742,
+      "lat": -42.997913,
+      "elevacion_m": 449.4
+    },
+    {
+      "nodo_id": 50,
+      "nombre": "WP Anillo C1-SE",
+      "lon": -72.459715,
+      "lat": -43.003879,
+      "elevacion_m": 395.1
+    },
+    {
+      "nodo_id": 51,
+      "nombre": "WP Anillo C1-SO",
+      "lon": -72.469268,
+      "lat": -43.004091,
+      "elevacion_m": 412.5
+    },
+    {
+      "nodo_id": 52,
+      "nombre": "WP Anillo C2-N",
+      "lon": -72.477366,
+      "lat": -42.989187,
+      "elevacion_m": 122.6
+    },
+    {
+      "nodo_id": 53,
+      "nombre": "WP Anillo C2-SE",
+      "lon": -72.472341,
+      "lat": -42.995154,
+      "elevacion_m": 177.7
+    },
+    {
+      "nodo_id": 54,
+      "nombre": "WP Anillo C2-SO",
+      "lon": -72.481893,
+      "lat": -42.995364,
+      "elevacion_m": 134.5
+    },
+    {
+      "nodo_id": 55,
+      "nombre": "WP Anillo C3-N",
+      "lon": -72.477734,
+      "lat": -42.980191,
+      "elevacion_m": 179.9
+    },
+    {
+      "nodo_id": 56,
+      "nombre": "WP Anillo C3-SE",
+      "lon": -72.47271,
+      "lat": -42.986158,
+      "elevacion_m": 119.3
+    },
+    {
+      "nodo_id": 57,
+      "nombre": "WP Anillo C3-SO",
+      "lon": -72.482261,
+      "lat": -42.986368,
+      "elevacion_m": 161.5
+    },
+    {
+      "nodo_id": 58,
+      "nombre": "WP Anillo C4-N",
+      "lon": -72.440976,
+      "lat": -42.979375,
+      "elevacion_m": 811.9
+    },
+    {
+      "nodo_id": 59,
+      "nombre": "WP Anillo C4-SE",
+      "lon": -72.435949,
+      "lat": -42.98534,
+      "elevacion_m": 498.9
+    },
+    {
+      "nodo_id": 60,
+      "nombre": "WP Anillo C4-SO",
+      "lon": -72.445499,
+      "lat": -42.985554,
+      "elevacion_m": 841.7
+    },
+    {
+      "nodo_id": 61,
+      "nombre": "WP Anillo C5-N",
+      "lon": -72.46585,
+      "lat": -42.970924,
+      "elevacion_m": 186.8
+    },
+    {
+      "nodo_id": 62,
+      "nombre": "WP Anillo C5-SE",
+      "lon": -72.460826,
+      "lat": -42.97689,
+      "elevacion_m": 330.2
+    },
+    {
+      "nodo_id": 63,
+      "nombre": "WP Anillo C5-SO",
+      "lon": -72.470375,
+      "lat": -42.977102,
+      "elevacion_m": 169.3
+    },
+    {
+      "nodo_id": 64,
+      "nombre": "WP Anillo C6-N",
+      "lon": -72.478469,
+      "lat": -42.962198,
+      "elevacion_m": 291.9
+    },
+    {
+      "nodo_id": 65,
+      "nombre": "WP Anillo C6-SE",
+      "lon": -72.473447,
+      "lat": -42.968165,
+      "elevacion_m": 222.6
+    },
+    {
+      "nodo_id": 66,
+      "nombre": "WP Anillo C6-SO",
+      "lon": -72.482995,
+      "lat": -42.968375,
+      "elevacion_m": 249.8
+    },
+    {
+      "nodo_id": 67,
+      "nombre": "WP Anillo C7-N",
+      "lon": -72.478836,
+      "lat": -42.953202,
+      "elevacion_m": 430.4
+    },
+    {
+      "nodo_id": 68,
+      "nombre": "WP Anillo C7-SE",
+      "lon": -72.473815,
+      "lat": -42.959169,
+      "elevacion_m": 357.0
+    },
+    {
+      "nodo_id": 69,
+      "nombre": "WP Anillo C7-SO",
+      "lon": -72.483362,
+      "lat": -42.959379,
+      "elevacion_m": 288.3
+    },
+    {
+      "nodo_id": 70,
+      "nombre": "WP Anillo C8-N",
+      "lon": -72.613917,
+      "lat": -42.947094,
+      "elevacion_m": 216.3
+    },
+    {
+      "nodo_id": 71,
+      "nombre": "WP Anillo C8-SE",
+      "lon": -72.608909,
+      "lat": -42.953068,
+      "elevacion_m": 49.6
+    },
+    {
+      "nodo_id": 72,
+      "nombre": "WP Anillo C8-SO",
+      "lon": -72.618456,
+      "lat": -42.953267,
+      "elevacion_m": 210.1
+    },
+    {
+      "nodo_id": 73,
+      "nombre": "WP Anillo C9-N",
+      "lon": -72.467328,
+      "lat": -42.934939,
+      "elevacion_m": 348.0
+    },
+    {
+      "nodo_id": 74,
+      "nombre": "WP Anillo C9-SE",
+      "lon": -72.462307,
+      "lat": -42.940905,
+      "elevacion_m": 394.3
+    },
+    {
+      "nodo_id": 75,
+      "nombre": "WP Anillo C9-SO",
+      "lon": -72.471851,
+      "lat": -42.941117,
+      "elevacion_m": 333.6
+    },
+    {
+      "nodo_id": 76,
+      "nombre": "WP Anillo C10-N",
+      "lon": -72.455825,
+      "lat": -42.916674,
+      "elevacion_m": 636.6
+    },
+    {
+      "nodo_id": 77,
+      "nombre": "WP Anillo C10-SE",
+      "lon": -72.450804,
+      "lat": -42.92264,
+      "elevacion_m": 960.0
+    },
+    {
+      "nodo_id": 78,
+      "nombre": "WP Anillo C10-SO",
+      "lon": -72.460345,
+      "lat": -42.922852,
+      "elevacion_m": 611.4
+    },
+    {
+      "nodo_id": 79,
+      "nombre": "WP Anillo C11-N",
+      "lon": -72.456566,
+      "lat": -42.898682,
+      "elevacion_m": 396.2
+    },
+    {
+      "nodo_id": 80,
+      "nombre": "WP Anillo C11-SE",
+      "lon": -72.451547,
+      "lat": -42.904648,
+      "elevacion_m": 562.3
+    },
+    {
+      "nodo_id": 81,
+      "nombre": "WP Anillo C11-SO",
+      "lon": -72.461085,
+      "lat": -42.90486,
+      "elevacion_m": 384.9
+    },
+    {
+      "nodo_id": 82,
+      "nombre": "WP Anillo C12-N",
+      "lon": -72.445072,
+      "lat": -42.880416,
+      "elevacion_m": 641.1
+    },
+    {
+      "nodo_id": 83,
+      "nombre": "WP Anillo C12-SE",
+      "lon": -72.440054,
+      "lat": -42.886382,
+      "elevacion_m": 610.7
+    },
+    {
+      "nodo_id": 84,
+      "nombre": "WP Anillo C12-SO",
+      "lon": -72.449589,
+      "lat": -42.886595,
+      "elevacion_m": 441.2
+    },
+    {
+      "nodo_id": 85,
+      "nombre": "WP Anillo C13-N",
+      "lon": -72.396899,
+      "lat": -42.861321,
+      "elevacion_m": 656.1
+    },
+    {
+      "nodo_id": 86,
+      "nombre": "WP Anillo C13-SE",
+      "lon": -72.391878,
+      "lat": -42.867285,
+      "elevacion_m": 655.8
+    },
+    {
+      "nodo_id": 87,
+      "nombre": "WP Anillo C13-SO",
+      "lon": -72.40141,
+      "lat": -42.867501,
+      "elevacion_m": 612.1
+    },
+    {
+      "nodo_id": 88,
+      "nombre": "WP Anillo C14-N",
+      "lon": -72.777354,
+      "lat": -42.833324,
+      "elevacion_m": 331.3
+    },
+    {
+      "nodo_id": 89,
+      "nombre": "WP Anillo C14-SE",
+      "lon": -72.772371,
+      "lat": -42.839305,
+      "elevacion_m": 422.3
+    },
+    {
+      "nodo_id": 90,
+      "nombre": "WP Anillo C14-SO",
+      "lon": -72.781902,
+      "lat": -42.83949,
+      "elevacion_m": 268.0
+    },
+    {
+      "nodo_id": 91,
+      "nombre": "WP Anillo C15-N",
+      "lon": -72.717218,
+      "lat": -42.805126,
+      "elevacion_m": 50.7
+    },
+    {
+      "nodo_id": 92,
+      "nombre": "WP Anillo C15-SE",
+      "lon": -72.712232,
+      "lat": -42.811104,
+      "elevacion_m": 62.0
+    },
+    {
+      "nodo_id": 93,
+      "nombre": "WP Anillo C15-SO",
+      "lon": -72.721757,
+      "lat": -42.811295,
+      "elevacion_m": 59.4
+    },
+    {
+      "nodo_id": 94,
+      "nombre": "WP Anillo C16-N",
+      "lon": -72.643899,
+      "lat": -42.80364,
+      "elevacion_m": 290.7
+    },
+    {
+      "nodo_id": 95,
+      "nombre": "WP Anillo C16-SE",
+      "lon": -72.638906,
+      "lat": -42.809615,
+      "elevacion_m": 651.0
+    },
+    {
+      "nodo_id": 96,
+      "nombre": "WP Anillo C16-SO",
+      "lon": -72.648431,
+      "lat": -42.809811,
+      "elevacion_m": 309.7
+    },
+    {
+      "nodo_id": 97,
+      "nombre": "WP Anillo C17-N",
+      "lon": -72.693112,
+      "lat": -42.795638,
+      "elevacion_m": 61.5
+    },
+    {
+      "nodo_id": 98,
+      "nombre": "WP Anillo C17-SE",
+      "lon": -72.688125,
+      "lat": -42.801615,
+      "elevacion_m": 75.5
+    },
+    {
+      "nodo_id": 99,
+      "nombre": "WP Anillo C17-SO",
+      "lon": -72.697649,
+      "lat": -42.801807,
+      "elevacion_m": 84.3
+    },
+    {
+      "nodo_id": 100,
+      "nombre": "WP Anillo C18-N",
+      "lon": -72.644582,
+      "lat": -42.785645,
+      "elevacion_m": 120.4
+    },
+    {
+      "nodo_id": 101,
+      "nombre": "WP Anillo C18-SE",
+      "lon": -72.63959,
+      "lat": -42.79162,
+      "elevacion_m": 135.7
+    },
+    {
+      "nodo_id": 102,
+      "nombre": "WP Anillo C18-SO",
+      "lon": -72.649112,
+      "lat": -42.791816,
+      "elevacion_m": 124.4
+    },
+    {
+      "nodo_id": 103,
+      "nombre": "WP Anillo C19-N",
+      "lon": -72.62015,
+      "lat": -42.785139,
+      "elevacion_m": 176.9
+    },
+    {
+      "nodo_id": 104,
+      "nombre": "WP Anillo C19-SE",
+      "lon": -72.615157,
+      "lat": -42.791113,
+      "elevacion_m": 190.2
+    },
+    {
+      "nodo_id": 105,
+      "nombre": "WP Anillo C19-SO",
+      "lon": -72.624678,
+      "lat": -42.791311,
+      "elevacion_m": 176.8
+    },
+    {
+      "nodo_id": 106,
+      "nombre": "WP Anillo C20-N",
+      "lon": -72.608281,
+      "lat": -42.775887,
+      "elevacion_m": 192.4
+    },
+    {
+      "nodo_id": 107,
+      "nombre": "WP Anillo C20-SE",
+      "lon": -72.603287,
+      "lat": -42.781861,
+      "elevacion_m": 208.5
+    },
+    {
+      "nodo_id": 108,
+      "nombre": "WP Anillo C20-SO",
+      "lon": -72.612807,
+      "lat": -42.78206,
+      "elevacion_m": 175.3
+    },
+    {
+      "nodo_id": 109,
+      "nombre": "WP Anillo C21-N",
+      "lon": -72.645263,
+      "lat": -42.767649,
+      "elevacion_m": 101.9
+    },
+    {
+      "nodo_id": 110,
+      "nombre": "WP Anillo C21-SE",
+      "lon": -72.640274,
+      "lat": -42.773624,
+      "elevacion_m": 119.6
+    },
+    {
+      "nodo_id": 111,
+      "nombre": "WP Anillo C21-SO",
+      "lon": -72.649793,
+      "lat": -42.77382,
+      "elevacion_m": 113.9
+    },
+    {
+      "nodo_id": 112,
+      "nombre": "WP Anillo C22-N",
+      "lon": -72.608628,
+      "lat": -42.766889,
+      "elevacion_m": 334.5
+    },
+    {
+      "nodo_id": 113,
+      "nombre": "WP Anillo C22-SE",
+      "lon": -72.603635,
+      "lat": -42.772863,
+      "elevacion_m": 405.3
+    },
+    {
+      "nodo_id": 114,
+      "nombre": "WP Anillo C22-SO",
+      "lon": -72.613154,
+      "lat": -42.773062,
+      "elevacion_m": 166.5
+    },
+    {
+      "nodo_id": 115,
+      "nombre": "WP Anillo C23-N",
+      "lon": -72.621184,
+      "lat": -42.758146,
+      "elevacion_m": 115.7
+    },
+    {
+      "nodo_id": 116,
+      "nombre": "WP Anillo C23-SE",
+      "lon": -72.616193,
+      "lat": -42.76412,
+      "elevacion_m": 145.6
+    },
+    {
+      "nodo_id": 117,
+      "nombre": "WP Anillo C23-SO",
+      "lon": -72.62571,
+      "lat": -42.764318,
+      "elevacion_m": 139.4
+    },
+    {
+      "nodo_id": 118,
+      "nombre": "WP Anillo C24-N",
+      "lon": -72.60932,
+      "lat": -42.748894,
+      "elevacion_m": 114.0
+    },
+    {
+      "nodo_id": 119,
+      "nombre": "WP Anillo C24-SE",
+      "lon": -72.604328,
+      "lat": -42.754868,
+      "elevacion_m": 194.8
+    },
+    {
+      "nodo_id": 120,
+      "nombre": "WP Anillo C24-SO",
+      "lon": -72.613844,
+      "lat": -42.755067,
+      "elevacion_m": 114.0
+    },
+    {
+      "nodo_id": 121,
+      "nombre": "WP Anillo C25-N",
+      "lon": -72.585951,
+      "lat": -42.721389,
+      "elevacion_m": 238.0
+    },
+    {
+      "nodo_id": 122,
+      "nombre": "WP Anillo C25-SE",
+      "lon": -72.58096,
+      "lat": -42.727362,
+      "elevacion_m": 589.9
+    },
+    {
+      "nodo_id": 123,
+      "nombre": "WP Anillo C25-SO",
+      "lon": -72.590471,
+      "lat": -42.727563,
+      "elevacion_m": 289.4
+    },
+    {
+      "nodo_id": 124,
+      "nombre": "WP Anillo C26-N",
+      "lon": -72.574099,
+      "lat": -42.712133,
+      "elevacion_m": 292.0
+    },
+    {
+      "nodo_id": 125,
+      "nombre": "WP Anillo C26-SE",
+      "lon": -72.569107,
+      "lat": -42.718106,
+      "elevacion_m": 664.7
+    },
+    {
+      "nodo_id": 126,
+      "nombre": "WP Anillo C26-SO",
+      "lon": -72.578617,
+      "lat": -42.718307,
+      "elevacion_m": 273.3
+    },
+    {
+      "nodo_id": 127,
+      "nombre": "WP Anillo C27-N",
+      "lon": -72.586649,
+      "lat": -42.703394,
+      "elevacion_m": 121.3
+    },
+    {
+      "nodo_id": 128,
+      "nombre": "WP Anillo C27-SE",
+      "lon": -72.581659,
+      "lat": -42.709367,
+      "elevacion_m": 130.3
+    },
+    {
+      "nodo_id": 129,
+      "nombre": "WP Anillo C27-SO",
+      "lon": -72.591168,
+      "lat": -42.709568,
+      "elevacion_m": 111.5
+    },
+    {
+      "nodo_id": 130,
+      "nombre": "WP Anillo C28-N",
+      "lon": -72.587346,
+      "lat": -42.685399,
+      "elevacion_m": 428.0
+    },
+    {
+      "nodo_id": 131,
+      "nombre": "WP Anillo C28-SE",
+      "lon": -72.582357,
+      "lat": -42.691372,
+      "elevacion_m": 128.3
+    },
+    {
+      "nodo_id": 132,
+      "nombre": "WP Anillo C28-SO",
+      "lon": -72.591864,
+      "lat": -42.691573,
+      "elevacion_m": 505.1
+    },
+    {
+      "nodo_id": 133,
+      "nombre": "WP Anillo C29-N",
+      "lon": -72.576199,
+      "lat": -42.658148,
+      "elevacion_m": 277.0
+    },
+    {
+      "nodo_id": 134,
+      "nombre": "WP Anillo C29-SE",
+      "lon": -72.571212,
+      "lat": -42.664121,
+      "elevacion_m": 266.2
+    },
+    {
+      "nodo_id": 135,
+      "nombre": "WP Anillo C29-SO",
+      "lon": -72.580714,
+      "lat": -42.664322,
+      "elevacion_m": 184.9
+    },
+    {
+      "nodo_id": 136,
+      "nombre": "WP Anillo C30-N",
+      "lon": -72.600927,
+      "lat": -42.649664,
+      "elevacion_m": 771.3
+    },
+    {
+      "nodo_id": 137,
+      "nombre": "WP Anillo C30-SE",
+      "lon": -72.595943,
+      "lat": -42.655638,
+      "elevacion_m": 467.5
+    },
+    {
+      "nodo_id": 138,
+      "nombre": "WP Anillo C30-SO",
+      "lon": -72.605444,
+      "lat": -42.655837,
+      "elevacion_m": 580.6
+    },
+    {
+      "nodo_id": 139,
+      "nombre": "WP Anillo C31-N",
+      "lon": -72.576899,
+      "lat": -42.640153,
+      "elevacion_m": 266.3
+    },
+    {
+      "nodo_id": 140,
+      "nombre": "WP Anillo C31-SE",
+      "lon": -72.571914,
+      "lat": -42.646126,
+      "elevacion_m": 404.7
+    },
+    {
+      "nodo_id": 141,
+      "nombre": "WP Anillo C31-SO",
+      "lon": -72.581413,
+      "lat": -42.646327,
+      "elevacion_m": 263.6
+    },
+    {
+      "nodo_id": 142,
+      "nombre": "WP Anillo C32-N",
+      "lon": -72.809739,
+      "lat": -42.608823,
+      "elevacion_m": 46.5
+    },
+    {
+      "nodo_id": 143,
+      "nombre": "WP Anillo C32-SE",
+      "lon": -72.804778,
+      "lat": -42.614807,
+      "elevacion_m": 46.5
+    },
+    {
+      "nodo_id": 144,
+      "nombre": "WP Anillo C32-SO",
+      "lon": -72.814274,
+      "lat": -42.614989,
+      "elevacion_m": 49.2
+    },
+    {
+      "nodo_id": 145,
+      "nombre": "WP Anillo C33-N",
+      "lon": -72.578644,
+      "lat": -42.595165,
+      "elevacion_m": 463.4
+    },
+    {
+      "nodo_id": 146,
+      "nombre": "WP Anillo C33-SE",
+      "lon": -72.573662,
+      "lat": -42.601138,
+      "elevacion_m": 481.8
+    },
+    {
+      "nodo_id": 147,
+      "nombre": "WP Anillo C33-SO",
+      "lon": -72.583155,
+      "lat": -42.601339,
+      "elevacion_m": 90.8
+    },
+    {
+      "nodo_id": 148,
+      "nombre": "WP Anillo C34-N",
+      "lon": -72.798508,
+      "lat": -42.581592,
+      "elevacion_m": 74.9
+    },
+    {
+      "nodo_id": 149,
+      "nombre": "WP Anillo C34-SE",
+      "lon": -72.793548,
+      "lat": -42.587575,
+      "elevacion_m": 151.1
+    },
+    {
+      "nodo_id": 150,
+      "nombre": "WP Anillo C34-SO",
+      "lon": -72.80304,
+      "lat": -42.587758,
+      "elevacion_m": 97.8
+    },
+    {
+      "nodo_id": 151,
+      "nombre": "WP Anillo C35-N",
+      "lon": -72.591861,
+      "lat": -42.568429,
+      "elevacion_m": 168.2
+    },
+    {
+      "nodo_id": 152,
+      "nombre": "WP Anillo C35-SE",
+      "lon": -72.586883,
+      "lat": -42.574403,
+      "elevacion_m": 401.9
+    },
+    {
+      "nodo_id": 153,
+      "nombre": "WP Anillo C35-SO",
+      "lon": -72.596371,
+      "lat": -42.574602,
+      "elevacion_m": 65.2
+    },
+    {
+      "nodo_id": 154,
+      "nombre": "WP Anillo C36-N",
+      "lon": -72.61655,
+      "lat": -42.55994,
+      "elevacion_m": 121.4
+    },
+    {
+      "nodo_id": 155,
+      "nombre": "WP Anillo C36-SE",
+      "lon": -72.611575,
+      "lat": -42.565915,
+      "elevacion_m": 522.7
+    },
+    {
+      "nodo_id": 156,
+      "nombre": "WP Anillo C36-SO",
+      "lon": -72.621063,
+      "lat": -42.566112,
+      "elevacion_m": 144.6
+    },
+    {
+      "nodo_id": 157,
+      "nombre": "WP Anillo C37-N",
+      "lon": -72.604379,
+      "lat": -42.559686,
+      "elevacion_m": 7.8
+    },
+    {
+      "nodo_id": 158,
+      "nombre": "WP Anillo C37-SE",
+      "lon": -72.599403,
+      "lat": -42.56566,
+      "elevacion_m": 11.9
+    },
+    {
+      "nodo_id": 159,
+      "nombre": "WP Anillo C37-SO",
+      "lon": -72.60889,
+      "lat": -42.565859,
+      "elevacion_m": 503.6
+    },
+    {
+      "nodo_id": 160,
+      "nombre": "WP Anillo C38-N",
+      "lon": -72.519182,
+      "lat": -42.557872,
+      "elevacion_m": 156.3
+    },
+    {
+      "nodo_id": 161,
+      "nombre": "WP Anillo C38-SE",
+      "lon": -72.514199,
+      "lat": -42.563843,
+      "elevacion_m": 273.9
+    },
+    {
+      "nodo_id": 162,
+      "nombre": "WP Anillo C38-SO",
+      "lon": -72.523685,
+      "lat": -42.564048,
+      "elevacion_m": 100.2
+    },
+    {
+      "nodo_id": 163,
+      "nombre": "WP Anillo C39-N",
+      "lon": -72.592554,
+      "lat": -42.550433,
+      "elevacion_m": 0.0
+    },
+    {
+      "nodo_id": 164,
+      "nombre": "WP Anillo C39-SE",
+      "lon": -72.587577,
+      "lat": -42.556407,
+      "elevacion_m": 315.8
+    },
+    {
+      "nodo_id": 165,
+      "nombre": "WP Anillo C39-SO",
+      "lon": -72.597063,
+      "lat": -42.556606,
+      "elevacion_m": 64.3
+    },
+    {
+      "nodo_id": 166,
+      "nombre": "WP Anillo C40-N",
+      "lon": -72.507371,
+      "lat": -42.54861,
+      "elevacion_m": 281.2
+    },
+    {
+      "nodo_id": 167,
+      "nombre": "WP Anillo C40-SE",
+      "lon": -72.502387,
+      "lat": -42.55458,
+      "elevacion_m": 87.7
+    },
+    {
+      "nodo_id": 168,
+      "nombre": "WP Anillo C40-SO",
+      "lon": -72.511872,
+      "lat": -42.554787,
+      "elevacion_m": 341.6
+    },
+    {
+      "nodo_id": 169,
+      "nombre": "WP Anillo C41-N",
+      "lon": -72.519896,
+      "lat": -42.539877,
+      "elevacion_m": 119.6
+    },
+    {
+      "nodo_id": 170,
+      "nombre": "WP Anillo C41-SE",
+      "lon": -72.514914,
+      "lat": -42.545848,
+      "elevacion_m": 161.8
+    },
+    {
+      "nodo_id": 171,
+      "nombre": "WP Anillo C41-SO",
+      "lon": -72.524398,
+      "lat": -42.546053,
+      "elevacion_m": 0.0
+    },
+    {
+      "nodo_id": 172,
+      "nombre": "WP Anillo C42-N",
+      "lon": -72.471956,
+      "lat": -42.520819,
+      "elevacion_m": 28.3
+    },
+    {
+      "nodo_id": 173,
+      "nombre": "WP Anillo C42-SE",
+      "lon": -72.466971,
+      "lat": -42.526788,
+      "elevacion_m": 334.8
+    },
+    {
+      "nodo_id": 174,
+      "nombre": "WP Anillo C42-SO",
+      "lon": -72.476452,
+      "lat": -42.526997,
+      "elevacion_m": 30.2
+    },
+    {
+      "nodo_id": 175,
+      "nombre": "WP Anillo C43-N",
+      "lon": -72.48448,
+      "lat": -42.51209,
+      "elevacion_m": 178.8
+    },
+    {
+      "nodo_id": 176,
+      "nombre": "WP Anillo C43-SE",
+      "lon": -72.479497,
+      "lat": -42.518059,
+      "elevacion_m": 87.5
+    },
+    {
+      "nodo_id": 177,
+      "nombre": "WP Anillo C43-SO",
+      "lon": -72.488976,
+      "lat": -42.518267,
+      "elevacion_m": 140.7
+    },
+    {
+      "nodo_id": 178,
+      "nombre": "WP Anillo C44-N",
+      "lon": -72.447998,
+      "lat": -42.511282,
+      "elevacion_m": 160.8
+    },
+    {
+      "nodo_id": 179,
+      "nombre": "WP Anillo C44-SE",
+      "lon": -72.443011,
+      "lat": -42.51725,
+      "elevacion_m": 595.5
+    },
+    {
+      "nodo_id": 180,
+      "nombre": "WP Anillo C44-SO",
+      "lon": -72.45249,
+      "lat": -42.517461,
+      "elevacion_m": 186.1
+    },
+    {
+      "nodo_id": 181,
+      "nombre": "WP Anillo C45-N",
+      "lon": -72.44873,
+      "lat": -42.493289,
+      "elevacion_m": 209.8
+    },
+    {
+      "nodo_id": 182,
+      "nombre": "WP Anillo C45-SE",
+      "lon": -72.443745,
+      "lat": -42.499257,
+      "elevacion_m": 2.2
+    },
+    {
+      "nodo_id": 183,
+      "nombre": "WP Anillo C45-SO",
+      "lon": -72.453221,
+      "lat": -42.499468,
+      "elevacion_m": 187.4
+    },
+    {
+      "nodo_id": 184,
+      "nombre": "WP Anillo C46-N",
+      "lon": -72.37378,
+      "lat": -42.248454,
+      "elevacion_m": 23.0
+    },
+    {
+      "nodo_id": 185,
+      "nombre": "WP Anillo C46-SE",
+      "lon": -72.368809,
+      "lat": -42.254419,
+      "elevacion_m": 301.7
+    },
+    {
+      "nodo_id": 186,
+      "nombre": "WP Anillo C46-SO",
+      "lon": -72.378247,
+      "lat": -42.254635,
+      "elevacion_m": 0.0
+    },
+    {
+      "nodo_id": 187,
+      "nombre": "WP Anillo C47-N",
+      "lon": -72.441231,
+      "lat": -42.078875,
+      "elevacion_m": 400.0
+    },
+    {
+      "nodo_id": 188,
+      "nombre": "WP Anillo C47-SE",
+      "lon": -72.43628,
+      "lat": -42.084843,
+      "elevacion_m": 75.1
+    },
+    {
+      "nodo_id": 189,
+      "nombre": "WP Anillo C47-SO",
+      "lon": -72.445694,
+      "lat": -42.085053,
+      "elevacion_m": 20.9
+    },
+    {
+      "nodo_id": 190,
+      "nombre": "WP Anillo C48-N",
+      "lon": -72.430968,
+      "lat": -42.033618,
+      "elevacion_m": 151.3
+    },
+    {
+      "nodo_id": 191,
+      "nombre": "WP Anillo C48-SE",
+      "lon": -72.42602,
+      "lat": -42.039586,
+      "elevacion_m": 419.3
+    },
+    {
+      "nodo_id": 192,
+      "nombre": "WP Anillo C48-SO",
+      "lon": -72.435427,
+      "lat": -42.039797,
+      "elevacion_m": 590.8
+    },
+    {
+      "nodo_id": 193,
+      "nombre": "WP Desvio C1-C3 Izq-1",
+      "lon": -72.47971,
+      "lat": -42.996512,
+      "elevacion_m": 116.3
+    },
+    {
+      "nodo_id": 194,
+      "nombre": "WP Desvio C1-C3 Der-1",
+      "lon": -72.462436,
+      "lat": -42.989688,
+      "elevacion_m": 559.6
+    },
+    {
+      "nodo_id": 195,
+      "nombre": "WP Desvio C1-C4 Izq-1",
+      "lon": -72.459832,
+      "lat": -42.987758,
+      "elevacion_m": 590.5
+    },
+    {
+      "nodo_id": 196,
+      "nombre": "WP Desvio C1-C4 Der-1",
+      "lon": -72.445546,
+      "lat": -42.997627,
+      "elevacion_m": 265.0
+    },
+    {
+      "nodo_id": 197,
+      "nombre": "WP Desvio C2-C5 Izq-1",
+      "lon": -72.480341,
+      "lat": -42.981078,
+      "elevacion_m": 174.7
+    },
+    {
+      "nodo_id": 198,
+      "nombre": "WP Desvio C2-C5 Der-1",
+      "lon": -72.462541,
+      "lat": -42.987128,
+      "elevacion_m": 500.6
+    },
+    {
+      "nodo_id": 199,
+      "nombre": "WP Desvio C2-C6 Izq-1",
+      "lon": -72.487554,
+      "lat": -42.979956,
+      "elevacion_m": 313.6
+    },
+    {
+      "nodo_id": 200,
+      "nombre": "WP Desvio C2-C6 Der-1",
+      "lon": -72.46795,
+      "lat": -42.979524,
+      "elevacion_m": 137.8
+    },
+    {
+      "nodo_id": 201,
+      "nombre": "WP Desvio C3-C4 Izq-1",
+      "lon": -72.459484,
+      "lat": -42.976635,
+      "elevacion_m": 376.5
+    },
+    {
+      "nodo_id": 202,
+      "nombre": "WP Desvio C3-C4 Der-1",
+      "lon": -72.458891,
+      "lat": -42.991029,
+      "elevacion_m": 587.2
+    },
+    {
+      "nodo_id": 203,
+      "nombre": "WP Desvio C3-C6 Izq-1",
+      "lon": -72.487738,
+      "lat": -42.975458,
+      "elevacion_m": 377.5
+    },
+    {
+      "nodo_id": 204,
+      "nombre": "WP Desvio C3-C6 Der-1",
+      "lon": -72.468135,
+      "lat": -42.975026,
+      "elevacion_m": 182.2
+    },
+    {
+      "nodo_id": 205,
+      "nombre": "WP Desvio C3-C7 Izq-1",
+      "lon": -72.487921,
+      "lat": -42.97096,
+      "elevacion_m": 236.7
+    },
+    {
+      "nodo_id": 206,
+      "nombre": "WP Desvio C3-C7 Der-1",
+      "lon": -72.468319,
+      "lat": -42.970528,
+      "elevacion_m": 207.7
+    },
+    {
+      "nodo_id": 207,
+      "nombre": "WP Desvio C4-C5 Izq-1",
+      "lon": -72.457365,
+      "lat": -42.985733,
+      "elevacion_m": 593.5
+    },
+    {
+      "nodo_id": 208,
+      "nombre": "WP Desvio C4-C5 Der-1",
+      "lon": -72.449129,
+      "lat": -42.972663,
+      "elevacion_m": 647.5
+    },
+    {
+      "nodo_id": 209,
+      "nombre": "WP Desvio C5-C7 Izq-1",
+      "lon": -72.480812,
+      "lat": -42.969523,
+      "elevacion_m": 236.4
+    },
+    {
+      "nodo_id": 210,
+      "nombre": "WP Desvio C5-C7 Der-1",
+      "lon": -72.463545,
+      "lat": -42.962699,
+      "elevacion_m": 179.4
+    },
+    {
+      "nodo_id": 211,
+      "nombre": "WP Desvio C7-C8 Izq-1",
+      "lon": -72.546821,
+      "lat": -42.961404,
+      "elevacion_m": 57.7
+    },
+    {
+      "nodo_id": 212,
+      "nombre": "WP Desvio C7-C8 Der-1",
+      "lon": -72.545616,
+      "lat": -42.94703,
+      "elevacion_m": 617.9
+    },
+    {
+      "nodo_id": 213,
+      "nombre": "WP Desvio C7-C9 Izq-1",
+      "lon": -72.48181,
+      "lat": -42.945093,
+      "elevacion_m": 324.5
+    },
+    {
+      "nodo_id": 214,
+      "nombre": "WP Desvio C7-C9 Der-1",
+      "lon": -72.464021,
+      "lat": -42.951143,
+      "elevacion_m": 218.8
+    },
+    {
+      "nodo_id": 215,
+      "nombre": "WP Desvio C8-C16 Izq-1",
+      "lon": -72.63845,
+      "lat": -42.880511,
+      "elevacion_m": 237.4
+    },
+    {
+      "nodo_id": 216,
+      "nombre": "WP Desvio C8-C16 Der-1",
+      "lon": -72.619095,
+      "lat": -42.878323,
+      "elevacion_m": 591.0
+    },
+    {
+      "nodo_id": 217,
+      "nombre": "WP Desvio C9-C10 Izq-1",
+      "lon": -72.470301,
+      "lat": -42.92683,
+      "elevacion_m": 347.7
+    },
+    {
+      "nodo_id": 218,
+      "nombre": "WP Desvio C9-C10 Der-1",
+      "lon": -72.452516,
+      "lat": -42.932879,
+      "elevacion_m": 915.3
+    },
+    {
+      "nodo_id": 219,
+      "nombre": "WP Desvio C11-C12 Izq-1",
+      "lon": -72.459538,
+      "lat": -42.890573,
+      "elevacion_m": 415.4
+    },
+    {
+      "nodo_id": 220,
+      "nombre": "WP Desvio C11-C12 Der-1",
+      "lon": -72.441763,
+      "lat": -42.89662,
+      "elevacion_m": 750.1
+    },
+    {
+      "nodo_id": 221,
+      "nombre": "WP Desvio C12-C13 Izq-1",
+      "lon": -72.425457,
+      "lat": -42.86858,
+      "elevacion_m": 884.4
+    },
+    {
+      "nodo_id": 222,
+      "nombre": "WP Desvio C12-C13 Der-1",
+      "lon": -72.416168,
+      "lat": -42.881257,
+      "elevacion_m": 687.5
+    },
+    {
+      "nodo_id": 223,
+      "nombre": "WP Desvio C14-C15 Izq-1",
+      "lon": -72.752387,
+      "lat": -42.817204,
+      "elevacion_m": 46.3
+    },
+    {
+      "nodo_id": 224,
+      "nombre": "WP Desvio C14-C15 Der-1",
+      "lon": -72.741876,
+      "lat": -42.829351,
+      "elevacion_m": 357.4
+    },
+    {
+      "nodo_id": 225,
+      "nombre": "WP Desvio C15-C17 Izq-1",
+      "lon": -72.709624,
+      "lat": -42.798081,
+      "elevacion_m": 54.0
+    },
+    {
+      "nodo_id": 226,
+      "nombre": "WP Desvio C15-C17 Der-1",
+      "lon": -72.700404,
+      "lat": -42.810782,
+      "elevacion_m": 71.2
+    },
+    {
+      "nodo_id": 227,
+      "nombre": "WP Desvio C16-C19 Izq-1",
+      "lon": -72.638974,
+      "lat": -42.793492,
+      "elevacion_m": 133.6
+    },
+    {
+      "nodo_id": 228,
+      "nombre": "WP Desvio C16-C19 Der-1",
+      "lon": -72.624762,
+      "lat": -42.803386,
+      "elevacion_m": 408.8
+    },
+    {
+      "nodo_id": 229,
+      "nombre": "WP Desvio C17-C18 Izq-1",
+      "lon": -72.671325,
+      "lat": -42.787758,
+      "elevacion_m": 109.8
+    },
+    {
+      "nodo_id": 230,
+      "nombre": "WP Desvio C17-C18 Der-1",
+      "lon": -72.66606,
+      "lat": -42.801628,
+      "elevacion_m": 139.2
+    },
+    {
+      "nodo_id": 231,
+      "nombre": "WP Desvio C18-C21 Izq-1",
+      "lon": -72.654541,
+      "lat": -42.780897,
+      "elevacion_m": 105.4
+    },
+    {
+      "nodo_id": 232,
+      "nombre": "WP Desvio C18-C21 Der-1",
+      "lon": -72.634997,
+      "lat": -42.780495,
+      "elevacion_m": 132.1
+    },
+    {
+      "nodo_id": 233,
+      "nombre": "WP Desvio C19-C21 Izq-1",
+      "lon": -72.639271,
+      "lat": -42.785676,
+      "elevacion_m": 126.2
+    },
+    {
+      "nodo_id": 234,
+      "nombre": "WP Desvio C19-C21 Der-1",
+      "lon": -72.625839,
+      "lat": -42.775211,
+      "elevacion_m": 148.6
+    },
+    {
+      "nodo_id": 235,
+      "nombre": "WP Desvio C19-C22 Izq-1",
+      "lon": -72.623096,
+      "lat": -42.777026,
+      "elevacion_m": 152.5
+    },
+    {
+      "nodo_id": 236,
+      "nombre": "WP Desvio C19-C22 Der-1",
+      "lon": -72.605369,
+      "lat": -42.7831,
+      "elevacion_m": 185.2
+    },
+    {
+      "nodo_id": 237,
+      "nombre": "WP Desvio C20-C23 Izq-1",
+      "lon": -72.623194,
+      "lat": -42.774467,
+      "elevacion_m": 146.2
+    },
+    {
+      "nodo_id": 238,
+      "nombre": "WP Desvio C20-C23 Der-1",
+      "lon": -72.605963,
+      "lat": -42.767664,
+      "elevacion_m": 394.7
+    },
+    {
+      "nodo_id": 239,
+      "nombre": "WP Desvio C21-C22 Izq-1",
+      "lon": -72.627066,
+      "lat": -42.764121,
+      "elevacion_m": 123.7
+    },
+    {
+      "nodo_id": 240,
+      "nombre": "WP Desvio C21-C22 Der-1",
+      "lon": -72.626516,
+      "lat": -42.778518,
+      "elevacion_m": 148.0
+    },
+    {
+      "nodo_id": 241,
+      "nombre": "WP Desvio C21-C23 Izq-1",
+      "lon": -72.637683,
+      "lat": -42.760599,
+      "elevacion_m": 234.4
+    },
+    {
+      "nodo_id": 242,
+      "nombre": "WP Desvio C21-C23 Der-1",
+      "lon": -72.628454,
+      "lat": -42.773295,
+      "elevacion_m": 140.9
+    },
+    {
+      "nodo_id": 243,
+      "nombre": "WP Desvio C24-C25 Izq-1",
+      "lon": -72.605755,
+      "lat": -42.735369,
+      "elevacion_m": 138.0
+    },
+    {
+      "nodo_id": 244,
+      "nombre": "WP Desvio C24-C25 Der-1",
+      "lon": -72.589197,
+      "lat": -42.743013,
+      "elevacion_m": 609.0
+    },
+    {
+      "nodo_id": 245,
+      "nombre": "WP Desvio C28-C29 Izq-1",
+      "lon": -72.590957,
+      "lat": -42.673741,
+      "elevacion_m": 433.5
+    },
+    {
+      "nodo_id": 246,
+      "nombre": "WP Desvio C28-C29 Der-1",
+      "lon": -72.572271,
+      "lat": -42.677903,
+      "elevacion_m": 320.2
+    },
+    {
+      "nodo_id": 247,
+      "nombre": "WP Desvio C29-C30 Izq-1",
+      "lon": -72.59252,
+      "lat": -42.664486,
+      "elevacion_m": 831.8
+    },
+    {
+      "nodo_id": 248,
+      "nombre": "WP Desvio C29-C30 Der-1",
+      "lon": -72.584295,
+      "lat": -42.651426,
+      "elevacion_m": 361.1
+    },
+    {
+      "nodo_id": 249,
+      "nombre": "WP Desvio C30-C31 Izq-1",
+      "lon": -72.593365,
+      "lat": -42.642612,
+      "elevacion_m": 955.4
+    },
+    {
+      "nodo_id": 250,
+      "nombre": "WP Desvio C30-C31 Der-1",
+      "lon": -72.584145,
+      "lat": -42.655304,
+      "elevacion_m": 288.7
+    },
+    {
+      "nodo_id": 251,
+      "nombre": "WP Desvio C31-C33 Izq-1",
+      "lon": -72.587362,
+      "lat": -42.621914,
+      "elevacion_m": 197.2
+    },
+    {
+      "nodo_id": 252,
+      "nombre": "WP Desvio C31-C33 Der-1",
+      "lon": -72.567868,
+      "lat": -42.621501,
+      "elevacion_m": 619.4
+    },
+    {
+      "nodo_id": 253,
+      "nombre": "WP Desvio C32-C34 Izq-1",
+      "lon": -72.813304,
+      "lat": -42.597158,
+      "elevacion_m": 39.3
+    },
+    {
+      "nodo_id": 254,
+      "nombre": "WP Desvio C32-C34 Der-1",
+      "lon": -72.794655,
+      "lat": -42.601357,
+      "elevacion_m": 137.5
+    },
+    {
+      "nodo_id": 255,
+      "nombre": "WP Desvio C33-C35 Izq-1",
+      "lon": -72.594251,
+      "lat": -42.588317,
+      "elevacion_m": 73.6
+    },
+    {
+      "nodo_id": 256,
+      "nombre": "WP Desvio C33-C35 Der-1",
+      "lon": -72.575945,
+      "lat": -42.583375,
+      "elevacion_m": 292.0
+    },
+    {
+      "nodo_id": 257,
+      "nombre": "WP Desvio C34-C36 Izq-1",
+      "lon": -72.708912,
+      "lat": -42.567741,
+      "elevacion_m": 843.1
+    },
+    {
+      "nodo_id": 258,
+      "nombre": "WP Desvio C34-C36 Der-1",
+      "lon": -72.705814,
+      "lat": -42.581961,
+      "elevacion_m": 456.6
+    },
+    {
+      "nodo_id": 259,
+      "nombre": "WP Desvio C35-C36 Izq-1",
+      "lon": -72.60816,
+      "lat": -42.574764,
+      "elevacion_m": 415.5
+    },
+    {
+      "nodo_id": 260,
+      "nombre": "WP Desvio C35-C36 Der-1",
+      "lon": -72.599943,
+      "lat": -42.561705,
+      "elevacion_m": 12.6
+    },
+    {
+      "nodo_id": 261,
+      "nombre": "WP Desvio C35-C39 Izq-1",
+      "lon": -72.601789,
+      "lat": -42.563685,
+      "elevacion_m": 16.3
+    },
+    {
+      "nodo_id": 262,
+      "nombre": "WP Desvio C35-C39 Der-1",
+      "lon": -72.582314,
+      "lat": -42.563275,
+      "elevacion_m": 195.9
+    },
+    {
+      "nodo_id": 263,
+      "nombre": "WP Desvio C36-C39 Izq-1",
+      "lon": -72.608997,
+      "lat": -42.552889,
+      "elevacion_m": 0.0
+    },
+    {
+      "nodo_id": 264,
+      "nombre": "WP Desvio C36-C39 Der-1",
+      "lon": -72.599795,
+      "lat": -42.565583,
+      "elevacion_m": 9.0
+    },
+    {
+      "nodo_id": 265,
+      "nombre": "WP Desvio C38-C41 Izq-1",
+      "lon": -72.529115,
+      "lat": -42.553134,
+      "elevacion_m": 0.0
+    },
+    {
+      "nodo_id": 266,
+      "nombre": "WP Desvio C38-C41 Der-1",
+      "lon": -72.509644,
+      "lat": -42.552712,
+      "elevacion_m": 265.4
+    },
+    {
+      "nodo_id": 267,
+      "nombre": "WP Desvio C39-C41 Izq-1",
+      "lon": -72.557941,
+      "lat": -42.542144,
+      "elevacion_m": 0.0
+    },
+    {
+      "nodo_id": 268,
+      "nombre": "WP Desvio C39-C41 Der-1",
+      "lon": -72.554186,
+      "lat": -42.556276,
+      "elevacion_m": 0.0
+    },
+    {
+      "nodo_id": 269,
+      "nombre": "WP Desvio C41-C43 Izq-1",
+      "lon": -72.509107,
+      "lat": -42.525094,
+      "elevacion_m": 794.6
+    },
+    {
+      "nodo_id": 270,
+      "nombre": "WP Desvio C41-C43 Der-1",
+      "lon": -72.494938,
+      "lat": -42.534973,
+      "elevacion_m": 13.8
+    },
+    {
+      "nodo_id": 271,
+      "nombre": "WP Desvio C42-C44 Izq-1",
+      "lon": -72.464424,
+      "lat": -42.513759,
+      "elevacion_m": 36.1
+    },
+    {
+      "nodo_id": 272,
+      "nombre": "WP Desvio C42-C44 Der-1",
+      "lon": -72.455199,
+      "lat": -42.526441,
+      "elevacion_m": 570.4
+    },
+    {
+      "nodo_id": 273,
+      "nombre": "WP Desvio C45-C46 Izq-1",
+      "lon": -72.420492,
+      "lat": -42.373331,
+      "elevacion_m": 0.0
+    },
+    {
+      "nodo_id": 274,
+      "nombre": "WP Desvio C45-C46 Der-1",
+      "lon": -72.40155,
+      "lat": -42.376519,
+      "elevacion_m": 561.9
+    },
+    {
+      "nodo_id": 275,
+      "nombre": "WP Desvio C46-C47 Izq-1",
+      "lon": -72.41667,
+      "lat": -42.169763,
+      "elevacion_m": 0.0
+    },
+    {
+      "nodo_id": 276,
+      "nombre": "WP Desvio C46-C47 Der-1",
+      "lon": -72.398106,
+      "lat": -42.165677,
+      "elevacion_m": 0.0
+    },
+    {
+      "nodo_id": 277,
+      "nombre": "WP Desvio C47-C48 Izq-1",
+      "lon": -72.445463,
+      "lat": -42.059095,
+      "elevacion_m": 360.8
+    },
+    {
+      "nodo_id": 278,
+      "nombre": "WP Desvio C47-C48 Der-1",
+      "lon": -72.426406,
+      "lat": -42.061495,
+      "elevacion_m": 1230.4
+    }
+  ]
+}

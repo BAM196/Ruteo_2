@@ -1,0 +1,19 @@
+provisional_km:
+  valor: 2.0
+  justificacion: >-
+    Valor para las especies sin un dato publicado verificado: el orden de los
+    viajes de alimentación más cortos medidos con GPS en gaviotas.
+
+especies:
+  Larus dominicanus:
+    comun: Gaviota dominicana
+    desplazamiento_km: 1.7
+    medida: Promedio de viaje de alimentación más bajo entre colonias (1,7 a 17,8 km)
+    fuente: Reusch, K. et al. (2020). Foraging movements of breeding Kelp Gulls in South Africa. Movement Ecology 8(1)
+    url: https://doi.org/10.1186/s40462-020-00221-x
+  Caracara plancus:
+    comun: Carancho
+    desplazamiento_km: 2.5
+    medida: Radio de un ámbito de hogar de unos 5 km de diámetro
+    fuente: Journal of Raptor Research 36(3), 203-206 (2002), dispersión natal del carancho en Florida
+    url: https://sora.unm.edu/sites/default/files/journals/jrr/v036n03/p00203-p00206.pdf

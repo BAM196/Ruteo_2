@@ -1,30 +1,6 @@
-dron:
-  modelo: DJI Mavic 3T (Mavic 3 Enterprise Series)
-  ficha: https://enterprise.dji.com/mavic-3-enterprise/specs
-  tiempo_vuelo_min:
-    valor: 38
-    fuente: Ficha DJI Mavic 3 Enterprise, "Max Hovering Time (no wind) 38 minutes"
-    justificacion: >-
-      Se usa el tiempo en vuelo estacionario (38 min) y no el de vuelo
-      máximo (45 min) porque es el valor más conservador de la ficha.
-  velocidad_crucero_ms:
-    valor: 10
-    fuente: Supuesto de diseño. La ficha da 15 m/s como máximo en modo normal.
-    justificacion: >-
-      Para fotomonitoreo con cámara térmica no se vuela a velocidad máxima:
-      se usa dos tercios de la velocidad máxima de la ficha.
-  margen_seguridad:
-    valor: 0.30
-    fuente: Supuesto de diseño
-    justificacion: >-
-      Reserva de batería para viento, maniobras y aterrizaje. Una reserva
-      del 30 % deja la autonomía útil en 70 %.
-  ida_y_vuelta:
-    valor: true
-    fuente: Decisión D1 del grupo
-    justificacion: >-
-      El dron parte donde está el investigador y debe volver a él, así que
-      la ruta de ida puede usar como máximo la mitad de la distancia total.
+principio: >-
+  Cada probabilidad es la probabilidad de que ocurra, durante el vuelo, la
+  condición que hace fallar al dron, dado lo que miden los datos.
 
 cota_superior: 0.999999
 
@@ -32,119 +8,158 @@ amenazas:
   firms:
     activa: true
     descripcion: Focos de incendio activos (NASA FIRMS, VIIRS 375 m).
-    modelo: "p = p0(confianza) · max(0, 1 − d/R); varios focos se combinan como independientes"
+    condicion_falla: >-
+      Volar cerca de un fuego real (humo, calor, columnas de aire). Además, la
+      DAN 91 prohíbe volar donde se combate un incendio con aeronaves
+      tripuladas (91.102 (i)(11)).
+    modelo: "p = P(foco real | confianza) · max(0, 1 − d/R); varios focos se combinan como independientes"
     radio_m:
       valor: 1000
-      fuente: >-
-        Schroeder, W., Oliva, P., Giglio, L. y Csiszar, I. A. (2014). The New
-        VIIRS 375 m active fire detection data product. Remote Sensing of
-        Environment, 143, 85-96.
+      fuente: Schroeder et al. (2014), Remote Sensing of Environment 143, 85-96
       justificacion: >-
-        El píxel VIIRS mide 375 m, así que la posición del foco tiene una
-        incertidumbre del orden de medio píxel a un píxel. 1.000 m cubre el
-        píxel completo más el humo y el calor cercano. Es el mismo umbral de
-        la fase 2, que el profesor aprobó (T2 #37).
-    p0_por_confianza:
-      valor: {h: 0.9, n: 0.7, l: 0.4, desconocida: 0.7}
+        El fuego puede estar en cualquier parte del píxel de 375 m, a hasta
+        265 m de su centro (media diagonal). El resto, unos 735 m, es la
+        distancia de seguridad al humo y al calor. Se reporta con sensibilidad
+        en 500 y 1.500 m.
+    p_real_por_confianza:
+      valor: {h: 0.988, n: 0.988, l: 0.6, desconocida: 0.988}
       fuente: >-
-        Supuesto de diseño. La confianza (low, nominal, high) es la clase que
-        entrega FIRMS para VIIRS (Schroeder et al., 2014).
+        Schroeder et al. (2014); VIIRS 375 m Active Fire ATBD (2016), sección
+        4.3: errores de comisión menores a 1,2 % en confianza nominal y alta;
+        los píxeles de confianza baja llegan a 40 % de detecciones erróneas.
       justificacion: >-
-        La probabilidad sobre el foco mismo es alta, pero no 1, porque el dron
-        puede sobrevolar a altura segura. Baja según la confianza de la
-        detección. Se prueba sensibilidad.
+        P(foco real | confianza) = 1 − tasa de falsas alarmas. Para nominal y
+        alta se usa la cota publicada (1,2 %). Para baja se usa el peor valor
+        reportado (40 %), porque en un parque de fiordos esas detecciones
+        suelen ser reflejos del sol sobre el agua.
+    decaimiento:
+      valor: lineal
+      fuente: Lógica del modelo
+      justificacion: >-
+        La función más simple que cumple las dos condiciones conocidas: P(foco
+        real) sobre el foco y 0 en el borde de R. No agrega parámetros. Se
+        compara con un escalón en la sensibilidad.
 
   meteo:
     activa: true
-    descripcion: Condiciones medidas por Open-Meteo en cada cámara.
+    descripcion: Pronóstico por hora de Open-Meteo en cada cámara, para la ventana de la mañana.
+    condicion_falla: >-
+      Ráfaga a la altura de vuelo sobre el límite del dron, temperatura fuera
+      de su rango de operación o lluvia.
     modelo: >-
-      p_nodo = 1 − (1 − p_viento)(1 − p_temp)(1 − p_lluvia);
-      p_arista = max(p_u, p_v) (conservador)
-    variables_api: [temperature_2m, relative_humidity_2m, wind_speed_10m, wind_gusts_10m, precipitation]
-    unidad_viento: "m/s (se pide wind_speed_unit=ms a Open-Meteo)"
-    v_max_ms:
+      p_nodo = 1 − (1 − p_viento)(1 − p_temperatura)(1 − p_lluvia);
+      p_arista = max(p_u, p_v)
+    rafaga_max_ms:
       valor: 12
       fuente: Ficha DJI Mavic 3 Enterprise, "Max Wind Speed Resistance 12 m/s"
+      justificacion: Sobre esta ráfaga el fabricante no garantiza el vuelo.
+    altura_referencia_m:
+      valor: 10
+      fuente: Open-Meteo, wind_gusts_10m
+      justificacion: Open-Meteo entrega la ráfaga a 10 m del suelo.
+    alpha_perfil:
+      valor: 0.25
+      fuente: >-
+        Masters, G. M. (2004). Renewable and Efficient Electric Power Systems
+        (1.ª ed.). Wiley, sec. 6.4, ec. (6.15) y Tabla 6.3, pp. 319-320.
+      estado: verificado
       justificacion: >-
-        Sobre este viento el fabricante no garantiza el vuelo: es el extremo
-        de la rampa (p = 1).
-    v_seguro_ms:
-      valor: 8
-      fuente: Supuesto de diseño
+        Ley de potencia del perfil de viento, g80 = g10 · (80/10)^α (ec. 6.15),
+        con α = 0,25 de la fila "Wooded countryside, many trees" de la Tabla
+        6.3. Se reporta con sensibilidad en 0,20 y 0,30.
+    sigma_rafaga_ms:
+      valor: 3.1
+      fuente: >-
+        A. R. Harris y J. D. W. Kahl, "Gust factors: Meteorologically
+        stratified climatology, data artifacts, and utility in forecasting
+        peak gusts," Journal of Applied Meteorology and Climatology, vol. 56,
+        no. 12, pp. 3151-3166, 2017, doi: 10.1175/JAMC-D-17-0133.1.
+      estado: verificado
       justificacion: >-
-        Dos tercios del límite del fabricante. Bajo 8 m/s se considera que el
-        viento no compromete el vuelo; entre 8 y 12 m/s la probabilidad sube
-        linealmente. Se usa la ráfaga (wind_gusts_10m) y no el viento medio,
-        porque la ráfaga es la que desestabiliza. Se prueba sensibilidad.
+        σ = 3,10 m/s es la desviación estándar del sesgo del modelo de
+        climatología (sin habilidad) en la Tabla 2, p. 3161, y se usa como peor
+        caso; los modelos de factor de ráfaga tienen σ de 0,87 a 0,98 m/s.
+        p_viento = 1 − Φ((12 − g80) / σ).
+    sigma_temperatura_c:
+      valor: 2.0
+      fuente: Decisión del modelo
+      justificacion: >-
+        Orden del error de pronóstico de la temperatura a 2 m. Con las
+        temperaturas de Pumalín la probabilidad queda en cero salvo casos
+        extremos, así que el valor casi no pesa.
     temperatura_min_c:
       valor: -10
       fuente: Ficha DJI Mavic 3 Enterprise, "Operating Temperature -10° to 40° C"
-      justificacion: Fuera del rango de operación la falla es segura (p = 1).
+      justificacion: Límite inferior de operación.
     temperatura_max_c:
       valor: 40
       fuente: Ficha DJI Mavic 3 Enterprise, "Operating Temperature -10° to 40° C"
-      justificacion: Fuera del rango de operación la falla es segura (p = 1).
-    lluvia_max_mm_h:
-      valor: 2.5
+      justificacion: Límite superior de operación.
+    lluvia:
+      valor: probabilidad
       fuente: >-
-        American Meteorological Society, Glossary of Meteorology, entrada
-        "Rain": lluvia ligera hasta 2,5 mm/h, moderada de 2,6 a 7,6 mm/h. La
-        ficha del Mavic 3 Enterprise no declara clasificación IP (no es
-        resistente al agua).
+        Open-Meteo, precipitation_probability. La ficha del Mavic 3 Enterprise
+        no declara clasificación IP y la DAN 151 exige condiciones de vuelo
+        visual (151.103 (c)).
       justificacion: >-
-        La probabilidad sube linealmente de 0 (sin lluvia) a 1 cuando la lluvia
-        llega a moderada (2,5 mm/h). El umbral es un supuesto de diseño
-        anclado en esa clasificación.
+        Cualquier lluvia está fuera de las especificaciones del dron, así que
+        p_lluvia es la probabilidad de que llueva en la peor hora de la
+        ventana. En modo histórico, p = 1 si llovió y 0 si no.
+    tramos:
+      valor: maximo
+      fuente: Lógica del modelo
+      justificacion: >-
+        El clima solo se mide en las cámaras. Un tramo toma el máximo de sus
+        extremos porque cualquier interpolación lineal queda por debajo: es la
+        cota superior de lo que se puede estimar con los datos.
 
   ebird:
     activa: true
-    descripcion: Avistamientos recientes de aves (eBird API 2.0).
+    descripcion: Avistamientos de aves (eBird API 2.0).
+    condicion_falla: >-
+      El ave puede atacar o chocar con el dron, y el dron puede perturbar a la
+      fauna, lo que va contra el objetivo de conservación (Vas et al., 2015).
     modelo: >-
-      p = p0 · f_recencia · f_cantidad · max(0, 1 − d/R);
-      varios avistamientos se combinan como independientes
+      p_i = p0 · f_recencia · max(0, 1 − d/R), R = 100 m + r_mov;
+      p_avistamiento = 1 − (1 − p_i)^n con n aves; varios avistamientos se combinan como independientes
     distancia_precaucion_m:
       valor: 100
       fuente: >-
-        Vas, E., Lescroël, A., Duriez, O., Boguszewski, G. y Grémillet, D.
-        (2015). Approaching birds with drones: first experiments and ethical
-        guidelines. Biology Letters, 11(2), 20140754.
-        https://doi.org/10.1098/rsbl.2014.0754 (PMC4360097)
+        Vas, E. et al. (2015). Approaching birds with drones: first experiments
+        and ethical guidelines. Biology Letters 11(2), 20140754.
       justificacion: >-
-        El artículo recomienda "launching drones farther than 100 m from the
-        birds and adjusting approach distance according to species". Es una
-        distancia de lanzamiento por precaución, no un radio de perturbación
-        medido: en el experimento las aves reaccionaron a distancias mucho
-        menores (4-8 m en patos, 5-30 m en flamencos, 4-10 m en chorlos).
-        Se usa 100 m como radio de precaución. Son otras especies y otro
-        ecosistema que el parque, y el artículo indica ajustar la distancia
-        según la especie.
-    incertidumbre_ubicacion_m:
-      valor: 400
-      fuente: Supuesto de diseño
+        Distancia de despegue recomendada para no perturbar aves. Es una guía
+        ética de precaución, no una distancia de reacción medida.
+    r_mov_m:
+      valor: 2000
+      fuente: Amenazas/aves_desplazamiento.json (calcular_r_mov.py)
       justificacion: >-
-        eBird entrega la ubicación de la lista (checklist o hotspot), no la del
-        ave, y una lista puede cubrir un recorrido. Se suma un margen de 400 m.
-        El radio total queda en 500 m, el mismo de la fase 2, pero ahora con
-        su origen explicado.
+        eBird registra dónde estuvo el ave, no dónde estará durante el vuelo, y
+        un ave se desplaza kilómetros. r_mov es el promedio, ponderado por
+        registros, del desplazamiento típico de las aves que eBird registra en
+        el parque. El mismo radio cubre que eBird ubica la lista del observador
+        y no el ave. Se reporta con sensibilidad en 1 y 5 km.
     p0:
       valor: 0.5
-      fuente: Supuesto de diseño
+      fuente: Principio de razón insuficiente
       justificacion: >-
-        Probabilidad de que un encuentro con aves en el radio obligue a abortar
-        el tramo. Se prueba sensibilidad.
-    cantidad_referencia:
-      valor: 10
-      fuente: Supuesto de diseño
-      justificacion: f_cantidad = min(1, cantidad / 10). Grupos de 10 o más aves cuentan completos.
+        Se sabe que hay aves, pero no si van a reaccionar al dron, y no hay
+        datos locales: se asigna la misma probabilidad a ambos resultados. Se
+        reporta con sensibilidad en 0,3 y 0,7.
     ventana_dias:
       valor: 14
-      fuente: Ventana de consulta de extraer_ebird.py (parámetro back = 14 de la API eBird)
+      fuente: Ventana de la consulta a eBird (back = 14)
       justificacion: >-
-        f_recencia = max(0, 1 − edad/14). La edad se mide contra el avistamiento
-        más reciente del conjunto (el momento de la extracción).
+        f_recencia = max(0, 1 − edad/14): vale 1 el día del avistamiento y 0 al
+        final de la ventana. La edad se mide contra la fecha del escenario.
+    cantidad:
+      valor: al_menos_una
+      fuente: Lógica del modelo
+      justificacion: >-
+        Probabilidad de que al menos una de las n aves reaccione: 1 − (1 − p_i)^n.
 
   senderos:
     activa: false
     descripcion: >-
-      Decisión D3: los senderos son metadata (contexto de privacidad), no una
-      amenaza de falla del dron. No entran al cálculo de probabilidades.
+      Los senderos son metadata (privacidad de los visitantes), no una amenaza
+      de falla del dron: no entran al cálculo de probabilidades.

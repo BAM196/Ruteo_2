@@ -1,0 +1,5 @@
+tecnica,casos,R_plan_promedio,brecha_promedio_pct,brecha_max_pct,iguala_optimo_pct,computo_ms_promedio
+T1 Dijkstra distancia,10,0.2526,217.378,412.592,0.0,0.44
+T2 Gurobi,10,1.0,0.0,0.0,100.0,445.99
+T3 Dijkstra ponderado,10,1.0,9.381,31.519,20.0,0.53
+T4 ACO,10,1.0,0.074,0.526,80.0,20.56

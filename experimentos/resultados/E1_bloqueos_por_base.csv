@@ -1,0 +1,32 @@
+sector,base,aristas_en_radio,volables,bloqueadas_linea_de_vista,bloqueadas_techo,fuera_del_radio,enlaces_directos
+1,Camara AI03,11,1,5,0,5,0
+2,Camara AH08,16,6,0,0,10,0
+3,Camara AM27,16,6,0,0,10,0
+4,Entre Camara AF56 y Camara AF54,23,9,3,0,11,4
+5,Entre Camara AD57 y Camara AC56,27,5,9,0,13,3
+6,Camara Z59,33,5,9,0,19,0
+7,Camara AA60,34,3,14,0,17,0
+9,Camara Z61,22,6,6,0,10,0
+10,Entre Camara T62 y Camara S61,42,11,7,2,22,4
+11,Camara R61,42,5,15,1,21,0
+12,Camara C63,16,6,0,0,10,0
+13,Camara U65,16,1,5,1,9,0
+14,Camara B66,11,6,0,0,5,0
+15,Sendero Tronador,40,13,6,0,21,5
+16,Camara S71,24,7,6,1,10,0
+18,Sendero Punta del Lago,25,18,0,0,7,6
+19,Entre Camara Q83 y Camara R82,54,16,9,0,29,5
+20,Entre Camara Q86 y Camara R85,55,29,0,0,26,6
+21,Camara O84,34,12,2,0,20,0
+22,Entre Camara O88 y Camara O86,34,9,3,0,22,5
+23,Entre Camara I88 y Camara K87,28,16,0,0,12,6
+24,Camara D91,11,3,3,0,5,0
+25,Camara AI95,11,6,0,0,5,0
+26,Camara AE97,20,4,6,0,10,0
+27,Entre Camara AD101 y Camara AD99,23,9,4,0,10,5
+28,Camara AC103,24,3,11,0,10,0
+29,Camara Q104,16,3,3,0,10,0
+30,Entre Camara AC107 y Camara AB105,57,14,10,0,33,5
+31,Entre Camara AB108 y Camara AC107,79,35,1,0,43,6
+32,Camara AE108,25,6,4,0,15,0
+33,Camara AC110,38,1,11,0,26,0

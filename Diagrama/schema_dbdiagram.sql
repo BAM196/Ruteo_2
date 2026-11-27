@@ -34,29 +34,28 @@ Table "aristas" {
   "point" geometry [not null]
 }
 
-Table "metadata_gee" {
+Table "metadata_cobertura" {
   "nodo_id" INTEGER [pk]
-  "nombre" TEXT
   "landcover_code" INTEGER
   "landcover_clase" TEXT
   "landcover_clase_es" TEXT
-  "tiene_especie_objetivo" BOOLEAN
-  "tiene_especie_invasora" BOOLEAN
-  "clase_prioritaria_default" BOOLEAN
-  "preferencia_default" TEXT
+  "elevacion_m" DOUBLE
   "nota_pixel" TEXT
-  "point" geometry
 }
 
-Table "metadata_gee_especie" {
-  "nodo_id" INTEGER
-  "cientifico" TEXT [not null]
+Table "especie_rce" {
+  "cientifico" TEXT [pk]
   "comun" TEXT
-  "registros" INTEGER [not null]
-
-  Indexes {
-    (nodo_id, cientifico) [pk]
-  }
+  "origen" TEXT [not null]
+  "categoria_los_lagos" TEXT
+  "categoria_vigente" TEXT
+  "decreto" TEXT
+  "peso_w" DOUBLE
+  "objetivo" BOOLEAN [not null]
+  "presion" BOOLEAN [not null]
+  "registros" INTEGER
+  "camaras" INTEGER
+  "ficha" JSONB
 }
 
 Table "metadata_senderos" {
@@ -142,6 +141,11 @@ Table "meteo_alertas" {
   "lluvia_mm_h" DOUBLE
   "unidad_viento" TEXT
   "evitar" BOOLEAN
+  "temperatura_min" DOUBLE
+  "temperatura_max" DOUBLE
+  "precipitacion_mm" DOUBLE
+  "prob_lluvia" DOUBLE
+  "modo" TEXT
   "point" geometry [not null]
 }
 
@@ -210,8 +214,7 @@ Ref: "nodo_especie"."nodo_id" > "nodos"."id" [delete: cascade]
 Ref: "aristas"."source" > "nodos"."id"
 Ref: "aristas"."target" > "nodos"."id"
 
-Ref: "metadata_gee"."nodo_id" > "nodos"."id" [delete: cascade]
-Ref: "metadata_gee_especie"."nodo_id" > "metadata_gee"."nodo_id" [delete: cascade]
+Ref: "metadata_cobertura"."nodo_id" > "nodos"."id" [delete: cascade]
 
 Ref: "metadata_senderos_nodo"."sendero_id" > "metadata_senderos"."id" [delete: cascade]
 Ref: "metadata_senderos_nodo"."nodo_id" > "nodos"."id" [delete: cascade]
@@ -261,3 +264,125 @@ Ref: "amenazas_ebird_arista"."avistamiento_id" > "amenazas_ebird"."id" [delete: 
 Ref: "amenazas_ebird_arista"."arista_id" > "aristas"."id" [delete: cascade]
 Ref: "amenazas_ebird_arista"."source" > "nodos"."id"
 Ref: "amenazas_ebird_arista"."target" > "nodos"."id"
+
+Table "arista_perfil" {
+  "arista_id" INTEGER [pk]
+  "largo_2d_m" DOUBLE [not null]
+  "largo_3d_m" DOUBLE
+  "ascenso_ida_m" DOUBLE
+  "ascenso_vuelta_m" DOUBLE
+  "despeje_min_m" DOUBLE
+  "altura_max_sobre_superficie_m" DOUBLE
+  "densificada" BOOLEAN [not null]
+  "bloqueada" BOOLEAN [not null]
+  "motivo" TEXT
+  "geom" geometry
+}
+
+Table "bases" {
+  "id" INTEGER [pk]
+  "tipo" TEXT [not null]
+  "nodo_id" INTEGER
+  "nombre" TEXT
+  "sendero_id" INTEGER
+  "elevacion_m" DOUBLE
+  "geom" geometry [not null]
+}
+
+Table "base_camara" {
+  "base_id" INTEGER
+  "camara_id" INTEGER
+  "distancia_m" DOUBLE [not null]
+  "bloque_visible" BOOLEAN [not null]
+  "fraccion_visible" DOUBLE
+
+  Indexes {
+    (base_id, camara_id) [pk]
+  }
+}
+
+Table "base_enlace" {
+  "id" INTEGER [pk]
+  "base_id" INTEGER
+  "nodo_id" INTEGER
+  "distancia_m" DOUBLE [not null]
+  "largo_3d_m" DOUBLE
+  "ascenso_ida_m" DOUBLE
+  "ascenso_vuelta_m" DOUBLE
+  "despeje_min_m" DOUBLE
+  "geom" geometry
+}
+
+Table "base_arista_visible" {
+  "base_id" INTEGER
+  "arista_id" INTEGER
+  "visible" BOOLEAN [not null]
+  "motivo" TEXT
+
+  Indexes {
+    (base_id, arista_id) [pk]
+  }
+}
+
+Table "sectores" {
+  "id" INTEGER [pk]
+  "base_id" INTEGER
+  "n_camaras" INTEGER [not null]
+  "diametro_m" DOUBLE [not null]
+  "valor_conservacion" DOUBLE
+  "presion_exoticas" DOUBLE
+  "prioridad" DOUBLE
+  "subtitulo" TEXT
+  "detalle" JSONB
+  "geom" geometry
+}
+
+Table "sector_camara" {
+  "sector_id" INTEGER
+  "camara_id" INTEGER
+
+  Indexes {
+    (sector_id, camara_id) [pk]
+  }
+}
+
+Table "campanas" {
+  "id" SERIAL [pk]
+  "nombre" TEXT
+  "tipo" TEXT [not null]
+  "modo" TEXT [not null]
+  "consulta" JSONB [not null]
+  "temporada" TEXT
+  "fecha_inicio" DATE [not null]
+  "fecha_limite" DATE [not null]
+  "visitas_objetivo" INTEGER [not null]
+  "estado" TEXT [not null]
+  "completa" BOOLEAN [not null]
+  "motivo" TEXT
+  "creada" TIMESTAMPTZ [not null]
+}
+
+Table "campana_dia" {
+  "id" SERIAL [pk]
+  "campana_id" INTEGER
+  "visita" INTEGER [not null]
+  "fecha" DATE [not null]
+  "estado" TEXT [not null]
+  "decision" TEXT
+  "r_plan" DOUBLE
+  "plan" JSONB
+  "actualizado" TIMESTAMPTZ [not null]
+}
+
+Ref: "arista_perfil"."arista_id" - "aristas"."id" [delete: cascade]
+Ref: "bases"."nodo_id" > "nodos"."id" [delete: cascade]
+Ref: "base_camara"."base_id" > "bases"."id" [delete: cascade]
+Ref: "base_camara"."camara_id" > "nodos"."id" [delete: cascade]
+Ref: "base_enlace"."base_id" > "bases"."id" [delete: cascade]
+Ref: "base_enlace"."nodo_id" > "nodos"."id" [delete: cascade]
+Ref: "base_arista_visible"."base_id" > "bases"."id" [delete: cascade]
+Ref: "base_arista_visible"."arista_id" > "aristas"."id" [delete: cascade]
+Ref: "sectores"."base_id" > "bases"."id"
+Ref: "sector_camara"."sector_id" > "sectores"."id" [delete: cascade]
+Ref: "sector_camara"."camara_id" > "nodos"."id" [delete: cascade]
+Ref: "campana_dia"."campana_id" > "campanas"."id" [delete: cascade]

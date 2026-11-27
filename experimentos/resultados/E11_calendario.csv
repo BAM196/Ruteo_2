@@ -1,0 +1,30 @@
+campana,visita,fecha,decision,R,p_clima_max
+verano,1,2024-01-15,Postergar: clima fuera de los límites del dron,,0.0
+verano,1,2024-01-16,"Volar: R del plan 0,950 ≥ 0,90",0.9502,0.05
+verano,2,2024-01-17,"Volar: R del plan 0,956 ≥ 0,90",0.9555,0.044
+verano,3,2024-01-18,Postergar: clima fuera de los límites del dron,,0.0
+verano,3,2024-01-19,Postergar: clima fuera de los límites del dron,,0.0
+verano,3,2024-01-20,Postergar: clima fuera de los límites del dron,0.3592,0.641
+verano,3,2024-01-21,"Postergar: R del plan 0,655 < 0,90",0.655,0.345
+verano,3,2024-01-22,"Postergar: R del plan 0,887 < 0,90",0.8874,0.113
+verano,3,2024-01-23,"Volar: R del plan 0,976 ≥ 0,90",0.9757,0.024
+invierno,1,2024-06-10,Postergar: clima fuera de los límites del dron,,0.0
+invierno,1,2024-06-11,Postergar: clima fuera de los límites del dron,,0.0
+invierno,1,2024-06-12,Postergar: clima fuera de los límites del dron,,0.0
+invierno,1,2024-06-13,Postergar: clima fuera de los límites del dron,,0.0
+invierno,1,2024-06-14,Postergar: clima fuera de los límites del dron,,0.0
+invierno,1,2024-06-15,Postergar: clima fuera de los límites del dron,,0.0
+invierno,1,2024-06-16,Postergar: clima fuera de los límites del dron,0.0998,0.9
+invierno,1,2024-06-17,Postergar: clima fuera de los límites del dron,,0.0
+invierno,1,2024-06-18,Postergar: clima fuera de los límites del dron,,0.0
+invierno,1,2024-06-19,Postergar: clima fuera de los límites del dron,,0.0
+invierno,1,2024-06-20,Postergar: clima fuera de los límites del dron,,0.0
+invierno,1,2024-06-21,Postergar: clima fuera de los límites del dron,,0.0
+invierno,1,2024-06-22,Postergar: clima fuera de los límites del dron,,0.0
+invierno,1,2024-06-23,Postergar: clima fuera de los límites del dron,,0.0
+invierno,1,2024-06-24,"Postergar: R del plan 0,749 < 0,90",0.7486,0.251
+invierno,1,2024-06-25,Postergar: clima fuera de los límites del dron,,0.0
+invierno,1,2024-06-26,Postergar: clima fuera de los límites del dron,,0.0
+invierno,1,2024-06-27,Postergar: clima fuera de los límites del dron,,0.0
+invierno,1,2024-06-28,Postergar: clima fuera de los límites del dron,,0.0
+invierno,1,2024-06-29,Postergar: clima fuera de los límites del dron,0.1559,0.844

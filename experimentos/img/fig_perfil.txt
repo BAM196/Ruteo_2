@@ -1,0 +1,11 @@
+modo: sector
+sector: 20
+fecha: 2015-02-27
+theta: 0.5
+focos_simulados: 1
+restricciones: {'solo_bosque': True, 'evitar_senderos': False, 'evitar_clima': False, 'evitar_aves': False}
+tecnicas_visibles: ['dijkstra_distancia', 'milp', 'dijkstra_ponderado', 'aco']
+capas_encendidas: ['Cámaras', 'Bases del plan', 'Radio de operación', 'Tramos bloqueados', 'Tramos de la red', 'Focos de incendio', 'Amenaza simulada']
+zoom: 14
+centro: {'lat': -42.780070772910015, 'lng': -72.6142335}
+Tramo 31: densificado para seguir el relieve, con su popup de perfil.

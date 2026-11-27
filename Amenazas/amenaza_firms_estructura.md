@@ -1,43 +1,47 @@
 # amenaza_firms.json
 
-Focos de NASA FIRMS sobre las cámaras de `nodosv2.json`, con un margen de 0,05° alrededor. El sensor es VIIRS Suomi-NPP y la ventana es de 5 días, el máximo de una consulta.
+Focos de incendio activos de NASA FIRMS alrededor de las cámaras de `nodosv2.json`, con un margen de 0,05°. Lo genera `Amenazas/extraer_firms.py`.
 
-Si un foco cae junto a una cámara, esa estación no se visita mientras siga activo: no se espera fauna ahí. Cero focos es un resultado válido. La consulta del 19 de octubre de 2026, y la primera semana de febrero de 2023 a 2026, dieron 0 focos en esta caja.
+- **Sensor:** VIIRS Suomi-NPP, con píxeles de 375 m.
+- **Ventana:** 5 días, el máximo que admite una consulta de la API.
+- **Modo reciente (sin fecha):** consulta los últimos 5 días con el producto casi en tiempo real (`VIIRS_SNPP_NRT`).
+- **Modo histórico (`--fecha AAAA-MM-DD`):** consulta los 5 días que terminan en esa fecha. Si la fecha tiene más de 60 días, usa el producto estándar (`VIIRS_SNPP_SP`), que existe desde 2012.
 
-## Radio y peso
+Cero focos es un resultado válido.
 
-El punto de FIRMS es el centro de un píxel de 375 m, no la llama (Schroeder et al., 2014, Remote Sensing of Environment 143, 85-96). El radio usado es 1000 m: cubre ese píxel y el entorno de la cámara. En el informe 1 el foco más cercano estaba a unos 16 km y no quedaba definido desde qué distancia sí afecta.
+## Cómo se usa
 
-Dentro de ese radio la fauna no se asume disponible. Tras el fuego persiste en parches no quemados, no en lo recién quemado (Robinson et al., 2013, Journal of Applied Ecology 50, 1321-1329). 1000 m es la regla de este trabajo, no una distancia única para todas las especies.
+El archivo solo lista los focos y qué nodos y tramos quedan a 1.000 m o menos de cada uno. La probabilidad de falla la calcula el motor con esta fórmula (parámetros en `Motor/config/amenazas.yaml`):
 
-Si el foco está a 1000 m o menos del tramo:
+$$p = P(\text{foco real} \mid \text{confianza}) \cdot \max\left(0,\ 1 - \frac{d}{R}\right), \qquad R = 1.000\ \text{m}$$
 
-- `evitar = true`
-- `costo_resiliente_km = costo_km + 1000`
-
-Ese costo no entra al Dijkstra de esta fase. `pgr_dijkstra` usa solo `costo_km`. Lo penalizado queda para la fase 3. La misma regla marca la cámara en `nodos_afectados`.
+- **Confianza nominal o alta:** P(foco real) = 0,988. El error de comisión publicado es menor a 1,2 % (Schroeder et al., 2014).
+- **Confianza baja:** P(foco real) = 0,6. Es el peor valor reportado para esa clase: 40 % de detecciones erróneas.
+- **Radio de 1.000 m:** el fuego puede estar a hasta 265 m del centro del píxel (media diagonal de 375 m). Los 735 m restantes son la distancia de seguridad al humo y al calor.
 
 ## meta
 
-- `fuente`, `source`, `endpoint`: NASA FIRMS y el sensor.
-- `bbox`, `margen_grados`: rectángulo consultado.
-- `day_range`, `fecha`: días de la consulta. `fecha` vacía significa los días más recientes.
-- `umbral_amenaza_m`: 1000.
-- `penalizacion_km`: 1000, los kilómetros que se suman al tramo afectado.
-- `regla_peso`: la regla de arriba, en una frase.
-- `n_focos`, `n_nodos_afectados`, `n_aristas_afectadas`: conteos.
-- `resultado`: `con_focos` o `sin_focos_en_area`.
+| Campo | Contenido |
+| --- | --- |
+| `fuente`, `source`, `endpoint` | NASA FIRMS, el producto usado y la URL de la API |
+| `modo`, `fecha_escenario`, `desde`, `day_range` | Reciente o histórico, la fecha pedida, el primer día consultado y el largo de la ventana |
+| `bbox`, `margen_grados` | Rectángulo consultado |
+| `umbral_amenaza_m` | Radio con que se listan los nodos y tramos cercanos (1.000 m) |
+| `regla` | La regla de arriba, en una frase |
+| `n_focos`, `n_nodos_afectados`, `n_aristas_afectadas` | Conteos |
+| `resultado` | `con_focos` o `sin_focos_en_area` |
 
 ## focos[]
 
-- `id`, `lat`, `lon`.
-- `acq_date`, `acq_time`: fecha y hora UTC. La hora viene como `HHMM`.
-- `satellite`, `confidence` (`l`, `n` o `h`), `frp` (MW), `daynight` (`D` o `N`), `bright_ti4`.
-- `nodo_mas_cercano`: `{id, distancia_m}`, aunque quede lejos.
-- `nodos_dentro_umbral`, `aristas_dentro_umbral`: los que caen en los 1000 m.
+| Campo | Contenido |
+| --- | --- |
+| `id`, `lat`, `lon` | Identificador y centro del píxel |
+| `acq_date`, `acq_time` | Fecha y hora UTC de la pasada (`HHMM`) |
+| `satellite`, `confidence`, `frp`, `daynight`, `bright_ti4` | Satélite, confianza (`l`, `n` o `h`), potencia radiativa en MW, día o noche y temperatura de brillo |
+| `nodo_mas_cercano` | `{id, distancia_m}`, aunque quede lejos |
+| `nodos_dentro_umbral`, `aristas_dentro_umbral` | Nodos y tramos a 1.000 m o menos |
 
 ## nodos_afectados[] y aristas_afectadas[]
 
-Cámara: `nodo_id`, `distancia_min_m`, `focos`, `evitar`, `motivo`.
-
-Tramo: `arista_id`, `source`, `target`, `distancia_min_m`, `costo_km`, `costo_resiliente_km`, `evitar`, `focos`.
+- **Nodo:** `nodo_id`, `distancia_min_m`, `focos`, `evitar` y `motivo`.
+- **Tramo:** `arista_id`, `source`, `target`, `distancia_min_m`, `costo_km`, `focos` y `evitar`.

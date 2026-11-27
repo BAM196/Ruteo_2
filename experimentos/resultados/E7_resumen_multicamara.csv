@@ -1,0 +1,5 @@
+tecnica,casos,brecha_promedio_pct,iguala_optimo_pct
+T1 Dijkstra distancia,276,30.848,35.9
+T2 Gurobi,276,0.0,100.0
+T3 Dijkstra ponderado,276,0.816,74.6
+T4 ACO,276,0.0,100.0

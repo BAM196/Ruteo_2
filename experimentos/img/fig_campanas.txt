@@ -1,0 +1,11 @@
+modo: sector
+sector: 1
+fecha: datos actuales
+theta: 0.5
+focos_simulados: 0
+restricciones: {'solo_bosque': False, 'evitar_senderos': False, 'evitar_clima': False, 'evitar_aves': False}
+tecnicas_visibles: ['dijkstra_distancia', 'milp', 'dijkstra_ponderado', 'aco']
+capas_encendidas: ['Sectores', 'Cámaras', 'Vuelos planificados', 'Bases del plan', 'Radio de operación', 'Bloques de muestreo', 'Tramos bloqueados', 'Senderos', 'Focos de incendio', 'Aves', 'Amenaza simulada', 'Fallas sorteadas']
+zoom: 9
+centro: {'lat': -42.52207363067758, 'lng': -72.59160549999999}
+Campañas de ejemplo creadas para la captura (ids 7 y siguiente). Decisión mostrada: Postergar: R del plan 0,822 < 0,90

@@ -1,0 +1,45 @@
+{
+  "fecha": "2015-02-27",
+  "sector": 20,
+  "foco_simulado": {
+    "id": 9001,
+    "lon": -72.618069,
+    "lat": -42.775641,
+    "confidence": "n",
+    "fecha": "2015-02-27"
+  },
+  "arista": 32,
+  "desplazamiento_m": 800.0,
+  "consulta": {
+    "modo": "sector",
+    "sector_id": 20,
+    "restricciones": {
+      "solo_bosque": true
+    },
+    "focos_simulados": [
+      {
+        "id": 9001,
+        "lon": -72.618069,
+        "lat": -42.775641,
+        "confidence": "n",
+        "fecha": "2015-02-27"
+      }
+    ],
+    "fecha": "2015-02-27"
+  },
+  "distintas": 4,
+  "no_compartidos": 0.75,
+  "mejora_R": 0.0598,
+  "tecnica1_menor_R": true,
+  "t3_difiere_de_gurobi": true,
+  "aco_igual_gurobi": false,
+  "valido": true,
+  "simulado": true,
+  "busqueda_real": {
+    "fechas_probadas": 15,
+    "casos_probados": 180,
+    "con_planes_distintos": 44,
+    "mejor_mejora_R": 0.0
+  },
+  "nota": "El foco de incendio es simulado; el clima y las aves son reales de esa fecha. En las 15 fechas reales con focos más cercanos a las cámaras ningún foco cambió la resiliencia de los planes."
+}

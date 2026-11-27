@@ -97,7 +97,7 @@ def main():
                     )
 
         conn.commit()
-    print(f"Cargados {len(avistamientos)} avistamientos de rapaces en amenazas_ebird.")
+    print(f"Cargados {len(avistamientos)} avistamientos en amenazas_ebird.")
 
 
 if __name__ == "__main__":

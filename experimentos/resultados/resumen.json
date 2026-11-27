@@ -1,0 +1,1645 @@
+{
+ "entorno": {
+  "fecha_corrida": "2026-11-27T13:47:28+00:00",
+  "python": "3.12.4",
+  "plataforma": "Windows-10-10.0.19045-SP0",
+  "procesador": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
+  "nucleos": 16,
+  "postgresql": "PostgreSQL 17.5 (Debian 17.5-1.pgdg110+1) on x86_64-pc-linux-gnu",
+  "postgis": "3.5.2",
+  "pgrouting": "4.0.1",
+  "gurobi": "14.0.0",
+  "semilla_banco": 2026,
+  "semilla_planes": 0,
+  "escenario_cargado": {
+   "fuente": "db",
+   "fecha_escenario": "2026-11-27",
+   "modo_meteo": "pronostico",
+   "n_nodos": 1336,
+   "n_camaras": 48,
+   "n_aristas": 4556,
+   "n_bases": 1106,
+   "n_focos": 0,
+   "n_avistamientos": 11,
+   "n_lecturas_meteo": 1106
+  }
+ },
+ "E0": [
+  {
+   "parametro": "v_c (crucero)",
+   "valor": 9.0,
+   "unidad": "m/s",
+   "fuente": "Ficha DJI Mavic 3 Enterprise, nota del tiempo de vuelo: \"Measured with Mavic 3 Enterprise Series flying at a constant speed of 32.4 kph in a windless environment at sea level\".",
+   "estado": "verificado en la ficha"
+  },
+  {
+   "parametro": "v_sub (ascenso)",
+   "valor": 6.0,
+   "unidad": "m/s",
+   "fuente": "Ficha DJI Mavic 3 Enterprise, \"Max Ascent Speed 6 m/s (Normal Mode)\"",
+   "estado": "verificado en la ficha"
+  },
+  {
+   "parametro": "Error vertical del dron",
+   "valor": 0.5,
+   "unidad": "m",
+   "fuente": "Ficha DJI Mavic 3 Enterprise, \"Hovering Accuracy Vertical ±0.5 m (with GNSS)\"",
+   "estado": "verificado en la ficha"
+  },
+  {
+   "parametro": "Error vertical del DEM",
+   "valor": 4.0,
+   "unidad": "m",
+   "fuente": "Copernicus DEM, \"absolute vertical accuracy < 4 m (90 % linear error)\"",
+   "estado": "verificado (catálogo EEA y Copernicus Data Space)"
+  },
+  {
+   "parametro": "Margen por árboles",
+   "valor": 20.0,
+   "unidad": "m",
+   "fuente": "Decisión del modelo",
+   "estado": "supuesto"
+  },
+  {
+   "parametro": "c_min resultante",
+   "valor": 24.5,
+   "unidad": "m",
+   "fuente": "suma de los tres",
+   "estado": "derivado"
+  },
+  {
+   "parametro": "α del viento",
+   "valor": 0.25,
+   "unidad": "—",
+   "fuente": "Masters, G. M. (2004). Renewable and Efficient Electric Power Systems (1.ª ed.). Wiley, sec. 6.4, ec. (6.15) y Tabla 6.3, pp. 319-320.",
+   "estado": "verificado (fila \"Wooded countryside, many trees\")"
+  },
+  {
+   "parametro": "σ de ráfagas",
+   "valor": 3.1,
+   "unidad": "m/s",
+   "fuente": "A. R. Harris y J. D. W. Kahl, \"Gust factors: Meteorologically stratified climatology, data artifacts, and utility in forecasting peak gusts,\" Journal of Applied Meteorology and Climatology, vol. 56, no. 12, pp. 3151-3166, 2017, doi: 10.1175/JAMC-D-17-0133.1.",
+   "estado": "verificado (Tabla 2, p. 3161: sesgo del modelo de climatología, peor caso)"
+  },
+  {
+   "parametro": "σ de temperatura",
+   "valor": 2.0,
+   "unidad": "°C",
+   "fuente": "Decisión del modelo",
+   "estado": "supuesto"
+  },
+  {
+   "parametro": "P(foco real | h, n)",
+   "valor": 0.988,
+   "unidad": "—",
+   "fuente": "ATBD VIIRS 375 m (2016), sección 4.3",
+   "estado": "verificado (comisión < 1,2 %)"
+  },
+  {
+   "parametro": "P(foco real | l)",
+   "valor": 0.6,
+   "unidad": "—",
+   "fuente": "ATBD VIIRS 375 m (2016), sección 4.3",
+   "estado": "verificado (peor caso 40 %)"
+  },
+  {
+   "parametro": "Radio de incendio R",
+   "valor": 1000,
+   "unidad": "m",
+   "fuente": "265 m de píxel + margen de humo",
+   "estado": "265 m verificado; el margen es supuesto"
+  },
+  {
+   "parametro": "Cambio de batería",
+   "valor": 300.0,
+   "unidad": "s",
+   "fuente": "Decisión del modelo",
+   "estado": "supuesto"
+  },
+  {
+   "parametro": "Ventana de la mañana",
+   "valor": 3.0,
+   "unidad": "h",
+   "fuente": "Decisión del modelo; Chang et al. (2025, sec. 2.5) solo dicen \"shortly after sunrise\"",
+   "estado": "supuesto"
+  },
+  {
+   "parametro": "Muestreo por cámara s_i",
+   "valor": 534.0,
+   "unidad": "s",
+   "fuente": "Chang et al. (2025), Tabla 1: promedio de 9 vuelos (8 min 30 s a 10 min 2 s)",
+   "estado": "verificado"
+  },
+  {
+   "parametro": "p₀ de aves",
+   "valor": 0.5,
+   "unidad": "—",
+   "fuente": "Principio de razón insuficiente",
+   "estado": "supuesto"
+  },
+  {
+   "parametro": "Distancia de precaución de aves",
+   "valor": 100,
+   "unidad": "m",
+   "fuente": "Vas et al. (2015)",
+   "estado": "verificado"
+  },
+  {
+   "parametro": "r_mov",
+   "valor": 2000,
+   "unidad": "m",
+   "fuente": "calcular_r_mov.py sobre amenaza_ebird.json",
+   "estado": "provisional: las especies registradas no tienen dato publicado verificado"
+  },
+  {
+   "parametro": "Reserva t_res",
+   "valor": 560.0,
+   "unidad": "s",
+   "fuente": "R_op / (v_max − viento límite) + aterrizaje",
+   "estado": "derivado (aterrizaje de 60 s supuesto)"
+  },
+  {
+   "parametro": "Batería útil",
+   "valor": 1720.0,
+   "unidad": "s",
+   "fuente": "T_bat − t_res",
+   "estado": "derivado"
+  }
+ ],
+ "duraciones_s": {
+  "e0": 0.0,
+  "e1": 7.3,
+  "e2": 0.2,
+  "e3": 0.0,
+  "e4": 6.3,
+  "e6": 36.6,
+  "e9": 22.5,
+  "e10": 38.6,
+  "e7": 2106.6,
+  "e8": 505.9,
+  "e11": 218.0,
+  "e10b": 58.8
+ },
+ "E1": {
+  "n_sectores": 33,
+  "tamanos": {
+   "1": 21,
+   "2": 9,
+   "3": 3
+  },
+  "camaras_repetidas": 0,
+  "camaras_en_sectores": 48,
+  "distancia_min_entre_camaras_m": 1000.0,
+  "sectores_sin_base": [
+   8,
+   17
+  ],
+  "tipos_de_base": {
+   "camara": 19,
+   "sendero": 2,
+   "camino_camaras": 10
+  },
+  "dist_max_base_m": 1336.0,
+  "aristas_total": 700,
+  "aristas_densificadas": 389,
+  "aristas_bloqueadas_techo": 4,
+  "aristas_bloqueadas_linea_de_vista_desde_alguna_base": 478,
+  "bases_candidatas": 1106,
+  "camaras_sin_base": [
+   28,
+   39
+  ],
+  "por_tamano": [
+   {
+    "camaras": 1,
+    "sectores": 21,
+    "con_base": 19,
+    "vuelos_min": 1,
+    "vuelos_max": 1,
+    "min_vuelo_min": 8.9,
+    "min_vuelo_max": 8.9,
+    "min_con_cambios_min": 8.9,
+    "min_con_cambios_max": 8.9
+   },
+   {
+    "camaras": 2,
+    "sectores": 9,
+    "con_base": 9,
+    "vuelos_min": 1,
+    "vuelos_max": 1,
+    "min_vuelo_min": 21.92,
+    "min_vuelo_max": 26.18,
+    "min_con_cambios_min": 21.92,
+    "min_con_cambios_max": 26.18
+   },
+   {
+    "camaras": 3,
+    "sectores": 3,
+    "con_base": 3,
+    "vuelos_min": 2,
+    "vuelos_max": 2,
+    "min_vuelo_min": 35.69,
+    "min_vuelo_max": 37.05,
+    "min_con_cambios_min": 40.69,
+    "min_con_cambios_max": 42.05
+   }
+  ],
+  "horas_vuelo_parque": 8.58,
+  "mananas_por_pasada": 14,
+  "dias_por_pasada": 42,
+  "estimacion_previa_dias": 60,
+  "traslados": "medidos (Infraestructura/traslados_bases.json)"
+ },
+ "E2": {
+  "top10": [
+   {
+    "rango": 1,
+    "sector": 8,
+    "camaras": 1,
+    "V": 6.0,
+    "V_norm": 0.8,
+    "P": 1.0,
+    "P_norm": 1.0,
+    "prioridad": 90.0,
+    "objetivo": "pudú (VU), güiña (NT)",
+    "exoticas": "visón americano",
+    "con_base": false
+   },
+   {
+    "rango": 2,
+    "sector": 1,
+    "camaras": 1,
+    "V": 5.0,
+    "V_norm": 0.6667,
+    "P": 1.0,
+    "P_norm": 1.0,
+    "prioridad": 83.3,
+    "objetivo": "güiña (NT), pudú (VU)",
+    "exoticas": "perro doméstico",
+    "con_base": true
+   },
+   {
+    "rango": 3,
+    "sector": 12,
+    "camaras": 1,
+    "V": 5.0,
+    "V_norm": 0.6667,
+    "P": 1.0,
+    "P_norm": 1.0,
+    "prioridad": 83.3,
+    "objetivo": "güiña (NT), pudú (VU)",
+    "exoticas": "vaca",
+    "con_base": true
+   },
+   {
+    "rango": 4,
+    "sector": 24,
+    "camaras": 1,
+    "V": 5.0,
+    "V_norm": 0.6667,
+    "P": 1.0,
+    "P_norm": 1.0,
+    "prioridad": 83.3,
+    "objetivo": "güiña (NT), pudú (VU)",
+    "exoticas": "perro doméstico",
+    "con_base": true
+   },
+   {
+    "rango": 5,
+    "sector": 29,
+    "camaras": 1,
+    "V": 5.0,
+    "V_norm": 0.6667,
+    "P": 1.0,
+    "P_norm": 1.0,
+    "prioridad": 83.3,
+    "objetivo": "pudú (VU), güiña (NT)",
+    "exoticas": "vaca",
+    "con_base": true
+   },
+   {
+    "rango": 6,
+    "sector": 2,
+    "camaras": 1,
+    "V": 2.0,
+    "V_norm": 0.2667,
+    "P": 1.0,
+    "P_norm": 1.0,
+    "prioridad": 63.3,
+    "objetivo": "güiña (NT)",
+    "exoticas": "vaca",
+    "con_base": true
+   },
+   {
+    "rango": 7,
+    "sector": 23,
+    "camaras": 2,
+    "V": 1.0,
+    "V_norm": 0.1333,
+    "P": 1.0,
+    "P_norm": 1.0,
+    "prioridad": 56.7,
+    "objetivo": "puma (NT)",
+    "exoticas": "vaca, perro doméstico",
+    "con_base": true
+   },
+   {
+    "rango": 8,
+    "sector": 26,
+    "camaras": 1,
+    "V": 1.0,
+    "V_norm": 0.1333,
+    "P": 1.0,
+    "P_norm": 1.0,
+    "prioridad": 56.7,
+    "objetivo": "",
+    "exoticas": "liebre europea",
+    "con_base": true
+   },
+   {
+    "rango": 9,
+    "sector": 28,
+    "camaras": 1,
+    "V": 1.0,
+    "V_norm": 0.1333,
+    "P": 1.0,
+    "P_norm": 1.0,
+    "prioridad": 56.7,
+    "objetivo": "",
+    "exoticas": "liebre europea",
+    "con_base": true
+   },
+   {
+    "rango": 10,
+    "sector": 5,
+    "camaras": 2,
+    "V": 7.5,
+    "V_norm": 1.0,
+    "P": 0.0,
+    "P_norm": 0.0,
+    "prioridad": 50.0,
+    "objetivo": "pudú (VU), puma (NT), güiña (NT)",
+    "exoticas": "",
+    "con_base": true
+   }
+  ],
+  "kendall": [
+   {
+    "peso_valor": 0.3,
+    "peso_presion": 0.7,
+    "kendall_tau": 0.9773,
+    "top5": "8 1 12 24 29"
+   },
+   {
+    "peso_valor": 0.4,
+    "peso_presion": 0.6,
+    "kendall_tau": 0.9886,
+    "top5": "8 1 12 24 29"
+   },
+   {
+    "peso_valor": 0.5,
+    "peso_presion": 0.5,
+    "kendall_tau": 1.0,
+    "top5": "8 1 12 24 29"
+   },
+   {
+    "peso_valor": 0.6,
+    "peso_presion": 0.4,
+    "kendall_tau": 0.928,
+    "top5": "8 1 12 24 29"
+   },
+   {
+    "peso_valor": 0.7,
+    "peso_presion": 0.3,
+    "kendall_tau": 0.7727,
+    "top5": "8 1 12 24 29"
+   }
+  ],
+  "empates_en_prioridad": 17
+ },
+ "E3": {
+  "periodo": "2012-01-20 a 2026-11-26",
+  "ventanas_de_5_dias": 1085,
+  "dias_revisados": 5425,
+  "fechas_con_focos_a_3km": 290,
+  "fechas_a_1km": 0,
+  "fechas_a_1_5km": 1,
+  "dmin_m": 1384.8,
+  "busqueda_real": {
+   "fechas_probadas": 15,
+   "casos_probados": 180,
+   "con_planes_distintos": 44,
+   "mejor_mejora_R": 0.0
+  },
+  "caso": {
+   "fecha": "2015-02-27",
+   "sector": 20,
+   "foco_simulado": {
+    "id": 9001,
+    "lon": -72.618069,
+    "lat": -42.775641,
+    "confidence": "n",
+    "fecha": "2015-02-27"
+   },
+   "arista": 32,
+   "desplazamiento_m": 800.0,
+   "distintas": 4,
+   "no_compartidos": 0.75,
+   "mejora_R": 0.0598,
+   "tecnica1_menor_R": true,
+   "t3_difiere_de_gurobi": true,
+   "aco_igual_gurobi": false,
+   "valido": true,
+   "simulado": true,
+   "busqueda_real": {
+    "fechas_probadas": 15,
+    "casos_probados": 180,
+    "con_planes_distintos": 44,
+    "mejor_mejora_R": 0.0
+   },
+   "nota": "El foco de incendio es simulado; el clima y las aves son reales de esa fecha. En las 15 fechas reales con focos más cercanos a las cámaras ningún foco cambió la resiliencia de los planes."
+  },
+  "consulta": {
+   "modo": "sector",
+   "sector_id": 20,
+   "restricciones": {
+    "solo_bosque": true
+   },
+   "focos_simulados": [
+    {
+     "id": 9001,
+     "lon": -72.618069,
+     "lat": -42.775641,
+     "confidence": "n",
+     "fecha": "2015-02-27"
+    }
+   ],
+   "fecha": "2015-02-27"
+  }
+ },
+ "E4": {
+  "sector": 20,
+  "fecha": "2015-02-27",
+  "simulado": true,
+  "foco_simulado": {
+   "id": 9001,
+   "lon": -72.618069,
+   "lat": -42.775641,
+   "confidence": "n",
+   "fecha": "2015-02-27"
+  },
+  "base": {
+   "id": 100668,
+   "tipo": "camino_camaras",
+   "nombre": "Entre Camara Q86 y Camara R85",
+   "nodo": 100668,
+   "lon": -72.609923,
+   "lat": -42.781337,
+   "elevacion_m": 190.1
+  },
+  "camaras": [
+   "Q86",
+   "R85",
+   "R84"
+  ],
+  "tabla": [
+   {
+    "tecnica": "T1 Dijkstra distancia",
+    "etiqueta": "pgr_dijkstra (distancia)",
+    "vuelos": 2,
+    "orden": "R85 → R84 | Q86",
+    "distancia_km": 4.902,
+    "tiempo_min": 41.26,
+    "R_por_vuelo": "0.4251 | 0.7482",
+    "R_plan": 0.3181,
+    "costo_modelo": 1.072715,
+    "computo_ms": 15.05,
+    "mas_resiliente": false,
+    "leyenda": "pgr_dijkstra (distancia) | 2 vuelos | 4,9 km | 41 min | R plan = 0,318 | 15 ms"
+   },
+   {
+    "tecnica": "T2 Gurobi",
+    "etiqueta": "Gurobi (MILP)",
+    "vuelos": 2,
+    "orden": "Q86 | R84 → R85",
+    "distancia_km": 5.732,
+    "tiempo_min": 42.85,
+    "R_por_vuelo": "0.7482 | 0.5051",
+    "R_plan": 0.3779,
+    "costo_modelo": 1.069612,
+    "computo_ms": 12.94,
+    "mas_resiliente": false,
+    "leyenda": "Gurobi (MILP) | 2 vuelos | 5,7 km | 43 min | R plan = 0,378 | 13 ms"
+   },
+   {
+    "tecnica": "T3 Dijkstra ponderado",
+    "etiqueta": "pgr_dijkstra (ponderado)",
+    "vuelos": 2,
+    "orden": "R85 → Q86 | R84",
+    "distancia_km": 6.936,
+    "tiempo_min": 45.09,
+    "R_por_vuelo": "0.6500 | 0.6295",
+    "R_plan": 0.4092,
+    "costo_modelo": 1.147342,
+    "computo_ms": 6.65,
+    "mas_resiliente": true,
+    "leyenda": "pgr_dijkstra (ponderado) | 2 vuelos | 6,9 km | 45 min | R plan = 0,409 | 7 ms"
+   },
+   {
+    "tecnica": "T4 ACO",
+    "etiqueta": "ACO (config_zhang)",
+    "vuelos": 2,
+    "orden": "R84 → R85 | Q86",
+    "distancia_km": 5.732,
+    "tiempo_min": 42.85,
+    "R_por_vuelo": "0.5051 | 0.7482",
+    "R_plan": 0.3779,
+    "costo_modelo": 1.069612,
+    "computo_ms": 15.02,
+    "mas_resiliente": false,
+    "leyenda": "ACO (config_zhang) | 2 vuelos | 5,7 km | 43 min | R plan = 0,378 | 15 ms"
+   }
+  ],
+  "comparacion": [
+   {
+    "par": "T1 Dijkstra distancia vs T2 Gurobi",
+    "mismo_reparto": true,
+    "mismo_orden": false,
+    "mismos_tramos": false,
+    "tramos_no_compartidos": 4
+   },
+   {
+    "par": "T1 Dijkstra distancia vs T3 Dijkstra ponderado",
+    "mismo_reparto": false,
+    "mismo_orden": false,
+    "mismos_tramos": false,
+    "tramos_no_compartidos": 6
+   },
+   {
+    "par": "T1 Dijkstra distancia vs T4 ACO",
+    "mismo_reparto": true,
+    "mismo_orden": false,
+    "mismos_tramos": false,
+    "tramos_no_compartidos": 4
+   },
+   {
+    "par": "T2 Gurobi vs T3 Dijkstra ponderado",
+    "mismo_reparto": false,
+    "mismo_orden": false,
+    "mismos_tramos": false,
+    "tramos_no_compartidos": 2
+   },
+   {
+    "par": "T2 Gurobi vs T4 ACO",
+    "mismo_reparto": true,
+    "mismo_orden": false,
+    "mismos_tramos": true,
+    "tramos_no_compartidos": 0
+   },
+   {
+    "par": "T3 Dijkstra ponderado vs T4 ACO",
+    "mismo_reparto": false,
+    "mismo_orden": false,
+    "mismos_tramos": false,
+    "tramos_no_compartidos": 2
+   }
+  ],
+  "mas_resiliente": "T3 Dijkstra ponderado",
+  "mas_corta": "T1 Dijkstra distancia",
+  "delta_R_mejor_vs_corta": 0.0911,
+  "delta_min_mejor_vs_corta": 3.83,
+  "tecnica1_menor_R": true,
+  "gurobi_menor_costo": true,
+  "aviso": "Ningún plan alcanza R ≥ 0,90: conviene elegir otra base o postergar la campaña hasta que cambien las amenazas.",
+  "empate_en_R": [],
+  "escenario": {
+   "fuente": "db",
+   "fecha_escenario": "2015-02-27",
+   "modo_meteo": "historico",
+   "n_nodos": 1336,
+   "n_camaras": 48,
+   "n_aristas": 4556,
+   "n_bases": 1106,
+   "n_focos": 32,
+   "n_avistamientos": 0,
+   "n_lecturas_meteo": 1106
+  },
+  "aristas_bloqueadas_desde_base": []
+ },
+ "E5": [
+  {
+   "tecnica": "T1 Dijkstra distancia",
+   "R_plan": 0.31809,
+   "R_montecarlo": 0.3231,
+   "diferencia": 0.00501,
+   "ic95_inf": 0.31393,
+   "ic95_sup": 0.33227,
+   "R_en_ic": true,
+   "sorteos": 10000
+  },
+  {
+   "tecnica": "T2 Gurobi",
+   "R_plan": 0.37791,
+   "R_montecarlo": 0.3757,
+   "diferencia": -0.00221,
+   "ic95_inf": 0.36621,
+   "ic95_sup": 0.38519,
+   "R_en_ic": true,
+   "sorteos": 10000
+  },
+  {
+   "tecnica": "T3 Dijkstra ponderado",
+   "R_plan": 0.40915,
+   "R_montecarlo": 0.4126,
+   "diferencia": 0.00345,
+   "ic95_inf": 0.40295,
+   "ic95_sup": 0.42225,
+   "R_en_ic": true,
+   "sorteos": 10000
+  },
+  {
+   "tecnica": "T4 ACO",
+   "R_plan": 0.37791,
+   "R_montecarlo": 0.3805,
+   "diferencia": 0.00259,
+   "ic95_inf": 0.37098,
+   "ic95_sup": 0.39002,
+   "R_en_ic": true,
+   "sorteos": 10000
+  }
+ ],
+ "E6": [
+  {
+   "theta": 0.0,
+   "tecnica": "T2 Gurobi",
+   "tiempo_min": 41.26,
+   "distancia_km": 4.902,
+   "R_plan": 0.31809,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.0,
+   "tecnica": "T3 Dijkstra ponderado",
+   "tiempo_min": 41.26,
+   "distancia_km": 4.902,
+   "R_plan": 0.31809,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.0,
+   "tecnica": "T4 ACO",
+   "tiempo_min": 41.26,
+   "distancia_km": 4.902,
+   "R_plan": 0.31809,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.1,
+   "tecnica": "T2 Gurobi",
+   "tiempo_min": 41.26,
+   "distancia_km": 4.902,
+   "R_plan": 0.31809,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.1,
+   "tecnica": "T3 Dijkstra ponderado",
+   "tiempo_min": 41.918,
+   "distancia_km": 5.275,
+   "R_plan": 0.28987,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.1,
+   "tecnica": "T4 ACO",
+   "tiempo_min": 41.26,
+   "distancia_km": 4.902,
+   "R_plan": 0.31809,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.2,
+   "tecnica": "T2 Gurobi",
+   "tiempo_min": 41.26,
+   "distancia_km": 4.902,
+   "R_plan": 0.31809,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.2,
+   "tecnica": "T3 Dijkstra ponderado",
+   "tiempo_min": 41.918,
+   "distancia_km": 5.275,
+   "R_plan": 0.28987,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.2,
+   "tecnica": "T4 ACO",
+   "tiempo_min": 41.26,
+   "distancia_km": 4.902,
+   "R_plan": 0.31809,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.3,
+   "tecnica": "T2 Gurobi",
+   "tiempo_min": 41.26,
+   "distancia_km": 4.902,
+   "R_plan": 0.31809,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.3,
+   "tecnica": "T3 Dijkstra ponderado",
+   "tiempo_min": 41.918,
+   "distancia_km": 5.275,
+   "R_plan": 0.28987,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.3,
+   "tecnica": "T4 ACO",
+   "tiempo_min": 41.26,
+   "distancia_km": 4.902,
+   "R_plan": 0.31809,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.4,
+   "tecnica": "T2 Gurobi",
+   "tiempo_min": 41.26,
+   "distancia_km": 4.902,
+   "R_plan": 0.31809,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.4,
+   "tecnica": "T3 Dijkstra ponderado",
+   "tiempo_min": 41.918,
+   "distancia_km": 5.275,
+   "R_plan": 0.28987,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.4,
+   "tecnica": "T4 ACO",
+   "tiempo_min": 41.26,
+   "distancia_km": 4.902,
+   "R_plan": 0.31809,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.5,
+   "tecnica": "T2 Gurobi",
+   "tiempo_min": 42.848,
+   "distancia_km": 5.732,
+   "R_plan": 0.37791,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.5,
+   "tecnica": "T3 Dijkstra ponderado",
+   "tiempo_min": 45.093,
+   "distancia_km": 6.936,
+   "R_plan": 0.40915,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.5,
+   "tecnica": "T4 ACO",
+   "tiempo_min": 42.848,
+   "distancia_km": 5.732,
+   "R_plan": 0.37791,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.6,
+   "tecnica": "T2 Gurobi",
+   "tiempo_min": 42.848,
+   "distancia_km": 5.732,
+   "R_plan": 0.37791,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.6,
+   "tecnica": "T3 Dijkstra ponderado",
+   "tiempo_min": 45.093,
+   "distancia_km": 6.936,
+   "R_plan": 0.40915,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.6,
+   "tecnica": "T4 ACO",
+   "tiempo_min": 42.848,
+   "distancia_km": 5.732,
+   "R_plan": 0.37791,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.7,
+   "tecnica": "T2 Gurobi",
+   "tiempo_min": 42.848,
+   "distancia_km": 5.732,
+   "R_plan": 0.37791,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.7,
+   "tecnica": "T3 Dijkstra ponderado",
+   "tiempo_min": 45.093,
+   "distancia_km": 6.936,
+   "R_plan": 0.40915,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.7,
+   "tecnica": "T4 ACO",
+   "tiempo_min": 42.848,
+   "distancia_km": 5.732,
+   "R_plan": 0.37791,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.8,
+   "tecnica": "T2 Gurobi",
+   "tiempo_min": 45.093,
+   "distancia_km": 6.936,
+   "R_plan": 0.40915,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.8,
+   "tecnica": "T3 Dijkstra ponderado",
+   "tiempo_min": 45.093,
+   "distancia_km": 6.936,
+   "R_plan": 0.40915,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.8,
+   "tecnica": "T4 ACO",
+   "tiempo_min": 45.093,
+   "distancia_km": 6.936,
+   "R_plan": 0.40915,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.9,
+   "tecnica": "T2 Gurobi",
+   "tiempo_min": 45.093,
+   "distancia_km": 6.936,
+   "R_plan": 0.40915,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.9,
+   "tecnica": "T3 Dijkstra ponderado",
+   "tiempo_min": 45.093,
+   "distancia_km": 6.936,
+   "R_plan": 0.40915,
+   "vuelos": 2
+  },
+  {
+   "theta": 0.9,
+   "tecnica": "T4 ACO",
+   "tiempo_min": 45.093,
+   "distancia_km": 6.936,
+   "R_plan": 0.40915,
+   "vuelos": 2
+  },
+  {
+   "theta": 1.0,
+   "tecnica": "T2 Gurobi",
+   "tiempo_min": 45.093,
+   "distancia_km": 6.936,
+   "R_plan": 0.40915,
+   "vuelos": 2
+  },
+  {
+   "theta": 1.0,
+   "tecnica": "T3 Dijkstra ponderado",
+   "tiempo_min": 45.093,
+   "distancia_km": 6.936,
+   "R_plan": 0.40915,
+   "vuelos": 2
+  },
+  {
+   "theta": 1.0,
+   "tecnica": "T4 ACO",
+   "tiempo_min": 45.093,
+   "distancia_km": 6.936,
+   "R_plan": 0.40915,
+   "vuelos": 2
+  }
+ ],
+ "E9": {
+  "tabla": [
+   {
+    "r_min": 0.3,
+    "planes_factibles": 4,
+    "mensajes": "T1 Dijkstra distancia: ok || T2 Gurobi: ok || T3 Dijkstra ponderado: ok || T4 ACO: ok",
+    "aviso": null
+   },
+   {
+    "r_min": 0.35,
+    "planes_factibles": 3,
+    "mensajes": "T1 Dijkstra distancia: 20: R del plan 0.318 menor que el mínimo 0.35 || T2 Gurobi: ok || T3 Dijkstra ponderado: ok || T4 ACO: ok",
+    "aviso": null
+   },
+   {
+    "r_min": 0.38,
+    "planes_factibles": 2,
+    "mensajes": "T1 Dijkstra distancia: 20: R del plan 0.318 menor que el mínimo 0.38 || T2 Gurobi: ok || T3 Dijkstra ponderado: ok || T4 ACO: 20: R del plan 0.378 menor que el mínimo 0.38",
+    "aviso": null
+   },
+   {
+    "r_min": 0.4,
+    "planes_factibles": 2,
+    "mensajes": "T1 Dijkstra distancia: 20: R del plan 0.318 menor que el mínimo 0.4 || T2 Gurobi: ok || T3 Dijkstra ponderado: ok || T4 ACO: 20: R del plan 0.378 menor que el mínimo 0.4",
+    "aviso": null
+   },
+   {
+    "r_min": 0.45,
+    "planes_factibles": 0,
+    "mensajes": "T1 Dijkstra distancia: 20: R del plan 0.318 menor que el mínimo 0.45 || T2 Gurobi: 20: Ningún plan cumple la batería, las restricciones y la R mínima. || T3 Dijkstra ponderado: 20: R del plan 0.409 menor que el mínimo 0.45 || T4 ACO: 20: R del plan 0.378 menor que el mínimo 0.45",
+    "aviso": "Ninguna técnica encontró un plan factible: prueba otra base, menos restricciones o posterga la campaña."
+   },
+   {
+    "r_min": 0.5,
+    "planes_factibles": 0,
+    "mensajes": "T1 Dijkstra distancia: 20: R del plan 0.318 menor que el mínimo 0.5 || T2 Gurobi: 20: Ningún plan cumple la batería, las restricciones y la R mínima. || T3 Dijkstra ponderado: 20: R del plan 0.409 menor que el mínimo 0.5 || T4 ACO: 20: R del plan 0.378 menor que el mínimo 0.5",
+    "aviso": "Ninguna técnica encontró un plan factible: prueba otra base, menos restricciones o posterga la campaña."
+   },
+   {
+    "r_min": 0.9,
+    "planes_factibles": 0,
+    "mensajes": "T1 Dijkstra distancia: 20: R del plan 0.318 menor que el mínimo 0.9 || T2 Gurobi: 20: Ningún plan cumple la batería, las restricciones y la R mínima. || T3 Dijkstra ponderado: 20: R del plan 0.409 menor que el mínimo 0.9 || T4 ACO: 20: R del plan 0.378 menor que el mínimo 0.9",
+    "aviso": "Ninguna técnica encontró un plan factible: prueba otra base, menos restricciones o posterga la campaña."
+   }
+  ],
+  "primer_rmin_sin_plan": {
+   "r_min": 0.45,
+   "planes_factibles": 0,
+   "mensajes": "T1 Dijkstra distancia: 20: R del plan 0.318 menor que el mínimo 0.45 || T2 Gurobi: 20: Ningún plan cumple la batería, las restricciones y la R mínima. || T3 Dijkstra ponderado: 20: R del plan 0.409 menor que el mínimo 0.45 || T4 ACO: 20: R del plan 0.378 menor que el mínimo 0.45",
+   "aviso": "Ninguna técnica encontró un plan factible: prueba otra base, menos restricciones o posterga la campaña."
+  }
+ },
+ "E10": [
+  {
+   "parametro": "p0 aves",
+   "valor": 0.3,
+   "mas_resiliente": "T3 Dijkstra ponderado",
+   "R_dijkstra_distancia": 0.3181,
+   "R_milp": 0.3779,
+   "R_dijkstra_ponderado": 0.4092,
+   "R_aco": 0.3779
+  },
+  {
+   "parametro": "p0 aves",
+   "valor": 0.5,
+   "mas_resiliente": "T3 Dijkstra ponderado",
+   "R_dijkstra_distancia": 0.3181,
+   "R_milp": 0.3779,
+   "R_dijkstra_ponderado": 0.4092,
+   "R_aco": 0.3779
+  },
+  {
+   "parametro": "p0 aves",
+   "valor": 0.7,
+   "mas_resiliente": "T3 Dijkstra ponderado",
+   "R_dijkstra_distancia": 0.3181,
+   "R_milp": 0.3779,
+   "R_dijkstra_ponderado": 0.4092,
+   "R_aco": 0.3779
+  },
+  {
+   "parametro": "r_mov (m)",
+   "valor": 1000,
+   "mas_resiliente": "T3 Dijkstra ponderado",
+   "R_dijkstra_distancia": 0.3181,
+   "R_milp": 0.3779,
+   "R_dijkstra_ponderado": 0.4092,
+   "R_aco": 0.3779
+  },
+  {
+   "parametro": "r_mov (m)",
+   "valor": 2000,
+   "mas_resiliente": "T3 Dijkstra ponderado",
+   "R_dijkstra_distancia": 0.3181,
+   "R_milp": 0.3779,
+   "R_dijkstra_ponderado": 0.4092,
+   "R_aco": 0.3779
+  },
+  {
+   "parametro": "r_mov (m)",
+   "valor": 5000,
+   "mas_resiliente": "T3 Dijkstra ponderado",
+   "R_dijkstra_distancia": 0.3181,
+   "R_milp": 0.3779,
+   "R_dijkstra_ponderado": 0.4092,
+   "R_aco": 0.3779
+  },
+  {
+   "parametro": "radio incendio (m)",
+   "valor": 500,
+   "mas_resiliente": "T3 Dijkstra ponderado",
+   "R_dijkstra_distancia": 0.9223,
+   "R_milp": 0.9223,
+   "R_dijkstra_ponderado": 0.9223,
+   "R_aco": 0.9223
+  },
+  {
+   "parametro": "radio incendio (m)",
+   "valor": 1000,
+   "mas_resiliente": "T3 Dijkstra ponderado",
+   "R_dijkstra_distancia": 0.3181,
+   "R_milp": 0.3779,
+   "R_dijkstra_ponderado": 0.4092,
+   "R_aco": 0.3779
+  },
+  {
+   "parametro": "radio incendio (m)",
+   "valor": 1500,
+   "mas_resiliente": "T1 Dijkstra distancia",
+   "R_dijkstra_distancia": 0.0088,
+   "R_milp": 0.0088,
+   "R_dijkstra_ponderado": 0.008,
+   "R_aco": 0.0088
+  },
+  {
+   "parametro": "alpha viento",
+   "valor": 0.2,
+   "mas_resiliente": "T3 Dijkstra ponderado",
+   "R_dijkstra_distancia": 0.328,
+   "R_milp": 0.3897,
+   "R_dijkstra_ponderado": 0.4219,
+   "R_aco": 0.3897
+  },
+  {
+   "parametro": "alpha viento",
+   "valor": 0.25,
+   "mas_resiliente": "T3 Dijkstra ponderado",
+   "R_dijkstra_distancia": 0.3181,
+   "R_milp": 0.3779,
+   "R_dijkstra_ponderado": 0.4092,
+   "R_aco": 0.3779
+  },
+  {
+   "parametro": "alpha viento",
+   "valor": 0.3,
+   "mas_resiliente": "T3 Dijkstra ponderado",
+   "R_dijkstra_distancia": 0.3022,
+   "R_milp": 0.3591,
+   "R_dijkstra_ponderado": 0.3888,
+   "R_aco": 0.3591
+  }
+ ],
+ "E7": {
+  "fecha_amenazas": "2015-02-27",
+  "resumen": [
+   {
+    "tecnica": "T1 Dijkstra distancia",
+    "casos": 713,
+    "factibles_pct": 100.0,
+    "R_plan_promedio": 0.869,
+    "tiempo_plan_min_promedio": 16.76,
+    "brecha_promedio_pct": 11.941,
+    "brecha_max_pct": 379.717,
+    "iguala_optimo_pct": 75.2,
+    "computo_ms_promedio": 0.15
+   },
+   {
+    "tecnica": "T2 Gurobi",
+    "casos": 713,
+    "factibles_pct": 100.0,
+    "R_plan_promedio": 0.952,
+    "tiempo_plan_min_promedio": 16.99,
+    "brecha_promedio_pct": 0.0,
+    "brecha_max_pct": 0.0,
+    "iguala_optimo_pct": 100.0,
+    "computo_ms_promedio": 2.43
+   },
+   {
+    "tecnica": "T3 Dijkstra ponderado",
+    "casos": 713,
+    "factibles_pct": 100.0,
+    "R_plan_promedio": 0.952,
+    "tiempo_plan_min_promedio": 17.03,
+    "brecha_promedio_pct": 0.316,
+    "brecha_max_pct": 25.557,
+    "iguala_optimo_pct": 90.2,
+    "computo_ms_promedio": 0.07
+   },
+   {
+    "tecnica": "T4 ACO",
+    "casos": 713,
+    "factibles_pct": 100.0,
+    "R_plan_promedio": 0.952,
+    "tiempo_plan_min_promedio": 16.99,
+    "brecha_promedio_pct": 0.0,
+    "brecha_max_pct": 0.0,
+    "iguala_optimo_pct": 100.0,
+    "computo_ms_promedio": 3.94
+   }
+  ],
+  "resumen_multicamara": [
+   {
+    "tecnica": "T1 Dijkstra distancia",
+    "casos": 276,
+    "brecha_promedio_pct": 30.848,
+    "iguala_optimo_pct": 35.9
+   },
+   {
+    "tecnica": "T2 Gurobi",
+    "casos": 276,
+    "brecha_promedio_pct": 0.0,
+    "iguala_optimo_pct": 100.0
+   },
+   {
+    "tecnica": "T3 Dijkstra ponderado",
+    "casos": 276,
+    "brecha_promedio_pct": 0.816,
+    "iguala_optimo_pct": 74.6
+   },
+   {
+    "tecnica": "T4 ACO",
+    "casos": 276,
+    "brecha_promedio_pct": 0.0,
+    "iguala_optimo_pct": 100.0
+   }
+  ],
+  "resumen_sintetico": [
+   {
+    "tecnica": "T1 Dijkstra distancia",
+    "casos": 10,
+    "R_plan_promedio": 0.2526,
+    "brecha_promedio_pct": 217.378,
+    "brecha_max_pct": 412.592,
+    "iguala_optimo_pct": 0.0,
+    "computo_ms_promedio": 0.44
+   },
+   {
+    "tecnica": "T2 Gurobi",
+    "casos": 10,
+    "R_plan_promedio": 1.0,
+    "brecha_promedio_pct": 0.0,
+    "brecha_max_pct": 0.0,
+    "iguala_optimo_pct": 100.0,
+    "computo_ms_promedio": 445.99
+   },
+   {
+    "tecnica": "T3 Dijkstra ponderado",
+    "casos": 10,
+    "R_plan_promedio": 1.0,
+    "brecha_promedio_pct": 9.381,
+    "brecha_max_pct": 31.519,
+    "iguala_optimo_pct": 20.0,
+    "computo_ms_promedio": 0.53
+   },
+   {
+    "tecnica": "T4 ACO",
+    "casos": 10,
+    "R_plan_promedio": 1.0,
+    "brecha_promedio_pct": 0.074,
+    "brecha_max_pct": 0.526,
+    "iguala_optimo_pct": 80.0,
+    "computo_ms_promedio": 20.56
+   }
+  ],
+  "milp_mas_grande": {
+   "variables": 720,
+   "restricciones": 1319,
+   "caso": "sintética 3 (8 cámaras)"
+  },
+  "supera_2000": false,
+  "casos_por_sector": 23,
+  "sectores": 31
+ },
+ "E8": {
+  "instancias": [
+   "sintética 1 (6 cámaras)",
+   "sintética 2 (7 cámaras)",
+   "sintética 3 (8 cámaras)",
+   "sintética 4 (8 cámaras)",
+   "sintética 5 (8 cámaras)",
+   "sintética 6 (6 cámaras)",
+   "sintética 7 (6 cámaras)",
+   "sintética 8 (8 cámaras)",
+   "sintética 9 (8 cámaras)",
+   "sintética 10 (8 cámaras)"
+  ],
+  "semillas": 30,
+  "resumen": [
+   {
+    "configuracion": "config_mai",
+    "corridas": 300,
+    "brecha_media_pct": 0.0018,
+    "brecha_desv_pct": 0.0303,
+    "brecha_max_pct": 0.5265,
+    "optimos_pct": 99.7,
+    "tiempo_ms_medio": 344.37
+   },
+   {
+    "configuracion": "config_zhang",
+    "corridas": 300,
+    "brecha_media_pct": 0.0345,
+    "brecha_desv_pct": 0.1129,
+    "brecha_max_pct": 0.5265,
+    "optimos_pct": 89.7,
+    "tiempo_ms_medio": 19.89
+   },
+   {
+    "configuracion": "config_mai, alpha=1, 100 iteraciones",
+    "corridas": 300,
+    "brecha_media_pct": 0.0095,
+    "brecha_desv_pct": 0.0599,
+    "brecha_max_pct": 0.5265,
+    "optimos_pct": 97.0,
+    "tiempo_ms_medio": 69.79
+   },
+   {
+    "configuracion": "config_mai, alpha=2, 100 iteraciones",
+    "corridas": 300,
+    "brecha_media_pct": 0.02,
+    "brecha_desv_pct": 0.0939,
+    "brecha_max_pct": 0.5265,
+    "optimos_pct": 95.0,
+    "tiempo_ms_medio": 70.63
+   },
+   {
+    "configuracion": "config_mai, alpha=5, 100 iteraciones",
+    "corridas": 300,
+    "brecha_media_pct": 0.038,
+    "brecha_desv_pct": 0.1243,
+    "brecha_max_pct": 0.5265,
+    "optimos_pct": 90.0,
+    "tiempo_ms_medio": 70.25
+   },
+   {
+    "configuracion": "config_mai, alpha=8, 100 iteraciones",
+    "corridas": 300,
+    "brecha_media_pct": 0.0461,
+    "brecha_desv_pct": 0.1347,
+    "brecha_max_pct": 0.5265,
+    "optimos_pct": 87.7,
+    "tiempo_ms_medio": 70.06
+   },
+   {
+    "configuracion": "config_mai, beta=1, 100 iteraciones",
+    "corridas": 300,
+    "brecha_media_pct": 0.0035,
+    "brecha_desv_pct": 0.0272,
+    "brecha_max_pct": 0.2125,
+    "optimos_pct": 98.3,
+    "tiempo_ms_medio": 68.84
+   },
+   {
+    "configuracion": "config_mai, beta=2, 100 iteraciones",
+    "corridas": 300,
+    "brecha_media_pct": 0.005,
+    "brecha_desv_pct": 0.0321,
+    "brecha_max_pct": 0.2125,
+    "optimos_pct": 97.7,
+    "tiempo_ms_medio": 69.62
+   },
+   {
+    "configuracion": "config_mai, beta=5, 100 iteraciones",
+    "corridas": 300,
+    "brecha_media_pct": 0.0141,
+    "brecha_desv_pct": 0.0707,
+    "brecha_max_pct": 0.5265,
+    "optimos_pct": 95.3,
+    "tiempo_ms_medio": 68.68
+   },
+   {
+    "configuracion": "config_mai, beta=8, 100 iteraciones",
+    "corridas": 300,
+    "brecha_media_pct": 0.0095,
+    "brecha_desv_pct": 0.0599,
+    "brecha_max_pct": 0.5265,
+    "optimos_pct": 97.0,
+    "tiempo_ms_medio": 68.98
+   },
+   {
+    "configuracion": "config_mai, rho=0.1, 100 iteraciones",
+    "corridas": 300,
+    "brecha_media_pct": 0.0088,
+    "brecha_desv_pct": 0.0587,
+    "brecha_max_pct": 0.5265,
+    "optimos_pct": 97.3,
+    "tiempo_ms_medio": 69.16
+   },
+   {
+    "configuracion": "config_mai, rho=0.2, 100 iteraciones",
+    "corridas": 300,
+    "brecha_media_pct": 0.0095,
+    "brecha_desv_pct": 0.0599,
+    "brecha_max_pct": 0.5265,
+    "optimos_pct": 97.0,
+    "tiempo_ms_medio": 68.89
+   },
+   {
+    "configuracion": "config_mai, rho=0.5, 100 iteraciones",
+    "corridas": 300,
+    "brecha_media_pct": 0.0176,
+    "brecha_desv_pct": 0.0885,
+    "brecha_max_pct": 0.5265,
+    "optimos_pct": 95.7,
+    "tiempo_ms_medio": 69.73
+   },
+   {
+    "configuracion": "config_mai, hormigas=10, 100 iteraciones",
+    "corridas": 300,
+    "brecha_media_pct": 0.0095,
+    "brecha_desv_pct": 0.0599,
+    "brecha_max_pct": 0.5265,
+    "optimos_pct": 97.0,
+    "tiempo_ms_medio": 68.48
+   },
+   {
+    "configuracion": "config_mai, hormigas=30, 100 iteraciones",
+    "corridas": 300,
+    "brecha_media_pct": 0.0338,
+    "brecha_desv_pct": 0.1125,
+    "brecha_max_pct": 0.5265,
+    "optimos_pct": 90.0,
+    "tiempo_ms_medio": 156.16
+   },
+   {
+    "configuracion": "config_mai, q0_inicial=0.0, 100 iteraciones",
+    "corridas": 300,
+    "brecha_media_pct": 0.0349,
+    "brecha_desv_pct": 0.1156,
+    "brecha_max_pct": 0.5265,
+    "optimos_pct": 90.0,
+    "tiempo_ms_medio": 67.75
+   },
+   {
+    "configuracion": "config_mai, q0_inicial=0.5, 100 iteraciones",
+    "corridas": 300,
+    "brecha_media_pct": 0.0362,
+    "brecha_desv_pct": 0.1255,
+    "brecha_max_pct": 0.5265,
+    "optimos_pct": 91.3,
+    "tiempo_ms_medio": 69.55
+   },
+   {
+    "configuracion": "config_mai, q0_inicial=0.9, 100 iteraciones",
+    "corridas": 300,
+    "brecha_media_pct": 0.0095,
+    "brecha_desv_pct": 0.0599,
+    "brecha_max_pct": 0.5265,
+    "optimos_pct": 97.0,
+    "tiempo_ms_medio": 69.8
+   }
+  ],
+  "mejor": {
+   "configuracion": "config_mai",
+   "corridas": 300,
+   "brecha_media_pct": 0.0018,
+   "brecha_desv_pct": 0.0303,
+   "brecha_max_pct": 0.5265,
+   "optimos_pct": 99.7,
+   "tiempo_ms_medio": 344.37
+  },
+  "curva_en": "sintética 3 (8 cámaras)",
+  "iteraciones_curva": 500
+ },
+ "E11": {
+  "dias_por_temporada": {
+   "verano": 48,
+   "otono": 33,
+   "invierno": 22,
+   "primavera": 35
+  },
+  "fuente_dias": "mañanas volables por temporada, Open-Meteo 2020-2024, α = 0,25",
+  "rondas": [
+   {
+    "ronda": 1,
+    "temporada": "verano",
+    "dias_volables": 48,
+    "cubre_parque": true,
+    "sectores": 31,
+    "por_prioridad": 0,
+    "por_rotacion": 0,
+    "pendientes": 0,
+    "mananas": 14
+   },
+   {
+    "ronda": 2,
+    "temporada": "otono",
+    "dias_volables": 33,
+    "cubre_parque": false,
+    "sectores": 28,
+    "por_prioridad": 5,
+    "por_rotacion": 23,
+    "pendientes": 3,
+    "mananas": 11
+   },
+   {
+    "ronda": 3,
+    "temporada": "invierno",
+    "dias_volables": 22,
+    "cubre_parque": false,
+    "sectores": 18,
+    "por_prioridad": 3,
+    "por_rotacion": 15,
+    "pendientes": 13,
+    "mananas": 7
+   },
+   {
+    "ronda": 4,
+    "temporada": "primavera",
+    "dias_volables": 35,
+    "cubre_parque": false,
+    "sectores": 28,
+    "por_prioridad": 5,
+    "por_rotacion": 23,
+    "pendientes": 3,
+    "mananas": 12
+   }
+  ],
+  "rondas_para_cubrir_el_parque": 1,
+  "sectores_validos": 31,
+  "calendario": {
+   "sector": 23,
+   "campanas": [
+    {
+     "temporada": "verano",
+     "inicio": "2024-01-15",
+     "estado_final": "completa",
+     "decisiones": 9,
+     "dias": [
+      {
+       "visita": 1,
+       "fecha": "2024-01-16",
+       "estado": "volada"
+      },
+      {
+       "visita": 2,
+       "fecha": "2024-01-17",
+       "estado": "volada"
+      },
+      {
+       "visita": 3,
+       "fecha": "2024-01-23",
+       "estado": "volada"
+      }
+     ]
+    },
+    {
+     "temporada": "invierno",
+     "inicio": "2024-06-10",
+     "estado_final": "programada",
+     "decisiones": 20,
+     "dias": [
+      {
+       "visita": 1,
+       "fecha": "2024-06-30",
+       "estado": "postergada"
+      },
+      {
+       "visita": 2,
+       "fecha": "2024-07-01",
+       "estado": "programada"
+      },
+      {
+       "visita": 3,
+       "fecha": "2024-07-02",
+       "estado": "programada"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "E10b": {
+  "sector": 20,
+  "fecha": "2025-02-12",
+  "aves_en_ventana_comuna": 47,
+  "fuente_aves": "eBird histórico, comuna de Chaitén (CL-LL-CHA), 14 días hasta la fecha",
+  "avistamientos_ventana_a_5km": 5,
+  "nota": "sector 20 (el del caso de E4)",
+  "aves_en_escenario_a_5km": [
+   {
+    "especie": "Southern Lapwing",
+    "cantidad": 2,
+    "fecha": "2025-02-12"
+   },
+   {
+    "especie": "Crested Caracara",
+    "cantidad": 2,
+    "fecha": "2025-02-12"
+   },
+   {
+    "especie": "Southern Lapwing",
+    "cantidad": 2,
+    "fecha": "2025-02-04"
+   },
+   {
+    "especie": "Crested Caracara",
+    "cantidad": 2,
+    "fecha": "2025-02-04"
+   },
+   {
+    "especie": "Southern Lapwing",
+    "cantidad": 3,
+    "fecha": "2025-02-03"
+   }
+  ],
+  "tabla": [
+   {
+    "parametro": "p0 aves",
+    "valor": 0.3,
+    "mas_resiliente": "T3 Dijkstra ponderado",
+    "empate": "",
+    "camaras_y_base_con_p_aves": 1,
+    "R_dijkstra_distancia": 0.0541,
+    "p_aves_max_dijkstra_distancia": 0.2688,
+    "R_milp": 0.0642,
+    "p_aves_max_milp": 0.1976,
+    "R_dijkstra_ponderado": 0.0695,
+    "p_aves_max_dijkstra_ponderado": 0.1462,
+    "R_aco": 0.0642,
+    "p_aves_max_aco": 0.1976
+   },
+   {
+    "parametro": "p0 aves",
+    "valor": 0.5,
+    "mas_resiliente": "T2 Gurobi",
+    "empate": "T2 Gurobi T4 ACO T3 Dijkstra ponderado",
+    "camaras_y_base_con_p_aves": 1,
+    "R_dijkstra_distancia": 0.0464,
+    "p_aves_max_dijkstra_distancia": 0.2688,
+    "R_milp": 0.0551,
+    "p_aves_max_milp": 0.1976,
+    "R_dijkstra_ponderado": 0.0551,
+    "p_aves_max_dijkstra_ponderado": 0.1976,
+    "R_aco": 0.0551,
+    "p_aves_max_aco": 0.1976
+   },
+   {
+    "parametro": "p0 aves",
+    "valor": 0.7,
+    "mas_resiliente": "T2 Gurobi",
+    "empate": "T2 Gurobi T4 ACO T3 Dijkstra ponderado",
+    "camaras_y_base_con_p_aves": 1,
+    "R_dijkstra_distancia": 0.0397,
+    "p_aves_max_dijkstra_distancia": 0.2688,
+    "R_milp": 0.0472,
+    "p_aves_max_milp": 0.2295,
+    "R_dijkstra_ponderado": 0.0472,
+    "p_aves_max_dijkstra_ponderado": 0.2295,
+    "R_aco": 0.0472,
+    "p_aves_max_aco": 0.2295
+   },
+   {
+    "parametro": "r_mov (m)",
+    "valor": 1000,
+    "mas_resiliente": "T3 Dijkstra ponderado",
+    "empate": "",
+    "camaras_y_base_con_p_aves": 0,
+    "R_dijkstra_distancia": 0.0676,
+    "p_aves_max_dijkstra_distancia": 0.2688,
+    "R_milp": 0.0804,
+    "p_aves_max_milp": 0.1976,
+    "R_dijkstra_ponderado": 0.087,
+    "p_aves_max_dijkstra_ponderado": 0.0799,
+    "R_aco": 0.0804,
+    "p_aves_max_aco": 0.1976
+   },
+   {
+    "parametro": "r_mov (m)",
+    "valor": 2000,
+    "mas_resiliente": "T2 Gurobi",
+    "empate": "T2 Gurobi T4 ACO T3 Dijkstra ponderado",
+    "camaras_y_base_con_p_aves": 1,
+    "R_dijkstra_distancia": 0.0464,
+    "p_aves_max_dijkstra_distancia": 0.2688,
+    "R_milp": 0.0551,
+    "p_aves_max_milp": 0.1976,
+    "R_dijkstra_ponderado": 0.0551,
+    "p_aves_max_dijkstra_ponderado": 0.1976,
+    "R_aco": 0.0551,
+    "p_aves_max_aco": 0.1976
+   },
+   {
+    "parametro": "r_mov (m)",
+    "valor": 5000,
+    "mas_resiliente": "T3 Dijkstra ponderado",
+    "empate": "T3 Dijkstra ponderado T1 Dijkstra distancia T2 Gurobi T4 ACO",
+    "camaras_y_base_con_p_aves": 4,
+    "R_dijkstra_distancia": 0.0,
+    "p_aves_max_dijkstra_distancia": 0.8603,
+    "R_milp": 0.0,
+    "p_aves_max_milp": 0.8603,
+    "R_dijkstra_ponderado": 0.0,
+    "p_aves_max_dijkstra_ponderado": 0.8603,
+    "R_aco": 0.0,
+    "p_aves_max_aco": 0.8603
+   }
+  ]
+ }
+}

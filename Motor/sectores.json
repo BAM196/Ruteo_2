@@ -1,0 +1,2218 @@
+{
+ "meta": {
+  "generado": "2026-11-26T22:52:08+00:00",
+  "metodo": "Partición exacta: el mínimo número de grupos tal que cada grupo tiene una base que deja todas sus cámaras a ≤ R_op − r_b y con su bloque de muestreo a la vista; a igual número, la menor suma de diámetros.",
+  "diametro_max_m": 2717.2,
+  "alcance_m": 1358.6,
+  "n_sectores": 33,
+  "tamanos": {
+   "1": 21,
+   "2": 9,
+   "3": 3
+  },
+  "sin_base": [
+   8,
+   17
+  ],
+  "prioridad": "Prioridad = 100 · (V̂ + P̂) / 2; V = Σ w_e f_e,s sobre nativas; P = fracción de cámaras con exóticas",
+  "numeracion": "De norte a sur"
+ },
+ "sectores": [
+  {
+   "id": 1,
+   "camaras": [
+    48
+   ],
+   "n_camaras": 1,
+   "diametro_m": 0.0,
+   "base": {
+    "id": 48,
+    "tipo": "camara",
+    "nombre": "Camara AI03",
+    "nodo": 48,
+    "lon": -72.430805,
+    "lat": -42.037667,
+    "elevacion_m": 291.0
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 5.0,
+   "presion_exoticas": 1.0,
+   "descripcion": {
+    "predominan": [
+     "perro doméstico",
+     "güiña"
+    ],
+    "objetivo": [
+     "güiña (NT)",
+     "pudú (VU)"
+    ],
+    "exoticas": [
+     "perro doméstico"
+    ]
+   },
+   "registros": {
+    "Canis lupus familiaris": 34,
+    "Leopardus guigna": 6,
+    "Pudu puda": 6
+   },
+   "poligono": [
+    [
+     [
+      -72.432048,
+      -42.036794
+     ],
+     [
+      -72.431976,
+      -42.038594
+     ],
+     [
+      -72.429562,
+      -42.03854
+     ],
+     [
+      -72.429634,
+      -42.03674
+     ],
+     [
+      -72.432048,
+      -42.036794
+     ]
+    ]
+   ],
+   "V_norm": 0.6666666666666666,
+   "P_norm": 1.0,
+   "prioridad": 83.3,
+   "subtitulo": "Sector 1 · Prioridad 83 % · Predominan: perro doméstico, güiña · Objetivo: güiña (NT), pudú (VU) · Exóticas: perro doméstico"
+  },
+  {
+   "id": 2,
+   "camaras": [
+    47
+   ],
+   "n_camaras": 1,
+   "diametro_m": 0.0,
+   "base": {
+    "id": 47,
+    "tipo": "camara",
+    "nombre": "Camara AH08",
+    "nodo": 47,
+    "lon": -72.441068,
+    "lat": -42.082924,
+    "elevacion_m": 35.6
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 2.0,
+   "presion_exoticas": 1.0,
+   "descripcion": {
+    "predominan": [
+     "vaca",
+     "güiña"
+    ],
+    "objetivo": [
+     "güiña (NT)"
+    ],
+    "exoticas": [
+     "vaca"
+    ]
+   },
+   "registros": {
+    "Bos taurus": 12,
+    "Leopardus guigna": 4
+   },
+   "poligono": [
+    [
+     [
+      -72.442312,
+      -42.082051
+     ],
+     [
+      -72.44224,
+      -42.083851
+     ],
+     [
+      -72.439824,
+      -42.083797
+     ],
+     [
+      -72.439896,
+      -42.081997
+     ],
+     [
+      -72.442312,
+      -42.082051
+     ]
+    ]
+   ],
+   "V_norm": 0.26666666666666666,
+   "P_norm": 1.0,
+   "prioridad": 63.3,
+   "subtitulo": "Sector 2 · Prioridad 63 % · Predominan: vaca, güiña · Objetivo: güiña (NT) · Exóticas: vaca"
+  },
+  {
+   "id": 3,
+   "camaras": [
+    46
+   ],
+   "n_camaras": 1,
+   "diametro_m": 0.0,
+   "base": {
+    "id": 46,
+    "tipo": "camara",
+    "nombre": "Camara AM27",
+    "nodo": 46,
+    "lon": -72.373612,
+    "lat": -42.252503,
+    "elevacion_m": 15.9
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 7.0,
+   "presion_exoticas": 0.0,
+   "descripcion": {
+    "predominan": [
+     "pudú",
+     "güiña"
+    ],
+    "objetivo": [
+     "pudú (VU)",
+     "güiña (NT)",
+     "puma (NT)"
+    ],
+    "exoticas": []
+   },
+   "registros": {
+    "Pudu puda": 188,
+    "Leopardus guigna": 30,
+    "Puma concolor": 8
+   },
+   "poligono": [
+    [
+     [
+      -72.37486,
+      -42.251631
+     ],
+     [
+      -72.374786,
+      -42.25343
+     ],
+     [
+      -72.372364,
+      -42.253375
+     ],
+     [
+      -72.372438,
+      -42.251576
+     ],
+     [
+      -72.37486,
+      -42.251631
+     ]
+    ]
+   ],
+   "V_norm": 0.9333333333333333,
+   "P_norm": 0.0,
+   "prioridad": 46.7,
+   "subtitulo": "Sector 3 · Prioridad 47 % · Predominan: pudú, güiña · Objetivo: pudú (VU), güiña (NT), puma (NT)"
+  },
+  {
+   "id": 4,
+   "camaras": [
+    44,
+    45
+   ],
+   "n_camaras": 2,
+   "diametro_m": 1999.9,
+   "base": {
+    "id": 101093,
+    "tipo": "camino_camaras",
+    "nombre": "Entre Camara AF56 y Camara AF54",
+    "nodo": 101093,
+    "lon": -72.448089,
+    "lat": -42.509033,
+    "elevacion_m": 87.4
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 5.0,
+   "presion_exoticas": 0.0,
+   "descripcion": {
+    "predominan": [
+     "pudú",
+     "puma"
+    ],
+    "objetivo": [
+     "pudú (VU)",
+     "puma (NT)"
+    ],
+    "exoticas": []
+   },
+   "registros": {
+    "Pudu puda": 46,
+    "Puma concolor": 27
+   },
+   "poligono": [
+    [
+     [
+      -72.449817,
+      -42.496465
+     ],
+     [
+      -72.449744,
+      -42.498265
+     ],
+     [
+      -72.449013,
+      -42.516258
+     ],
+     [
+      -72.44658,
+      -42.516204
+     ],
+     [
+      -72.447386,
+      -42.496411
+     ],
+     [
+      -72.449817,
+      -42.496465
+     ]
+    ]
+   ],
+   "V_norm": 0.6666666666666666,
+   "P_norm": 0.0,
+   "prioridad": 33.3,
+   "subtitulo": "Sector 4 · Prioridad 33 % · Predominan: pudú, puma · Objetivo: pudú (VU), puma (NT)"
+  },
+  {
+   "id": 5,
+   "camaras": [
+    42,
+    43
+   ],
+   "n_camaras": 2,
+   "diametro_m": 1414.2,
+   "base": {
+    "id": 101053,
+    "tipo": "camino_camaras",
+    "nombre": "Entre Camara AD57 y Camara AC56",
+    "nodo": 101053,
+    "lon": -72.472679,
+    "lat": -42.524251,
+    "elevacion_m": 47.1
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 7.5,
+   "presion_exoticas": 0.0,
+   "descripcion": {
+    "predominan": [
+     "pudú",
+     "puma"
+    ],
+    "objetivo": [
+     "pudú (VU)",
+     "puma (NT)",
+     "güiña (NT)"
+    ],
+    "exoticas": []
+   },
+   "registros": {
+    "Pudu puda": 454,
+    "Puma concolor": 94,
+    "Leopardus guigna": 24,
+    "Galictis cuja": 2
+   },
+   "poligono": [
+    [
+     [
+      -72.48557,
+      -42.515266
+     ],
+     [
+      -72.485498,
+      -42.517065
+     ],
+     [
+      -72.472973,
+      -42.525795
+     ],
+     [
+      -72.47054,
+      -42.525741
+     ],
+     [
+      -72.470613,
+      -42.523941
+     ],
+     [
+      -72.483138,
+      -42.515213
+     ],
+     [
+      -72.48557,
+      -42.515266
+     ]
+    ]
+   ],
+   "V_norm": 1.0,
+   "P_norm": 0.0,
+   "prioridad": 50.0,
+   "subtitulo": "Sector 5 · Prioridad 50 % · Predominan: pudú, puma · Objetivo: pudú (VU), puma (NT), güiña (NT)"
+  },
+  {
+   "id": 6,
+   "camaras": [
+    41
+   ],
+   "n_camaras": 1,
+   "diametro_m": 0.0,
+   "base": {
+    "id": 41,
+    "tipo": "camara",
+    "nombre": "Camara Z59",
+    "nodo": 41,
+    "lon": -72.519736,
+    "lat": -42.543926,
+    "elevacion_m": 40.9
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 2.0,
+   "presion_exoticas": 0.0,
+   "descripcion": {
+    "predominan": [
+     "puma"
+    ],
+    "objetivo": [
+     "puma (NT)"
+    ],
+    "exoticas": []
+   },
+   "registros": {
+    "Puma concolor": 3
+   },
+   "poligono": [
+    [
+     [
+      -72.520988,
+      -42.543053
+     ],
+     [
+      -72.520917,
+      -42.544852
+     ],
+     [
+      -72.518484,
+      -42.544799
+     ],
+     [
+      -72.518555,
+      -42.543
+     ],
+     [
+      -72.520988,
+      -42.543053
+     ]
+    ]
+   ],
+   "V_norm": 0.26666666666666666,
+   "P_norm": 0.0,
+   "prioridad": 13.3,
+   "subtitulo": "Sector 6 · Prioridad 13 % · Predominan: puma · Objetivo: puma (NT)"
+  },
+  {
+   "id": 7,
+   "camaras": [
+    40
+   ],
+   "n_camaras": 1,
+   "diametro_m": 0.0,
+   "base": {
+    "id": 40,
+    "tipo": "camara",
+    "nombre": "Camara AA60",
+    "nodo": 40,
+    "lon": -72.50721,
+    "lat": -42.552659,
+    "elevacion_m": 263.5
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 4.0,
+   "presion_exoticas": 0.0,
+   "descripcion": {
+    "predominan": [
+     "pudú",
+     "quique"
+    ],
+    "objetivo": [
+     "pudú (VU)"
+    ],
+    "exoticas": []
+   },
+   "registros": {
+    "Pudu puda": 66,
+    "Galictis cuja": 2
+   },
+   "poligono": [
+    [
+     [
+      -72.508463,
+      -42.551786
+     ],
+     [
+      -72.508391,
+      -42.553585
+     ],
+     [
+      -72.505957,
+      -42.553532
+     ],
+     [
+      -72.506029,
+      -42.551733
+     ],
+     [
+      -72.508463,
+      -42.551786
+     ]
+    ]
+   ],
+   "V_norm": 0.5333333333333333,
+   "P_norm": 0.0,
+   "prioridad": 26.7,
+   "subtitulo": "Sector 7 · Prioridad 27 % · Predominan: pudú, quique · Objetivo: pudú (VU)"
+  },
+  {
+   "id": 8,
+   "camaras": [
+    39
+   ],
+   "n_camaras": 1,
+   "diametro_m": 0.0,
+   "base": null,
+   "regla_base": "Ninguna base deja todas las cámaras dentro del radio y a la vista.",
+   "valor_conservacion": 6.0,
+   "presion_exoticas": 1.0,
+   "descripcion": {
+    "predominan": [
+     "pudú",
+     "güiña"
+    ],
+    "objetivo": [
+     "pudú (VU)",
+     "güiña (NT)"
+    ],
+    "exoticas": [
+     "visón americano"
+    ]
+   },
+   "registros": {
+    "Pudu puda": 106,
+    "Leopardus guigna": 52,
+    "Galictis cuja": 36,
+    "Neovison vison": 12
+   },
+   "poligono": [
+    [
+     [
+      -72.59365,
+      -42.553608
+     ],
+     [
+      -72.59358,
+      -42.555407
+     ],
+     [
+      -72.591146,
+      -42.555356
+     ],
+     [
+      -72.591216,
+      -42.553557
+     ],
+     [
+      -72.59365,
+      -42.553608
+     ]
+    ]
+   ],
+   "V_norm": 0.8,
+   "P_norm": 1.0,
+   "prioridad": 90.0,
+   "subtitulo": "Sector 8 · Prioridad 90 % · Predominan: pudú, güiña · Objetivo: pudú (VU), güiña (NT) · Exóticas: visón americano"
+  },
+  {
+   "id": 9,
+   "camaras": [
+    38
+   ],
+   "n_camaras": 1,
+   "diametro_m": 0.0,
+   "base": {
+    "id": 38,
+    "tipo": "camara",
+    "nombre": "Camara Z61",
+    "nodo": 38,
+    "lon": -72.519022,
+    "lat": -42.561921,
+    "elevacion_m": 191.2
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 5.0,
+   "presion_exoticas": 0.0,
+   "descripcion": {
+    "predominan": [
+     "pudú",
+     "güiña"
+    ],
+    "objetivo": [
+     "pudú (VU)",
+     "güiña (NT)"
+    ],
+    "exoticas": []
+   },
+   "registros": {
+    "Pudu puda": 26,
+    "Leopardus guigna": 18
+   },
+   "poligono": [
+    [
+     [
+      -72.520275,
+      -42.561048
+     ],
+     [
+      -72.520203,
+      -42.562847
+     ],
+     [
+      -72.517769,
+      -42.562794
+     ],
+     [
+      -72.517841,
+      -42.560995
+     ],
+     [
+      -72.520275,
+      -42.561048
+     ]
+    ]
+   ],
+   "V_norm": 0.6666666666666666,
+   "P_norm": 0.0,
+   "prioridad": 33.3,
+   "subtitulo": "Sector 9 · Prioridad 33 % · Predominan: pudú, güiña · Objetivo: pudú (VU), güiña (NT)"
+  },
+  {
+   "id": 10,
+   "camaras": [
+    35,
+    37
+   ],
+   "n_camaras": 2,
+   "diametro_m": 1414.3,
+   "base": {
+    "id": 100933,
+    "tipo": "camino_camaras",
+    "nombre": "Entre Camara T62 y Camara S61",
+    "nodo": 100933,
+    "lon": -72.59259,
+    "lat": -42.57186,
+    "elevacion_m": 62.0
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 4.0,
+   "presion_exoticas": 0.0,
+   "descripcion": {
+    "predominan": [
+     "güiña",
+     "zorro culpeo"
+    ],
+    "objetivo": [
+     "güiña (NT)",
+     "pudú (VU)"
+    ],
+    "exoticas": []
+   },
+   "registros": {
+    "Leopardus guigna": 32,
+    "Pudu puda": 6,
+    "Lycalopex culpaeus": 14
+   },
+   "poligono": [
+    [
+     [
+      -72.605476,
+      -42.562861
+     ],
+     [
+      -72.605407,
+      -42.56466
+     ],
+     [
+      -72.592888,
+      -42.573403
+     ],
+     [
+      -72.590453,
+      -42.573352
+     ],
+     [
+      -72.590522,
+      -42.571553
+     ],
+     [
+      -72.603041,
+      -42.56281
+     ],
+     [
+      -72.605476,
+      -42.562861
+     ]
+    ]
+   ],
+   "V_norm": 0.5333333333333333,
+   "P_norm": 0.0,
+   "prioridad": 26.7,
+   "subtitulo": "Sector 10 · Prioridad 27 % · Predominan: güiña, zorro culpeo · Objetivo: güiña (NT), pudú (VU)"
+  },
+  {
+   "id": 11,
+   "camaras": [
+    36
+   ],
+   "n_camaras": 1,
+   "diametro_m": 0.0,
+   "base": {
+    "id": 36,
+    "tipo": "camara",
+    "nombre": "Camara R61",
+    "nodo": 36,
+    "lon": -72.616396,
+    "lat": -42.563989,
+    "elevacion_m": 208.2
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 5.0,
+   "presion_exoticas": 0.0,
+   "descripcion": {
+    "predominan": [
+     "pudú",
+     "güiña"
+    ],
+    "objetivo": [
+     "pudú (VU)",
+     "güiña (NT)"
+    ],
+    "exoticas": []
+   },
+   "registros": {
+    "Pudu puda": 42,
+    "Leopardus guigna": 26
+   },
+   "poligono": [
+    [
+     [
+      -72.617647,
+      -42.563115
+     ],
+     [
+      -72.617579,
+      -42.564914
+     ],
+     [
+      -72.615144,
+      -42.564863
+     ],
+     [
+      -72.615213,
+      -42.563064
+     ],
+     [
+      -72.617647,
+      -42.563115
+     ]
+    ]
+   ],
+   "V_norm": 0.6666666666666666,
+   "P_norm": 0.0,
+   "prioridad": 33.3,
+   "subtitulo": "Sector 11 · Prioridad 33 % · Predominan: pudú, güiña · Objetivo: pudú (VU), güiña (NT)"
+  },
+  {
+   "id": 12,
+   "camaras": [
+    34
+   ],
+   "n_camaras": 1,
+   "diametro_m": 0.0,
+   "base": {
+    "id": 34,
+    "tipo": "camara",
+    "nombre": "Camara C63",
+    "nodo": 34,
+    "lon": -72.798365,
+    "lat": -42.585642,
+    "elevacion_m": 112.6
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 5.0,
+   "presion_exoticas": 1.0,
+   "descripcion": {
+    "predominan": [
+     "vaca",
+     "güiña"
+    ],
+    "objetivo": [
+     "güiña (NT)",
+     "pudú (VU)"
+    ],
+    "exoticas": [
+     "vaca"
+    ]
+   },
+   "registros": {
+    "Bos taurus": 222,
+    "Leopardus guigna": 98,
+    "Pudu puda": 92
+   },
+   "poligono": [
+    [
+     [
+      -72.799614,
+      -42.584765
+     ],
+     [
+      -72.799551,
+      -42.586565
+     ],
+     [
+      -72.797115,
+      -42.586518
+     ],
+     [
+      -72.797179,
+      -42.584719
+     ],
+     [
+      -72.799614,
+      -42.584765
+     ]
+    ]
+   ],
+   "V_norm": 0.6666666666666666,
+   "P_norm": 1.0,
+   "prioridad": 83.3,
+   "subtitulo": "Sector 12 · Prioridad 83 % · Predominan: vaca, güiña · Objetivo: güiña (NT), pudú (VU) · Exóticas: vaca"
+  },
+  {
+   "id": 13,
+   "camaras": [
+    33
+   ],
+   "n_camaras": 1,
+   "diametro_m": 0.0,
+   "base": {
+    "id": 33,
+    "tipo": "camara",
+    "nombre": "Camara U65",
+    "nodo": 33,
+    "lon": -72.578487,
+    "lat": -42.599214,
+    "elevacion_m": 348.6
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 2.0,
+   "presion_exoticas": 0.0,
+   "descripcion": {
+    "predominan": [
+     "güiña"
+    ],
+    "objetivo": [
+     "güiña (NT)"
+    ],
+    "exoticas": []
+   },
+   "registros": {
+    "Leopardus guigna": 24
+   },
+   "poligono": [
+    [
+     [
+      -72.57974,
+      -42.59834
+     ],
+     [
+      -72.57967,
+      -42.60014
+     ],
+     [
+      -72.577234,
+      -42.600088
+     ],
+     [
+      -72.577304,
+      -42.598288
+     ],
+     [
+      -72.57974,
+      -42.59834
+     ]
+    ]
+   ],
+   "V_norm": 0.26666666666666666,
+   "P_norm": 0.0,
+   "prioridad": 13.3,
+   "subtitulo": "Sector 13 · Prioridad 13 % · Predominan: güiña · Objetivo: güiña (NT)"
+  },
+  {
+   "id": 14,
+   "camaras": [
+    32
+   ],
+   "n_camaras": 1,
+   "diametro_m": 0.0,
+   "base": {
+    "id": 32,
+    "tipo": "camara",
+    "nombre": "Camara B66",
+    "nodo": 32,
+    "lon": -72.809597,
+    "lat": -42.612873,
+    "elevacion_m": 45.8
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 5.0,
+   "presion_exoticas": 0.0,
+   "descripcion": {
+    "predominan": [
+     "güiña",
+     "pudú"
+    ],
+    "objetivo": [
+     "güiña (NT)",
+     "pudú (VU)"
+    ],
+    "exoticas": []
+   },
+   "registros": {
+    "Leopardus guigna": 18,
+    "Pudu puda": 16
+   },
+   "poligono": [
+    [
+     [
+      -72.810847,
+      -42.611996
+     ],
+     [
+      -72.810784,
+      -42.613796
+     ],
+     [
+      -72.808347,
+      -42.61375
+     ],
+     [
+      -72.80841,
+      -42.61195
+     ],
+     [
+      -72.810847,
+      -42.611996
+     ]
+    ]
+   ],
+   "V_norm": 0.6666666666666666,
+   "P_norm": 0.0,
+   "prioridad": 33.3,
+   "subtitulo": "Sector 14 · Prioridad 33 % · Predominan: güiña, pudú · Objetivo: güiña (NT), pudú (VU)"
+  },
+  {
+   "id": 15,
+   "camaras": [
+    29,
+    31
+   ],
+   "n_camaras": 2,
+   "diametro_m": 2000.0,
+   "base": {
+    "id": 100087,
+    "tipo": "sendero",
+    "nombre": "Sendero Tronador",
+    "nodo": 100087,
+    "lon": -72.580278,
+    "lat": -42.654907,
+    "elevacion_m": 188.2
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 4.0,
+   "presion_exoticas": 0.0,
+   "descripcion": {
+    "predominan": [
+     "pudú",
+     "güiña"
+    ],
+    "objetivo": [
+     "pudú (VU)",
+     "güiña (NT)"
+    ],
+    "exoticas": []
+   },
+   "registros": {
+    "Pudu puda": 706,
+    "Leopardus guigna": 68,
+    "Galictis cuja": 6
+   },
+   "poligono": [
+    [
+     [
+      -72.577996,
+      -42.643328
+     ],
+     [
+      -72.577926,
+      -42.645128
+     ],
+     [
+      -72.577226,
+      -42.663123
+     ],
+     [
+      -72.574788,
+      -42.663071
+     ],
+     [
+      -72.574858,
+      -42.661271
+     ],
+     [
+      -72.575558,
+      -42.643276
+     ],
+     [
+      -72.577996,
+      -42.643328
+     ]
+    ]
+   ],
+   "V_norm": 0.5333333333333333,
+   "P_norm": 0.0,
+   "prioridad": 26.7,
+   "subtitulo": "Sector 15 · Prioridad 27 % · Predominan: pudú, güiña · Objetivo: pudú (VU), güiña (NT)"
+  },
+  {
+   "id": 16,
+   "camaras": [
+    30
+   ],
+   "n_camaras": 1,
+   "diametro_m": 0.0,
+   "base": {
+    "id": 30,
+    "tipo": "camara",
+    "nombre": "Camara S71",
+    "nodo": 30,
+    "lon": -72.600771,
+    "lat": -42.653713,
+    "elevacion_m": 467.5
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 5.0,
+   "presion_exoticas": 0.0,
+   "descripcion": {
+    "predominan": [
+     "pudú",
+     "güiña"
+    ],
+    "objetivo": [
+     "pudú (VU)",
+     "güiña (NT)"
+    ],
+    "exoticas": []
+   },
+   "registros": {
+    "Pudu puda": 18,
+    "Leopardus guigna": 2
+   },
+   "poligono": [
+    [
+     [
+      -72.602025,
+      -42.652839
+     ],
+     [
+      -72.601955,
+      -42.654638
+     ],
+     [
+      -72.599517,
+      -42.654587
+     ],
+     [
+      -72.599587,
+      -42.652788
+     ],
+     [
+      -72.602025,
+      -42.652839
+     ]
+    ]
+   ],
+   "V_norm": 0.6666666666666666,
+   "P_norm": 0.0,
+   "prioridad": 33.3,
+   "subtitulo": "Sector 16 · Prioridad 33 % · Predominan: pudú, güiña · Objetivo: pudú (VU), güiña (NT)"
+  },
+  {
+   "id": 17,
+   "camaras": [
+    28
+   ],
+   "n_camaras": 1,
+   "diametro_m": 0.0,
+   "base": null,
+   "regla_base": "Ninguna base deja todas las cámaras dentro del radio y a la vista.",
+   "valor_conservacion": 5.0,
+   "presion_exoticas": 0.0,
+   "descripcion": {
+    "predominan": [
+     "güiña",
+     "pudú"
+    ],
+    "objetivo": [
+     "güiña (NT)",
+     "pudú (VU)"
+    ],
+    "exoticas": []
+   },
+   "registros": {
+    "Leopardus guigna": 10,
+    "Pudu puda": 6
+   },
+   "poligono": [
+    [
+     [
+      -72.588443,
+      -42.688574
+     ],
+     [
+      -72.588374,
+      -42.690373
+     ],
+     [
+      -72.585934,
+      -42.690322
+     ],
+     [
+      -72.586004,
+      -42.688523
+     ],
+     [
+      -72.588443,
+      -42.688574
+     ]
+    ]
+   ],
+   "V_norm": 0.6666666666666666,
+   "P_norm": 0.0,
+   "prioridad": 33.3,
+   "subtitulo": "Sector 17 · Prioridad 33 % · Predominan: güiña, pudú · Objetivo: güiña (NT), pudú (VU)"
+  },
+  {
+   "id": 18,
+   "camaras": [
+    25,
+    26,
+    27
+   ],
+   "n_camaras": 3,
+   "diametro_m": 2000.0,
+   "base": {
+    "id": 100131,
+    "tipo": "sendero",
+    "nombre": "Sendero Punta del Lago",
+    "nodo": 100131,
+    "lon": -72.582879,
+    "lat": -42.714592,
+    "elevacion_m": 140.4
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 2.6667,
+   "presion_exoticas": 0.0,
+   "descripcion": {
+    "predominan": [
+     "pudú",
+     "güiña"
+    ],
+    "objetivo": [
+     "pudú (VU)",
+     "güiña (NT)"
+    ],
+    "exoticas": []
+   },
+   "registros": {
+    "Pudu puda": 22,
+    "Leopardus guigna": 2
+   },
+   "poligono": [
+    [
+     [
+      -72.587747,
+      -42.706569
+     ],
+     [
+      -72.587049,
+      -42.724564
+     ],
+     [
+      -72.586979,
+      -42.726363
+     ],
+     [
+      -72.584539,
+      -42.726312
+     ],
+     [
+      -72.572686,
+      -42.717056
+     ],
+     [
+      -72.572756,
+      -42.715256
+     ],
+     [
+      -72.585307,
+      -42.706518
+     ],
+     [
+      -72.587747,
+      -42.706569
+     ]
+    ]
+   ],
+   "V_norm": 0.35556,
+   "P_norm": 0.0,
+   "prioridad": 17.8,
+   "subtitulo": "Sector 18 · Prioridad 18 % · Predominan: pudú, güiña · Objetivo: pudú (VU), güiña (NT)"
+  },
+  {
+   "id": 19,
+   "camaras": [
+    23,
+    24
+   ],
+   "n_camaras": 2,
+   "diametro_m": 1414.2,
+   "base": {
+    "id": 100774,
+    "tipo": "camino_camaras",
+    "nombre": "Entre Camara Q83 y Camara R82",
+    "nodo": 100774,
+    "lon": -72.62019,
+    "lat": -42.761541,
+    "elevacion_m": 122.0
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 1.5,
+   "presion_exoticas": 0.5,
+   "descripcion": {
+    "predominan": [
+     "pudú",
+     "perro doméstico"
+    ],
+    "objetivo": [
+     "pudú (VU)"
+    ],
+    "exoticas": [
+     "perro doméstico"
+    ]
+   },
+   "registros": {
+    "Pudu puda": 54,
+    "Canis lupus familiaris": 1
+   },
+   "poligono": [
+    [
+     [
+      -72.622285,
+      -42.761321
+     ],
+     [
+      -72.622216,
+      -42.76312
+     ],
+     [
+      -72.619773,
+      -42.763069
+     ],
+     [
+      -72.607908,
+      -42.753817
+     ],
+     [
+      -72.607978,
+      -42.752018
+     ],
+     [
+      -72.61042,
+      -42.752069
+     ],
+     [
+      -72.622285,
+      -42.761321
+     ]
+    ]
+   ],
+   "V_norm": 0.2,
+   "P_norm": 0.5,
+   "prioridad": 35.0,
+   "subtitulo": "Sector 19 · Prioridad 35 % · Predominan: pudú, perro doméstico · Objetivo: pudú (VU) · Exóticas: perro doméstico"
+  },
+  {
+   "id": 20,
+   "camaras": [
+    19,
+    20,
+    22
+   ],
+   "n_camaras": 3,
+   "diametro_m": 2236.1,
+   "base": {
+    "id": 100668,
+    "tipo": "camino_camaras",
+    "nombre": "Entre Camara Q86 y Camara R85",
+    "nodo": 100668,
+    "lon": -72.609923,
+    "lat": -42.781337,
+    "elevacion_m": 190.1
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 3.0,
+   "presion_exoticas": 0.0,
+   "descripcion": {
+    "predominan": [
+     "pudú"
+    ],
+    "objetivo": [
+     "pudú (VU)"
+    ],
+    "exoticas": []
+   },
+   "registros": {
+    "Pudu puda": 132
+   },
+   "poligono": [
+    [
+     [
+      -72.621251,
+      -42.788314
+     ],
+     [
+      -72.621182,
+      -42.790113
+     ],
+     [
+      -72.618739,
+      -42.790062
+     ],
+     [
+      -72.606869,
+      -42.78081
+     ],
+     [
+      -72.606938,
+      -42.779011
+     ],
+     [
+      -72.607285,
+      -42.770013
+     ],
+     [
+      -72.609728,
+      -42.770064
+     ],
+     [
+      -72.621251,
+      -42.788314
+     ]
+    ]
+   ],
+   "V_norm": 0.4,
+   "P_norm": 0.0,
+   "prioridad": 20.0,
+   "subtitulo": "Sector 20 · Prioridad 20 % · Predominan: pudú · Objetivo: pudú (VU)"
+  },
+  {
+   "id": 21,
+   "camaras": [
+    21
+   ],
+   "n_camaras": 1,
+   "diametro_m": 0.0,
+   "base": {
+    "id": 21,
+    "tipo": "camara",
+    "nombre": "Camara O84",
+    "nodo": 21,
+    "lon": -72.64511,
+    "lat": -42.771698,
+    "elevacion_m": 120.6
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 5.0,
+   "presion_exoticas": 0.0,
+   "descripcion": {
+    "predominan": [
+     "pudú",
+     "puma"
+    ],
+    "objetivo": [
+     "pudú (VU)",
+     "puma (NT)"
+    ],
+    "exoticas": []
+   },
+   "registros": {
+    "Pudu puda": 14,
+    "Puma concolor": 12
+   },
+   "poligono": [
+    [
+     [
+      -72.646365,
+      -42.770823
+     ],
+     [
+      -72.646297,
+      -42.772623
+     ],
+     [
+      -72.643855,
+      -42.772573
+     ],
+     [
+      -72.643923,
+      -42.770773
+     ],
+     [
+      -72.646365,
+      -42.770823
+     ]
+    ]
+   ],
+   "V_norm": 0.6666666666666666,
+   "P_norm": 0.0,
+   "prioridad": 33.3,
+   "subtitulo": "Sector 21 · Prioridad 33 % · Predominan: pudú, puma · Objetivo: pudú (VU), puma (NT)"
+  },
+  {
+   "id": 22,
+   "camaras": [
+    16,
+    18
+   ],
+   "n_camaras": 2,
+   "diametro_m": 1999.9,
+   "base": {
+    "id": 100608,
+    "tipo": "camino_camaras",
+    "nombre": "Entre Camara O88 y Camara O86",
+    "nodo": 100608,
+    "lon": -72.644052,
+    "lat": -42.799591,
+    "elevacion_m": 111.2
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 3.5,
+   "presion_exoticas": 0.0,
+   "descripcion": {
+    "predominan": [
+     "pudú",
+     "zorro culpeo"
+    ],
+    "objetivo": [
+     "pudú (VU)"
+    ],
+    "exoticas": []
+   },
+   "registros": {
+    "Pudu puda": 400,
+    "Lycalopex culpaeus": 22
+   },
+   "poligono": [
+    [
+     [
+      -72.645684,
+      -42.788819
+     ],
+     [
+      -72.645616,
+      -42.790619
+     ],
+     [
+      -72.644933,
+      -42.808614
+     ],
+     [
+      -72.642489,
+      -42.808564
+     ],
+     [
+      -72.642557,
+      -42.806764
+     ],
+     [
+      -72.64324,
+      -42.788769
+     ],
+     [
+      -72.645684,
+      -42.788819
+     ]
+    ]
+   ],
+   "V_norm": 0.4666666666666667,
+   "P_norm": 0.0,
+   "prioridad": 23.3,
+   "subtitulo": "Sector 22 · Prioridad 23 % · Predominan: pudú, zorro culpeo · Objetivo: pudú (VU)"
+  },
+  {
+   "id": 23,
+   "camaras": [
+    15,
+    17
+   ],
+   "n_camaras": 2,
+   "diametro_m": 2236.0,
+   "base": {
+    "id": 100587,
+    "tipo": "camino_camaras",
+    "nombre": "Entre Camara I88 y Camara K87",
+    "nodo": 100587,
+    "lon": -72.707365,
+    "lat": -42.805357,
+    "elevacion_m": 64.2
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 1.0,
+   "presion_exoticas": 1.0,
+   "descripcion": {
+    "predominan": [
+     "vaca",
+     "perro doméstico"
+    ],
+    "objetivo": [
+     "puma (NT)"
+    ],
+    "exoticas": [
+     "vaca",
+     "perro doméstico"
+    ]
+   },
+   "registros": {
+    "Bos taurus": 4658,
+    "Canis lupus familiaris": 12,
+    "Puma concolor": 6
+   },
+   "poligono": [
+    [
+     [
+      -72.718324,
+      -42.8083
+     ],
+     [
+      -72.718258,
+      -42.810099
+     ],
+     [
+      -72.715814,
+      -42.81005
+     ],
+     [
+      -72.691707,
+      -42.800562
+     ],
+     [
+      -72.691774,
+      -42.798763
+     ],
+     [
+      -72.694217,
+      -42.798812
+     ],
+     [
+      -72.718324,
+      -42.8083
+     ]
+    ]
+   ],
+   "V_norm": 0.13333333333333333,
+   "P_norm": 1.0,
+   "prioridad": 56.7,
+   "subtitulo": "Sector 23 · Prioridad 57 % · Predominan: vaca, perro doméstico · Objetivo: puma (NT) · Exóticas: vaca, perro doméstico"
+  },
+  {
+   "id": 24,
+   "camaras": [
+    14
+   ],
+   "n_camaras": 1,
+   "diametro_m": 0.0,
+   "base": {
+    "id": 14,
+    "tipo": "camara",
+    "nombre": "Camara D91",
+    "nodo": 14,
+    "lon": -72.777209,
+    "lat": -42.837373,
+    "elevacion_m": 332.5
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 5.0,
+   "presion_exoticas": 1.0,
+   "descripcion": {
+    "predominan": [
+     "perro doméstico",
+     "güiña"
+    ],
+    "objetivo": [
+     "güiña (NT)",
+     "pudú (VU)"
+    ],
+    "exoticas": [
+     "perro doméstico"
+    ]
+   },
+   "registros": {
+    "Canis lupus familiaris": 18,
+    "Leopardus guigna": 12,
+    "Pudu puda": 12
+   },
+   "poligono": [
+    [
+     [
+      -72.778464,
+      -42.836497
+     ],
+     [
+      -72.778399,
+      -42.838297
+     ],
+     [
+      -72.775954,
+      -42.838249
+     ],
+     [
+      -72.776019,
+      -42.836449
+     ],
+     [
+      -72.778464,
+      -42.836497
+     ]
+    ]
+   ],
+   "V_norm": 0.6666666666666666,
+   "P_norm": 1.0,
+   "prioridad": 83.3,
+   "subtitulo": "Sector 24 · Prioridad 83 % · Predominan: perro doméstico, güiña · Objetivo: güiña (NT), pudú (VU) · Exóticas: perro doméstico"
+  },
+  {
+   "id": 25,
+   "camaras": [
+    13
+   ],
+   "n_camaras": 1,
+   "diametro_m": 0.0,
+   "base": {
+    "id": 13,
+    "tipo": "camara",
+    "nombre": "Camara AI95",
+    "nodo": 13,
+    "lon": -72.396729,
+    "lat": -42.865369,
+    "elevacion_m": 551.0
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 2.0,
+   "presion_exoticas": 0.0,
+   "descripcion": {
+    "predominan": [
+     "puma"
+    ],
+    "objetivo": [
+     "puma (NT)"
+    ],
+    "exoticas": []
+   },
+   "registros": {
+    "Puma concolor": 6
+   },
+   "poligono": [
+    [
+     [
+      -72.39799,
+      -42.864497
+     ],
+     [
+      -72.397914,
+      -42.866296
+     ],
+     [
+      -72.395468,
+      -42.866241
+     ],
+     [
+      -72.395544,
+      -42.864442
+     ],
+     [
+      -72.39799,
+      -42.864497
+     ]
+    ]
+   ],
+   "V_norm": 0.26666666666666666,
+   "P_norm": 0.0,
+   "prioridad": 13.3,
+   "subtitulo": "Sector 25 · Prioridad 13 % · Predominan: puma · Objetivo: puma (NT)"
+  },
+  {
+   "id": 26,
+   "camaras": [
+    12
+   ],
+   "n_camaras": 1,
+   "diametro_m": 0.0,
+   "base": {
+    "id": 12,
+    "tipo": "camara",
+    "nombre": "Camara AE97",
+    "nodo": 12,
+    "lon": -72.444905,
+    "lat": -42.884464,
+    "elevacion_m": 611.7
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 1.0,
+   "presion_exoticas": 1.0,
+   "descripcion": {
+    "predominan": [
+     "zorro culpeo",
+     "liebre europea"
+    ],
+    "objetivo": [],
+    "exoticas": [
+     "liebre europea"
+    ]
+   },
+   "registros": {
+    "Lycalopex culpaeus": 112,
+    "Lepus europaeus": 100
+   },
+   "poligono": [
+    [
+     [
+      -72.446165,
+      -42.883592
+     ],
+     [
+      -72.446091,
+      -42.885391
+     ],
+     [
+      -72.443644,
+      -42.885336
+     ],
+     [
+      -72.443719,
+      -42.883537
+     ],
+     [
+      -72.446165,
+      -42.883592
+     ]
+    ]
+   ],
+   "V_norm": 0.13333333333333333,
+   "P_norm": 1.0,
+   "prioridad": 56.7,
+   "subtitulo": "Sector 26 · Prioridad 57 % · Predominan: zorro culpeo, liebre europea · Exóticas: liebre europea"
+  },
+  {
+   "id": 27,
+   "camaras": [
+    10,
+    11
+   ],
+   "n_camaras": 2,
+   "diametro_m": 1999.9,
+   "base": {
+    "id": 100548,
+    "tipo": "camino_camaras",
+    "nombre": "Entre Camara AD101 y Camara AD99",
+    "nodo": 100548,
+    "lon": -72.456029,
+    "lat": -42.911726,
+    "elevacion_m": 522.8
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 1.5,
+   "presion_exoticas": 0.0,
+   "descripcion": {
+    "predominan": [
+     "zorro culpeo",
+     "güiña"
+    ],
+    "objetivo": [
+     "güiña (NT)"
+    ],
+    "exoticas": []
+   },
+   "registros": {
+    "Lycalopex culpaeus": 24,
+    "Leopardus guigna": 10
+   },
+   "poligono": [
+    [
+     [
+      -72.45766,
+      -42.901858
+     ],
+     [
+      -72.457586,
+      -42.903657
+     ],
+     [
+      -72.456845,
+      -42.921649
+     ],
+     [
+      -72.454397,
+      -42.921594
+     ],
+     [
+      -72.454471,
+      -42.919795
+     ],
+     [
+      -72.455212,
+      -42.901803
+     ],
+     [
+      -72.45766,
+      -42.901858
+     ]
+    ]
+   ],
+   "V_norm": 0.2,
+   "P_norm": 0.0,
+   "prioridad": 10.0,
+   "subtitulo": "Sector 27 · Prioridad 10 % · Predominan: zorro culpeo, güiña · Objetivo: güiña (NT)"
+  },
+  {
+   "id": 28,
+   "camaras": [
+    9
+   ],
+   "n_camaras": 1,
+   "diametro_m": 0.0,
+   "base": {
+    "id": 9,
+    "tipo": "camara",
+    "nombre": "Camara AC103",
+    "nodo": 9,
+    "lon": -72.467162,
+    "lat": -42.938987,
+    "elevacion_m": 298.2
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 1.0,
+   "presion_exoticas": 1.0,
+   "descripcion": {
+    "predominan": [
+     "liebre europea",
+     "zorro culpeo"
+    ],
+    "objetivo": [],
+    "exoticas": [
+     "liebre europea"
+    ]
+   },
+   "registros": {
+    "Lepus europaeus": 164,
+    "Lycalopex culpaeus": 64
+   },
+   "poligono": [
+    [
+     [
+      -72.468423,
+      -42.938114
+     ],
+     [
+      -72.46835,
+      -42.939914
+     ],
+     [
+      -72.465901,
+      -42.93986
+     ],
+     [
+      -72.465974,
+      -42.93806
+     ],
+     [
+      -72.468423,
+      -42.938114
+     ]
+    ]
+   ],
+   "V_norm": 0.13333333333333333,
+   "P_norm": 1.0,
+   "prioridad": 56.7,
+   "subtitulo": "Sector 28 · Prioridad 57 % · Predominan: liebre europea, zorro culpeo · Exóticas: liebre europea"
+  },
+  {
+   "id": 29,
+   "camaras": [
+    8
+   ],
+   "n_camaras": 1,
+   "diametro_m": 0.0,
+   "base": {
+    "id": 8,
+    "tipo": "camara",
+    "nombre": "Camara Q104",
+    "nodo": 8,
+    "lon": -72.613761,
+    "lat": -42.951143,
+    "elevacion_m": 138.6
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 5.0,
+   "presion_exoticas": 1.0,
+   "descripcion": {
+    "predominan": [
+     "vaca",
+     "pudú"
+    ],
+    "objetivo": [
+     "pudú (VU)",
+     "güiña (NT)"
+    ],
+    "exoticas": [
+     "vaca"
+    ]
+   },
+   "registros": {
+    "Bos taurus": 158,
+    "Pudu puda": 16,
+    "Leopardus guigna": 4
+   },
+   "poligono": [
+    [
+     [
+      -72.615021,
+      -42.950269
+     ],
+     [
+      -72.614951,
+      -42.952068
+     ],
+     [
+      -72.612501,
+      -42.952017
+     ],
+     [
+      -72.612571,
+      -42.950218
+     ],
+     [
+      -72.615021,
+      -42.950269
+     ]
+    ]
+   ],
+   "V_norm": 0.6666666666666666,
+   "P_norm": 1.0,
+   "prioridad": 83.3,
+   "subtitulo": "Sector 29 · Prioridad 83 % · Predominan: vaca, pudú · Objetivo: pudú (VU), güiña (NT) · Exóticas: vaca"
+  },
+  {
+   "id": 30,
+   "camaras": [
+    6,
+    7
+   ],
+   "n_camaras": 2,
+   "diametro_m": 1000.0,
+   "base": {
+    "id": 100484,
+    "tipo": "camino_camaras",
+    "nombre": "Entre Camara AC107 y Camara AB105",
+    "nodo": 100484,
+    "lon": -72.476139,
+    "lat": -42.960706,
+    "elevacion_m": 357.3
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 5.0,
+   "presion_exoticas": 0.0,
+   "descripcion": {
+    "predominan": [
+     "pudú",
+     "güiña"
+    ],
+    "objetivo": [
+     "pudú (VU)",
+     "güiña (NT)"
+    ],
+    "exoticas": []
+   },
+   "registros": {
+    "Pudu puda": 66,
+    "Leopardus guigna": 16
+   },
+   "poligono": [
+    [
+     [
+      -72.479933,
+      -42.956377
+     ],
+     [
+      -72.479566,
+      -42.965373
+     ],
+     [
+      -72.479492,
+      -42.967173
+     ],
+     [
+      -72.477042,
+      -42.967119
+     ],
+     [
+      -72.477409,
+      -42.958123
+     ],
+     [
+      -72.477483,
+      -42.956323
+     ],
+     [
+      -72.479933,
+      -42.956377
+     ]
+    ]
+   ],
+   "V_norm": 0.6666666666666666,
+   "P_norm": 0.0,
+   "prioridad": 33.3,
+   "subtitulo": "Sector 30 · Prioridad 33 % · Predominan: pudú, güiña · Objetivo: pudú (VU), güiña (NT)"
+  },
+  {
+   "id": 31,
+   "camaras": [
+    2,
+    3,
+    5
+   ],
+   "n_camaras": 3,
+   "diametro_m": 2236.0,
+   "base": {
+    "id": 100402,
+    "tipo": "camino_camaras",
+    "nombre": "Entre Camara AB108 y Camara AC107",
+    "nodo": 100402,
+    "lon": -72.475887,
+    "lat": -42.982929,
+    "elevacion_m": 165.8
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 3.6667,
+   "presion_exoticas": 0.3333,
+   "descripcion": {
+    "predominan": [
+     "güiña",
+     "pudú"
+    ],
+    "objetivo": [
+     "güiña (NT)",
+     "pudú (VU)",
+     "puma (NT)"
+    ],
+    "exoticas": [
+     "perro doméstico"
+    ]
+   },
+   "registros": {
+    "Leopardus guigna": 90,
+    "Canis lupus familiaris": 6,
+    "Puma concolor": 6,
+    "Pudu puda": 10
+   },
+   "poligono": [
+    [
+     [
+      -72.47883,
+      -42.983366
+     ],
+     [
+      -72.478757,
+      -42.985166
+     ],
+     [
+      -72.478389,
+      -42.994162
+     ],
+     [
+      -72.475938,
+      -42.994108
+     ],
+     [
+      -72.464422,
+      -42.975844
+     ],
+     [
+      -72.464496,
+      -42.974045
+     ],
+     [
+      -72.466946,
+      -42.9741
+     ],
+     [
+      -72.47883,
+      -42.983366
+     ]
+    ]
+   ],
+   "V_norm": 0.48889333333333335,
+   "P_norm": 0.3333,
+   "prioridad": 41.1,
+   "subtitulo": "Sector 31 · Prioridad 41 % · Predominan: güiña, pudú · Objetivo: güiña (NT), pudú (VU), puma (NT) · Exóticas: perro doméstico"
+  },
+  {
+   "id": 32,
+   "camaras": [
+    4
+   ],
+   "n_camaras": 1,
+   "diametro_m": 0.0,
+   "base": {
+    "id": 4,
+    "tipo": "camara",
+    "nombre": "Camara AE108",
+    "nodo": 4,
+    "lon": -72.440808,
+    "lat": -42.983423,
+    "elevacion_m": 768.2
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 3.0,
+   "presion_exoticas": 0.0,
+   "descripcion": {
+    "predominan": [
+     "pudú"
+    ],
+    "objetivo": [
+     "pudú (VU)"
+    ],
+    "exoticas": []
+   },
+   "registros": {
+    "Pudu puda": 12
+   },
+   "poligono": [
+    [
+     [
+      -72.442071,
+      -42.982551
+     ],
+     [
+      -72.441996,
+      -42.98435
+     ],
+     [
+      -72.439545,
+      -42.984295
+     ],
+     [
+      -72.43962,
+      -42.982496
+     ],
+     [
+      -72.442071,
+      -42.982551
+     ]
+    ]
+   ],
+   "V_norm": 0.4,
+   "P_norm": 0.0,
+   "prioridad": 20.0,
+   "subtitulo": "Sector 32 · Prioridad 20 % · Predominan: pudú · Objetivo: pudú (VU)"
+  },
+  {
+   "id": 33,
+   "camaras": [
+    1
+   ],
+   "n_camaras": 1,
+   "diametro_m": 0.0,
+   "base": {
+    "id": 1,
+    "tipo": "camara",
+    "nombre": "Camara AC110",
+    "nodo": 1,
+    "lon": -72.464575,
+    "lat": -43.001961,
+    "elevacion_m": 573.3
+   },
+   "regla_base": "mínima suma de distancias a las cámaras",
+   "valor_conservacion": 6.0,
+   "presion_exoticas": 0.0,
+   "descripcion": {
+    "predominan": [
+     "pudú",
+     "quique"
+    ],
+    "objetivo": [
+     "pudú (VU)",
+     "puma (NT)"
+    ],
+    "exoticas": []
+   },
+   "registros": {
+    "Pudu puda": 12,
+    "Galictis cuja": 4,
+    "Puma concolor": 4
+   },
+   "poligono": [
+    [
+     [
+      -72.465838,
+      -43.001089
+     ],
+     [
+      -72.465764,
+      -43.002888
+     ],
+     [
+      -72.463312,
+      -43.002833
+     ],
+     [
+      -72.463386,
+      -43.001034
+     ],
+     [
+      -72.465838,
+      -43.001089
+     ]
+    ]
+   ],
+   "V_norm": 0.8,
+   "P_norm": 0.0,
+   "prioridad": 40.0,
+   "subtitulo": "Sector 33 · Prioridad 40 % · Predominan: pudú, quique · Objetivo: pudú (VU), puma (NT)"
+  }
+ ]
+}

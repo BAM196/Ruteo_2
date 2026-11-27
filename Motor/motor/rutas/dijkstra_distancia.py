@@ -1,52 +1,20 @@
 import time
 
-from .comun import Problema, dijkstra
+from .comun import ProblemaSector, resultado, vecino_mas_cercano
 
 TECNICA, ETIQUETA = "dijkstra_distancia", "pgr_dijkstra (distancia)"
 
-SQL = """
-SELECT path_seq, node, edge, agg_cost
-FROM pgr_dijkstra(
-    'SELECT id, source, target, distancia_m AS cost FROM aristas',
-    %(origen)s, %(destino)s, directed := false)
-ORDER BY path_seq
-"""
 
-
-def _con_pgrouting(prob: Problema, conn):
+def resolver(prob: ProblemaSector, conn=None) -> dict:
     t0 = time.perf_counter()
-    with conn.cursor() as cur:
-        cur.execute(SQL, {"origen": prob.s, "destino": prob.t})
-        filas = cur.fetchall()
+    tramos = prob.calcular_tramos("distancia", conn)
+    viables, motivos = prob.viables(tramos)
+    vuelos = vecino_mas_cercano(prob, tramos, viables)
     ms = (time.perf_counter() - t0) * 1000
-    if not filas:
-        return None, ms
-    nodos = [int(f[1]) for f in filas]
-    aristas = [int(f[2]) for f in filas if f[2] > 0]
-    return (nodos, aristas, float(filas[-1][3])), ms
-
-
-def _en_python(prob: Problema):
-    t0 = time.perf_counter()
-    r = dijkstra(prob.adyacencia("distancia", permitidos=False), prob.s, prob.t)
-    return r, (time.perf_counter() - t0) * 1000
-
-
-def resolver(prob: Problema, conn=None) -> dict:
-    error = prob.validar_extremos()
-    if error:
-        return prob.resultado(TECNICA, ETIQUETA, [], [], 0.0, mensaje=error)
-    if conn is not None:
-        r, ms = _con_pgrouting(prob, conn)
-        motor = "pgr_dijkstra (PostGIS/pgRouting)"
-    else:
-        r, ms = _en_python(prob)
-        motor = "Dijkstra en Python (modo sin base, mismas reglas que pgr_dijkstra)"
-    if r is None:
-        return prob.resultado(TECNICA, ETIQUETA, [], [], ms,
-                              extra={"motor": motor}, mensaje="No hay camino entre esas cámaras.")
-    nodos, aristas, dist = r
-    if prob.d_ref is None:
-        prob.d_ref = dist
-    return prob.resultado(TECNICA, ETIQUETA, nodos, aristas, ms,
-                          extra={"motor": motor, "sql": SQL.strip() if conn else None})
+    traslado = sum(prob.tramos_dist[(a, b)].tiempo
+                   for seq in vuelos for a, b in zip([prob.b] + seq, seq + [prob.b]) if (a, b) in tramos)
+    prob.t_ref = traslado if traslado > 0 else max([t.tiempo for t in tramos.values()] + [1.0])
+    return resultado(prob, TECNICA, ETIQUETA, vuelos, tramos, ms, no_viables=motivos,
+                     extra={"motor": prob.motor_tramos, "orden": "vecino más cercano por distancia",
+                            "cierre": "vuelve a la base cuando la siguiente cámara no cabe en la batería",
+                            "t_ref_s": round(prob.t_ref, 2)})

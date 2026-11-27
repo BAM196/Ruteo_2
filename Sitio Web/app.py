@@ -3,23 +3,11 @@ from pathlib import Path
 
 import psycopg2
 from dotenv import load_dotenv
-from flask import Flask, jsonify, render_template, request
-from psycopg2.extras import RealDictCursor
+from flask import Flask, jsonify, render_template
 
 load_dotenv(Path(__file__).resolve().parents[1] / ".env")
 
 app = Flask(__name__)
-
-ROUTE_SQL = """
-    SELECT path_seq, node, edge, agg_cost
-    FROM pgr_dijkstra(
-        'SELECT id, source, target, costo_km AS cost FROM aristas',
-        %s,
-        %s,
-        false
-    )
-    ORDER BY path_seq
-"""
 
 NODE_SQL = """
     SELECT json_build_object(
@@ -35,24 +23,28 @@ NODE_SQL = """
                 'name', n.nombre,
                 'is_camera', (n.nombre ILIKE 'Camara%%'),
                 'records', n.n_registros,
-                'station_codes', n.codigos_estacion,
                 'land_cover_code', m.landcover_code,
                 'land_cover_label', m.landcover_clase_es,
-                'preference', m.preferencia_default,
+                'elevation_m', m.elevacion_m,
                 'pixel_note', m.nota_pixel,
                 'species', (
                     SELECT COALESCE(json_agg(json_build_object(
-                        'common', e.comun,
+                        'common', COALESCE(r.comun, e.comun),
                         'scientific', e.cientifico,
-                        'records', e.registros
+                        'records', e.registros,
+                        'category', r.categoria_los_lagos,
+                        'origin', r.origen,
+                        'target', r.objetivo,
+                        'pressure', r.presion
                     ) ORDER BY e.registros DESC), '[]'::json)
                     FROM nodo_especie e
+                    LEFT JOIN especie_rce r ON e.cientifico ILIKE r.cientifico || '%%'
                     WHERE e.nodo_id = n.id
                 )
             )
         ) AS feature
         FROM nodos n
-        LEFT JOIN metadata_gee m ON m.nodo_id = n.id
+        LEFT JOIN metadata_cobertura m ON m.nodo_id = n.id
         ORDER BY n.id
     ) features
 """
@@ -65,18 +57,44 @@ EDGE_SQL = """
     FROM (
         SELECT json_build_object(
             'type', 'Feature',
-            'geometry', ST_AsGeoJSON(geom)::json,
+            'geometry', ST_AsGeoJSON(COALESCE(ST_Force2D(p.geom), a.geom))::json,
             'properties', json_build_object(
-                'id', id,
-                'source', source,
-                'target', target,
-                'distance_m', distancia_m,
-                'cost_km', costo_km,
-                'kind', tipo,
-                'exceeds_max', excede_max
+                'id', a.id,
+                'source', a.source,
+                'target', a.target,
+                'distance_m', a.distancia_m,
+                'kind', a.tipo,
+                'length_3d_m', p.largo_3d_m,
+                'climb_m', p.ascenso_ida_m,
+                'climb_back_m', p.ascenso_vuelta_m,
+                'clearance_m', p.despeje_min_m,
+                'densified', p.densificada,
+                'blocked', p.bloqueada,
+                'blocked_reason', p.motivo
             )
         ) AS feature
-        FROM aristas
+        FROM aristas a
+        LEFT JOIN arista_perfil p ON p.arista_id = a.id
+        ORDER BY a.id
+    ) features
+"""
+
+LINK_SQL = """
+    SELECT json_build_object(
+        'type', 'FeatureCollection',
+        'features', COALESCE(json_agg(feature), '[]'::json)
+    )
+    FROM (
+        SELECT json_build_object(
+            'type', 'Feature',
+            'geometry', ST_AsGeoJSON(ST_Force2D(geom))::json,
+            'properties', json_build_object(
+                'id', id, 'base_id', base_id, 'target', nodo_id, 'distance_m', distancia_m,
+                'length_3d_m', largo_3d_m, 'climb_m', ascenso_ida_m, 'clearance_m', despeje_min_m,
+                'kind', 'enlace_base'
+            )
+        ) AS feature
+        FROM base_enlace
         ORDER BY id
     ) features
 """
@@ -119,7 +137,13 @@ meteo_alertas_sql = """
                 'date', fecha,
                 'temperature', temperatura,
                 'humidity', humedad,
-                'wind_speed', viento
+                'wind_speed', viento,
+                'gust', rafaga,
+                'temp_min', temperatura_min,
+                'temp_max', temperatura_max,
+                'rain_mm', precipitacion_mm,
+                'rain_probability', prob_lluvia,
+                'mode', modo
             )
         ) AS feature
         FROM meteo_alertas
@@ -244,68 +268,10 @@ def ebird():
     except psycopg2.Error:
         return database_error()
 
-def endpoint_pair():
-    sql = """
-        SELECT id FROM (
-            (SELECT id, 1 AS ord FROM nodos WHERE nombre ILIKE 'Camara%%' ORDER BY ST_Y(geom) ASC LIMIT 1)
-            UNION ALL
-            (SELECT id, 2 AS ord FROM nodos WHERE nombre ILIKE 'Camara%%' ORDER BY ST_Y(geom) DESC LIMIT 1)
-        ) ends
-        ORDER BY ord
-    """
-    with connect() as connection:
-        with connection.cursor() as cursor:
-            cursor.execute(sql)
-            return [row[0] for row in cursor.fetchall()]
-
-
-def line_for(edge_ids):
-    if not edge_ids:
-        return None
-    order = list(range(len(edge_ids)))
-    sql = """
-        SELECT ST_AsGeoJSON(
-            ST_LineMerge(ST_Collect(a.geom ORDER BY u.ord))
-        )::json
-        FROM unnest(%s::int[], %s::int[]) AS u(edge_id, ord)
-        JOIN aristas a ON a.id = u.edge_id
-    """
-    return query_value(sql, (edge_ids, order))
-
-
-@app.get("/api/route")
-def route():
-    start_raw = request.args.get("start_id")
-    goal_raw = request.args.get("goal_id")
+@app.get("/api/links")
+def links():
     try:
-        if start_raw and goal_raw:
-            start_id = int(start_raw)
-            goal_id = int(goal_raw)
-        else:
-            pair = endpoint_pair()
-            if len(pair) < 2:
-                return jsonify({"error": "No hay suficientes cámaras para una ruta."}), 404
-            start_id, goal_id = pair
-    except ValueError:
-        return jsonify({"error": "El inicio y el destino deben ser números de cámara."}), 400
-    if start_id == goal_id:
-        return jsonify({"error": "El inicio y el destino son la misma cámara."}), 400
-    try:
-        with connect() as connection:
-            with connection.cursor(cursor_factory=RealDictCursor) as cursor:
-                cursor.execute(ROUTE_SQL, (start_id, goal_id))
-                steps = cursor.fetchall()
-        if not steps:
-            return jsonify({"error": "No hay camino entre esas cámaras."}), 404
-        edge_ids = [step["edge"] for step in steps if step["edge"] > 0]
-        geometry = line_for(edge_ids)
-        return jsonify({
-            "start_id": start_id,
-            "goal_id": goal_id,
-            "distance_km": round(float(steps[-1]["agg_cost"]), 2),
-            "node_ids": [step["node"] for step in steps],
-            "geometry": geometry,
-        })
+        return jsonify(query_value(LINK_SQL))
     except psycopg2.Error:
         return database_error()
 

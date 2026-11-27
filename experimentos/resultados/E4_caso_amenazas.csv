@@ -1,0 +1,9 @@
+tecnica,vuelo,camaras,tramos,incendio,aves,simulada,clima
+T1 Dijkstra distancia,1,R85 → R84,102280 32 102285,nodo 20 (p=0.056); nodo 22 (p=0.056); nodo 100668 (p=0.080); tramo 102280 (p=0.080); tramo 32 (p=0.198); tramo 102285 (p=0.269),—,—,p_clima del vuelo = 0.040
+T1 Dijkstra distancia,2,Q86,102284 102284,nodo 100668 (p=0.080); tramo 102284 (p=0.080); tramo 102284 (p=0.080),—,—,p_clima del vuelo = 0.040
+T2 Gurobi,1,Q86,102284 102284,nodo 100668 (p=0.080); tramo 102284 (p=0.080); tramo 102284 (p=0.080),—,—,p_clima del vuelo = 0.040
+T2 Gurobi,2,R84 → R85,102282 532 196 32 102280,nodo 22 (p=0.056); nodo 20 (p=0.056); nodo 100668 (p=0.080); tramo 102282 (p=0.080); tramo 196 (p=0.056); tramo 32 (p=0.198); tramo 102280 (p=0.080),—,—,p_clima del vuelo = 0.040
+T3 Dijkstra ponderado,1,R85 → Q86,102280 29 102284,nodo 20 (p=0.056); nodo 100668 (p=0.080); tramo 102280 (p=0.080); tramo 29 (p=0.080); tramo 102284 (p=0.080),—,—,p_clima del vuelo = 0.040
+T3 Dijkstra ponderado,2,R84,102282 532 196 196 532 102282,nodo 22 (p=0.056); nodo 100668 (p=0.080); tramo 102282 (p=0.080); tramo 196 (p=0.056); tramo 196 (p=0.056); tramo 102282 (p=0.080),—,—,p_clima del vuelo = 0.040
+T4 ACO,1,R84 → R85,102282 532 196 32 102280,nodo 22 (p=0.056); nodo 20 (p=0.056); nodo 100668 (p=0.080); tramo 102282 (p=0.080); tramo 196 (p=0.056); tramo 32 (p=0.198); tramo 102280 (p=0.080),—,—,p_clima del vuelo = 0.040
+T4 ACO,2,Q86,102284 102284,nodo 100668 (p=0.080); tramo 102284 (p=0.080); tramo 102284 (p=0.080),—,—,p_clima del vuelo = 0.040

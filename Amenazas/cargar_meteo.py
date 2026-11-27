@@ -71,10 +71,11 @@ def main():
                     """
                     INSERT INTO meteo_alertas (
                         nodo_id, fecha, temperatura, humedad, viento, rafaga,
-                        lluvia_mm_h, unidad_viento, evitar, geom
+                        lluvia_mm_h, unidad_viento, evitar, temperatura_min, temperatura_max,
+                        precipitacion_mm, prob_lluvia, modo, geom
                     ) VALUES (
                         %s, COALESCE(%s::date, CURRENT_DATE), %s, %s, %s, %s, %s, %s, %s,
-                        ST_SetSRID(ST_MakePoint(%s, %s), 4326)
+                        %s, %s, %s, %s, %s, ST_SetSRID(ST_MakePoint(%s, %s), 4326)
                     )
                     RETURNING id
                     """,
@@ -82,6 +83,8 @@ def main():
                         nodo_id, lec.get("fecha") or fecha_doc,
                         lec["temperatura"], lec.get("humedad") or 0, lec["viento"],
                         lec.get("rafaga"), lec.get("lluvia_mm_h"), unidad, evitar,
+                        lec.get("temperatura_min"), lec.get("temperatura_max"),
+                        lec.get("precipitacion_mm"), lec.get("prob_lluvia"), meta.get("modo"),
                         lec["lon"], lec["lat"],
                     ),
                 )

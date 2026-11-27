@@ -1,0 +1,5 @@
+tecnica,leyenda,vuelos,camaras_por_vuelo,distancia_km,tiempo_min,R,R_montecarlo,delta_R,costo,tiempo_ms,mas_resiliente
+dijkstra_distancia,"pgr_dijkstra (distancia) | 1 vuelo | 0,0 km | 9 min | R plan = 0,950 | 1 ms",1,48,0.0,8.9,0.950186,0.95,0.0,0.025549,0.5164000012882752,False
+milp,"Gurobi (MILP) | 1 vuelo | 0,0 km | 9 min | R plan = 0,950 | 23 ms",1,48,0.0,8.9,0.950186,0.95,0.0,0.025549,23.18970000084839,False
+dijkstra_ponderado,"pgr_dijkstra (ponderado) | 1 vuelo | 0,0 km | 9 min | R plan = 0,950 | 0 ms",1,48,0.0,8.9,0.950186,0.95,0.0,0.025549,0.0297000008483883,True
+aco,"ACO (config_zhang) | 1 vuelo | 0,0 km | 9 min | R plan = 0,950 | 4 ms",1,48,0.0,8.9,0.950186,0.95,0.0,0.025549,3.7897000008483883,False

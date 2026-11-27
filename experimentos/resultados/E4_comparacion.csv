@@ -1,0 +1,7 @@
+par,mismo_reparto,mismo_orden,mismos_tramos,tramos_no_compartidos
+T1 Dijkstra distancia vs T2 Gurobi,True,False,False,4
+T1 Dijkstra distancia vs T3 Dijkstra ponderado,False,False,False,6
+T1 Dijkstra distancia vs T4 ACO,True,False,False,4
+T2 Gurobi vs T3 Dijkstra ponderado,False,False,False,2
+T2 Gurobi vs T4 ACO,True,False,True,0
+T3 Dijkstra ponderado vs T4 ACO,False,False,False,2

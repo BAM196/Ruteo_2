@@ -13,7 +13,7 @@ AQUI = Path(__file__).resolve().parent
 RAIZ = AQUI.parent
 NODOS_PATH = Path(os.getenv("NODOS_PATH", RAIZ / "Infraestructura" / "nodosv2.json"))
 ARISTAS_PATH = Path(os.getenv("ARISTAS_PATH", RAIZ / "Infraestructura" / "aristasv2.json"))
-KML_PATH = Path(os.getenv("SENDEROS_KML_PATH", AQUI / "senderos.kml"))
+KML_PATH = Path(os.getenv("SENDEROS_KML_PATH", AQUI / "Senderos.kml"))
 SALIDA = AQUI / "metadata_senderos.json"
 
 UMBRAL_PRIVACIDAD_M = float(os.getenv("UMBRAL_SENDERO_M", "50"))

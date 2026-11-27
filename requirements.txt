@@ -4,8 +4,8 @@ scipy
 pyproj
 requests
 rasterio
+openpyxl
 psycopg2-binary
 python-dotenv
 flask
-earthengine-api
 PyYAML

@@ -1,288 +1,217 @@
-# Motor de rutas resilientes (fase 3: puntos 5, 6 y 8)
+# Motor de planificación de misiones
 
-Servicio `motor` (Python, en Docker, puerto 8001). Lee el grafo y las amenazas de la base y entrega:
+Servicio en Python que arma las misiones del dron: sectores, base del operador, vuelos de ida y vuelta, las cuatro técnicas de ruteo, la probabilidad de falla y la resiliencia de cada plan. Corre en Docker, en el puerto 8001, con FastAPI y Gurobi. El sitio web lo consulta por HTTP.
 
-1. **Punto 5:** la probabilidad de falla de cada nodo y cada arista, por amenaza y total (`motor/probabilidades.py`).
-2. **Punto 6:** las 4 rutas: `pgr_dijkstra` por distancia, el modelo de optimización en Gurobi, `pgr_dijkstra` ponderado y ACO (`motor/rutas/`).
-3. **Punto 8:** la métrica de resiliencia $R$ de cada ruta, con su tiempo de cómputo y la técnica más resiliente (`motor/resiliencia.py`).
-
-Solo lee de la base (o de los JSON del repositorio) y de `config/*.yaml`. No depende del sitio ni de la simulación.
+La guía general del proyecto, con la instalación, el uso del sitio y las fuentes, está en el [README principal](../README.md). Este archivo explica el motor por dentro.
 
 ## Cómo se corre
 
-Todo junto, desde la raíz del repositorio:
-
 ```bash
-python main.py          # extrae, levanta Docker (postgis, web, motor), carga y calcula el punto 5
+docker compose up -d                                              # base, sitio y motor
+docker compose run --rm motor python -m motor.mision.sectores --cargar
+docker compose run --rm motor python -m motor.probabilidades --cargar
+docker compose run --rm motor python -m pytest -q                 # tests
+docker compose run --rm motor python -m motor.evaluacion          # calibración y sensibilidad
+docker compose run --rm motor python -m motor.buscar_caso         # caso de ejemplo histórico
+docker compose run --rm motor python -m motor.capacidad           # mañanas y rondas
+docker compose run --rm motor python -m motor.programador         # tareas de las campañas de hoy
 ```
 
-Por partes:
+Sin Docker, desde `Motor/`, se puede trabajar con los JSON del repositorio en vez de la base:
 
 ```bash
-docker compose up -d --build motor
-docker compose run --rm motor python -m motor.probabilidades --cargar   # punto 5 -> prob_fallo.json y tablas
-docker compose run --rm motor python -m motor.evaluacion                # tablas y gráficos para el video
-docker compose run --rm motor python -m pytest                          # pruebas (incluye las de la base)
-```
-
-Sin Docker ni base (para desarrollar), con los JSON del repositorio:
-
-```bash
-cd Motor
 pip install -r requirements.txt
-python -m pytest
-python -m motor.probabilidades --fuente json
-python -m motor.evaluacion --fuente json
-MOTOR_FUENTE=json uvicorn motor.api:app --port 8001
+MOTOR_FUENTE=json python -m pytest -q
+MOTOR_FUENTE=json python -m motor.mision.sectores
 ```
+
+La documentación interactiva de la API queda en http://127.0.0.1:8001/docs.
 
 ## Estructura
 
-```
-Motor/
-├── config/amenazas.yaml        # parámetros del punto 5 y del dron, cada uno con valor, fuente y justificación
-├── config/aco.yaml             # config_mai y config_zhang
-├── config/consulta_ejemplo.json# caso de ejemplo del punto 9
-├── motor/
-│   ├── grafo.py                # carga del escenario desde la base o desde JSON
-│   ├── probabilidades.py       # punto 5
-│   ├── rutas/comun.py          # costos, exclusiones, evaluación y GeoJSON comunes
-│   ├── rutas/dijkstra_distancia.py   # técnica 1
-│   ├── rutas/milp.py                 # técnica 2 (Gurobi)
-│   ├── rutas/dijkstra_ponderado.py   # técnica 3
-│   ├── rutas/aco.py                  # técnica 4
-│   ├── resiliencia.py          # punto 8 (R analítico y Monte Carlo)
-│   ├── servicio.py             # une los tres puntos para una consulta
-│   ├── evaluacion.py           # 30 corridas del ACO, brecha, sensibilidad, convergencia
-│   └── api.py                  # FastAPI
-├── tests/                      # grafo de juguete con óptimo conocido + pruebas
-├── prob_fallo.json             # salida del punto 5   (estructura: prob_fallo_estructura.md)
-├── resultados/                 # salida de la evaluación (estructura: resultados/README.md)
-├── Dockerfile.motor
-└── requirements.txt
-```
+| Archivo | Qué hace |
+| --- | --- |
+| `config/amenazas.yaml` | Parámetros de cada amenaza, cada uno con `valor`, `fuente` y `justificacion` |
+| `config/mision.yaml` | Dron, radio de operación, altura, muestreo, prioridad, campañas y resiliencia |
+| `config/aco.yaml` | `config_mai`, `config_zhang` y la grilla de calibración |
+| `config/caso_ejemplo.json` | Caso de ejemplo elegido por `buscar_caso.py` |
+| `motor/grafo.py` | Carga la red (cámaras, waypoints, tramos con perfil, bases, especies y amenazas) desde la base o desde los JSON |
+| `motor/probabilidades.py` | Probabilidad de falla por nodo y tramo |
+| `motor/escenarios.py` | Amenazas de una fecha: histórico para fechas pasadas, pronóstico para próximas |
+| `motor/mision/sectores.py` | Partición exacta en sectores y su prioridad |
+| `motor/mision/bases.py` | Elección de la base del operador |
+| `motor/mision/bloques.py` | Bloques de muestreo de 5 × 5 puntos alrededor de cada cámara |
+| `motor/mision/bateria.py` | Tiempo de vuelo, reserva y batería útil |
+| `motor/mision/prioridad.py` | Valor de conservación, presión de exóticas y Kendall |
+| `motor/rutas/comun.py` | Consulta, contexto de amenazas, problema por sector, tramos y evaluación de un plan |
+| `motor/rutas/matriz.py` | Matriz de tramos con `pgr_dijkstra` (muchos a muchos) o Dijkstra en Python |
+| `motor/rutas/dijkstra_distancia.py` | Técnica 1 |
+| `motor/rutas/milp.py` | Técnica 2 (Gurobi) |
+| `motor/rutas/dijkstra_ponderado.py` | Técnica 3 |
+| `motor/rutas/aco.py` | Técnica 4 |
+| `motor/resiliencia.py` | R por vuelo y por plan, Monte Carlo, sorteo de fallas y leyenda |
+| `motor/servicio.py` | Une todo: modo → sectores → base → técnicas → resiliencia |
+| `motor/capacidad.py` | Tiempo por sector, mañanas, días por pasada y rondas por temporada |
+| `motor/programador.py` | Campañas: plan provisorio, decisión de volar o postergar, reprogramación |
+| `motor/exportar.py` | KML de waypoints por vuelo y datos para la solicitud a la DGAC |
+| `motor/buscar_caso.py` | Búsqueda del caso de ejemplo |
+| `motor/evaluacion.py` | Calibración del ACO y análisis de sensibilidad |
+| `motor/api.py` | API |
+| `tests/` | Tests con un sector de juguete (`grafo_juguete.json`) y con la base real |
 
-## API (contrato con el sitio)
+## Flujo de una consulta
+
+1. **El modo define las cámaras.**
+   - Sector: las de un sector.
+   - Especie: las que registraron la especie.
+   - Cámaras: una o varias, elegidas por el usuario.
+   - Todo el parque: las 48.
+2. **Las cámaras se agrupan en sectores.** En modo sector y parque se usan los sectores precalculados. En los otros modos se aplica la misma partición a las cámaras elegidas.
+3. **Cada sector se atiende desde una base.** Es la candidata que deja todas las cámaras a ≤ 1.359 m y a la vista, con la menor suma de distancias. El usuario puede elegir otra.
+4. **Se arma el problema del sector.** Solo cuentan los tramos volables desde esa base: dentro del radio, sin cerros que corten la línea de vista y sin bloqueo por altura. También se quitan los tramos y nodos excluidos por las restricciones del usuario.
+5. **Las cuatro técnicas arman sus vuelos.**
+6. **Se miden la R de cada vuelo y del plan,** se valida con Monte Carlo y se marca la técnica más resiliente.
+
+## Batería
+
+$$\sum_{(i,j) \in \text{vuelo}} \left(\frac{d_{ij}}{v_c} + \frac{\Delta h^+_{ij}}{v_{sub}}\right) + \sum_{i \in \text{vuelo}} s_i \le T_{bat} - t_{res}$$
+
+| Símbolo | Valor | Regla |
+| --- | --- | --- |
+| T_bat | 2.280 s (38 min) | Tiempo en vuelo estacionario de la ficha DJI; el muestreo es estacionario |
+| v_c | 9 m/s | Velocidad a la que DJI midió su autonomía (32,4 km/h) |
+| v_sub | 6 m/s | Ascenso máximo en modo normal, ficha DJI |
+| s_i | 534 s | Muestreo de un bloque de 5 × 5 puntos: promedio de los 9 vuelos de la Tabla 1 de Chang et al. (2025), que duran de 8 min 30 s a 10 min 2 s |
+| t_res | 560 s | Peor regreso: 1.500 m / (15 − 12) m/s + 60 s de aterrizaje |
+
+Quedan 1.720 s útiles (28,7 min) por vuelo. Si las cámaras no caben en una batería, se hacen varios vuelos con un cambio de batería de 5 minutos entre ellos.
+
+## Las cuatro técnicas
+
+Cada técnica decide tres cosas: por dónde ir entre dos puntos (los tramos), en qué orden visitar las cámaras y cómo repartirlas en vuelos.
+
+**Tramos.** Para la base b y las cámaras C se calcula el mejor camino entre cada par de puntos con `pgr_dijkstra` (muchos a muchos, con costos propios en una tabla temporal):
+
+- **Técnica 1:** el costo es la distancia volada en metros.
+- **Técnicas 2, 3 y 4:** el costo de cada tramo es
+
+$$c_e = (1-\theta+\varepsilon)\,\frac{t_e}{t_{ref}} + \theta\,(w_e + u_v), \qquad w = -\ln(1-p), \quad u = -\ln(1-q)$$
+
+con t_ref, el tiempo de traslado del plan de la técnica 1, y ε = 10⁻⁶. Se usa el tiempo y no la distancia porque la batería se mide en tiempo.
+
+**El clima es un evento del vuelo.** El viento es el mismo en todo el recorrido, así que el clima no se suma tramo a tramo: cada vuelo toma el máximo de su recorrido, μ_k = máx(−ln(1 − p_clima)). El incendio y las aves sí se suman por elemento.
+
+| Técnica | Tramos | Orden y reparto | Qué garantiza |
+| --- | --- | --- | --- |
+| 1. `pgr_dijkstra` (distancia) | Solo distancia | Vecino más cercano; vuelve a la base cuando la siguiente cámara no cabe en la batería | Nada sobre el riesgo: es el peor caso de referencia |
+| 2. Gurobi (MILP) | Costo del modelo | Óptimo exacto de orden y reparto, con batería y R mínima | El óptimo sobre el grafo reducido |
+| 3. `pgr_dijkstra` (ponderado) | Costo del modelo | Vecino más cercano por costo; mismo cierre por batería | Tramos óptimos, orden y reparto gananciosos |
+| 4. ACO | Costo del modelo | Construcción con feromona y búsqueda local | Buena solución sin garantía de óptimo |
+
+### Modelo de Gurobi
+
+x_ijk = 1 si el vuelo k va de i a j; y_ik = 1 si la cámara i va en el vuelo k; z_k = 1 si se usa el vuelo k; u_ik es el orden de i en el vuelo (restricciones MTZ, Miller, Tucker y Zemlin, 1960); μ_k es el clima del vuelo.
+
+$$\min \sum_k \sum_{i,j} c_{ij}\,x_{ijk} + \theta \sum_k \mu_k$$
+
+$$\sum_k y_{ik} = 1 \qquad \sum_j x_{ijk} = \sum_j x_{jik} = y_{ik} \qquad \sum_j x_{0jk} = \sum_j x_{j0k} = z_k \qquad z_k \ge z_{k+1}$$
+
+$$\sum_{i,j} t_{ij}\,x_{ijk} + \sum_i s_i\,y_{ik} \le T_{bat} - t_{res} \qquad u_{ik} - u_{jk} + |C|\,x_{ijk} \le |C| - 1 \qquad \mu_k \ge \mu_{ij}\,x_{ijk}$$
+
+$$\sum_k \Big(\sum_{i,j} \rho_{ij}\,x_{ijk} + \mu_k\Big) \le -\ln R_{min} \quad \text{(opcional)}$$
+
+- **Límite de la licencia:** la licencia gratuita de Gurobi admite 2.000 variables y restricciones. El número de vuelos K se acota para no pasarlo. Con 8 cámaras el modelo tiene unas 720 variables.
+- **Grafo reducido:** el modelo es exacto sobre el grafo reducido (base y cámaras con tramos precalculados), no sobre la red completa.
+- **Parámetros:** MIPGap 0 y límite de 30 s, que es solo un seguro.
+
+### ACO
+
+- **Construcción:** cada hormiga sale de la base y elige la siguiente cámara con τ^α η^β, con η = 1/c_ij. Si ninguna cabe en la batería que queda, vuelve a la base y empieza otro vuelo, como el vehículo de Zhang et al. (2018) que vuelve a recargar.
+- **Búsqueda local:** 2-opt dentro de un vuelo, mover una cámara a otro vuelo e intercambiar cámaras entre vuelos.
+- **Configuraciones:** `config_mai` (α 1, β 8, ρ 0,2, 500 iteraciones, calendario de q₀ de Mai et al., 2023) y `config_zhang` (α 5, β 5, ρ 0,1, 150 iteraciones, 10 soluciones de élite). La segunda es la que se usa por defecto.
+
+## Resiliencia
+
+$$R_{vuelo} = (1 - p_{clima}) \prod_{v} (1 - q_v) \prod_{a} (1 - p_a) \qquad R_{plan} = \prod_k R_{vuelo,k}$$
+
+- **R del plan:** un plan se completa solo si se completan todos sus vuelos.
+- **Monte Carlo:** 10.000 sorteos por vuelo con la regla r ~ U(0, 100), donde un elemento falla si r ≤ 100 · p. Da un intervalo de 95 % de media anchura ≤ 0,01.
+- **Más resiliente:** la técnica factible con mayor R del plan. Si hay empate, gana la de menor tiempo de vuelo y luego la más rápida de calcular. ΔR se mide contra la técnica 1.
+- **Umbral:** R del plan ≥ 0,9. Si ningún plan lo alcanza, el sistema avisa y sugiere otra base o postergar.
+
+## Campañas
+
+- **Campaña:** 3 mañanas seguidas por sector, porque los modelos de ocupación necesitan visitas repetidas. Si se declaran menos días, queda como campaña parcial.
+- **Ronda por temporada:** cubre el parque si alcanzan los días. Si no, la mitad de los días va a los sectores más prioritarios y el resto a la rotación de pendientes (`capacidad.py`).
+- **7 días hábiles antes:** se arma un plan provisorio para la solicitud a la DGAC (DAN 91, Anexo D).
+- **La noche anterior y al amanecer:** se revisa el pronóstico, se recalcula el plan y se decide si se vuela o se posterga. Una mañana postergada pasa a la siguiente; si se acaba la temporada, la campaña queda incompleta y el sector pasa primero en la ronda siguiente.
+
+El programador corre dentro del motor cada 30 minutos (`MOTOR_PROGRAMADOR=0` lo apaga). El piloto siempre decide si despega.
+
+## API
 
 | Método | Ruta | Qué hace |
 | --- | --- | --- |
-| `POST` | `/api/rutas` | Recibe la consulta del usuario y devuelve las 4 rutas con $R$, tiempo y leyenda |
-| `GET` | `/api/probabilidades` | Punto 5 para toda la red |
-| `POST` | `/api/probabilidades` | Igual, con `overrides_prob` en el cuerpo |
-| `POST` | `/api/fallas` | Punto 7: sortea r ~ U(0,100) para cada nodo y arista y marca falla si r ≤ 100·p. Recibe `overrides_prob` y una `semilla` opcional. El sitio lo usa en "Simular fallas" |
-| `GET` | `/health` | Estado de la base y del solver |
+| `GET` | `/health` | Estado de la base, de Gurobi y resumen de los datos |
+| `GET` | `/api/parametros` | Batería, radio, altura y umbral |
+| `GET` | `/api/sectores` | Sectores con prioridad, subtítulo, base y polígono |
+| `GET` | `/api/bases` | Bases candidatas y las cámaras que cada una deja a la vista |
+| `GET` | `/api/especies` | Especies con su categoría RCE, amenazas y comportamiento |
+| `POST` | `/api/plan` | Plan de cada técnica |
+| `POST` | `/api/fallas` | Sorteo de fallas por vuelo |
+| `GET` / `POST` | `/api/probabilidades` | Probabilidad de falla de todos los elementos |
+| `POST` | `/api/escenario` | Carga las amenazas de una fecha |
+| `POST` | `/api/kml` | ZIP con un KML por vuelo y la solicitud a la DGAC |
+| `GET` | `/api/capacidad` | Mañanas, días por pasada y rondas por temporada |
+| `GET` / `POST` | `/api/campanas` | Lista y crea campañas |
+| `POST` | `/api/campanas/{id}/decidir` | Revisa las amenazas y decide si se vuela la próxima mañana |
+| `POST` | `/api/campanas/{id}/reprogramar` | Mueve las mañanas pendientes a otra fecha |
+| `POST` | `/api/campanas/{id}/volada/{dia}` | Marca una mañana como volada |
+| `GET` | `/api/campanas/{id}/kml` | KML del plan de la campaña |
 
-La documentación interactiva queda en http://127.0.0.1:8001/docs. El sitio llama a la API desde el navegador (CORS abierto).
-
-### Entrada de `POST /api/rutas`
+### Entrada de `POST /api/plan`
 
 ```json
 {
-  "origen_id": 33,
-  "destino_id": 36,
-  "restricciones": {"solo_bosque": false, "evitar_senderos": false, "excluir_nodos": []},
-  "autonomia_m": 7980,
+  "modo": "sector",
+  "sector_id": 31,
+  "especie": null,
+  "camaras": [],
+  "base_id": null,
+  "fecha": "2024-02-10",
   "theta": 0.5,
-  "overrides_prob": {"aristas": {"50": 0.8}},
+  "restricciones": {"solo_bosque": true, "evitar_senderos": false, "evitar_clima": false,
+                    "evitar_aves": false, "excluir_nodos": []},
+  "overrides_prob": {"aristas": {"4": 0.6}},
+  "focos_simulados": [],
   "r_min": null,
+  "aco_config": null,
   "semilla": 0
 }
 ```
 
-| Campo | Significado |
+- **`modo`:** `sector`, `especie`, `camaras` o `parque`. Sin `sector_id`, el modo sector toma el de mayor prioridad.
+- **`fecha`:** vacía para usar los datos cargados. Una fecha pasada usa el histórico de ese día.
+- **`overrides_prob`:** fuerza la probabilidad de un nodo o tramo (amenaza simulada).
+- **`focos_simulados`:** agrega focos de incendio simulados `{lon, lat, confidence}`.
+
+### Salida (resumida)
+
+| Campo | Contenido |
 | --- | --- |
-| `origen_id`, `destino_id` | Cámaras de partida y de llegada (`nodos.id`) |
-| `restricciones.solo_bosque` | Si es `true`, se excluyen los nodos con `landcover_code ≠ 10` (salvo origen y destino) |
-| `restricciones.evitar_senderos` | Si es `true`, se excluyen las aristas marcadas con `buffer_privacidad` (cerca de un sendero) |
-| `restricciones.evitar_clima` | Si es `true`, se excluyen los nodos y aristas con probabilidad de falla por clima (`meteo`) mayor que 0 (salvo origen y destino) |
-| `restricciones.evitar_aves` | Si es `true`, se excluyen los nodos y aristas con probabilidad de falla por aves (`ebird`) mayor que 0 (salvo origen y destino) |
-| `restricciones.excluir_nodos` | Cámaras que la ruta no puede tocar |
-| `autonomia_m` | $D_{max}$ en metros. Si es `null`, se usa la del dron (7.980 m, ver más abajo) |
-| `theta` | Peso del riesgo, entre 0 y 1. 0 = solo distancia, 1 = solo riesgo |
-| `overrides_prob` | Probabilidades forzadas `{"nodos": {id: p}, "aristas": {id: p}}`. Se agregan como amenaza "escenario" (caso del punto 9) |
-| `r_min` | Opcional: resiliencia mínima exigida ($R \ge r_{min}$) |
-| `tecnicas` | Opcional: subconjunto de `["dijkstra_distancia", "milp", "dijkstra_ponderado", "aco"]` |
-| `aco_config` | Opcional: `config_mai` o `config_zhang` (por defecto `config_zhang`) |
-| `semilla` | Semilla del ACO y del Monte Carlo |
+| `titulo`, `modo`, `escenario`, `parametros` | Qué se planificó y con qué datos |
+| `sectores[]` | Cada sector con sus cámaras, base, subtítulo y regla de la base |
+| `no_visitadas` | Cámaras que no se pueden visitar y por qué |
+| `planes[]` | Por técnica: `etiqueta`, `vuelos[]`, `distancia_m`, `tiempo_s`, `R`, `R_montecarlo`, `ic95`, `delta_R`, `costo`, `tiempo_ms`, `factible`, `mensaje`, `leyenda` |
+| `planes[].vuelos[]` | `camaras`, `nodos`, `aristas`, `tiempo_s`, `R`, `p_clima`, `elementos` (con su p, para el sorteo) y `geojson` |
+| `resiliencia` | Métrica, ranking, más resiliente, empates y aviso |
+| `capas` | Bases, bloques de muestreo, tramos bloqueados desde la base y radio |
 
-### Salida de `POST /api/rutas` (resumida)
-
-```json
-{
-  "rutas": [
-    {
-      "tecnica": "milp",
-      "etiqueta": "Gurobi (MILP)",
-      "nodos": [33, 255, 153, 259, 36],
-      "aristas": [605, 608, 623, 622],
-      "geojson": {"type": "Feature", "geometry": {"type": "LineString", "coordinates": [[-72.6, -42.5], "..."]},
-                  "properties": {"tecnica": "milp", "leyenda": "Gurobi (MILP) | 5,6 km | R = 1,000 | 55 ms"}},
-      "distancia_m": 5648.4,
-      "riesgo_log": 0.0,
-      "p_supervivencia": 1.0,
-      "costo": 0.5232,
-      "tiempo_ms": 54.8,
-      "factible": true,
-      "mensaje": "ok",
-      "R": 1.0,
-      "R_montecarlo": 1.0,
-      "ic95": [1.0, 1.0],
-      "delta_R": 0.8,
-      "ranking": 2,
-      "leyenda": "Gurobi (MILP) | 5,6 km | R = 1,000 | 55 ms",
-      "extra": {"solver": "Gurobi", "estado": "OPTIMAL", "objetivo": 0.5232, "gap": 0.0, "n_variables": 1628}
-    }
-  ],
-  "mas_resiliente": "dijkstra_ponderado",
-  "resiliencia": {"ranking": ["dijkstra_ponderado", "aco", "milp", "dijkstra_distancia"],
-                  "empate_en_R": ["dijkstra_ponderado", "milp", "aco"]},
-  "nodos_excluidos": {"6": "no es bosque (solo_bosque)"},
-  "probabilidades": {"aristas_con_riesgo": {"50": 0.8}}
-}
-```
-
-Cada ruta trae su `leyenda` lista para el panel (`algoritmo | km | R | ms`) y su `geojson` para dibujarla y prenderla o apagarla con un checkbox. Una ruta imposible llega con `factible: false` y un `mensaje`, nunca como error.
-
-## Punto 5: probabilidad de falla
-
-Cada parámetro está en `config/amenazas.yaml` con `valor`, `fuente` y `justificacion`. Lo que es supuesto de diseño se dice como tal.
-
-| Amenaza | Modelo | Parámetros y fuente |
-| --- | --- | --- |
-| FIRMS (incendio) | $p = p_0(\text{conf})\cdot\max(0,\,1-d/R)$ | $R = 1.000$ m (píxel VIIRS de 375 m, Schroeder et al., 2014). $p_0$ = 0,9 / 0,7 / 0,4 según confianza h / n / l (supuesto) |
-| Open-Meteo (clima) | $p = 1-(1-p_{viento})(1-p_{temp})(1-p_{lluvia})$ | Ráfaga: rampa de 8 m/s (supuesto) a 12 m/s (ficha DJI). Temperatura fuera de −10 a 40 °C: $p = 1$ (ficha DJI). Lluvia: rampa de 0 a 2,5 mm/h (AMS, "lluvia moderada"; el dron no declara IP) |
-| eBird (aves) | $p = p_0\cdot f_{rec}\cdot f_{cant}\cdot\max(0,\,1-d/R)$ | $R$ = 100 m de precaución (Vas et al., 2015, recomiendan lanzar el dron a más de 100 m de las aves; no es un radio de perturbación medido) + 400 m de incertidumbre de ubicación de eBird (supuesto) = 500 m. $p_0 = 0{,}5$ (supuesto) |
-| Senderos | — | Decisión D3: son metadata, no amenaza |
-
-- **Distancias:** se miden en UTM 18S (EPSG:32718). Para una arista, es la distancia del punto al segmento, como en la fase 2.
-- **Clima en aristas:** $p_a = \max(p_u, p_v)$ entre sus dos extremos (conservador).
-- **Combinación:** las amenazas se tratan como independientes, $q = 1-\prod_k(1-q_k)$.
-- **Cotas:** toda probabilidad se acota a $[0,\,1-10^{-6}]$, y una probabilidad en la cota equivale a excluir el elemento.
-- **Limitación:** tratar las amenazas como independientes, y un nodo y sus aristas como independientes entre sí, sobreestima el riesgo cuando un mismo foco afecta a ambos. Es una aproximación conservadora.
-
-### Autonomía del dron (D2, B4)
-
-DJI Mavic 3T, el mismo dron del paper base (Chang et al., 2025). Datos de la [ficha técnica](https://enterprise.dji.com/mavic-3-enterprise/specs): 38 min de vuelo estacionario, 15 m/s de velocidad máxima en modo normal, 12 m/s de viento máximo y operación entre −10 y 40 °C.
-
-$$D_{max} = \frac{v \cdot t \cdot (1 - \text{margen})}{2} = \frac{10 \cdot 38 \cdot 60 \cdot 0{,}7}{2} = 7.980 \text{ m}$$
-
-- $v = 10$ m/s y el margen de 30 % son supuestos de diseño.
-- Se divide por 2 porque el dron vuelve donde está el investigador.
-- **Tramos de más de 3 km (T2 #4):** el dron sí puede volarlos, porque la autonomía de ida es de casi 8 km.
-- **Tramos más largos que $D_{max}$:** hay aristas de hasta 27,9 km. Se excluyen solas de las técnicas 2, 3 y 4, porque ninguna batería las cubre.
-
-## Punto 6: las cuatro técnicas
-
-### Notación
-
-- $V$: nodos; $A$: arcos dirigidos (cada arista $\{u,v\}$ da $(u,v)$ y $(v,u)$).
-- $s$, $t$: origen y destino; $X \subseteq V$: nodos excluidos.
-- $d_a$: largo del arco en metros; $p_a$, $q_v$: probabilidades de falla.
-- $w_a = -\ln(1-p_a)$ y $u_v = -\ln(1-q_v)$.
-- $d_{ref}$: distancia de la técnica 1; $\theta \in [0,1]$: peso del riesgo; $\varepsilon = 10^{-6}$.
-
-### Modelo formal (técnica 2)
-
-Variables: $x_a \in \{0,1\}$ (el arco se usa) e $y_v \in \{0,1\}$ (el nodo se visita).
-
-**Objetivo:**
-
-$$\min\;(1-\theta+\varepsilon)\sum_{a\in A}\frac{d_a}{d_{ref}}\,x_a+\theta\Big(\sum_{a\in A}w_a\,x_a+\sum_{v\in V}u_v\,y_v\Big)$$
-
-**Restricciones:**
-
-- Flujo: $\displaystyle\sum_{\delta^+(v)}x-\sum_{\delta^-(v)}x=\begin{cases}1&v=s\\-1&v=t\\0&\text{otro}\end{cases}$
-- Una visita por nodo: $\displaystyle\sum_{\delta^-(v)}x\le1$
-- Nodos visitados: $y_v\ge\sum_{\delta^-(v)}x$ y $y_s=1$
-- Autonomía: $\displaystyle\sum d_a x_a\le D_{max}$
-- Exclusiones: $x_a=0$ si $a$ toca $X$
-- Opcional: $\displaystyle\sum w_a x_a+\sum u_v y_v\le-\ln R_{min}$
-
-**Por qué el término de riesgo es exacto y lineal:** con fallas independientes, $P_{sup}=\prod(1-p)$. Minimizar $-\ln P_{sup}=\sum w+\sum u$ equivale a maximizar la supervivencia. Como los costos son estrictamente positivos (gracias a $\varepsilon$), el óptimo no tiene ciclos sueltos.
-
-**Tamaño:** en el grafo final (278 nodos y 700 aristas) el modelo tiene unas 1.630 variables, bajo el límite de 2.000 de la licencia de `pip install gurobipy`. Si la red crece más, hay que pedir la licencia académica gratuita de Gurobi.
-
-### Qué hace cada técnica
-
-| Técnica | Costo | Autonomía | Implementación |
-| --- | --- | --- | --- |
-| 1. `pgr_dijkstra` (distancia) | `distancia_m` | Se revisa después | `SELECT id, source, target, distancia_m AS cost FROM aristas` |
-| 2. Gurobi (MILP) | Modelo formal | **Restricción del modelo** | `gurobipy`, `TimeLimit` = 30 s, `MIPGap` = 0 |
-| 3. `pgr_dijkstra` (ponderado) | $c_{uv}=(1-\theta)\,d_{uv}/d_{ref}+\theta\,(w_{uv}+u_v)$ | Se revisa después | `cost` y `reverse_cost` por sentido; un costo de −1 excluye la arista |
-| 4. ACO | El mismo $C(P)$, más una penalización | Penalización $\gamma$ + `factible` | `config/aco.yaml` |
-
-La diferencia entre las técnicas 2 y 3 es que usan **la misma función de costo**, pero solo el modelo de optimización impone $D_{max}$. En `resultados/tabla_rutas_autonomia.csv`, con $D_{max}$ = 5.500 m:
-
-- La técnica 3 elige el desvío de 5,65 km y queda no factible.
-- Gurobi devuelve la única ruta que sí cabe en la autonomía (la corta, con $R$ = 0,2).
-- El ACO tampoco la encuentra: la heurística castiga tanto el tramo amenazado que casi ninguna hormiga lo elige, y como la autonomía solo entra como penalización, devuelve el desvío no factible.
-
-### ACO: qué se toma de cada paper y qué se adapta
-
-| Elemento | Zhang et al. (2018), EVRP | Mai et al. (2023), dron | Aquí |
-| --- | --- | --- | --- |
-| Regla de transición | $[Sav]^\alpha[\tau]^\beta$, probabilística | Probabilística + arg max con $q_0$ variable por iteración (Ec. 15, $k_0 = 0{,}7K$) | $P_{ij}\propto\tau_{ij}^\alpha\eta_{ij}^\beta$; `config_mai` usa el calendario de Mai con $q_{0,inicial} = 0{,}9$; `config_zhang` usa $q_0 = 0$ |
-| Heurística | Ahorro (VRP con depósito) | $S\cdot M\cdot D$ (accesibilidad, altura, distancia al destino) | $\eta_{ij}=1/(c_{ij}+h_j)$, con $h_j$ = distancia en línea recta de $j$ al destino (como el factor $D$ de Mai), normalizada |
-| Feromona | $\phi\tau+\sum\Delta\tau$, con $\lambda$ élite | Solo la mejor; $[\tau_{min},\tau_{max}]$ | Evaporación $\rho$; depositan la mejor de la iteración, la global y las $\lambda$ élite; $\Delta\tau=1/f$; cotas de Mai |
-| Objetivo | Energía + penalizaciones | Largo + altura + giros | $f=C(P)+\gamma\max(0,D-D_{max})/d_{ref}$ |
-| Autonomía | Penalización de batería | $L\le L_{max}$ | Penalización $\gamma = 1000$ + toda ruta factible gana sobre una no factible |
-| Búsqueda local | ILS (2-opt\*, reubicar…) para varias rutas | No tiene | Reemplazar un tramo de 2 o 3 saltos por su camino mínimo |
-| Comparación | CPLEX (instancias pequeñas) | AS, MMAS, otro ACO | Óptimo de Gurobi (técnica 2) |
-
-- **Limitación:** Zhang es de **varios vehículos** y Mai trabaja sobre una **grilla 3D con terreno**. Aquí se usa un grafo y un solo dron, así que es una adaptación, no una réplica.
-- **Decisiones propias:**
-  - $\tau_0=\tau_{max}$.
-  - $q_{0,inicial} = 0{,}9$ en el calendario de Mai: el paper da la forma (Ec. 15), pero no el valor, que tampoco aparece en su Tabla 4. Se barren los valores $\{0;\ 0{,}5;\ 0{,}9\}$ en la tabla de sensibilidad.
-  - Normalizar $\eta$.
-  - Usar la heurística euclidiana. Con el costo exacto al destino (un Dijkstra inverso) el ACO se vuelve un Dijkstra voraz; esa variante queda disponible con `heuristica: dijkstra`.
-  - Tramo de búsqueda local de 3 saltos como máximo, para que nunca reemplace el camino completo.
-  - Interpretar $\varepsilon = 25$ de Zhang como iteraciones sin mejora.
-
-## Punto 8: métrica de resiliencia
-
-$$R(P)=\prod_{v\in P}(1-q_v)\prod_{a\in P}(1-p_a)$$
-
-Es la probabilidad de que la ruta se complete bajo las amenazas detectadas, y es igual a `p_supervivencia` $=e^{-\text{riesgo\_log}}$.
-
-- **Validación:** se valida con Monte Carlo ($N$ = 10.000) usando la regla D4 del punto 7: $r\sim U(0,100)$, y el elemento falla si $r\le100p$. Se informa el intervalo de confianza $R\pm1{,}96\sqrt{R(1-R)/N}$.
-- **Rutas no factibles:** no reciben $R$, y se marcan.
-- **Más resiliente:** `mas_resiliente` es la ruta factible con mayor $R$. A igual $R$ gana la más corta, y luego la más rápida de calcular; el empate se informa en `empate_en_R`.
-- **$\Delta R$:** $\Delta R = R_{tec}-R_{dijkstra}$ mide cuánto mejora cada técnica a la ruta por distancia.
-- **Umbral de ruta resiliente (B6):** se propone $R\ge0{,}9$, es decir, a lo más un 10 % de probabilidad de no completar la misión. Se puede exigir con `r_min`.
-
-## Resultados (`python -m motor.evaluacion`)
-
-**Caso de ejemplo** (`config/consulta_ejemplo.json`): de la cámara 33 (U65) a la 36 (R61), con la arista 50 (de la U65 a la T62) amenazada ($p$ = 0,8).
-
-| Técnica | Ruta | Distancia | $R$ | Tiempo |
-| --- | --- | --- | --- | --- |
-| `pgr_dijkstra` (distancia) | 33-35-36 | 5,4 km | 0,200 | ~4 ms |
-| Gurobi (MILP) | 33-255-153-259-36 | 5,6 km | 1,000 | ~55 ms |
-| `pgr_dijkstra` (ponderado) | 33-255-153-259-36 | 5,6 km | 1,000 | ~13 ms |
-| ACO (`config_zhang`) | 33-255-153-259-36 | 5,6 km | 1,000 | ~26 ms |
-
-Las técnicas 2, 3 y 4 rodean la cámara T62 por tres waypoints del anillo y empatan en $R$ ($\Delta R$ = +0,8). Los tiempos son dentro de Docker, con PostGIS.
-
-**ACO: 30 corridas por configuración** (semillas 0 a 29, en el caso de ejemplo): brecha de 0 % en las 60 corridas. El caso es pequeño, así que la brecha ahí no discrimina.
-
-**Banco de estrés** (`aco_banco_resumen.csv`): 12 pares al azar, 15 aristas amenazadas y $D_{max}$ = 60 km, para que existan muchas alternativas.
-
-| Configuración | Búsqueda local | Brecha promedio | Brecha máxima | Sin ruta factible |
-| --- | --- | --- | --- | --- |
-| `config_mai` | No | 1,2 % | 26,0 % | 4 de 50 |
-| `config_mai` | Sí | 0,8 % | 19,4 % | 3 de 50 |
-| `config_zhang` | No | 5,7 % | 33,3 % | 20 de 50 |
-| `config_zhang` | Sí | 0,9 % | 11,8 % | 20 de 50 |
-
-Gurobi siempre llega al óptimo; el ACO no siempre, que es el resultado esperado. Con búsqueda local, `config_mai` llega al óptimo en 43 de 50 corridas y `config_zhang` en 26 de 50. La brecha de 3,2 % que reporta Zhang es de otro problema (varios vehículos) y no se compara con esta.
+Ejemplo de leyenda: `Gurobi (MILP) | 2 vuelos | 5,0 km | 41 min | R plan = 0,892 | 8 ms`.
 
 ## Referencias
 
-- Chang, B. et al. (2025). Enhancing Wildlife Detection Using Thermal Imaging Drones: Designing the Flight Path. *Drones*, 9(1), 52. https://doi.org/10.3390/drones9010052
-- DJI (s. f.). *Mavic 3 Enterprise Series – Specs*. https://enterprise.dji.com/mavic-3-enterprise/specs
-- Mai, X., Dong, N. y Chen, H. (2023). UAV path planning based on a dual-strategy ant colony optimization algorithm. *Intelligence & Robotics*, 3(4), 666–684. https://www.oaepublish.com/articles/ir.2023.37
-- Schroeder, W., Oliva, P., Giglio, L. y Csiszar, I. A. (2014). The New VIIRS 375 m active fire detection data product. *Remote Sensing of Environment*, 143, 85–96.
-- Vas, E., Lescroël, A., Duriez, O., Boguszewski, G. y Grémillet, D. (2015). Approaching birds with drones: first experiments and ethical guidelines. *Biology Letters*, 11(2), 20140754. https://doi.org/10.1098/rsbl.2014.0754 (PMC4360097)
-- Zhang, S., Gajpal, Y., Appadoo, S. S. y Abdulkader, M. M. S. (2018). Electric vehicle routing problem with recharging stations for minimizing energy consumption. *International Journal of Production Economics*, 203, 404–413.
-- American Meteorological Society. *Glossary of Meteorology*, entrada "Rain".
-- Documentación de pgRouting (`pgr_dijkstra`), Gurobi y Open-Meteo.
+- Chang, B. et al. (2025). Enhancing Wildlife Detection Using Thermal Imaging Drones: Designing the Flight Path. *Drones*, 9(1), 52.
+- Mai, X., Dong, N. y Chen, H. (2023). UAV path planning based on a dual-strategy ant colony optimization algorithm. *Intelligence & Robotics*, 3(4), 666-684.
+- Zhang, S., Gajpal, Y., Appadoo, S. S. y Abdulkader, M. M. S. (2018). Electric vehicle routing problem with recharging stations for minimizing energy consumption. *International Journal of Production Economics*, 203, 404-413.
+- Miller, C. E., Tucker, A. W. y Zemlin, R. A. (1960). Integer programming formulation of traveling salesman problems. *Journal of the ACM*, 7(4), 326-329.

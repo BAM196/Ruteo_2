@@ -1,0 +1,4 @@
+pgr_dijkstra (distancia) | 2 vuelos | 4,9 km | 41 min | R plan = 0,318 | 6 ms
+Gurobi (MILP) | 2 vuelos | 5,7 km | 43 min | R plan = 0,378 | 10 ms
+★ pgr_dijkstra (ponderado) | 2 vuelos | 6,9 km | 45 min | R plan = 0,409 | 3 ms
+ACO (config_zhang) | 2 vuelos | 5,7 km | 43 min | R plan = 0,378 | 11 ms

@@ -4,3 +4,8 @@ __pycache__/
 
 data/occurrence.txt
 .pytest_cache/
+
+data/dem_pumalin.tif
+data/rce_nomina.xlsx
+Motor/escenarios/
+Motor/resultados/campanas.json

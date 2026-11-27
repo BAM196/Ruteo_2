@@ -1,0 +1,151 @@
+Pudu puda:
+  comun: Pudú
+  origen: nativa
+  amenazas:
+    texto: >-
+      Destrucción y fragmentación de su hábitat al talarse bosque nativo,
+      cacería, muertes por perros e introducción de enfermedades por parte del
+      ganado doméstico.
+    fuente: Ficha RCE del pudú, Razones del Comité de Clasificación
+    url: https://clasificacionespecies.mma.gob.cl/wp-content/uploads/2019/10/Ficha_Web_PUDU.pdf
+  comportamiento:
+    social: Solitario; a lo más 2 o 3 juntos al alimentarse
+    actividad: Día y noche, más activo en la mañana y al atardecer
+    ambito: 16 a 26 ha
+    monitoreo: >-
+      El ámbito equivale a unos pocos bloques de 4 ha: si vive junto a la
+      cámara, es probable que pase por el bloque. Cada firma térmica cuenta
+      como un individuo.
+    fuente: Animal Diversity Web, Pudu puda
+    url: https://animaldiversity.org/accounts/pudu_puda/
+
+Leopardus guigna:
+  comun: Güiña
+  origen: nativa
+  amenazas:
+    texto: >-
+      Destrucción y fragmentación de su hábitat por la pérdida de bosques y
+      matorrales y su sustitución por agricultura y plantaciones exóticas; caza
+      ocasional por su piel; persecución por considerarla peligrosa para las
+      aves de corral; presencia de perros, especialmente asilvestrados.
+    fuente: Ficha RCE de la güiña (7º proceso), Principales amenazas actuales y potenciales
+    url: https://clasificacionespecies.mma.gob.cl/wp-content/uploads/2019/10/Leopardus_guigna_P07.pdf
+  comportamiento:
+    social: Solitaria, con ámbitos muy superpuestos entre vecinos
+    actividad: Hábitos más nocturnos, con leve tendencia crepuscular
+    ambito: 96 ha (hembras) a 131 ha (machos)
+    monitoreo: >-
+      El ámbito es unas 25 veces el bloque: un día dado puede no estar en él,
+      lo que explica la variación entre días y respalda repetir visitas.
+    fuente: Ficha RCE de la güiña; Freer (2004), tesis doctoral, Universidad de Durham
+    url: https://www.unil.ch/biomapper/Download/Freer-PhD-2004.pdf
+
+Puma concolor:
+  comun: Puma
+  origen: nativa
+  amenazas:
+    texto: >-
+      Acoso y caza furtiva por considerarlo perjudicial para la ganadería;
+      fragmentación y pérdida de hábitat, que reduce su alimento, refugio y
+      territorio; reducción de los ungulados por caza y deforestación.
+    fuente: Ficha RCE del puma (7º proceso), Principales amenazas actuales y potenciales
+    url: https://clasificacionespecies.mma.gob.cl/wp-content/uploads/2019/10/Puma_concolor_P07.pdf
+  comportamiento:
+    social: Solitario y territorial
+    actividad: Crepuscular o nocturno, aunque también presenta actividad a pleno día
+    ambito: Decenas a cientos de km² (199 km² en un macho en dispersión)
+    monitoreo: >-
+      Rara vez queda dentro de un bloque y un mismo individuo puede aparecer
+      en varios sectores: sus conteos no se suman entre sectores. Las cámaras
+      trampa siguen siendo su mejor fuente.
+    fuente: Ficha RCE del puma; Elbroch et al. (2009), Revista Chilena de Historia Natural 82(3)
+    url: https://www.redalyc.org/pdf/3699/369944291011.pdf
+
+Lycalopex culpaeus:
+  comun: Zorro culpeo
+  origen: nativa
+  amenazas:
+    texto: >-
+      Clasificado como Preocupación menor fuera de Tierra del Fuego; solo la
+      subespecie lycoides es Vulnerable.
+    fuente: Nómina RCE, DS 151/2007 MINSEGPRES y DS 33/2012 MMA
+    url: https://clasificacionespecies.mma.gob.cl/
+  comportamiento:
+    social: Solitario fuera de la época reproductiva
+    actividad: Variable según la región; diurno o crepuscular en Chile central, nocturno en el altiplano
+    ambito: 3,7 a 8,9 km² en Chile central; hasta 800 km² en el altiplano
+    monitoreo: >-
+      El ámbito supera muchas veces el bloque: un día dado puede no estar, y
+      las visitas repetidas reducen ese error.
+    fuente: Animal Diversity Web, Lycalopex culpaeus; Lagos et al. (2021)
+    url: https://animaldiversity.org/accounts/Lycalopex_culpaeus
+
+Galictis cuja:
+  comun: Quique
+  origen: nativa
+  amenazas:
+    texto: Clasificado como Preocupación menor.
+    fuente: Nómina RCE, DS 16/2016 MMA
+    url: https://clasificacionespecies.mma.gob.cl/
+  comportamiento:
+    social: Mayormente solitario; a veces en pareja o una hembra con crías
+    actividad: Principalmente diurno, con actividad nocturna ocasional
+    ambito: No reportado
+    monitoreo: >-
+      Las firmas cercanas pueden ser una hembra con crías: se cuentan como un
+      grupo.
+    fuente: Animal Diversity Web, Galictis cuja
+    url: https://www.animaldiversity.org/accounts/Galictis_cuja/
+
+Canis lupus familiaris:
+  comun: Perro doméstico
+  origen: doméstica
+  presion: >-
+    Ataca al pudú y a la güiña; las fichas RCE de ambas lo citan como amenaza.
+  comportamiento:
+    social: En grupos
+    actividad: Variable
+    ambito: —
+    monitoreo: Una detección suele implicar varios individuos; las firmas cercanas se cuentan como un grupo.
+    fuente: Fichas RCE del pudú y de la güiña
+    url: https://clasificacionespecies.mma.gob.cl/
+
+Neovison vison:
+  comun: Visón americano
+  origen: exótica invasora
+  presion: Depredador introducido en ríos y costas del sur de Chile.
+  comportamiento:
+    social: Solitario
+    actividad: Crepuscular y nocturno; casi siempre a menos de 100 m del agua
+    ambito: 0,5 a 6 km de ribera (hembras)
+    monitoreo: Las detecciones se concentran en las orillas; un bloque junto a un río o al fiordo es donde aparece.
+    fuente: Jaksic (1998), Biodiversity and Conservation 7, 1427-1445; estudios de control del visón en la Patagonia
+    url: https://www.mdpi.com/2076-2615/12/2/142
+
+Bos taurus:
+  comun: Vaca
+  origen: doméstica
+  presion: >-
+    El ganado doméstico introduce enfermedades al pudú (ficha RCE del pudú) y
+    compite por el hábitat.
+  comportamiento:
+    social: En manada
+    actividad: Diurna
+    ambito: —
+    monitoreo: Grupos grandes y fáciles de detectar; indican presión de ganado.
+    fuente: Ficha RCE del pudú
+    url: https://clasificacionespecies.mma.gob.cl/wp-content/uploads/2019/10/Ficha_Web_PUDU.pdf
+
+Lepus europaeus:
+  comun: Liebre europea
+  origen: exótica
+  presion: Herbívoro introducido que compite con la fauna nativa.
+  comportamiento:
+    social: Solitaria fuera de la época reproductiva
+    actividad: Principalmente nocturna; la actividad diurna es cerca de un tercio de la nocturna
+    ambito: 21 a 100 ha
+    monitoreo: >-
+      En la mañana todavía puede estar activa: su firma térmica es fácil de
+      confundir con la de un pudú, así que se separa por tamaño y forma.
+    fuente: Jaksic (1998); Mori y Viviano (2022); Rühe y Hohmann (2004)
+    url: https://animaldiversity.org/accounts/Lepus_europaeus/

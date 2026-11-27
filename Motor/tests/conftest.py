@@ -6,8 +6,10 @@ import pytest
 
 MOTOR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(MOTOR))
+sys.path.insert(0, str(MOTOR.parent / "Infraestructura"))
 
 from motor import grafo
+from motor.config import parametros_mision
 
 JUGUETE = MOTOR / "tests" / "grafo_juguete.json"
 
@@ -18,13 +20,18 @@ def esc():
 
 
 @pytest.fixture
+def m():
+    return parametros_mision()
+
+
+@pytest.fixture
 def consulta():
-    return {"origen_id": 1, "destino_id": 7, "theta": 0.5, "autonomia_m": 10_000,
-            "restricciones": {"solo_bosque": False, "excluir_nodos": []}, "overrides_prob": {}}
+    return {"modo": "camaras", "camaras": [1, 2, 3, 4], "base_id": 1, "theta": 0.5,
+            "restricciones": {}, "overrides_prob": {}}
 
 
 @pytest.fixture
 def con_amenaza(consulta):
     c = copy.deepcopy(consulta)
-    c["overrides_prob"] = {"aristas": {"2": 0.9}}
+    c["overrides_prob"] = {"aristas": {"4": 0.8}}
     return c

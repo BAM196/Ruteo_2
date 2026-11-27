@@ -1,0 +1,77 @@
+{
+ "campanas": [
+  {
+   "nombre": "Sector 23 (invierno 2024)",
+   "tipo": "ronda",
+   "modo": "sector",
+   "consulta": {
+    "modo": "sector",
+    "sector_id": 23
+   },
+   "temporada": "invierno",
+   "fecha_inicio": "2024-06-10",
+   "fecha_limite": "2024-08-31",
+   "visitas_objetivo": 3,
+   "estado": "programada",
+   "completa": false,
+   "motivo": null,
+   "id": 1
+  }
+ ],
+ "dias": [
+  {
+   "visita": 1,
+   "fecha": "2024-06-30",
+   "estado": "postergada",
+   "id": 1,
+   "campana_id": 1,
+   "decision": "Postergar: clima fuera de los límites del dron",
+   "r_plan": 0.15585113553508434,
+   "plan": {
+    "tecnica": "dijkstra_ponderado",
+    "leyendas": [
+     "pgr_dijkstra (distancia) | 1 vuelo | 4,5 km | 26 min | R plan = 0,156 | 6 ms",
+     "Gurobi (MILP) | 1 vuelo | 4,5 km | 26 min | R plan = 0,156 | 5 ms",
+     "pgr_dijkstra (ponderado) | 1 vuelo | 4,5 km | 26 min | R plan = 0,156 | 2 ms",
+     "ACO (config_zhang) | 1 vuelo | 4,5 km | 26 min | R plan = 0,156 | 7 ms"
+    ],
+    "vuelos": [
+     {
+      "vuelo": 1,
+      "camaras": [
+       15,
+       17
+      ],
+      "nodos": [
+       100587,
+       15,
+       100587,
+       17,
+       100587
+      ],
+      "aristas": [
+       101935,
+       101935,
+       101936,
+       101936
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "visita": 2,
+   "fecha": "2024-07-01",
+   "estado": "programada",
+   "id": 2,
+   "campana_id": 1
+  },
+  {
+   "visita": 3,
+   "fecha": "2024-07-02",
+   "estado": "programada",
+   "id": 3,
+   "campana_id": 1
+  }
+ ]
+}

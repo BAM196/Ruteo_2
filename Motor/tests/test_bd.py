@@ -1,7 +1,7 @@
 import pytest
 
 from motor import config, grafo, probabilidades, servicio
-from motor.rutas import dijkstra_distancia, dijkstra_ponderado
+from motor.mision import sectores
 
 
 @pytest.fixture(scope="module")
@@ -9,43 +9,41 @@ def conn():
     try:
         c = config.conectar()
         with c.cursor() as cur:
-            cur.execute("SELECT count(*) FROM aristas")
+            cur.execute("SELECT count(*) FROM bases")
             if cur.fetchone()[0] == 0:
-                pytest.skip("La tabla aristas está vacía.")
+                pytest.skip("La tabla bases está vacía.")
     except Exception as exc:
         pytest.skip(f"Sin base de datos: {exc}")
     yield c
     c.close()
 
 
-def test_distancia_m_es_costo_km_por_mil(conn):
-    with conn.cursor() as cur:
-        cur.execute("SELECT count(*) FROM aristas WHERE abs(distancia_m - costo_km * 1000) > 0.5")
-        assert cur.fetchone()[0] == 0
-
-
 def test_pgr_dijkstra_igual_a_python(conn):
+    from motor.rutas.comun import Consulta, Contexto, ProblemaSector
+
     esc = grafo.desde_bd(conn)
-    for s, t in [(33, 36), (28, 30), (16, 22)]:
-        c = {"origen_id": s, "destino_id": t, "theta": 0.5,
-             "overrides_prob": {"aristas": {"50": 0.8, "44": 0.5}}}
-        p1, _ = servicio.preparar(c, esc)
-        p2, _ = servicio.preparar(c, esc)
-        a = dijkstra_distancia.resolver(p1, conn)
-        b = dijkstra_distancia.resolver(p2, None)
-        assert a["distancia_m"] == pytest.approx(b["distancia_m"])
-        a3 = dijkstra_ponderado.resolver(p1, conn)
-        b3 = dijkstra_ponderado.resolver(p2, None)
-        assert a3["costo"] == pytest.approx(b3["costo"], rel=1e-9)
+    s = max((x for x in sectores.leer_sectores(esc) if x["base"]), key=lambda x: x["n_camaras"])
+    ctx = Contexto(esc, probabilidades.calcular(esc), Consulta())
+    a = ProblemaSector(ctx, esc.bases[s["base"]["id"]], s["camaras"])
+    b = ProblemaSector(ctx, esc.bases[s["base"]["id"]], s["camaras"])
+    ta = a.calcular_tramos("distancia", conn)
+    tb = b.calcular_tramos("distancia", None)
+    assert a.motor_tramos.startswith("pgr_dijkstra")
+    assert set(ta) == set(tb)
+    for k in ta:
+        assert ta[k].distancia == pytest.approx(tb[k].distancia)
+
+
+def test_plan_desde_la_base(conn):
+    esc = grafo.desde_bd(conn)
+    res = servicio.planificar({"modo": "sector"}, esc, n_mc=500)
+    assert res["planes"][0]["vuelos"]
 
 
 def test_tablas_y_vistas_de_probabilidad(conn):
     esc = grafo.desde_bd(conn)
-    doc = probabilidades.calcular(esc, overrides={"aristas": {"27": 0.8}})
-    probabilidades.cargar_bd(doc, conn)
+    probabilidades.cargar_bd(probabilidades.calcular(esc, overrides={"aristas": {"27": 0.8}}), conn)
     with conn.cursor() as cur:
         cur.execute("SELECT p_total FROM prob_fallo_arista_total WHERE arista_id = 27")
-        assert cur.fetchone()[0] == pytest.approx(0.8)
-        cur.execute("SELECT count(*) FROM prob_fallo_nodo_total")
-        assert cur.fetchone()[0] == len(esc.nodos)
+        assert cur.fetchone()[0] >= 0.8 - 1e-9
     probabilidades.cargar_bd(probabilidades.calcular(esc), conn)

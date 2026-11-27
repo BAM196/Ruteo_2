@@ -1,0 +1,41 @@
+parametro,valor,tecnica,R,vuelos,min,firma,mas_resiliente
+base,—,dijkstra_distancia,0.9502,1,8.9,48,False
+base,—,milp,0.9502,1,8.9,48,False
+base,—,dijkstra_ponderado,0.9502,1,8.9,48,True
+base,—,aco,0.9502,1,8.9,48,False
+p0 aves,0.3,dijkstra_distancia,0.9502,1,8.9,48,False
+p0 aves,0.3,milp,0.9502,1,8.9,48,False
+p0 aves,0.3,dijkstra_ponderado,0.9502,1,8.9,48,True
+p0 aves,0.3,aco,0.9502,1,8.9,48,False
+p0 aves,0.7,dijkstra_distancia,0.9502,1,8.9,48,False
+p0 aves,0.7,milp,0.9502,1,8.9,48,False
+p0 aves,0.7,dijkstra_ponderado,0.9502,1,8.9,48,True
+p0 aves,0.7,aco,0.9502,1,8.9,48,False
+r_mov aves,1000,dijkstra_distancia,0.9502,1,8.9,48,False
+r_mov aves,1000,milp,0.9502,1,8.9,48,False
+r_mov aves,1000,dijkstra_ponderado,0.9502,1,8.9,48,True
+r_mov aves,1000,aco,0.9502,1,8.9,48,False
+r_mov aves,5000,dijkstra_distancia,0.9502,1,8.9,48,False
+r_mov aves,5000,milp,0.9502,1,8.9,48,False
+r_mov aves,5000,dijkstra_ponderado,0.9502,1,8.9,48,True
+r_mov aves,5000,aco,0.9502,1,8.9,48,False
+radio incendio,500,dijkstra_distancia,0.9502,1,8.9,48,False
+radio incendio,500,milp,0.9502,1,8.9,48,False
+radio incendio,500,dijkstra_ponderado,0.9502,1,8.9,48,True
+radio incendio,500,aco,0.9502,1,8.9,48,False
+radio incendio,1500,dijkstra_distancia,0.9502,1,8.9,48,False
+radio incendio,1500,milp,0.9502,1,8.9,48,False
+radio incendio,1500,dijkstra_ponderado,0.9502,1,8.9,48,True
+radio incendio,1500,aco,0.9502,1,8.9,48,False
+decaimiento incendio,escalon,dijkstra_distancia,0.9502,1,8.9,48,False
+decaimiento incendio,escalon,milp,0.9502,1,8.9,48,False
+decaimiento incendio,escalon,dijkstra_ponderado,0.9502,1,8.9,48,True
+decaimiento incendio,escalon,aco,0.9502,1,8.9,48,False
+alpha viento,0.2,dijkstra_distancia,0.969,1,8.9,48,False
+alpha viento,0.2,milp,0.969,1,8.9,48,False
+alpha viento,0.2,dijkstra_ponderado,0.969,1,8.9,48,True
+alpha viento,0.2,aco,0.969,1,8.9,48,False
+alpha viento,0.3,dijkstra_distancia,0.9197,1,8.9,48,False
+alpha viento,0.3,milp,0.9197,1,8.9,48,False
+alpha viento,0.3,dijkstra_ponderado,0.9197,1,8.9,48,True
+alpha viento,0.3,aco,0.9197,1,8.9,48,False

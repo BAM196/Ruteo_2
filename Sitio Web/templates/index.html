@@ -3,198 +3,174 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Pumalín - rutas resilientes</title>
-    <link rel="icon" href="data:," />
-
+    <title>WildWard · Pumalín</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23285c3f'/%3E%3Cpath d='M9 19l7-9 7 9' stroke='%23f4efe3' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560&family=Outfit:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="{{ url_for('static', filename='map.css') }}" />
   </head>
 
   <body>
-    <aside class="panel">
-      <header>
-        <p class="kicker">Tarea 3</p>
-        <h1>Pumalín</h1>
-        <p class="lead">
-          Rutas de dron entre cámaras CONAF con cuatro técnicas y su resiliencia
-          frente a las amenazas detectadas.
-        </p>
+    <aside class="panel" id="panel">
+      <header class="brand">
+        <div>
+          <h1>WildWard</h1>
+          <p>Vuelos de monitoreo de fauna · Parque Pumalín</p>
+        </div>
+        <button class="icon-button only-mobile" id="panel-toggle" type="button" aria-label="Mostrar u ocultar el panel">☰</button>
       </header>
 
-      <form id="route-form">
-        <label>
-          Origen (donde está el investigador)
-          <select id="start-id" name="start_id"></select>
-        </label>
+      <nav class="tabs" role="tablist">
+        <button class="tab active" data-tab="plan" role="tab" type="button">Planificar</button>
+        <button class="tab" data-tab="campaigns" role="tab" type="button">Campañas</button>
+        <button class="tab" data-tab="layers" role="tab" type="button">Mapa</button>
+      </nav>
 
-        <label>
-          Destino (cámara a visitar)
-          <select id="goal-id" name="goal_id"></select>
-        </label>
+      <section class="tab-panel active" id="tab-plan">
+        <form id="plan-form" autocomplete="off">
+          <fieldset class="step">
+            <legend><span class="num">1</span> ¿Qué quieres monitorear?</legend>
+            <div class="segmented" id="mode-picker">
+              <button type="button" data-mode="sector" class="active">Un sector</button>
+              <button type="button" data-mode="especie">Una especie</button>
+              <button type="button" data-mode="camaras">Cámaras</button>
+              <button type="button" data-mode="parque">Todo el parque</button>
+            </div>
 
-        <label>
-          Peso del riesgo θ: <output id="theta-value">0,50</output>
-          <input
-            id="theta"
-            type="range"
-            min="0"
-            max="1"
-            step="0.05"
-            value="0.5"
-          />
-          <small class="hint">0 = solo distancia · 1 = solo riesgo</small>
-        </label>
+            <div class="mode-body" data-for="sector">
+              <select id="sector-id" aria-label="Sector"></select>
+              <p class="card-note" id="sector-info"></p>
+            </div>
+            <div class="mode-body" data-for="especie" hidden>
+              <select id="species-id" aria-label="Especie"></select>
+              <p class="card-note" id="species-info"></p>
+            </div>
+            <div class="mode-body" data-for="camaras" hidden>
+              <p class="hint">Toca las cámaras en el mapa para agregarlas o quitarlas.</p>
+              <div class="chips" id="camera-chips"></div>
+            </div>
+            <div class="mode-body" data-for="parque" hidden>
+              <p class="card-note" id="park-info">Todos los sectores, ordenados por prioridad.</p>
+            </div>
+          </fieldset>
 
-        <label>
-          Autonomía del dron (m)
-          <input
-            id="autonomy"
-            type="number"
-            min="100"
-            step="100"
-            placeholder="7980 (Mavic 3T, ida)"
-          />
-        </label>
+          <fieldset class="step">
+            <legend><span class="num">2</span> ¿Con qué datos?</legend>
+            <div class="segmented two" id="date-picker">
+              <button type="button" data-date="now" class="active">Datos actuales</button>
+              <button type="button" data-date="pick">Otra fecha</button>
+            </div>
+            <div id="date-box" hidden>
+              <input id="scenario-date" type="date" aria-label="Fecha del escenario" />
+              <p class="hint">Una fecha pasada usa los incendios, el clima y las aves de ese día.</p>
+            </div>
+          </fieldset>
 
-        <label class="check">
-          <input id="forest-only" type="checkbox" />
-          <span>Volar solo sobre bosque</span>
-        </label>
+          <details class="step options" id="options">
+            <summary><span class="num">3</span> Opciones <span class="muted">(opcional)</span></summary>
 
-        <label class="check">
-          <input id="avoid-trails" type="checkbox" />
-          <span>Evitar senderos</span>
-        </label>
+            <label class="field">
+              <span>Base del operador</span>
+              <select id="base-id"><option value="">Automática</option></select>
+            </label>
 
-        <label class="check">
-          <input id="avoid-rain" type="checkbox" />
-          <span>Evitar por clima</span>
-        </label>
+            <label class="field">
+              <span class="row-between"><span>Más corto</span><output id="theta-value">equilibrado</output><span>Más seguro</span></span>
+              <input id="theta" type="range" min="0" max="1" step="0.05" value="0.5" aria-label="Equilibrio entre distancia y riesgo" />
+            </label>
 
-        <label class="check">
-          <input id="avoid-birds" type="checkbox" />
-          <span>Evitar aves</span>
-        </label>
+            <div class="checks">
+              <label class="check"><input id="forest-only" type="checkbox" /><span>Volar solo sobre bosque</span></label>
+              <label class="check"><input id="avoid-trails" type="checkbox" /><span>Evitar senderos con visitantes</span></label>
+              <label class="check"><input id="avoid-weather" type="checkbox" /><span>Evitar mal clima</span></label>
+              <label class="check"><input id="avoid-birds" type="checkbox" /><span>Evitar zonas con aves</span></label>
+            </div>
 
-        <label>
-          Cámaras a excluir
-          <select id="exclude-ids" multiple size="4"></select>
-          <small class="hint">Ctrl + clic para elegir varias</small>
-        </label>
+            <label class="field">
+              <span>No visitar estas cámaras</span>
+              <select id="exclude-ids" multiple size="3"></select>
+            </label>
 
-        <details id="threat-box">
-          <summary>Simular una amenaza (caso de ejemplo)</summary>
-          <label>
-            Tramo amenazado
-            <select id="threat-edge"></select>
+            <div class="threat-box">
+              <div class="row-between">
+                <span>Amenaza simulada</span>
+                <button class="link" type="button" id="threat-clear" hidden>Quitar</button>
+              </div>
+              <p class="hint" id="threat-info">Toca un tramo en el mapa y elige «Simular amenaza».</p>
+              <label class="field inline" id="threat-p-box" hidden>
+                <span>Probabilidad</span>
+                <input id="threat-p" type="number" min="0.05" max="0.99" step="0.05" value="0.6" />
+              </label>
+            </div>
+          </details>
+
+          <button class="primary" id="plan-button" type="submit">Planificar vuelos</button>
+          <button class="link example" id="example-button" type="button" hidden>Ver el caso de ejemplo</button>
+        </form>
+
+        <p class="status" id="plan-status">Cargando el parque…</p>
+        <p class="error" id="plan-error" hidden></p>
+
+        <section id="results" hidden>
+          <div class="summary-card" id="summary-card"></div>
+          <h2>Planes por técnica</h2>
+          <ul class="plans" id="plan-list"></ul>
+          <div class="actions">
+            <button class="secondary" type="button" id="fail-button">Simular fallas</button>
+            <button class="secondary" type="button" id="kml-button">Descargar vuelos (KML)</button>
+          </div>
+          <div id="fail-result" hidden></div>
+        </section>
+      </section>
+
+      <section class="tab-panel" id="tab-campaigns">
+        <div class="capacity" id="capacity-box"><p class="status">Calculando la capacidad del equipo…</p></div>
+
+        <form id="campaign-form" class="step" autocomplete="off">
+          <h2>Nueva campaña</h2>
+          <p class="hint" id="campaign-target">Usa lo que elegiste en «Planificar».</p>
+          <label class="field"><span>Primera mañana</span><input id="campaign-start" type="date" required /></label>
+          <label class="field"><span>Días de terreno disponibles</span>
+            <input id="campaign-days" type="number" min="1" max="3" value="3" />
           </label>
-          <label>
-            Probabilidad de falla
-            <input
-              id="threat-p"
-              type="number"
-              min="0"
-              max="0.99"
-              step="0.05"
-              value="0.8"
-            />
+          <label class="field"><span>Motivo</span>
+            <select id="campaign-type">
+              <option value="ronda">Ronda de la temporada</option>
+              <option value="evento: incendio apagado">Después de un incendio</option>
+              <option value="evento: exótica nueva">Especie exótica nueva</option>
+              <option value="manual">Revisión puntual</option>
+            </select>
           </label>
-        </details>
+          <button class="primary" type="submit">Programar 3 mañanas</button>
+          <p class="hint">Se programan 3 mañanas seguidas. La noche anterior y al amanecer el sistema revisa las amenazas y decide si se vuela o se posterga.</p>
+        </form>
 
-        <button id="route-button" type="submit">Calcular rutas</button>
-      </form>
-
-      <p id="route-summary" class="summary">Cargando el parque…</p>
-      <p id="route-error" class="error" hidden></p>
-
-      <section id="routes-box" hidden>
-        <h2>Rutas</h2>
-        <ul id="routes-list" class="routes"></ul>
-        <p id="routes-winner" class="winner"></p>
+        <p class="status" id="campaign-status"></p>
+        <p class="status" id="campaign-tasks"></p>
+        <ul class="campaigns" id="campaign-list"></ul>
       </section>
 
-      <section id="fail-box" class="fail-box">
-        <h2>Simular fallas</h2>
-        <p class="hint">
-          Para cada cámara, waypoint y tramo se sortea un número r entre 0 y
-          100. El elemento falla si r ≤ 100 · p, con p su probabilidad de
-          falla. Si la amenaza simulada está abierta, se incluye en el sorteo.
-        </p>
-        <label>
-          Semilla (opcional)
-          <input id="fail-seed" type="number" min="0" step="1" placeholder="Vacía = sorteo nuevo cada vez" />
-        </label>
-        <button id="fail-button" type="button">Sortear fallas</button>
-        <p id="fail-summary" class="summary" hidden></p>
-        <ul id="fail-list" class="fail-list"></ul>
+      <section class="tab-panel" id="tab-layers">
+        <h2>Capas</h2>
+        <div class="layer-list" id="layer-list"></div>
+        <h2>Leyenda</h2>
+        <ul class="legend">
+          <li><i class="sw sector"></i> Sector de monitoreo (color según prioridad)</li>
+          <li><i class="sw camera"></i> Cámara trampa</li>
+          <li><i class="sw base"></i> Base del operador</li>
+          <li><i class="sw radius"></i> Radio de operación (1.500 m)</li>
+          <li><i class="sw block"></i> Bloque de muestreo (200 × 200 m)</li>
+          <li><i class="sw edge"></i> Tramo de vuelo</li>
+          <li><i class="sw blocked"></i> Tramo bloqueado (relieve o sin línea de vista)</li>
+          <li><i class="sw trail"></i> Sendero oficial</li>
+          <li><i class="sw fire"></i> Foco de incendio</li>
+          <li><i class="sw bird"></i> Ave grande o territorial</li>
+          <li><i class="sw threat"></i> Amenaza simulada</li>
+          <li><i class="sw failure"></i> Falla sorteada</li>
+        </ul>
       </section>
-
-      <section id="fauna-box" class="fauna-box">
-        <h2>Fauna registrada por cámaras</h2>
-        <p id="fauna-summary" class="hint">Cargando especies…</p>
-        <ul id="fauna-list" class="fauna-list"></ul>
-      </section>
-
-      <fieldset>
-        <legend>Capas</legend>
-
-        <label>
-          <input id="toggle-edges" type="checkbox" checked />
-          Tramos
-        </label>
-
-        <label>
-          <input id="toggle-nodes" type="checkbox" checked />
-          Cámaras
-        </label>
-
-        <label>
-          <input id="toggle-trails" type="checkbox" checked />
-          Senderos
-        </label>
-
-        <label>
-          <input id="toggle-ebird" type="checkbox" checked />
-          Aves (eBird)
-        </label>
-
-        <label>
-          <input id="toggle-fires" type="checkbox" checked />
-          Focos (FIRMS)
-        </label>
-
-        <label>
-          <input id="toggle-meteo" type="checkbox" checked />
-          Clima (Open-Meteo)
-        </label>
-
-        <label>
-          <input id="toggle-failures" type="checkbox" checked />
-          Fallas sorteadas
-        </label>
-      </fieldset>
-
-      <ul class="legend">
-        <li><i class="swatch tree"></i> Bosque</li>
-        <li><i class="swatch grass"></i> Pastizal</li>
-        <li><i class="swatch water"></i> Agua</li>
-        <li><i class="swatch other"></i> Otra cobertura</li>
-        <li><i class="swatch trail"></i> Sendero oficial</li>
-        <li><i class="swatch ebird"></i> Ave territorial (eBird)</li>
-        <li><i class="swatch threat"></i> Tramo con amenaza simulada</li>
-        <li><i class="swatch failure"></i> Elemento que falló en el sorteo</li>
-      </ul>
     </aside>
 
     <main id="map"></main>

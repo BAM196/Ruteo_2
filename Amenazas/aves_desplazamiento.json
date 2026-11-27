@@ -1,0 +1,106 @@
+{
+  "meta": {
+    "regla": "r_mov = Σ (desplazamiento_e · registros_e) / Σ registros_e sobre las aves que eBird registra en el parque",
+    "fuente_registros": "amenaza_ebird.json",
+    "tabla": "aves_desplazamiento.yaml",
+    "provisional_km": 2.0,
+    "n_especies": 10,
+    "n_con_fuente": 0,
+    "n_registros": 11,
+    "r_mov_km": 2.0,
+    "r_mov_m": 2000,
+    "generado": "2026-11-26T23:07:53+00:00"
+  },
+  "especies": [
+    {
+      "cientifico": "Vultur gryphus",
+      "comun": "Andean Condor",
+      "registros": 2,
+      "desplazamiento_km": 2.0,
+      "con_fuente": false,
+      "medida": null,
+      "fuente": null
+    },
+    {
+      "cientifico": "Leucophaeus pipixcan",
+      "comun": "Franklin's Gull",
+      "registros": 1,
+      "desplazamiento_km": 2.0,
+      "con_fuente": false,
+      "medida": null,
+      "fuente": null
+    },
+    {
+      "cientifico": "Sterna hirundinacea",
+      "comun": "South American Tern",
+      "registros": 1,
+      "desplazamiento_km": 2.0,
+      "con_fuente": false,
+      "medida": null,
+      "fuente": null
+    },
+    {
+      "cientifico": "Chroicocephalus maculipennis",
+      "comun": "Brown-hooded Gull",
+      "registros": 1,
+      "desplazamiento_km": 2.0,
+      "con_fuente": false,
+      "medida": null,
+      "fuente": null
+    },
+    {
+      "cientifico": "Cathartes aura",
+      "comun": "Turkey Vulture",
+      "registros": 1,
+      "desplazamiento_km": 2.0,
+      "con_fuente": false,
+      "medida": null,
+      "fuente": null
+    },
+    {
+      "cientifico": "Falco sparverius",
+      "comun": "American Kestrel",
+      "registros": 1,
+      "desplazamiento_km": 2.0,
+      "con_fuente": false,
+      "medida": null,
+      "fuente": null
+    },
+    {
+      "cientifico": "Falco peregrinus",
+      "comun": "Peregrine Falcon",
+      "registros": 1,
+      "desplazamiento_km": 2.0,
+      "con_fuente": false,
+      "medida": null,
+      "fuente": null
+    },
+    {
+      "cientifico": "Strix rufipes",
+      "comun": "Rufous-legged Owl",
+      "registros": 1,
+      "desplazamiento_km": 2.0,
+      "con_fuente": false,
+      "medida": null,
+      "fuente": null
+    },
+    {
+      "cientifico": "Glaucidium nana",
+      "comun": "Austral Pygmy-Owl",
+      "registros": 1,
+      "desplazamiento_km": 2.0,
+      "con_fuente": false,
+      "medida": null,
+      "fuente": null
+    },
+    {
+      "cientifico": "Leucophaeus scoresbii",
+      "comun": "Dolphin Gull",
+      "registros": 1,
+      "desplazamiento_km": 2.0,
+      "con_fuente": false,
+      "medida": null,
+      "fuente": null
+    }
+  ]
+}

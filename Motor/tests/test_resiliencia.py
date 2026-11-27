@@ -1,39 +1,44 @@
+import math
+
+import numpy as np
 import pytest
 
 from motor import resiliencia, servicio
 
 
-def test_r_analitico_en_ic_montecarlo():
-    q = {1: 0.1, 2: 0.05, 3: 0.2}
-    p = {10: 0.3, 11: 0.15}
-    r = resiliencia.r_analitico([1, 2, 3], [10, 11], q, p)
-    assert r == pytest.approx(0.9 * 0.95 * 0.8 * 0.7 * 0.85)
-    mc = resiliencia.montecarlo([1, 2, 3], [10, 11], q, p, n=10_000, semilla=1)
-    assert mc["ic95"][0] <= r <= mc["ic95"][1]
+def test_r_plan_es_producto_de_vuelos(esc, con_amenaza):
+    res = servicio.planificar(con_amenaza, esc, n_mc=4000)
+    for p in res["planes"]:
+        assert p["R"] == pytest.approx(math.prod(v["R"] for v in p["vuelos"]))
+        assert p["analitico_en_ic"]
 
 
-def test_regla_d4_extremos():
-    import numpy as np
+def test_montecarlo_converge():
+    elems = [[{"p": 0.1}, {"p": 0.2}], [{"p": 0.05}]]
+    mc = resiliencia.montecarlo_plan(elems, 20000, 1)
+    assert mc["r_mc"] == pytest.approx(0.9 * 0.8 * 0.95, abs=0.01)
+    assert mc["ic95"][0] <= 0.9 * 0.8 * 0.95 <= mc["ic95"][1]
 
+
+def test_regla_de_sorteo():
     rng = np.random.default_rng(0)
-    f = resiliencia.sortear_fallas(np.array([0.0, 1.0]), 1000, rng)
-    assert not f[:, 0].any()
-    assert f[:, 1].all()
+    falla = resiliencia.sortear(np.array([0.0, 1.0]), 1000, rng)
+    assert not falla[:, 0].any() and falla[:, 1].all()
 
 
-def test_leyenda_y_ranking(esc, con_amenaza):
-    res = servicio.calcular_rutas(con_amenaza, esc, n_mc=5000)
-    milp = next(r for r in res["rutas"] if r["tecnica"] == "milp")
-    assert milp["leyenda"] == "Gurobi (MILP) | 2,2 km | R = 1,000 | " + milp["leyenda"].split(" | ")[-1]
-    assert milp["delta_R"] == pytest.approx(0.9)
-    assert res["resiliencia"]["ranking"][-1] == "dijkstra_distancia"
-    for r in res["rutas"]:
-        if r["R"] is not None:
-            assert r["analitico_en_ic"]
+def test_sorteo_de_fallas_por_vuelo(esc, con_amenaza):
+    res = servicio.planificar(con_amenaza, esc, n_mc=200)
+    vuelos = [{**v, "tecnica": p["tecnica"]} for p in res["planes"] for v in p["vuelos"]]
+    a = servicio.simular_fallas(vuelos, semilla=3)
+    b = servicio.simular_fallas(vuelos, semilla=3)
+    assert a == b
+    for v in a["vuelos"]:
+        assert v["falla"] == any(e["falla"] for e in v["elementos"])
+        for e in v["elementos"]:
+            assert e["falla"] == (e["r"] <= 100 * e["p"] + 1e-9)
 
 
-def test_simular_fallas(esc):
-    out = servicio.simular_fallas(esc, {"aristas": {"2": 1.0}}, semilla=3)
-    a2 = next(a for a in out["aristas"] if a["id"] == 2)
-    assert a2["falla"]
-    assert not any(n["falla"] for n in out["nodos"])
+def test_leyenda(esc, consulta):
+    res = servicio.planificar(consulta, esc, n_mc=200)
+    for p in res["planes"]:
+        assert p["leyenda"].count("|") == 5 and "R plan" in p["leyenda"]

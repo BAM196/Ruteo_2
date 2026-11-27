@@ -1,3 +1,5 @@
-config,corridas,C_optimo_milp,C_mejor,C_promedio,C_desv,gap_mejor_pct,gap_promedio_pct,aciertos_optimo,tiempo_ms_promedio,tiempo_ms_desv
-config_mai,30,0.5231657463275476,0.5231657463275476,0.5231657463275476,0.0,0.0,0.0,30,406.1723333333333,5.553741491603258
-config_zhang,30,0.5231657463275476,0.5231657463275476,0.5231657463275476,0.0,0.0,0.0,30,25.514,2.1408247631851296
+config,banco,corridas,casos,gap_promedio_pct,gap_max_pct,optimos_pct,tiempo_aco_ms_prom,tiempo_milp_ms_prom
+config_mai,real,144,48,0.0,0.0,100.0,109.31,3.24
+config_mai,sintética,30,10,0.0,0.0,100.0,335.48,359.9
+config_zhang,real,144,48,0.0,0.0,100.0,5.96,3.24
+config_zhang,sintética,30,10,0.0367,1.1013,96.7,19.84,359.9

@@ -1,0 +1,11 @@
+modo: sector
+sector: 11
+fecha: datos actuales
+theta: 0.5
+focos_simulados: 0
+restricciones: {'solo_bosque': False, 'evitar_senderos': False, 'evitar_clima': False, 'evitar_aves': False}
+tecnicas_visibles: ['dijkstra_distancia', 'milp', 'dijkstra_ponderado', 'aco']
+capas_encendidas: ['Cámaras', 'Bases del plan', 'Radio de operación', 'Bloques de muestreo', 'Tramos bloqueados', 'Focos de incendio', 'Amenaza simulada', 'Fallas sorteadas']
+zoom: 15
+centro: {'lat': -42.563989, 'lng': -72.61639599999998}
+Sector 11: 16 tramos bloqueados desde su base (rojo discontinuo); popup de uno de ellos.

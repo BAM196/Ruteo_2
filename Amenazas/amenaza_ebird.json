@@ -2,130 +2,2046 @@
   "meta": {
     "fuente": "eBird API 2.0 (The Cornell Lab of Ornithology)",
     "endpoint": "https://api.ebird.org/v2/data/obs/geo/recent",
+    "modo": "reciente",
+    "fecha_escenario": null,
+    "region": "CL-LL",
     "dias_atras": 14,
-    "umbral_amenaza_m": 500.0,
-    "penalizacion_km": 200.0,
-    "generado": "2026-11-12T23:48:29+00:00",
-    "n_avistamientos": 7,
-    "n_nodos_afectados": 0,
-    "n_aristas_afectadas": 0,
-    "resultado": "con_amenazas",
-    "regla_peso": "Si la distancia al avistamiento de rapaz es <= 500 m, evitar = true y costo_resiliente_km = costo_km + 200."
+    "puntos_consulta": [
+      {
+        "lat": -42.7615,
+        "lon": -72.5546
+      },
+      {
+        "lat": -42.2762,
+        "lon": -72.5546
+      }
+    ],
+    "radio_consulta_km": 50,
+    "filtro": "Rapaces, carroñeras, gaviotas y queltehues: aves grandes o territoriales que pueden atacar o chocar con el dron",
+    "generos": [
+      "buteo",
+      "geranoaetus",
+      "falco",
+      "caracara",
+      "milvago",
+      "parabuteo",
+      "bubo",
+      "glaucidium",
+      "strix",
+      "vultur",
+      "cathartes",
+      "coragyps",
+      "larus",
+      "chroicocephalus",
+      "sterna",
+      "leucophaeus",
+      "vanellus"
+    ],
+    "umbral_amenaza_m": 2100.0,
+    "regla": "Se listan los nodos y aristas a <= 100 m + r_mov de cada avistamiento; la probabilidad se calcula en el motor.",
+    "generado": "2026-11-26T23:07:55+00:00",
+    "n_avistamientos": 11,
+    "n_nodos_afectados": 25,
+    "n_aristas_afectadas": 91
   },
   "avistamientos": [
     {
-      "id": "S409867990",
-      "cientifico": "Coragyps atratus",
-      "comun": "Black Vulture",
-      "fecha_obs": "2026-11-11 19:46",
-      "cantidad": 1,
-      "localidad": "Chaitén--Pueblo",
-      "lat": -42.9182658,
-      "lon": -72.7095984,
-      "nodo_mas_cercano": {
-        "id": 215,
-        "distancia_m": 7166.8
-      },
+      "id": "S413118072:fragul",
+      "lista": "S413118072",
+      "cientifico": "Leucophaeus pipixcan",
+      "comun": "Franklin's Gull",
+      "fecha_obs": "2026-11-25 14:40",
+      "cantidad": 200,
+      "localidad": "Estero Comeau",
+      "lat": -42.434687,
+      "lon": -72.43642,
+      "nodos_dentro_umbral": [],
+      "aristas_dentro_umbral": [
+        {
+          "id": 66,
+          "source": 45,
+          "target": 46,
+          "distancia_m": 568.8
+        },
+        {
+          "id": 677,
+          "source": 45,
+          "target": 273,
+          "distancia_m": 166.4
+        },
+        {
+          "id": 679,
+          "source": 181,
+          "target": 273,
+          "distancia_m": 121.4
+        },
+        {
+          "id": 681,
+          "source": 45,
+          "target": 274,
+          "distancia_m": 969.2
+        },
+        {
+          "id": 683,
+          "source": 181,
+          "target": 274,
+          "distancia_m": 897.9
+        }
+      ]
+    },
+    {
+      "id": "S413118226:soater1",
+      "lista": "S413118226",
+      "cientifico": "Sterna hirundinacea",
+      "comun": "South American Tern",
+      "fecha_obs": "2026-11-25 11:06",
+      "cantidad": 5,
+      "localidad": "Transbordador Fiordo Largo-Caleta Gonzalo",
+      "lat": -42.5493626,
+      "lon": -72.5663757,
+      "nodos_dentro_umbral": [
+        {
+          "id": 164,
+          "distancia_m": 1909.2
+        },
+        {
+          "id": 262,
+          "distancia_m": 2025.4
+        },
+        {
+          "id": 267,
+          "distancia_m": 1059.8
+        },
+        {
+          "id": 268,
+          "distancia_m": 1261.9
+        }
+      ],
+      "aristas_dentro_umbral": [
+        {
+          "id": 60,
+          "source": 39,
+          "target": 41,
+          "distancia_m": 146.6
+        },
+        {
+          "id": 298,
+          "source": 39,
+          "target": 164,
+          "distancia_m": 1909.2
+        },
+        {
+          "id": 300,
+          "source": 163,
+          "target": 164,
+          "distancia_m": 1909.2
+        },
+        {
+          "id": 301,
+          "source": 164,
+          "target": 165,
+          "distancia_m": 1909.2
+        },
+        {
+          "id": 633,
+          "source": 35,
+          "target": 262,
+          "distancia_m": 2025.4
+        },
+        {
+          "id": 634,
+          "source": 262,
+          "target": 39,
+          "distancia_m": 1998.0
+        },
+        {
+          "id": 635,
+          "source": 151,
+          "target": 262,
+          "distancia_m": 2025.4
+        },
+        {
+          "id": 636,
+          "source": 262,
+          "target": 164,
+          "distancia_m": 1900.9
+        },
+        {
+          "id": 653,
+          "source": 39,
+          "target": 267,
+          "distancia_m": 419.6
+        },
+        {
+          "id": 654,
+          "source": 267,
+          "target": 41,
+          "distancia_m": 1059.8
+        },
+        {
+          "id": 655,
+          "source": 164,
+          "target": 267,
+          "distancia_m": 294.0
+        },
+        {
+          "id": 656,
+          "source": 267,
+          "target": 171,
+          "distancia_m": 1059.8
+        },
+        {
+          "id": 657,
+          "source": 39,
+          "target": 268,
+          "distancia_m": 703.2
+        },
+        {
+          "id": 658,
+          "source": 268,
+          "target": 41,
+          "distancia_m": 1261.9
+        },
+        {
+          "id": 659,
+          "source": 164,
+          "target": 268,
+          "distancia_m": 773.5
+        },
+        {
+          "id": 660,
+          "source": 268,
+          "target": 171,
+          "distancia_m": 1261.9
+        }
+      ]
+    },
+    {
+      "id": "S412873463:brhgul2",
+      "lista": "S412873463",
+      "cientifico": "Chroicocephalus maculipennis",
+      "comun": "Brown-hooded Gull",
+      "fecha_obs": "2026-11-24 12:55",
+      "cantidad": 3,
+      "localidad": "Chana",
+      "lat": -42.7459643,
+      "lon": -72.8340326,
       "nodos_dentro_umbral": [],
       "aristas_dentro_umbral": []
     },
     {
-      "id": "S409325789",
-      "cientifico": "Larus dominicanus",
-      "comun": "Kelp Gull",
-      "fecha_obs": "2026-11-09 13:15",
-      "cantidad": 1,
-      "localidad": "Leptepu",
-      "lat": -42.4887895,
-      "lon": -72.4365916,
-      "nodo_mas_cercano": {
-        "id": 181,
-        "distancia_m": 1116.2
-      },
-      "nodos_dentro_umbral": [],
-      "aristas_dentro_umbral": []
-    },
-    {
-      "id": "S409325789",
+      "id": "S412873463:turvul",
+      "lista": "S412873463",
       "cientifico": "Cathartes aura",
       "comun": "Turkey Vulture",
-      "fecha_obs": "2026-11-09 13:15",
+      "fecha_obs": "2026-11-24 12:55",
       "cantidad": 1,
-      "localidad": "Leptepu",
-      "lat": -42.4887895,
-      "lon": -72.4365916,
-      "nodo_mas_cercano": {
-        "id": 181,
-        "distancia_m": 1116.2
-      },
+      "localidad": "Chana",
+      "lat": -42.7459643,
+      "lon": -72.8340326,
       "nodos_dentro_umbral": [],
       "aristas_dentro_umbral": []
     },
     {
-      "id": "S409325789",
-      "cientifico": "Caracara plancus",
-      "comun": "Crested Caracara",
-      "fecha_obs": "2026-11-09 13:15",
-      "cantidad": 2,
-      "localidad": "Leptepu",
-      "lat": -42.4887895,
-      "lon": -72.4365916,
-      "nodo_mas_cercano": {
-        "id": 181,
-        "distancia_m": 1116.2
-      },
+      "id": "S412873463:amekes",
+      "lista": "S412873463",
+      "cientifico": "Falco sparverius",
+      "comun": "American Kestrel",
+      "fecha_obs": "2026-11-24 12:55",
+      "cantidad": 1,
+      "localidad": "Chana",
+      "lat": -42.7459643,
+      "lon": -72.8340326,
       "nodos_dentro_umbral": [],
       "aristas_dentro_umbral": []
     },
     {
-      "id": "S409329138",
+      "id": "S412713441:andcon1",
+      "lista": "S412713441",
       "cientifico": "Vultur gryphus",
       "comun": "Andean Condor",
-      "fecha_obs": "2026-11-07 16:16",
-      "cantidad": 2,
-      "localidad": "Chaitén, Los Lagos, CL (-42.479, -72.339)",
-      "lat": -42.4794695,
-      "lon": -72.3388479,
-      "nodo_mas_cercano": {
-        "id": 182,
-        "distancia_m": 8901.1
-      },
-      "nodos_dentro_umbral": [],
-      "aristas_dentro_umbral": []
+      "fecha_obs": "2026-11-23 11:29",
+      "cantidad": 4,
+      "localidad": "PN Pumalín--Volcán Chaitén",
+      "lat": -42.8212096,
+      "lon": -72.6611216,
+      "nodos_dentro_umbral": [
+        {
+          "id": 16,
+          "distancia_m": 2067.9
+        },
+        {
+          "id": 96,
+          "distancia_m": 1637.4
+        }
+      ],
+      "aristas_dentro_umbral": [
+        {
+          "id": 17,
+          "source": 8,
+          "target": 16,
+          "distancia_m": 1632.6
+        },
+        {
+          "id": 24,
+          "source": 16,
+          "target": 18,
+          "distancia_m": 2067.9
+        },
+        {
+          "id": 25,
+          "source": 16,
+          "target": 19,
+          "distancia_m": 2067.9
+        },
+        {
+          "id": 159,
+          "source": 16,
+          "target": 94,
+          "distancia_m": 2067.9
+        },
+        {
+          "id": 160,
+          "source": 16,
+          "target": 95,
+          "distancia_m": 2067.9
+        },
+        {
+          "id": 161,
+          "source": 16,
+          "target": 96,
+          "distancia_m": 1637.4
+        },
+        {
+          "id": 163,
+          "source": 95,
+          "target": 96,
+          "distancia_m": 1637.4
+        },
+        {
+          "id": 164,
+          "source": 96,
+          "target": 94,
+          "distancia_m": 1637.4
+        },
+        {
+          "id": 446,
+          "source": 215,
+          "target": 16,
+          "distancia_m": 1499.2
+        },
+        {
+          "id": 448,
+          "source": 215,
+          "target": 95,
+          "distancia_m": 1822.9
+        },
+        {
+          "id": 450,
+          "source": 216,
+          "target": 16,
+          "distancia_m": 1749.9
+        },
+        {
+          "id": 452,
+          "source": 216,
+          "target": 95,
+          "distancia_m": 2044.5
+        },
+        {
+          "id": 493,
+          "source": 16,
+          "target": 227,
+          "distancia_m": 2067.9
+        },
+        {
+          "id": 497,
+          "source": 16,
+          "target": 228,
+          "distancia_m": 2067.9
+        }
+      ]
     },
     {
-      "id": "S409329954",
+      "id": "S412713441:perfal",
+      "lista": "S412713441",
+      "cientifico": "Falco peregrinus",
+      "comun": "Peregrine Falcon",
+      "fecha_obs": "2026-11-23 11:29",
+      "cantidad": 1,
+      "localidad": "PN Pumalín--Volcán Chaitén",
+      "lat": -42.8212096,
+      "lon": -72.6611216,
+      "nodos_dentro_umbral": [
+        {
+          "id": 16,
+          "distancia_m": 2067.9
+        },
+        {
+          "id": 96,
+          "distancia_m": 1637.4
+        }
+      ],
+      "aristas_dentro_umbral": [
+        {
+          "id": 17,
+          "source": 8,
+          "target": 16,
+          "distancia_m": 1632.6
+        },
+        {
+          "id": 24,
+          "source": 16,
+          "target": 18,
+          "distancia_m": 2067.9
+        },
+        {
+          "id": 25,
+          "source": 16,
+          "target": 19,
+          "distancia_m": 2067.9
+        },
+        {
+          "id": 159,
+          "source": 16,
+          "target": 94,
+          "distancia_m": 2067.9
+        },
+        {
+          "id": 160,
+          "source": 16,
+          "target": 95,
+          "distancia_m": 2067.9
+        },
+        {
+          "id": 161,
+          "source": 16,
+          "target": 96,
+          "distancia_m": 1637.4
+        },
+        {
+          "id": 163,
+          "source": 95,
+          "target": 96,
+          "distancia_m": 1637.4
+        },
+        {
+          "id": 164,
+          "source": 96,
+          "target": 94,
+          "distancia_m": 1637.4
+        },
+        {
+          "id": 446,
+          "source": 215,
+          "target": 16,
+          "distancia_m": 1499.2
+        },
+        {
+          "id": 448,
+          "source": 215,
+          "target": 95,
+          "distancia_m": 1822.9
+        },
+        {
+          "id": 450,
+          "source": 216,
+          "target": 16,
+          "distancia_m": 1749.9
+        },
+        {
+          "id": 452,
+          "source": 216,
+          "target": 95,
+          "distancia_m": 2044.5
+        },
+        {
+          "id": 493,
+          "source": 16,
+          "target": 227,
+          "distancia_m": 2067.9
+        },
+        {
+          "id": 497,
+          "source": 16,
+          "target": 228,
+          "distancia_m": 2067.9
+        }
+      ]
+    },
+    {
+      "id": "S411679637:rulowl1",
+      "lista": "S411679637",
       "cientifico": "Strix rufipes",
       "comun": "Rufous-legged Owl",
-      "fecha_obs": "2026-11-05 21:38",
-      "cantidad": 2,
-      "localidad": "Punto Helipuerto",
-      "lat": -42.4800041,
-      "lon": -72.3432273,
-      "nodo_mas_cercano": {
-        "id": 182,
-        "distancia_m": 8537.5
-      },
+      "fecha_obs": "2026-11-19 01:17",
+      "cantidad": 1,
+      "localidad": "Helipuerto, Vududahue, Los Lagos, CL (-42.479, -72.344)",
+      "lat": -42.479233,
+      "lon": -72.3443341,
       "nodos_dentro_umbral": [],
       "aristas_dentro_umbral": []
     },
     {
-      "id": "S408251335",
-      "cientifico": "Vanellus chilensis",
-      "comun": "Southern Lapwing",
-      "fecha_obs": "2026-11-05 19:51",
-      "cantidad": 4,
-      "localidad": "Río Blanco--Desembocadura",
-      "lat": -42.9222175,
-      "lon": -72.7198792,
-      "nodo_mas_cercano": {
-        "id": 215,
-        "distancia_m": 8105.6
-      },
+      "id": "S411177651:aupowl1",
+      "lista": "S411177651",
+      "cientifico": "Glaucidium nana",
+      "comun": "Austral Pygmy-Owl",
+      "fecha_obs": "2026-11-16 07:13",
+      "cantidad": 1,
+      "localidad": "Caleta Gonzalo",
+      "lat": -42.5594176,
+      "lon": -72.6044408,
+      "nodos_dentro_umbral": [
+        {
+          "id": 35,
+          "distancia_m": 1788.6
+        },
+        {
+          "id": 36,
+          "distancia_m": 1105.4
+        },
+        {
+          "id": 37,
+          "distancia_m": 480.0
+        },
+        {
+          "id": 39,
+          "distancia_m": 1130.9
+        },
+        {
+          "id": 151,
+          "distancia_m": 1438.6
+        },
+        {
+          "id": 153,
+          "distancia_m": 1812.4
+        },
+        {
+          "id": 154,
+          "distancia_m": 996.2
+        },
+        {
+          "id": 155,
+          "distancia_m": 929.7
+        },
+        {
+          "id": 156,
+          "distancia_m": 1554.5
+        },
+        {
+          "id": 157,
+          "distancia_m": 30.2
+        },
+        {
+          "id": 158,
+          "distancia_m": 807.5
+        },
+        {
+          "id": 159,
+          "distancia_m": 803.5
+        },
+        {
+          "id": 163,
+          "distancia_m": 1396.2
+        },
+        {
+          "id": 164,
+          "distancia_m": 1424.8
+        },
+        {
+          "id": 165,
+          "distancia_m": 681.7
+        },
+        {
+          "id": 259,
+          "distancia_m": 1732.0
+        },
+        {
+          "id": 260,
+          "distancia_m": 448.4
+        },
+        {
+          "id": 261,
+          "distancia_m": 521.7
+        },
+        {
+          "id": 262,
+          "distancia_m": 1867.0
+        },
+        {
+          "id": 263,
+          "distancia_m": 816.1
+        },
+        {
+          "id": 264,
+          "distancia_m": 784.0
+        }
+      ],
+      "aristas_dentro_umbral": [
+        {
+          "id": 50,
+          "source": 33,
+          "target": 35,
+          "distancia_m": 1788.6
+        },
+        {
+          "id": 51,
+          "source": 34,
+          "target": 36,
+          "distancia_m": 1105.4
+        },
+        {
+          "id": 52,
+          "source": 35,
+          "target": 36,
+          "distancia_m": 874.6
+        },
+        {
+          "id": 53,
+          "source": 35,
+          "target": 37,
+          "distancia_m": 480.0
+        },
+        {
+          "id": 54,
+          "source": 35,
+          "target": 39,
+          "distancia_m": 1004.2
+        },
+        {
+          "id": 55,
+          "source": 36,
+          "target": 37,
+          "distancia_m": 479.9
+        },
+        {
+          "id": 56,
+          "source": 36,
+          "target": 39,
+          "distancia_m": 16.0
+        },
+        {
+          "id": 57,
+          "source": 37,
+          "target": 39,
+          "distancia_m": 342.4
+        },
+        {
+          "id": 60,
+          "source": 39,
+          "target": 41,
+          "distancia_m": 1130.9
+        },
+        {
+          "id": 273,
+          "source": 35,
+          "target": 151,
+          "distancia_m": 1438.6
+        },
+        {
+          "id": 274,
+          "source": 35,
+          "target": 152,
+          "distancia_m": 1788.6
+        },
+        {
+          "id": 275,
+          "source": 35,
+          "target": 153,
+          "distancia_m": 1783.9
+        },
+        {
+          "id": 276,
+          "source": 151,
+          "target": 152,
+          "distancia_m": 1438.6
+        },
+        {
+          "id": 277,
+          "source": 152,
+          "target": 153,
+          "distancia_m": 1812.4
+        },
+        {
+          "id": 278,
+          "source": 153,
+          "target": 151,
+          "distancia_m": 1438.6
+        },
+        {
+          "id": 279,
+          "source": 36,
+          "target": 154,
+          "distancia_m": 996.2
+        },
+        {
+          "id": 280,
+          "source": 36,
+          "target": 155,
+          "distancia_m": 929.7
+        },
+        {
+          "id": 281,
+          "source": 36,
+          "target": 156,
+          "distancia_m": 1105.4
+        },
+        {
+          "id": 282,
+          "source": 154,
+          "target": 155,
+          "distancia_m": 877.3
+        },
+        {
+          "id": 283,
+          "source": 155,
+          "target": 156,
+          "distancia_m": 929.7
+        },
+        {
+          "id": 284,
+          "source": 156,
+          "target": 154,
+          "distancia_m": 996.2
+        },
+        {
+          "id": 285,
+          "source": 37,
+          "target": 157,
+          "distancia_m": 30.2
+        },
+        {
+          "id": 286,
+          "source": 37,
+          "target": 158,
+          "distancia_m": 480.0
+        },
+        {
+          "id": 287,
+          "source": 37,
+          "target": 159,
+          "distancia_m": 480.0
+        },
+        {
+          "id": 288,
+          "source": 157,
+          "target": 158,
+          "distancia_m": 30.2
+        },
+        {
+          "id": 289,
+          "source": 158,
+          "target": 159,
+          "distancia_m": 705.0
+        },
+        {
+          "id": 290,
+          "source": 159,
+          "target": 157,
+          "distancia_m": 30.2
+        },
+        {
+          "id": 297,
+          "source": 39,
+          "target": 163,
+          "distancia_m": 1130.9
+        },
+        {
+          "id": 298,
+          "source": 39,
+          "target": 164,
+          "distancia_m": 1130.9
+        },
+        {
+          "id": 299,
+          "source": 39,
+          "target": 165,
+          "distancia_m": 681.7
+        },
+        {
+          "id": 300,
+          "source": 163,
+          "target": 164,
+          "distancia_m": 1354.7
+        },
+        {
+          "id": 301,
+          "source": 164,
+          "target": 165,
+          "distancia_m": 681.7
+        },
+        {
+          "id": 302,
+          "source": 165,
+          "target": 163,
+          "distancia_m": 681.7
+        },
+        {
+          "id": 606,
+          "source": 255,
+          "target": 35,
+          "distancia_m": 1788.6
+        },
+        {
+          "id": 608,
+          "source": 255,
+          "target": 153,
+          "distancia_m": 1812.4
+        },
+        {
+          "id": 610,
+          "source": 256,
+          "target": 35,
+          "distancia_m": 1788.6
+        },
+        {
+          "id": 614,
+          "source": 257,
+          "target": 36,
+          "distancia_m": 1105.4
+        },
+        {
+          "id": 616,
+          "source": 257,
+          "target": 156,
+          "distancia_m": 1554.5
+        },
+        {
+          "id": 618,
+          "source": 258,
+          "target": 36,
+          "distancia_m": 1105.4
+        },
+        {
+          "id": 620,
+          "source": 258,
+          "target": 156,
+          "distancia_m": 1554.5
+        },
+        {
+          "id": 621,
+          "source": 35,
+          "target": 259,
+          "distancia_m": 1619.2
+        },
+        {
+          "id": 622,
+          "source": 259,
+          "target": 36,
+          "distancia_m": 1104.6
+        },
+        {
+          "id": 623,
+          "source": 153,
+          "target": 259,
+          "distancia_m": 1698.9
+        },
+        {
+          "id": 624,
+          "source": 259,
+          "target": 155,
+          "distancia_m": 929.7
+        },
+        {
+          "id": 625,
+          "source": 35,
+          "target": 260,
+          "distancia_m": 448.4
+        },
+        {
+          "id": 626,
+          "source": 260,
+          "target": 36,
+          "distancia_m": 317.9
+        },
+        {
+          "id": 627,
+          "source": 151,
+          "target": 260,
+          "distancia_m": 448.4
+        },
+        {
+          "id": 628,
+          "source": 260,
+          "target": 155,
+          "distancia_m": 390.7
+        },
+        {
+          "id": 629,
+          "source": 35,
+          "target": 261,
+          "distancia_m": 521.7
+        },
+        {
+          "id": 630,
+          "source": 261,
+          "target": 39,
+          "distancia_m": 459.4
+        },
+        {
+          "id": 631,
+          "source": 151,
+          "target": 261,
+          "distancia_m": 521.7
+        },
+        {
+          "id": 632,
+          "source": 261,
+          "target": 165,
+          "distancia_m": 405.1
+        },
+        {
+          "id": 633,
+          "source": 35,
+          "target": 262,
+          "distancia_m": 1708.7
+        },
+        {
+          "id": 634,
+          "source": 262,
+          "target": 39,
+          "distancia_m": 1130.9
+        },
+        {
+          "id": 635,
+          "source": 151,
+          "target": 262,
+          "distancia_m": 1438.6
+        },
+        {
+          "id": 636,
+          "source": 262,
+          "target": 164,
+          "distancia_m": 1424.8
+        },
+        {
+          "id": 637,
+          "source": 36,
+          "target": 263,
+          "distancia_m": 656.2
+        },
+        {
+          "id": 638,
+          "source": 263,
+          "target": 39,
+          "distancia_m": 671.0
+        },
+        {
+          "id": 639,
+          "source": 154,
+          "target": 263,
+          "distancia_m": 743.6
+        },
+        {
+          "id": 640,
+          "source": 263,
+          "target": 165,
+          "distancia_m": 523.1
+        },
+        {
+          "id": 641,
+          "source": 36,
+          "target": 264,
+          "distancia_m": 630.1
+        },
+        {
+          "id": 642,
+          "source": 264,
+          "target": 39,
+          "distancia_m": 645.0
+        },
+        {
+          "id": 643,
+          "source": 155,
+          "target": 264,
+          "distancia_m": 699.0
+        },
+        {
+          "id": 644,
+          "source": 264,
+          "target": 165,
+          "distancia_m": 522.6
+        },
+        {
+          "id": 653,
+          "source": 39,
+          "target": 267,
+          "distancia_m": 1130.9
+        },
+        {
+          "id": 655,
+          "source": 164,
+          "target": 267,
+          "distancia_m": 1424.8
+        },
+        {
+          "id": 657,
+          "source": 39,
+          "target": 268,
+          "distancia_m": 1130.9
+        },
+        {
+          "id": 659,
+          "source": 164,
+          "target": 268,
+          "distancia_m": 1424.8
+        }
+      ]
+    },
+    {
+      "id": "S413047147:dolgul2",
+      "lista": "S413047147",
+      "cientifico": "Leucophaeus scoresbii",
+      "comun": "Dolphin Gull",
+      "fecha_obs": "2026-11-25 09:45",
+      "cantidad": 2,
+      "localidad": "Ruta W-739, Hualaihué CL-Región de Los Lagos -42.01982, -72.63318",
+      "lat": -42.019821,
+      "lon": -72.63318,
+      "nodos_dentro_umbral": [],
+      "aristas_dentro_umbral": []
+    },
+    {
+      "id": "S411842814:andcon1",
+      "lista": "S411842814",
+      "cientifico": "Vultur gryphus",
+      "comun": "Andean Condor",
+      "fecha_obs": "2026-11-20 12:59",
+      "cantidad": 1,
+      "localidad": "Río Vodudahue--Desembocadura",
+      "lat": -42.4747427,
+      "lon": -72.4025403,
       "nodos_dentro_umbral": [],
       "aristas_dentro_umbral": []
     }
   ],
-  "nodos_afectados": [],
-  "aristas_afectadas": []
+  "nodos_afectados": [
+    {
+      "nodo_id": 164,
+      "distancia_min_m": 1424.8,
+      "avistamientos": [
+        "S413118226:soater1",
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "nodo_id": 262,
+      "distancia_min_m": 1867.0,
+      "avistamientos": [
+        "S413118226:soater1",
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "nodo_id": 267,
+      "distancia_min_m": 1059.8,
+      "avistamientos": [
+        "S413118226:soater1"
+      ]
+    },
+    {
+      "nodo_id": 268,
+      "distancia_min_m": 1261.9,
+      "avistamientos": [
+        "S413118226:soater1"
+      ]
+    },
+    {
+      "nodo_id": 16,
+      "distancia_min_m": 2067.9,
+      "avistamientos": [
+        "S412713441:andcon1",
+        "S412713441:perfal"
+      ]
+    },
+    {
+      "nodo_id": 96,
+      "distancia_min_m": 1637.4,
+      "avistamientos": [
+        "S412713441:andcon1",
+        "S412713441:perfal"
+      ]
+    },
+    {
+      "nodo_id": 35,
+      "distancia_min_m": 1788.6,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "nodo_id": 36,
+      "distancia_min_m": 1105.4,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "nodo_id": 37,
+      "distancia_min_m": 480.0,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "nodo_id": 39,
+      "distancia_min_m": 1130.9,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "nodo_id": 151,
+      "distancia_min_m": 1438.6,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "nodo_id": 153,
+      "distancia_min_m": 1812.4,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "nodo_id": 154,
+      "distancia_min_m": 996.2,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "nodo_id": 155,
+      "distancia_min_m": 929.7,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "nodo_id": 156,
+      "distancia_min_m": 1554.5,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "nodo_id": 157,
+      "distancia_min_m": 30.2,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "nodo_id": 158,
+      "distancia_min_m": 807.5,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "nodo_id": 159,
+      "distancia_min_m": 803.5,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "nodo_id": 163,
+      "distancia_min_m": 1396.2,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "nodo_id": 165,
+      "distancia_min_m": 681.7,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "nodo_id": 259,
+      "distancia_min_m": 1732.0,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "nodo_id": 260,
+      "distancia_min_m": 448.4,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "nodo_id": 261,
+      "distancia_min_m": 521.7,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "nodo_id": 263,
+      "distancia_min_m": 816.1,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "nodo_id": 264,
+      "distancia_min_m": 784.0,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    }
+  ],
+  "aristas_afectadas": [
+    {
+      "arista_id": 66,
+      "source": 45,
+      "target": 46,
+      "distancia_min_m": 568.8,
+      "avistamientos": [
+        "S413118072:fragul"
+      ]
+    },
+    {
+      "arista_id": 677,
+      "source": 45,
+      "target": 273,
+      "distancia_min_m": 166.4,
+      "avistamientos": [
+        "S413118072:fragul"
+      ]
+    },
+    {
+      "arista_id": 679,
+      "source": 181,
+      "target": 273,
+      "distancia_min_m": 121.4,
+      "avistamientos": [
+        "S413118072:fragul"
+      ]
+    },
+    {
+      "arista_id": 681,
+      "source": 45,
+      "target": 274,
+      "distancia_min_m": 969.2,
+      "avistamientos": [
+        "S413118072:fragul"
+      ]
+    },
+    {
+      "arista_id": 683,
+      "source": 181,
+      "target": 274,
+      "distancia_min_m": 897.9,
+      "avistamientos": [
+        "S413118072:fragul"
+      ]
+    },
+    {
+      "arista_id": 60,
+      "source": 39,
+      "target": 41,
+      "distancia_min_m": 146.6,
+      "avistamientos": [
+        "S413118226:soater1",
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 298,
+      "source": 39,
+      "target": 164,
+      "distancia_min_m": 1130.9,
+      "avistamientos": [
+        "S413118226:soater1",
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 300,
+      "source": 163,
+      "target": 164,
+      "distancia_min_m": 1354.7,
+      "avistamientos": [
+        "S413118226:soater1",
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 301,
+      "source": 164,
+      "target": 165,
+      "distancia_min_m": 681.7,
+      "avistamientos": [
+        "S413118226:soater1",
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 633,
+      "source": 35,
+      "target": 262,
+      "distancia_min_m": 1708.7,
+      "avistamientos": [
+        "S413118226:soater1",
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 634,
+      "source": 262,
+      "target": 39,
+      "distancia_min_m": 1130.9,
+      "avistamientos": [
+        "S413118226:soater1",
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 635,
+      "source": 151,
+      "target": 262,
+      "distancia_min_m": 1438.6,
+      "avistamientos": [
+        "S413118226:soater1",
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 636,
+      "source": 262,
+      "target": 164,
+      "distancia_min_m": 1424.8,
+      "avistamientos": [
+        "S413118226:soater1",
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 653,
+      "source": 39,
+      "target": 267,
+      "distancia_min_m": 419.6,
+      "avistamientos": [
+        "S413118226:soater1",
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 654,
+      "source": 267,
+      "target": 41,
+      "distancia_min_m": 1059.8,
+      "avistamientos": [
+        "S413118226:soater1"
+      ]
+    },
+    {
+      "arista_id": 655,
+      "source": 164,
+      "target": 267,
+      "distancia_min_m": 294.0,
+      "avistamientos": [
+        "S413118226:soater1",
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 656,
+      "source": 267,
+      "target": 171,
+      "distancia_min_m": 1059.8,
+      "avistamientos": [
+        "S413118226:soater1"
+      ]
+    },
+    {
+      "arista_id": 657,
+      "source": 39,
+      "target": 268,
+      "distancia_min_m": 703.2,
+      "avistamientos": [
+        "S413118226:soater1",
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 658,
+      "source": 268,
+      "target": 41,
+      "distancia_min_m": 1261.9,
+      "avistamientos": [
+        "S413118226:soater1"
+      ]
+    },
+    {
+      "arista_id": 659,
+      "source": 164,
+      "target": 268,
+      "distancia_min_m": 773.5,
+      "avistamientos": [
+        "S413118226:soater1",
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 660,
+      "source": 268,
+      "target": 171,
+      "distancia_min_m": 1261.9,
+      "avistamientos": [
+        "S413118226:soater1"
+      ]
+    },
+    {
+      "arista_id": 17,
+      "source": 8,
+      "target": 16,
+      "distancia_min_m": 1632.6,
+      "avistamientos": [
+        "S412713441:andcon1",
+        "S412713441:perfal"
+      ]
+    },
+    {
+      "arista_id": 24,
+      "source": 16,
+      "target": 18,
+      "distancia_min_m": 2067.9,
+      "avistamientos": [
+        "S412713441:andcon1",
+        "S412713441:perfal"
+      ]
+    },
+    {
+      "arista_id": 25,
+      "source": 16,
+      "target": 19,
+      "distancia_min_m": 2067.9,
+      "avistamientos": [
+        "S412713441:andcon1",
+        "S412713441:perfal"
+      ]
+    },
+    {
+      "arista_id": 159,
+      "source": 16,
+      "target": 94,
+      "distancia_min_m": 2067.9,
+      "avistamientos": [
+        "S412713441:andcon1",
+        "S412713441:perfal"
+      ]
+    },
+    {
+      "arista_id": 160,
+      "source": 16,
+      "target": 95,
+      "distancia_min_m": 2067.9,
+      "avistamientos": [
+        "S412713441:andcon1",
+        "S412713441:perfal"
+      ]
+    },
+    {
+      "arista_id": 161,
+      "source": 16,
+      "target": 96,
+      "distancia_min_m": 1637.4,
+      "avistamientos": [
+        "S412713441:andcon1",
+        "S412713441:perfal"
+      ]
+    },
+    {
+      "arista_id": 163,
+      "source": 95,
+      "target": 96,
+      "distancia_min_m": 1637.4,
+      "avistamientos": [
+        "S412713441:andcon1",
+        "S412713441:perfal"
+      ]
+    },
+    {
+      "arista_id": 164,
+      "source": 96,
+      "target": 94,
+      "distancia_min_m": 1637.4,
+      "avistamientos": [
+        "S412713441:andcon1",
+        "S412713441:perfal"
+      ]
+    },
+    {
+      "arista_id": 446,
+      "source": 215,
+      "target": 16,
+      "distancia_min_m": 1499.2,
+      "avistamientos": [
+        "S412713441:andcon1",
+        "S412713441:perfal"
+      ]
+    },
+    {
+      "arista_id": 448,
+      "source": 215,
+      "target": 95,
+      "distancia_min_m": 1822.9,
+      "avistamientos": [
+        "S412713441:andcon1",
+        "S412713441:perfal"
+      ]
+    },
+    {
+      "arista_id": 450,
+      "source": 216,
+      "target": 16,
+      "distancia_min_m": 1749.9,
+      "avistamientos": [
+        "S412713441:andcon1",
+        "S412713441:perfal"
+      ]
+    },
+    {
+      "arista_id": 452,
+      "source": 216,
+      "target": 95,
+      "distancia_min_m": 2044.5,
+      "avistamientos": [
+        "S412713441:andcon1",
+        "S412713441:perfal"
+      ]
+    },
+    {
+      "arista_id": 493,
+      "source": 16,
+      "target": 227,
+      "distancia_min_m": 2067.9,
+      "avistamientos": [
+        "S412713441:andcon1",
+        "S412713441:perfal"
+      ]
+    },
+    {
+      "arista_id": 497,
+      "source": 16,
+      "target": 228,
+      "distancia_min_m": 2067.9,
+      "avistamientos": [
+        "S412713441:andcon1",
+        "S412713441:perfal"
+      ]
+    },
+    {
+      "arista_id": 50,
+      "source": 33,
+      "target": 35,
+      "distancia_min_m": 1788.6,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 51,
+      "source": 34,
+      "target": 36,
+      "distancia_min_m": 1105.4,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 52,
+      "source": 35,
+      "target": 36,
+      "distancia_min_m": 874.6,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 53,
+      "source": 35,
+      "target": 37,
+      "distancia_min_m": 480.0,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 54,
+      "source": 35,
+      "target": 39,
+      "distancia_min_m": 1004.2,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 55,
+      "source": 36,
+      "target": 37,
+      "distancia_min_m": 479.9,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 56,
+      "source": 36,
+      "target": 39,
+      "distancia_min_m": 16.0,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 57,
+      "source": 37,
+      "target": 39,
+      "distancia_min_m": 342.4,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 273,
+      "source": 35,
+      "target": 151,
+      "distancia_min_m": 1438.6,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 274,
+      "source": 35,
+      "target": 152,
+      "distancia_min_m": 1788.6,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 275,
+      "source": 35,
+      "target": 153,
+      "distancia_min_m": 1783.9,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 276,
+      "source": 151,
+      "target": 152,
+      "distancia_min_m": 1438.6,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 277,
+      "source": 152,
+      "target": 153,
+      "distancia_min_m": 1812.4,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 278,
+      "source": 153,
+      "target": 151,
+      "distancia_min_m": 1438.6,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 279,
+      "source": 36,
+      "target": 154,
+      "distancia_min_m": 996.2,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 280,
+      "source": 36,
+      "target": 155,
+      "distancia_min_m": 929.7,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 281,
+      "source": 36,
+      "target": 156,
+      "distancia_min_m": 1105.4,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 282,
+      "source": 154,
+      "target": 155,
+      "distancia_min_m": 877.3,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 283,
+      "source": 155,
+      "target": 156,
+      "distancia_min_m": 929.7,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 284,
+      "source": 156,
+      "target": 154,
+      "distancia_min_m": 996.2,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 285,
+      "source": 37,
+      "target": 157,
+      "distancia_min_m": 30.2,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 286,
+      "source": 37,
+      "target": 158,
+      "distancia_min_m": 480.0,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 287,
+      "source": 37,
+      "target": 159,
+      "distancia_min_m": 480.0,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 288,
+      "source": 157,
+      "target": 158,
+      "distancia_min_m": 30.2,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 289,
+      "source": 158,
+      "target": 159,
+      "distancia_min_m": 705.0,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 290,
+      "source": 159,
+      "target": 157,
+      "distancia_min_m": 30.2,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 297,
+      "source": 39,
+      "target": 163,
+      "distancia_min_m": 1130.9,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 299,
+      "source": 39,
+      "target": 165,
+      "distancia_min_m": 681.7,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 302,
+      "source": 165,
+      "target": 163,
+      "distancia_min_m": 681.7,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 606,
+      "source": 255,
+      "target": 35,
+      "distancia_min_m": 1788.6,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 608,
+      "source": 255,
+      "target": 153,
+      "distancia_min_m": 1812.4,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 610,
+      "source": 256,
+      "target": 35,
+      "distancia_min_m": 1788.6,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 614,
+      "source": 257,
+      "target": 36,
+      "distancia_min_m": 1105.4,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 616,
+      "source": 257,
+      "target": 156,
+      "distancia_min_m": 1554.5,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 618,
+      "source": 258,
+      "target": 36,
+      "distancia_min_m": 1105.4,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 620,
+      "source": 258,
+      "target": 156,
+      "distancia_min_m": 1554.5,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 621,
+      "source": 35,
+      "target": 259,
+      "distancia_min_m": 1619.2,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 622,
+      "source": 259,
+      "target": 36,
+      "distancia_min_m": 1104.6,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 623,
+      "source": 153,
+      "target": 259,
+      "distancia_min_m": 1698.9,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 624,
+      "source": 259,
+      "target": 155,
+      "distancia_min_m": 929.7,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 625,
+      "source": 35,
+      "target": 260,
+      "distancia_min_m": 448.4,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 626,
+      "source": 260,
+      "target": 36,
+      "distancia_min_m": 317.9,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 627,
+      "source": 151,
+      "target": 260,
+      "distancia_min_m": 448.4,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 628,
+      "source": 260,
+      "target": 155,
+      "distancia_min_m": 390.7,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 629,
+      "source": 35,
+      "target": 261,
+      "distancia_min_m": 521.7,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 630,
+      "source": 261,
+      "target": 39,
+      "distancia_min_m": 459.4,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 631,
+      "source": 151,
+      "target": 261,
+      "distancia_min_m": 521.7,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 632,
+      "source": 261,
+      "target": 165,
+      "distancia_min_m": 405.1,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 637,
+      "source": 36,
+      "target": 263,
+      "distancia_min_m": 656.2,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 638,
+      "source": 263,
+      "target": 39,
+      "distancia_min_m": 671.0,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 639,
+      "source": 154,
+      "target": 263,
+      "distancia_min_m": 743.6,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 640,
+      "source": 263,
+      "target": 165,
+      "distancia_min_m": 523.1,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 641,
+      "source": 36,
+      "target": 264,
+      "distancia_min_m": 630.1,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 642,
+      "source": 264,
+      "target": 39,
+      "distancia_min_m": 645.0,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 643,
+      "source": 155,
+      "target": 264,
+      "distancia_min_m": 699.0,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    },
+    {
+      "arista_id": 644,
+      "source": 264,
+      "target": 165,
+      "distancia_min_m": 522.6,
+      "avistamientos": [
+        "S411177651:aupowl1"
+      ]
+    }
+  ]
 }

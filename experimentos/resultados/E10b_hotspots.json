@@ -1,0 +1,398 @@
+{
+ "4": {
+  "camaras": [
+   44,
+   45
+  ],
+  "hotspots": [
+   {
+    "locId": "L10882979",
+    "nombre": "Leptepu",
+    "distancia_m": 1368,
+    "ultima_obs": "2026-11-13 12:20",
+    "especies_total": 44,
+    "lat": -42.4887895,
+    "lon": -72.4365916
+   },
+   {
+    "locId": "L29337812",
+    "nombre": "Río Vodudahue--Desembocadura",
+    "distancia_m": 4541,
+    "ultima_obs": "2026-11-20 12:59",
+    "especies_total": 41,
+    "lat": -42.4747427,
+    "lon": -72.4025403
+   }
+  ]
+ },
+ "5": {
+  "camaras": [
+   42,
+   43
+  ],
+  "hotspots": [
+   {
+    "locId": "L10883319",
+    "nombre": "Fiordo Largo",
+    "distancia_m": 4602,
+    "ultima_obs": "2026-11-07 14:54",
+    "especies_total": 33,
+    "lat": -42.5461855,
+    "lon": -72.5228686
+   },
+   {
+    "locId": "L10882979",
+    "nombre": "Leptepu",
+    "distancia_m": 4944,
+    "ultima_obs": "2026-11-13 12:20",
+    "especies_total": 44,
+    "lat": -42.4887895,
+    "lon": -72.4365916
+   }
+  ]
+ },
+ "10": {
+  "camaras": [
+   35,
+   37
+  ],
+  "hotspots": [
+   {
+    "locId": "L2707624",
+    "nombre": "Caleta Gonzalo",
+    "distancia_m": 480,
+    "ultima_obs": "2026-11-25 10:25",
+    "especies_total": 78,
+    "lat": -42.5594176,
+    "lon": -72.6044408
+   },
+   {
+    "locId": "L10883329",
+    "nombre": "Transbordador Fiordo Largo-Caleta Gonzalo",
+    "distancia_m": 3305,
+    "ultima_obs": "2026-11-25 11:06",
+    "especies_total": 44,
+    "lat": -42.5493626,
+    "lon": -72.5663757
+   }
+  ]
+ },
+ "15": {
+  "camaras": [
+   29,
+   31
+  ],
+  "hotspots": [
+   {
+    "locId": "L54124662",
+    "nombre": "Ruta 7--Sendero Los Alerces",
+    "distancia_m": 475,
+    "ultima_obs": "2026-11-24 17:07",
+    "especies_total": 20,
+    "lat": -42.6594642,
+    "lon": -72.5804901
+   }
+  ]
+ },
+ "18": {
+  "camaras": [
+   25,
+   26,
+   27
+  ],
+  "hotspots": [
+   {
+    "locId": "L10883489",
+    "nombre": "PN Pumalín--Lago Blanco",
+    "distancia_m": 3279,
+    "ultima_obs": "2026-08-16 14:15",
+    "especies_total": 31,
+    "lat": -42.750766,
+    "lon": -72.6063448
+   },
+   {
+    "locId": "L10883500",
+    "nombre": "Ruta 7--Mirador Panorámico",
+    "distancia_m": 908,
+    "ultima_obs": "2026-10-15 08:13",
+    "especies_total": 20,
+    "lat": -42.7222015,
+    "lon": -72.5959715
+   },
+   {
+    "locId": "L10883279",
+    "nombre": "Sendero Lago Río Negro",
+    "distancia_m": 768,
+    "ultima_obs": "2026-11-23 07:45",
+    "especies_total": 29,
+    "lat": -42.7143408,
+    "lon": -72.5858349
+   }
+  ]
+ },
+ "19": {
+  "camaras": [
+   23,
+   24
+  ],
+  "hotspots": [
+   {
+    "locId": "L10883346",
+    "nombre": "PN Pumalín--Camping Los Volcanes",
+    "distancia_m": 3211,
+    "ultima_obs": "2026-10-25 11:28",
+    "especies_total": 45,
+    "lat": -42.7810808,
+    "lon": -72.6507336
+   },
+   {
+    "locId": "L10883489",
+    "nombre": "PN Pumalín--Lago Blanco",
+    "distancia_m": 334,
+    "ultima_obs": "2026-08-16 14:15",
+    "especies_total": 31,
+    "lat": -42.750766,
+    "lon": -72.6063448
+   },
+   {
+    "locId": "L22714547",
+    "nombre": "PN Pumalín--Sendero Volcán Michimahuida",
+    "distancia_m": 4779,
+    "ultima_obs": "2023-02-11 10:30",
+    "especies_total": 16,
+    "lat": -42.7820982,
+    "lon": -72.5662404
+   },
+   {
+    "locId": "L10883500",
+    "nombre": "Ruta 7--Mirador Panorámico",
+    "distancia_m": 3582,
+    "ultima_obs": "2026-10-15 08:13",
+    "especies_total": 20,
+    "lat": -42.7222015,
+    "lon": -72.5959715
+   },
+   {
+    "locId": "L10883480",
+    "nombre": "Río Rayas--Puente Ruta 7",
+    "distancia_m": 4076,
+    "ultima_obs": "2026-11-03 11:11",
+    "especies_total": 21,
+    "lat": -42.7970734,
+    "lon": -72.6364931
+   },
+   {
+    "locId": "L10883279",
+    "nombre": "Sendero Lago Río Negro",
+    "distancia_m": 4695,
+    "ultima_obs": "2026-11-23 07:45",
+    "especies_total": 29,
+    "lat": -42.7143408,
+    "lon": -72.5858349
+   }
+  ]
+ },
+ "20": {
+  "camaras": [
+   19,
+   20,
+   22
+  ],
+  "hotspots": [
+   {
+    "locId": "L10883346",
+    "nombre": "PN Pumalín--Camping Los Volcanes",
+    "distancia_m": 2672,
+    "ultima_obs": "2026-10-25 11:28",
+    "especies_total": 45,
+    "lat": -42.7810808,
+    "lon": -72.6507336
+   },
+   {
+    "locId": "L10883489",
+    "nombre": "PN Pumalín--Lago Blanco",
+    "distancia_m": 2248,
+    "ultima_obs": "2026-08-16 14:15",
+    "especies_total": 31,
+    "lat": -42.750766,
+    "lon": -72.6063448
+   },
+   {
+    "locId": "L22714547",
+    "nombre": "PN Pumalín--Sendero Volcán Michimahuida",
+    "distancia_m": 3436,
+    "ultima_obs": "2023-02-11 10:30",
+    "especies_total": 16,
+    "lat": -42.7820982,
+    "lon": -72.5662404
+   },
+   {
+    "locId": "L10883480",
+    "nombre": "Río Rayas--Puente Ruta 7",
+    "distancia_m": 1609,
+    "ultima_obs": "2026-11-03 11:11",
+    "especies_total": 21,
+    "lat": -42.7970734,
+    "lon": -72.6364931
+   }
+  ]
+ },
+ "22": {
+  "camaras": [
+   16,
+   18
+  ],
+  "hotspots": [
+   {
+    "locId": "L10883346",
+    "nombre": "PN Pumalín--Camping Los Volcanes",
+    "distancia_m": 1087,
+    "ultima_obs": "2026-10-25 11:28",
+    "especies_total": 45,
+    "lat": -42.7810808,
+    "lon": -72.6507336
+   },
+   {
+    "locId": "L13061117",
+    "nombre": "PN Pumalín--Volcán Chaitén",
+    "distancia_m": 2068,
+    "ultima_obs": "2026-11-23 11:29",
+    "especies_total": 45,
+    "lat": -42.8212096,
+    "lon": -72.6611216
+   },
+   {
+    "locId": "L10883480",
+    "nombre": "Río Rayas--Puente Ruta 7",
+    "distancia_m": 1046,
+    "ultima_obs": "2026-11-03 11:11",
+    "especies_total": 21,
+    "lat": -42.7970734,
+    "lon": -72.6364931
+   }
+  ]
+ },
+ "23": {
+  "camaras": [
+   15,
+   17
+  ],
+  "hotspots": [
+   {
+    "locId": "L10883346",
+    "nombre": "PN Pumalín--Camping Los Volcanes",
+    "distancia_m": 4026,
+    "ultima_obs": "2026-10-25 11:28",
+    "especies_total": 45,
+    "lat": -42.7810808,
+    "lon": -72.6507336
+   },
+   {
+    "locId": "L13061117",
+    "nombre": "PN Pumalín--Volcán Chaitén",
+    "distancia_m": 3536,
+    "ultima_obs": "2026-11-23 11:29",
+    "especies_total": 45,
+    "lat": -42.8212096,
+    "lon": -72.6611216
+   },
+   {
+    "locId": "L10883480",
+    "nombre": "Río Rayas--Puente Ruta 7",
+    "distancia_m": 4629,
+    "ultima_obs": "2026-11-03 11:11",
+    "especies_total": 21,
+    "lat": -42.7970734,
+    "lon": -72.6364931
+   }
+  ]
+ },
+ "27": {
+  "camaras": [
+   10,
+   11
+  ],
+  "hotspots": [
+   {
+    "locId": "L7819772",
+    "nombre": "PN Pumalín--Camping Ventisquero",
+    "distancia_m": 3127,
+    "ultima_obs": "2026-02-21 10:06",
+    "especies_total": 41,
+    "lat": -42.9442662,
+    "lon": -72.476635
+   }
+  ]
+ },
+ "30": {
+  "camaras": [
+   6,
+   7
+  ],
+  "hotspots": [
+   {
+    "locId": "L7819772",
+    "nombre": "PN Pumalín--Camping Ventisquero",
+    "distancia_m": 1452,
+    "ultima_obs": "2026-02-21 10:06",
+    "especies_total": 41,
+    "lat": -42.9442662,
+    "lon": -72.476635
+   },
+   {
+    "locId": "L6530938",
+    "nombre": "PN Pumalín--Sendero Ranita de Darwin",
+    "distancia_m": 1450,
+    "ultima_obs": "2026-10-22 14:10",
+    "especies_total": 40,
+    "lat": -42.9749979,
+    "lon": -72.4651229
+   },
+   {
+    "locId": "L58228354",
+    "nombre": "PN Pumalín--acceso",
+    "distancia_m": 4737,
+    "ultima_obs": "2026-11-17 10:48",
+    "especies_total": 27,
+    "lat": -43.0088838,
+    "lon": -72.4784374
+   }
+  ]
+ },
+ "31": {
+  "camaras": [
+   2,
+   3,
+   5
+  ],
+  "hotspots": [
+   {
+    "locId": "L7819772",
+    "nombre": "PN Pumalín--Camping Ventisquero",
+    "distancia_m": 3527,
+    "ultima_obs": "2026-02-21 10:06",
+    "especies_total": 41,
+    "lat": -42.9442662,
+    "lon": -72.476635
+   },
+   {
+    "locId": "L6530938",
+    "nombre": "PN Pumalín--Sendero Ranita de Darwin",
+    "distancia_m": 46,
+    "ultima_obs": "2026-10-22 14:10",
+    "especies_total": 40,
+    "lat": -42.9749979,
+    "lon": -72.4651229
+   },
+   {
+    "locId": "L58228354",
+    "nombre": "PN Pumalín--acceso",
+    "distancia_m": 1742,
+    "ultima_obs": "2026-11-17 10:48",
+    "especies_total": 27,
+    "lat": -43.0088838,
+    "lon": -72.4784374
+   }
+  ]
+ }
+}

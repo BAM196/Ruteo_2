@@ -1,0 +1,41 @@
+caso,tecnica,vuelos,R_plan,costo,brecha_pct,computo_ms,milp_variables,milp_restricciones
+sintética 1 (6 cámaras),T1 Dijkstra distancia,3,0.07053,1.8258737,280.52,0.35,336,605
+sintética 1 (6 cámaras),T2 Gurobi,3,1.0,0.4798365,0.0,69.52,336,605
+sintética 1 (6 cámaras),T3 Dijkstra ponderado,3,1.0,0.4798365,0.0,0.43,336,605
+sintética 1 (6 cámaras),T4 ACO,3,1.0,0.4798365,0.0,16.32,336,605
+sintética 2 (7 cámaras),T1 Dijkstra distancia,4,0.038,2.1350856,312.1862,0.4,504,916
+sintética 2 (7 cámaras),T2 Gurobi,4,1.0,0.5179905,0.0,448.81,504,916
+sintética 2 (7 cámaras),T3 Dijkstra ponderado,4,1.0,0.5483902,5.8688,0.5,504,916
+sintética 2 (7 cámaras),T4 ACO,4,1.0,0.5179905,0.0,20.09,504,916
+sintética 3 (8 cámaras),T1 Dijkstra distancia,4,0.0396,2.1144641,325.5535,0.49,720,1319
+sintética 3 (8 cámaras),T2 Gurobi,4,1.0,0.4968738,0.0,706.74,720,1319
+sintética 3 (8 cámaras),T3 Dijkstra ponderado,4,1.0,0.5478789,10.2652,0.63,720,1319
+sintética 3 (8 cámaras),T4 ACO,4,1.0,0.4979299,0.2125,21.97,720,1319
+sintética 4 (8 cámaras),T1 Dijkstra distancia,4,0.02299,2.3862724,348.4449,0.54,720,1319
+sintética 4 (8 cámaras),T2 Gurobi,4,1.0,0.5321216,0.0,823.61,720,1319
+sintética 4 (8 cámaras),T3 Dijkstra ponderado,4,1.0,0.5501496,3.3879,0.63,720,1319
+sintética 4 (8 cámaras),T4 ACO,4,1.0,0.534923,0.5265,22.2,720,1319
+sintética 5 (8 cámaras),T1 Dijkstra distancia,4,0.76,0.6372194,11.9149,0.51,720,1319
+sintética 5 (8 cámaras),T2 Gurobi,5,1.0,0.5693785,0.0,754.38,720,1319
+sintética 5 (8 cámaras),T3 Dijkstra ponderado,4,1.0,0.6221403,9.2666,0.57,720,1319
+sintética 5 (8 cámaras),T4 ACO,4,1.0,0.5693785,0.0,25.15,720,1319
+sintética 6 (6 cámaras),T1 Dijkstra distancia,3,0.553,0.7961996,78.934,0.3,336,605
+sintética 6 (6 cámaras),T2 Gurobi,3,1.0,0.4449684,0.0,109.87,336,605
+sintética 6 (6 cámaras),T3 Dijkstra ponderado,3,1.0,0.5358155,20.4165,0.36,336,605
+sintética 6 (6 cámaras),T4 ACO,3,1.0,0.4449684,0.0,15.51,336,605
+sintética 7 (6 cámaras),T1 Dijkstra distancia,3,0.27866,1.1388771,99.7204,0.29,336,605
+sintética 7 (6 cámaras),T2 Gurobi,3,1.0,0.5702357,0.0,128.43,336,605
+sintética 7 (6 cámaras),T3 Dijkstra ponderado,3,1.0,0.6114068,7.22,0.37,336,605
+sintética 7 (6 cámaras),T4 ACO,3,1.0,0.5702357,0.0,15.45,336,605
+sintética 8 (8 cámaras),T1 Dijkstra distancia,4,0.0247,2.350477,412.5925,0.51,720,1319
+sintética 8 (8 cámaras),T2 Gurobi,4,1.0,0.4585469,0.0,461.96,720,1319
+sintética 8 (8 cámaras),T3 Dijkstra ponderado,4,1.0,0.4585469,0.0,0.6,720,1319
+sintética 8 (8 cámaras),T4 ACO,4,1.0,0.4585469,0.0,21.35,720,1319
+sintética 9 (8 cámaras),T1 Dijkstra distancia,4,0.06838,1.8413311,262.2514,0.48,720,1319
+sintética 9 (8 cámaras),T2 Gurobi,4,1.0,0.5083021,0.0,393.12,720,1319
+sintética 9 (8 cámaras),T3 Dijkstra ponderado,5,1.0,0.6685136,31.519,0.6,720,1319
+sintética 9 (8 cámaras),T4 ACO,4,1.0,0.5083021,0.0,25.29,720,1319
+sintética 10 (8 cámaras),T1 Dijkstra distancia,4,0.67,0.7002398,41.662,0.52,720,1319
+sintética 10 (8 cámaras),T2 Gurobi,4,1.0,0.4943032,0.0,563.48,720,1319
+sintética 10 (8 cámaras),T3 Dijkstra ponderado,4,1.0,0.5232759,5.8613,0.62,720,1319
+sintética 10 (8 cámaras),T4 ACO,4,1.0,0.4943032,0.0,22.29,720,1319

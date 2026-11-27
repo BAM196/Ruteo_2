@@ -1,44 +1,46 @@
+import argparse
 import json
 import os
 import sys
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 import numpy as np
 import requests
+import yaml
 from pyproj import Transformer
 
 AQUI = Path(__file__).resolve().parent
 RAIZ = AQUI.parent
 NODOS_PATH = Path(os.getenv("NODOS_PATH", RAIZ / "Infraestructura" / "nodosv2.json"))
 ARISTAS_PATH = Path(os.getenv("ARISTAS_PATH", RAIZ / "Infraestructura" / "aristasv2.json"))
+AMENAZAS_YAML = RAIZ / "Motor" / "config" / "amenazas.yaml"
 SALIDA = AQUI / "amenaza_ebird.json"
 
+API = "https://api.ebird.org/v2/data/obs"
+REGION = os.getenv("EBIRD_REGION", "CL-LL")
 DIAS = int(os.getenv("EBIRD_BACK_DAYS", "14"))
-UMBRAL_M = float(os.getenv("UMBRAL_EBIRD_M", "500"))
-PENALIZACION_KM = float(os.getenv("PENALIZACION_KM", "200"))
+RADIO_CONSULTA_KM = 50
 CRS_METRICO = "EPSG:32718"
 
-
-RAPACES_TERRITORIALES = (
-    "buteo",           # Aguilucho chico (B. albigula), Aguilucho común (B. polyosoma), Aguilucho cola rojiza (B. ventralis)
-    "geranoaetus",     # Águila mora (G. melanoleucus) / sinónimo eBird de Buteo polyosoma
-    "falco",           # Halcón peregrino (F. peregrinus), Halcón perdiguero (F. femoralis), Cernícalo (F. sparverius)
-    "caracara",        # Traro (Caracara plancus)
-    "milvago",         # Tiuque (Milvago chimango)
-    "parabuteo",       # Peuco (Parabuteo unicinctus)
-    "bubo",            # Tucúquere (Bubo magellanicus)
-    "glaucidium",      # Chuncho (Glaucidium nana)
-    "strix",           # Concón (Strix rufipes)
-    "vultur",          # Cóndor andino (Vultur gryphus)
-    "cathartes",       # Jote de cabeza colorada (Cathartes aura)
-    "coragyps",        # Jote de cabeza negra (Coragyps atratus)
-    "larus",           # Gaviota dominicana (Larus dominicanus)
-    "chroicocephalus", # Gaviota cáhuil (Chroicocephalus maculipennis)
-    "sterna",          # Gaviotín sudamericano (Sterna hirundinacea)
-    "leucophaeus",     # Gaviota austral / Franklin
-    "vanellus",        # Queltehue (Vanellus chilensis)
+GENEROS = (
+    "buteo", "geranoaetus", "falco", "caracara", "milvago", "parabuteo", "bubo", "glaucidium",
+    "strix", "vultur", "cathartes", "coragyps", "larus", "chroicocephalus", "sterna",
+    "leucophaeus", "vanellus",
 )
+
+
+def valor(x):
+    return x["valor"] if isinstance(x, dict) and "valor" in x else x
+
+
+def radio_amenaza() -> float:
+    eb = yaml.safe_load(AMENAZAS_YAML.read_text(encoding="utf-8"))["amenazas"]["ebird"]
+    r_mov = float(valor(eb["r_mov_m"]))
+    calculado = AQUI / "aves_desplazamiento.json"
+    if calculado.exists():
+        r_mov = float(json.loads(calculado.read_text(encoding="utf-8"))["meta"]["r_mov_m"])
+    return float(valor(eb["distancia_precaucion_m"])) + r_mov
 
 
 def ruta_repo(path: Path) -> str:
@@ -61,16 +63,10 @@ def cargar_env():
 def leer_json(path: Path, clave: str) -> list[dict]:
     if not path.exists():
         sys.exit(f"No existe {path}.")
-    data = json.loads(path.read_text(encoding="utf-8"))
-    return data[clave] if isinstance(data, dict) else data
+    return json.loads(path.read_text(encoding="utf-8"))[clave]
 
 
-def proyectar(tr: Transformer, lon: float, lat: float) -> np.ndarray:
-    x, y = tr.transform(lon, lat)
-    return np.array([x, y], dtype=float)
-
-
-def distancia_a_tramo(p: np.ndarray, a: np.ndarray, b: np.ndarray) -> float:
+def distancia_a_tramo(p, a, b) -> float:
     ab = b - a
     den = float(np.dot(ab, ab))
     if den == 0:
@@ -79,143 +75,146 @@ def distancia_a_tramo(p: np.ndarray, a: np.ndarray, b: np.ndarray) -> float:
     return float(np.linalg.norm(p - (a + t * ab)))
 
 
-def consultar_ebird(lat_center: float, lon_center: float, dist_km: int = 50) -> list[dict]:
-    token = os.getenv("EBIRD_API_KEY", "").strip()
-    if not token:
-        print("AVISO: EBIRD_API_KEY no definida. Se retorna lista vacía.")
+def es_objetivo(obs: dict) -> bool:
+    sci = (obs.get("sciName") or "").lower()
+    return any(sci.startswith(g) for g in GENEROS)
+
+
+def a_registro(obs: dict) -> dict:
+    return {
+        "id": f"{obs.get('subId')}:{obs.get('speciesCode')}",
+        "lista": obs.get("subId"),
+        "cientifico": obs.get("sciName"),
+        "comun": obs.get("comName"),
+        "fecha_obs": obs.get("obsDt"),
+        "cantidad": obs.get("howMany") or 1,
+        "localidad": obs.get("locName"),
+        "lat": float(obs["lat"]),
+        "lon": float(obs["lng"]),
+    }
+
+
+def pedir(url: str, params: dict, token: str) -> list[dict]:
+    resp = requests.get(url, params=params, headers={"X-eBirdApiToken": token}, timeout=60)
+    if resp.status_code != 200:
+        print(f"eBird respondió {resp.status_code}: {resp.text[:200]}")
         return []
-
-    url = f"https://api.ebird.org/v2/data/obs/geo/recent?lat={lat_center}&lng={lon_center}&dist={dist_km}&back={DIAS}"
-    headers = {"X-eBirdApiToken": token}
-    
-    try:
-        resp = requests.get(url, headers=headers, timeout=30)
-        if resp.status_code != 200:
-            print(f"Error eBird API ({resp.status_code}): {resp.text[:200]}")
-            return []
-        
-        datos = resp.json()
-        filtrados = []
-        for obs in datos:
-            sci = obs.get("sciName", "").lower()
-            if any(rapaz in sci for rapaz in RAPACES_TERRITORIALES):
-                filtrados.append({
-                    "id": obs.get("subId"),
-                    "cientifico": obs.get("sciName"),
-                    "comun": obs.get("comName"),
-                    "fecha_obs": obs.get("obsDt"),
-                    "cantidad": obs.get("howMany", 1),
-                    "localidad": obs.get("locName"),
-                    "lat": float(obs["lat"]),
-                    "lon": float(obs["lng"])
-                })
-        return filtrados
-    except Exception as e:
-        print(f"Excepción consultando eBird: {e}")
-        return []
+    return resp.json()
 
 
-def cruzar(avistamientos: list[dict], nodos: list[dict], aristas: list[dict]):
-    tr = Transformer.from_crs("EPSG:4326", CRS_METRICO, always_xy=True)
-    xy_nodo = {n["id"]: proyectar(tr, n["lon"], n["lat"]) for n in nodos}
-
-    for av in avistamientos:
-        p = proyectar(tr, av["lon"], av["lat"])
-        dist_n = sorted(
-            ((nid, float(np.linalg.norm(p - xy))) for nid, xy in xy_nodo.items()),
-            key=lambda t: t[1],
-        )
-        cerca = dist_n[0]
-        av["nodo_mas_cercano"] = {"id": cerca[0], "distancia_m": round(cerca[1], 1)}
-        av["nodos_dentro_umbral"] = [
-            {"id": nid, "distancia_m": round(d, 1)} for nid, d in dist_n if d <= UMBRAL_M
-        ]
-
-        afectadas = []
-        for ar in aristas:
-            d = distancia_a_tramo(p, xy_nodo[ar["source"]], xy_nodo[ar["target"]])
-            if d <= UMBRAL_M:
-                afectadas.append({
-                    "id": ar["id"],
-                    "source": ar["source"],
-                    "target": ar["target"],
-                    "distancia_m": round(d, 1),
-                })
-        av["aristas_dentro_umbral"] = afectadas
+def recientes(centros, token: str) -> list[dict]:
+    salida = []
+    for lat, lon in centros:
+        salida += pedir(f"{API}/geo/recent", {"lat": f"{lat:.4f}", "lng": f"{lon:.4f}",
+                                               "dist": RADIO_CONSULTA_KM, "back": DIAS}, token)
+    return salida
 
 
-def calcular_afectados(avistamientos: list[dict], aristas: list[dict]):
-    nodos_af: dict[int, dict] = {}
-    aristas_af: dict[int, dict] = {}
-    costos = {a["id"]: a["costo_km"] for a in aristas}
+def historicos(fecha: date, token: str) -> list[dict]:
+    salida = []
+    for k in range(DIAS):
+        d = fecha - timedelta(days=k)
+        salida += pedir(f"{API}/{REGION}/historic/{d.year}/{d.month}/{d.day}",
+                        {"rank": "mrec", "detail": "simple"}, token)
+    return salida
 
-    for av in avistamientos:
-        for item in av["nodos_dentro_umbral"]:
-            b = nodos_af.setdefault(item["id"], {
-                "nodo_id": item["id"],
-                "distancia_min_m": item["distancia_m"],
-                "avistamientos": [],
-                "evitar": True,
-                "motivo": "Presencia reciente de ave rapaz territorial con riesgo de ataque aéreo."
-            })
-            b["distancia_min_m"] = min(b["distancia_min_m"], item["distancia_m"])
-            b["avistamientos"].append(av["id"])
 
-        for item in av["aristas_dentro_umbral"]:
-            base = costos[item["id"]]
-            b = aristas_af.setdefault(item["id"], {
-                "arista_id": item["id"],
-                "source": item["source"],
-                "target": item["target"],
-                "distancia_min_m": item["distancia_m"],
-                "costo_km": base,
-                "costo_resiliente_km": round(base + PENALIZACION_KM, 4),
-                "avistamientos": [],
-                "evitar": True
-            })
-            b["distancia_min_m"] = min(b["distancia_min_m"], item["distancia_m"])
-            b["avistamientos"].append(av["id"])
-
-    return list(nodos_af.values()), list(aristas_af.values())
+def dentro_del_parque(av: dict, bbox) -> bool:
+    return bbox[0] <= av["lon"] <= bbox[2] and bbox[1] <= av["lat"] <= bbox[3]
 
 
 def main():
+    ap = argparse.ArgumentParser(description="Avistamientos de aves de eBird cerca de la red.")
+    ap.add_argument("--fecha", default=os.getenv("ESCENARIO_FECHA") or None,
+                    help="YYYY-MM-DD: observaciones de los 14 días que terminan en esa fecha")
+    args = ap.parse_args()
     cargar_env()
     nodos = leer_json(NODOS_PATH, "nodos")
     aristas = leer_json(ARISTAS_PATH, "aristas")
+    umbral = radio_amenaza()
+    lats = [n["lat"] for n in nodos]
+    lons = [n["lon"] for n in nodos]
+    margen = 0.05
+    bbox = (min(lons) - margen, min(lats) - margen, max(lons) + margen, max(lats) + margen)
+    lon_c = float(np.mean(lons))
+    tercio = (max(lats) - min(lats)) / 4
+    centros = [(min(lats) + tercio, lon_c), (max(lats) - tercio, lon_c)]
 
-    lat_c = float(np.mean([n["lat"] for n in nodos]))
-    lon_c = float(np.mean([n["lon"] for n in nodos]))
+    token = os.getenv("EBIRD_API_KEY", "").strip()
+    if not token:
+        if SALIDA.exists():
+            print(f"Falta EBIRD_API_KEY en .env: se mantiene {ruta_repo(SALIDA)} sin cambios.")
+            return
+        print("Aviso: falta EBIRD_API_KEY; se guarda una lista vacía.")
+        crudos = []
+    elif args.fecha:
+        print(f"Consultando eBird histórico en {REGION}, {DIAS} días hasta {args.fecha}")
+        crudos = historicos(date.fromisoformat(args.fecha), token)
+    else:
+        print(f"Consultando eBird reciente ({DIAS} días) desde {len(centros)} puntos con radio de {RADIO_CONSULTA_KM} km")
+        crudos = recientes(centros, token)
 
-    print(f"Consultando eBird en Centroide: ({lat_c:.4f}, {lon_c:.4f}) con radio de 50 km")
-    avistamientos = consultar_ebird(lat_c, lon_c)
-    cruzar(avistamientos, nodos, aristas)
-    nodos_af, aristas_af = calcular_afectados(avistamientos, aristas)
+    vistos, avistamientos = set(), []
+    for obs in crudos:
+        if not es_objetivo(obs) or "lat" not in obs:
+            continue
+        av = a_registro(obs)
+        if av["id"] in vistos or not dentro_del_parque(av, bbox):
+            continue
+        vistos.add(av["id"])
+        avistamientos.append(av)
+
+    tr = Transformer.from_crs("EPSG:4326", CRS_METRICO, always_xy=True)
+    xy = {n["id"]: np.array(tr.transform(n["lon"], n["lat"])) for n in nodos}
+    nodos_af, aristas_af = {}, {}
+    for av in avistamientos:
+        p = np.array(tr.transform(av["lon"], av["lat"]))
+        av["nodos_dentro_umbral"] = [
+            {"id": nid, "distancia_m": round(float(np.linalg.norm(p - q)), 1)}
+            for nid, q in xy.items() if np.linalg.norm(p - q) <= umbral]
+        av["aristas_dentro_umbral"] = []
+        for ar in aristas:
+            d = distancia_a_tramo(p, xy[ar["source"]], xy[ar["target"]])
+            if d <= umbral:
+                av["aristas_dentro_umbral"].append({"id": ar["id"], "source": ar["source"],
+                                                    "target": ar["target"], "distancia_m": round(d, 1)})
+        for item in av["nodos_dentro_umbral"]:
+            b = nodos_af.setdefault(item["id"], {"nodo_id": item["id"], "distancia_min_m": item["distancia_m"],
+                                                 "avistamientos": []})
+            b["distancia_min_m"] = min(b["distancia_min_m"], item["distancia_m"])
+            b["avistamientos"].append(av["id"])
+        for item in av["aristas_dentro_umbral"]:
+            b = aristas_af.setdefault(item["id"], {"arista_id": item["id"], "source": item["source"],
+                                                   "target": item["target"],
+                                                   "distancia_min_m": item["distancia_m"], "avistamientos": []})
+            b["distancia_min_m"] = min(b["distancia_min_m"], item["distancia_m"])
+            b["avistamientos"].append(av["id"])
 
     documento = {
         "meta": {
             "fuente": "eBird API 2.0 (The Cornell Lab of Ornithology)",
-            "endpoint": "https://api.ebird.org/v2/data/obs/geo/recent",
+            "endpoint": f"{API}/{REGION}/historic/{{y}}/{{m}}/{{d}}" if args.fecha else f"{API}/geo/recent",
+            "modo": "historico" if args.fecha else "reciente",
+            "fecha_escenario": args.fecha,
+            "region": REGION,
             "dias_atras": DIAS,
-            "umbral_amenaza_m": UMBRAL_M,
-            "penalizacion_km": PENALIZACION_KM,
+            "puntos_consulta": [] if args.fecha else [{"lat": round(a, 4), "lon": round(b, 4)} for a, b in centros],
+            "radio_consulta_km": RADIO_CONSULTA_KM,
+            "filtro": "Rapaces, carroñeras, gaviotas y queltehues: aves grandes o territoriales que pueden atacar o chocar con el dron",
+            "generos": list(GENEROS),
+            "umbral_amenaza_m": umbral,
+            "regla": "Se listan los nodos y aristas a <= 100 m + r_mov de cada avistamiento; la probabilidad se calcula en el motor.",
             "generado": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "n_avistamientos": len(avistamientos),
             "n_nodos_afectados": len(nodos_af),
             "n_aristas_afectadas": len(aristas_af),
-            "resultado": "con_amenazas" if avistamientos else "sin_amenazas_en_radio",
-            "regla_peso": (
-                f"Si la distancia al avistamiento de rapaz es <= {UMBRAL_M:.0f} m, "
-                f"evitar = true y costo_resiliente_km = costo_km + {PENALIZACION_KM:.0f}."
-            )
         },
         "avistamientos": avistamientos,
-        "nodos_afectados": nodos_af,
-        "aristas_afectadas": aristas_af
+        "nodos_afectados": list(nodos_af.values()),
+        "aristas_afectadas": list(aristas_af.values()),
     }
-
     SALIDA.write_text(json.dumps(documento, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Escrito: {SALIDA} | Rapaces detectadas: {len(avistamientos)}")
+    print(f"Avistamientos: {len(avistamientos)} | radio de amenaza {umbral:.0f} m. Escrito: {ruta_repo(SALIDA)}")
 
 
 if __name__ == "__main__":

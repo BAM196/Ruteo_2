@@ -1,61 +1,349 @@
-config,semilla,costo_C,gap_pct,distancia_m,factible,nodos,tiempo_ms,iteraciones
-config_mai,0,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,408.47,500
-config_mai,1,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,409.13,500
-config_mai,2,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,416.01,500
-config_mai,3,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,406.18,500
-config_mai,4,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,403.03,500
-config_mai,5,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,401.6,500
-config_mai,6,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,404.07,500
-config_mai,7,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,415.7,500
-config_mai,8,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,403.71,500
-config_mai,9,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,399.12,500
-config_mai,10,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,403.82,500
-config_mai,11,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,409.48,500
-config_mai,12,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,410.67,500
-config_mai,13,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,403.55,500
-config_mai,14,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,399.76,500
-config_mai,15,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,403.67,500
-config_mai,16,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,401.99,500
-config_mai,17,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,400.32,500
-config_mai,18,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,403.11,500
-config_mai,19,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,412.69,500
-config_mai,20,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,401.57,500
-config_mai,21,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,405.78,500
-config_mai,22,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,398.61,500
-config_mai,23,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,411.42,500
-config_mai,24,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,405.02,500
-config_mai,25,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,408.67,500
-config_mai,26,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,423.79,500
-config_mai,27,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,402.99,500
-config_mai,28,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,406.93,500
-config_mai,29,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,404.31,500
-config_zhang,0,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,24.83,26
-config_zhang,1,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,25.3,27
-config_zhang,2,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,24.28,26
-config_zhang,3,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,25.58,27
-config_zhang,4,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,24.61,26
-config_zhang,5,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,25.1,26
-config_zhang,6,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,24.89,26
-config_zhang,7,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,24.61,26
-config_zhang,8,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,25.02,26
-config_zhang,9,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,24.73,26
-config_zhang,10,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,25.36,26
-config_zhang,11,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,26.32,27
-config_zhang,12,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,24.76,26
-config_zhang,13,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,24.74,26
-config_zhang,14,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,32.67,26
-config_zhang,15,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,25.69,27
-config_zhang,16,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,24.73,26
-config_zhang,17,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,25.13,26
-config_zhang,18,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,25.08,26
-config_zhang,19,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,24.41,26
-config_zhang,20,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,24.45,26
-config_zhang,21,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,24.35,26
-config_zhang,22,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,24.92,26
-config_zhang,23,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,25.03,26
-config_zhang,24,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,25.04,26
-config_zhang,25,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,24.88,26
-config_zhang,26,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,34.01,26
-config_zhang,27,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,25.46,26
-config_zhang,28,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,24.68,26
-config_zhang,29,0.5231657463275476,0.0,5648.4,True,33-255-153-259-36,24.76,26
+caso,tipo,config,semilla,camaras,c_optimo,c_aco,gap_pct,optimo,tiempo_aco_ms,tiempo_milp_ms,iteraciones
+sector 4,real,config_mai,0,2,0.528622,0.528622,0.0,True,87.38,3.52,500
+sector 4,real,config_mai,1,2,0.528622,0.528622,0.0,True,90.67,3.52,500
+sector 4,real,config_mai,2,2,0.528622,0.528622,0.0,True,86.99,3.52,500
+sector 4,real,config_zhang,0,2,0.528622,0.528622,0.0,True,4.77,3.52,26
+sector 4,real,config_zhang,1,2,0.528622,0.528622,0.0,True,4.75,3.52,26
+sector 4,real,config_zhang,2,2,0.528622,0.528622,0.0,True,4.78,3.52,26
+sector 4 variante 1,real,config_mai,0,2,0.528622,0.528622,0.0,True,90.08,2.77,500
+sector 4 variante 1,real,config_mai,1,2,0.528622,0.528622,0.0,True,89.78,2.77,500
+sector 4 variante 1,real,config_mai,2,2,0.528622,0.528622,0.0,True,89.71,2.77,500
+sector 4 variante 1,real,config_zhang,0,2,0.528622,0.528622,0.0,True,4.87,2.77,26
+sector 4 variante 1,real,config_zhang,1,2,0.528622,0.528622,0.0,True,4.82,2.77,26
+sector 4 variante 1,real,config_zhang,2,2,0.528622,0.528622,0.0,True,4.84,2.77,26
+sector 4 variante 2,real,config_mai,0,2,0.528622,0.528622,0.0,True,88.55,2.61,500
+sector 4 variante 2,real,config_mai,1,2,0.528622,0.528622,0.0,True,89.43,2.61,500
+sector 4 variante 2,real,config_mai,2,2,0.528622,0.528622,0.0,True,89.02,2.61,500
+sector 4 variante 2,real,config_zhang,0,2,0.528622,0.528622,0.0,True,4.75,2.61,26
+sector 4 variante 2,real,config_zhang,1,2,0.528622,0.528622,0.0,True,4.74,2.61,26
+sector 4 variante 2,real,config_zhang,2,2,0.528622,0.528622,0.0,True,4.86,2.61,26
+sector 4 variante 3,real,config_mai,0,2,0.557256,0.557256,0.0,True,104.16,2.33,500
+sector 4 variante 3,real,config_mai,1,2,0.557256,0.557256,0.0,True,104.37,2.33,500
+sector 4 variante 3,real,config_mai,2,2,0.557256,0.557256,0.0,True,104.68,2.33,500
+sector 4 variante 3,real,config_zhang,0,2,0.557256,0.557256,0.0,True,5.7,2.33,26
+sector 4 variante 3,real,config_zhang,1,2,0.557256,0.557256,0.0,True,5.81,2.33,26
+sector 4 variante 3,real,config_zhang,2,2,0.557256,0.557256,0.0,True,5.7,2.33,26
+sector 5,real,config_mai,0,2,0.527371,0.527371,0.0,True,89.36,2.45,500
+sector 5,real,config_mai,1,2,0.527371,0.527371,0.0,True,91.96,2.45,500
+sector 5,real,config_mai,2,2,0.527371,0.527371,0.0,True,95.97,2.45,500
+sector 5,real,config_zhang,0,2,0.527371,0.527371,0.0,True,8.02,2.45,26
+sector 5,real,config_zhang,1,2,0.527371,0.527371,0.0,True,6.17,2.45,26
+sector 5,real,config_zhang,2,2,0.527371,0.527371,0.0,True,5.42,2.45,26
+sector 5 variante 1,real,config_mai,0,2,1.371341,1.371341,0.0,True,89.71,2.45,500
+sector 5 variante 1,real,config_mai,1,2,1.371341,1.371341,0.0,True,90.31,2.45,500
+sector 5 variante 1,real,config_mai,2,2,1.371341,1.371341,0.0,True,89.97,2.45,500
+sector 5 variante 1,real,config_zhang,0,2,1.371341,1.371341,0.0,True,4.78,2.45,26
+sector 5 variante 1,real,config_zhang,1,2,1.371341,1.371341,0.0,True,4.73,2.45,26
+sector 5 variante 1,real,config_zhang,2,2,1.371341,1.371341,0.0,True,4.86,2.45,26
+sector 5 variante 2,real,config_mai,0,2,0.583211,0.583211,0.0,True,89.23,2.57,500
+sector 5 variante 2,real,config_mai,1,2,0.583211,0.583211,0.0,True,91.79,2.57,500
+sector 5 variante 2,real,config_mai,2,2,0.583211,0.583211,0.0,True,89.14,2.57,500
+sector 5 variante 2,real,config_zhang,0,2,0.583211,0.583211,0.0,True,4.87,2.57,26
+sector 5 variante 2,real,config_zhang,1,2,0.583211,0.583211,0.0,True,4.8,2.57,26
+sector 5 variante 2,real,config_zhang,2,2,0.583211,0.583211,0.0,True,5.33,2.57,26
+sector 5 variante 3,real,config_mai,0,2,0.892516,0.892516,0.0,True,104.6,2.31,500
+sector 5 variante 3,real,config_mai,1,2,0.892516,0.892516,0.0,True,103.52,2.31,500
+sector 5 variante 3,real,config_mai,2,2,0.892516,0.892516,0.0,True,103.18,2.31,500
+sector 5 variante 3,real,config_zhang,0,2,0.892516,0.892516,0.0,True,5.49,2.31,26
+sector 5 variante 3,real,config_zhang,1,2,0.892516,0.892516,0.0,True,5.65,2.31,26
+sector 5 variante 3,real,config_zhang,2,2,0.892516,0.892516,0.0,True,5.51,2.31,26
+sector 10,real,config_mai,0,2,0.663463,0.663463,0.0,True,91.18,2.63,500
+sector 10,real,config_mai,1,2,0.663463,0.663463,0.0,True,91.45,2.63,500
+sector 10,real,config_mai,2,2,0.663463,0.663463,0.0,True,90.5,2.63,500
+sector 10,real,config_zhang,0,2,0.663463,0.663463,0.0,True,4.86,2.63,26
+sector 10,real,config_zhang,1,2,0.663463,0.663463,0.0,True,4.82,2.63,26
+sector 10,real,config_zhang,2,2,0.663463,0.663463,0.0,True,4.85,2.63,26
+sector 10 variante 1,real,config_mai,0,2,0.823334,0.823334,0.0,True,87.78,2.61,500
+sector 10 variante 1,real,config_mai,1,2,0.823334,0.823334,0.0,True,88.94,2.61,500
+sector 10 variante 1,real,config_mai,2,2,0.823334,0.823334,0.0,True,87.52,2.61,500
+sector 10 variante 1,real,config_zhang,0,2,0.823334,0.823334,0.0,True,5.26,2.61,26
+sector 10 variante 1,real,config_zhang,1,2,0.823334,0.823334,0.0,True,4.72,2.61,26
+sector 10 variante 1,real,config_zhang,2,2,0.823334,0.823334,0.0,True,4.82,2.61,26
+sector 10 variante 2,real,config_mai,0,2,0.725107,0.725107,0.0,True,90.64,2.76,500
+sector 10 variante 2,real,config_mai,1,2,0.725107,0.725107,0.0,True,90.12,2.76,500
+sector 10 variante 2,real,config_mai,2,2,0.725107,0.725107,0.0,True,89.69,2.76,500
+sector 10 variante 2,real,config_zhang,0,2,0.725107,0.725107,0.0,True,4.88,2.76,26
+sector 10 variante 2,real,config_zhang,1,2,0.725107,0.725107,0.0,True,4.78,2.76,26
+sector 10 variante 2,real,config_zhang,2,2,0.725107,0.725107,0.0,True,4.78,2.76,26
+sector 10 variante 3,real,config_mai,0,2,1.084669,1.084669,0.0,True,109.08,2.36,500
+sector 10 variante 3,real,config_mai,1,2,1.084669,1.084669,0.0,True,111.41,2.36,500
+sector 10 variante 3,real,config_mai,2,2,1.084669,1.084669,0.0,True,104.57,2.36,500
+sector 10 variante 3,real,config_zhang,0,2,1.084669,1.084669,0.0,True,5.52,2.36,26
+sector 10 variante 3,real,config_zhang,1,2,1.084669,1.084669,0.0,True,5.66,2.36,26
+sector 10 variante 3,real,config_zhang,2,2,1.084669,1.084669,0.0,True,5.52,2.36,26
+sector 15,real,config_mai,0,2,0.520207,0.520207,0.0,True,90.04,2.71,500
+sector 15,real,config_mai,1,2,0.520207,0.520207,0.0,True,88.53,2.71,500
+sector 15,real,config_mai,2,2,0.520207,0.520207,0.0,True,89.16,2.71,500
+sector 15,real,config_zhang,0,2,0.520207,0.520207,0.0,True,4.8,2.71,26
+sector 15,real,config_zhang,1,2,0.520207,0.520207,0.0,True,4.77,2.71,26
+sector 15,real,config_zhang,2,2,0.520207,0.520207,0.0,True,4.79,2.71,26
+sector 15 variante 1,real,config_mai,0,2,0.520207,0.520207,0.0,True,90.75,2.54,500
+sector 15 variante 1,real,config_mai,1,2,0.520207,0.520207,0.0,True,90.44,2.54,500
+sector 15 variante 1,real,config_mai,2,2,0.520207,0.520207,0.0,True,90.33,2.54,500
+sector 15 variante 1,real,config_zhang,0,2,0.520207,0.520207,0.0,True,4.9,2.54,26
+sector 15 variante 1,real,config_zhang,1,2,0.520207,0.520207,0.0,True,4.84,2.54,26
+sector 15 variante 1,real,config_zhang,2,2,0.520207,0.520207,0.0,True,4.84,2.54,26
+sector 15 variante 2,real,config_mai,0,2,0.706181,0.706181,0.0,True,88.2,2.56,500
+sector 15 variante 2,real,config_mai,1,2,0.706181,0.706181,0.0,True,89.69,2.56,500
+sector 15 variante 2,real,config_mai,2,2,0.706181,0.706181,0.0,True,88.75,2.56,500
+sector 15 variante 2,real,config_zhang,0,2,0.706181,0.706181,0.0,True,4.82,2.56,26
+sector 15 variante 2,real,config_zhang,1,2,0.706181,0.706181,0.0,True,4.72,2.56,26
+sector 15 variante 2,real,config_zhang,2,2,0.706181,0.706181,0.0,True,4.79,2.56,26
+sector 15 variante 3,real,config_mai,0,2,0.667392,0.667392,0.0,True,103.39,2.15,500
+sector 15 variante 3,real,config_mai,1,2,0.667392,0.667392,0.0,True,103.05,2.15,500
+sector 15 variante 3,real,config_mai,2,2,0.667392,0.667392,0.0,True,101.93,2.15,500
+sector 15 variante 3,real,config_zhang,0,2,0.667392,0.667392,0.0,True,5.56,2.15,26
+sector 15 variante 3,real,config_zhang,1,2,0.667392,0.667392,0.0,True,5.69,2.15,26
+sector 15 variante 3,real,config_zhang,2,2,0.667392,0.667392,0.0,True,5.53,2.15,26
+sector 18,real,config_mai,0,3,0.557256,0.557256,0.0,True,158.64,5.8,500
+sector 18,real,config_mai,1,3,0.557256,0.557256,0.0,True,159.5,5.8,500
+sector 18,real,config_mai,2,3,0.557256,0.557256,0.0,True,159.7,5.8,500
+sector 18,real,config_zhang,0,3,0.557256,0.557256,0.0,True,8.77,5.8,26
+sector 18,real,config_zhang,1,3,0.557256,0.557256,0.0,True,8.81,5.8,26
+sector 18,real,config_zhang,2,3,0.557256,0.557256,0.0,True,9.12,5.8,26
+sector 18 variante 1,real,config_mai,0,3,0.557256,0.557256,0.0,True,159.65,5.29,500
+sector 18 variante 1,real,config_mai,1,3,0.557256,0.557256,0.0,True,160.03,5.29,500
+sector 18 variante 1,real,config_mai,2,3,0.557256,0.557256,0.0,True,159.09,5.29,500
+sector 18 variante 1,real,config_zhang,0,3,0.557256,0.557256,0.0,True,8.73,5.29,26
+sector 18 variante 1,real,config_zhang,1,3,0.557256,0.557256,0.0,True,8.84,5.29,26
+sector 18 variante 1,real,config_zhang,2,3,0.557256,0.557256,0.0,True,8.78,5.29,26
+sector 18 variante 2,real,config_mai,0,3,0.591511,0.591511,0.0,True,163.26,5.29,500
+sector 18 variante 2,real,config_mai,1,3,0.591511,0.591511,0.0,True,158.89,5.29,500
+sector 18 variante 2,real,config_mai,2,3,0.591511,0.591511,0.0,True,161.04,5.29,500
+sector 18 variante 2,real,config_zhang,0,3,0.591511,0.591511,0.0,True,9.16,5.29,26
+sector 18 variante 2,real,config_zhang,1,3,0.591511,0.591511,0.0,True,8.96,5.29,26
+sector 18 variante 2,real,config_zhang,2,3,0.591511,0.591511,0.0,True,8.92,5.29,26
+sector 18 variante 3,real,config_mai,0,3,0.585883,0.585883,0.0,True,143.57,4.21,500
+sector 18 variante 3,real,config_mai,1,3,0.585883,0.585883,0.0,True,146.15,4.21,500
+sector 18 variante 3,real,config_mai,2,3,0.585883,0.585883,0.0,True,143.87,4.21,500
+sector 18 variante 3,real,config_zhang,0,3,0.585883,0.585883,0.0,True,8.17,4.21,26
+sector 18 variante 3,real,config_zhang,1,3,0.585883,0.585883,0.0,True,8.56,4.21,26
+sector 18 variante 3,real,config_zhang,2,3,0.585883,0.585883,0.0,True,8.13,4.21,26
+sector 19,real,config_mai,0,2,0.548911,0.548911,0.0,True,89.42,2.63,500
+sector 19,real,config_mai,1,2,0.548911,0.548911,0.0,True,88.43,2.63,500
+sector 19,real,config_mai,2,2,0.548911,0.548911,0.0,True,88.26,2.63,500
+sector 19,real,config_zhang,0,2,0.548911,0.548911,0.0,True,4.82,2.63,26
+sector 19,real,config_zhang,1,2,0.548911,0.548911,0.0,True,4.69,2.63,26
+sector 19,real,config_zhang,2,2,0.548911,0.548911,0.0,True,4.75,2.63,26
+sector 19 variante 1,real,config_mai,0,2,0.548911,0.548911,0.0,True,88.57,2.45,500
+sector 19 variante 1,real,config_mai,1,2,0.548911,0.548911,0.0,True,89.61,2.45,500
+sector 19 variante 1,real,config_mai,2,2,0.548911,0.548911,0.0,True,88.89,2.45,500
+sector 19 variante 1,real,config_zhang,0,2,0.548911,0.548911,0.0,True,4.89,2.45,26
+sector 19 variante 1,real,config_zhang,1,2,0.548911,0.548911,0.0,True,5.07,2.45,26
+sector 19 variante 1,real,config_zhang,2,2,0.548911,0.548911,0.0,True,4.81,2.45,26
+sector 19 variante 2,real,config_mai,0,2,0.548911,0.548911,0.0,True,89.45,2.52,500
+sector 19 variante 2,real,config_mai,1,2,0.548911,0.548911,0.0,True,89.36,2.52,500
+sector 19 variante 2,real,config_mai,2,2,0.548911,0.548911,0.0,True,88.66,2.52,500
+sector 19 variante 2,real,config_zhang,0,2,0.548911,0.548911,0.0,True,4.83,2.52,26
+sector 19 variante 2,real,config_zhang,1,2,0.548911,0.548911,0.0,True,4.76,2.52,26
+sector 19 variante 2,real,config_zhang,2,2,0.548911,0.548911,0.0,True,5.04,2.52,26
+sector 19 variante 3,real,config_mai,0,2,0.672217,0.672217,0.0,True,102.02,2.28,500
+sector 19 variante 3,real,config_mai,1,2,0.672217,0.672217,0.0,True,103.02,2.28,500
+sector 19 variante 3,real,config_mai,2,2,0.672217,0.672217,0.0,True,102.96,2.28,500
+sector 19 variante 3,real,config_zhang,0,2,0.672217,0.672217,0.0,True,5.7,2.28,26
+sector 19 variante 3,real,config_zhang,1,2,0.672217,0.672217,0.0,True,5.63,2.28,26
+sector 19 variante 3,real,config_zhang,2,2,0.672217,0.672217,0.0,True,5.6,2.28,26
+sector 20,real,config_mai,0,3,0.597862,0.597862,0.0,True,167.23,5.47,500
+sector 20,real,config_mai,1,3,0.597862,0.597862,0.0,True,157.68,5.47,500
+sector 20,real,config_mai,2,3,0.597862,0.597862,0.0,True,157.6,5.47,500
+sector 20,real,config_zhang,0,3,0.597862,0.597862,0.0,True,8.28,5.47,26
+sector 20,real,config_zhang,1,3,0.597862,0.597862,0.0,True,8.43,5.47,26
+sector 20,real,config_zhang,2,3,0.597862,0.597862,0.0,True,8.41,5.47,26
+sector 20 variante 1,real,config_mai,0,3,0.597862,0.597862,0.0,True,157.98,5.41,500
+sector 20 variante 1,real,config_mai,1,3,0.597862,0.597862,0.0,True,155.58,5.41,500
+sector 20 variante 1,real,config_mai,2,3,0.597862,0.597862,0.0,True,155.14,5.41,500
+sector 20 variante 1,real,config_zhang,0,3,0.597862,0.597862,0.0,True,8.32,5.41,26
+sector 20 variante 1,real,config_zhang,1,3,0.597862,0.597862,0.0,True,8.28,5.41,26
+sector 20 variante 1,real,config_zhang,2,3,0.597862,0.597862,0.0,True,8.29,5.41,26
+sector 20 variante 2,real,config_mai,0,3,0.64688,0.64688,0.0,True,157.42,5.59,500
+sector 20 variante 2,real,config_mai,1,3,0.64688,0.64688,0.0,True,157.76,5.59,500
+sector 20 variante 2,real,config_mai,2,3,0.64688,0.64688,0.0,True,156.19,5.59,500
+sector 20 variante 2,real,config_zhang,0,3,0.64688,0.64688,0.0,True,8.58,5.59,26
+sector 20 variante 2,real,config_zhang,1,3,0.64688,0.64688,0.0,True,8.57,5.59,26
+sector 20 variante 2,real,config_zhang,2,3,0.64688,0.64688,0.0,True,8.5,5.59,26
+sector 20 variante 3,real,config_mai,0,3,0.646793,0.646793,-0.0,True,144.48,5.02,500
+sector 20 variante 3,real,config_mai,1,3,0.646793,0.646793,-0.0,True,144.01,5.02,500
+sector 20 variante 3,real,config_mai,2,3,0.646793,0.646793,-0.0,True,142.75,5.02,500
+sector 20 variante 3,real,config_zhang,0,3,0.646793,0.646793,-0.0,True,7.9,5.02,26
+sector 20 variante 3,real,config_zhang,1,3,0.646793,0.646793,-0.0,True,8.24,5.02,26
+sector 20 variante 3,real,config_zhang,2,3,0.646793,0.646793,-0.0,True,7.7,5.02,26
+sector 22,real,config_mai,0,2,0.588406,0.588406,0.0,True,90.79,3.15,500
+sector 22,real,config_mai,1,2,0.588406,0.588406,0.0,True,90.5,3.15,500
+sector 22,real,config_mai,2,2,0.588406,0.588406,0.0,True,89.99,3.15,500
+sector 22,real,config_zhang,0,2,0.588406,0.588406,0.0,True,4.87,3.15,26
+sector 22,real,config_zhang,1,2,0.588406,0.588406,0.0,True,4.71,3.15,26
+sector 22,real,config_zhang,2,2,0.588406,0.588406,0.0,True,4.8,3.15,26
+sector 22 variante 1,real,config_mai,0,2,0.588406,0.588406,0.0,True,88.48,2.61,500
+sector 22 variante 1,real,config_mai,1,2,0.588406,0.588406,0.0,True,90.89,2.61,500
+sector 22 variante 1,real,config_mai,2,2,0.588406,0.588406,0.0,True,103.39,2.61,500
+sector 22 variante 1,real,config_zhang,0,2,0.588406,0.588406,0.0,True,4.89,2.61,26
+sector 22 variante 1,real,config_zhang,1,2,0.588406,0.588406,0.0,True,4.77,2.61,26
+sector 22 variante 1,real,config_zhang,2,2,0.588406,0.588406,0.0,True,5.11,2.61,26
+sector 22 variante 2,real,config_mai,0,2,0.588406,0.588406,0.0,True,91.8,2.76,500
+sector 22 variante 2,real,config_mai,1,2,0.588406,0.588406,0.0,True,97.52,2.76,500
+sector 22 variante 2,real,config_mai,2,2,0.588406,0.588406,0.0,True,95.02,2.76,500
+sector 22 variante 2,real,config_zhang,0,2,0.588406,0.588406,0.0,True,4.88,2.76,26
+sector 22 variante 2,real,config_zhang,1,2,0.588406,0.588406,0.0,True,4.87,2.76,26
+sector 22 variante 2,real,config_zhang,2,2,0.588406,0.588406,0.0,True,4.9,2.76,26
+sector 22 variante 3,real,config_mai,0,2,0.615472,0.615472,0.0,True,104.71,2.44,500
+sector 22 variante 3,real,config_mai,1,2,0.615472,0.615472,0.0,True,104.3,2.44,500
+sector 22 variante 3,real,config_mai,2,2,0.615472,0.615472,0.0,True,103.65,2.44,500
+sector 22 variante 3,real,config_zhang,0,2,0.615472,0.615472,0.0,True,5.69,2.44,26
+sector 22 variante 3,real,config_zhang,1,2,0.615472,0.615472,0.0,True,5.73,2.44,26
+sector 22 variante 3,real,config_zhang,2,2,0.615472,0.615472,0.0,True,5.96,2.44,26
+sector 23,real,config_mai,0,2,0.517915,0.517915,0.0,True,88.2,2.55,500
+sector 23,real,config_mai,1,2,0.517915,0.517915,0.0,True,89.22,2.55,500
+sector 23,real,config_mai,2,2,0.517915,0.517915,0.0,True,88.32,2.55,500
+sector 23,real,config_zhang,0,2,0.517915,0.517915,0.0,True,4.75,2.55,26
+sector 23,real,config_zhang,1,2,0.517915,0.517915,0.0,True,4.79,2.55,26
+sector 23,real,config_zhang,2,2,0.517915,0.517915,0.0,True,4.79,2.55,26
+sector 23 variante 1,real,config_mai,0,2,0.517915,0.517915,0.0,True,90.65,2.69,500
+sector 23 variante 1,real,config_mai,1,2,0.517915,0.517915,0.0,True,89.06,2.69,500
+sector 23 variante 1,real,config_mai,2,2,0.517915,0.517915,0.0,True,88.69,2.69,500
+sector 23 variante 1,real,config_zhang,0,2,0.517915,0.517915,0.0,True,4.91,2.69,26
+sector 23 variante 1,real,config_zhang,1,2,0.517915,0.517915,0.0,True,4.76,2.69,26
+sector 23 variante 1,real,config_zhang,2,2,0.517915,0.517915,0.0,True,4.85,2.69,26
+sector 23 variante 2,real,config_mai,0,2,0.517915,0.517915,0.0,True,89.09,2.65,500
+sector 23 variante 2,real,config_mai,1,2,0.517915,0.517915,0.0,True,89.97,2.65,500
+sector 23 variante 2,real,config_mai,2,2,0.517915,0.517915,0.0,True,88.65,2.65,500
+sector 23 variante 2,real,config_zhang,0,2,0.517915,0.517915,0.0,True,4.82,2.65,26
+sector 23 variante 2,real,config_zhang,1,2,0.517915,0.517915,0.0,True,4.76,2.65,26
+sector 23 variante 2,real,config_zhang,2,2,0.517915,0.517915,0.0,True,4.81,2.65,26
+sector 23 variante 3,real,config_mai,0,2,0.535828,0.535828,0.0,True,102.59,2.17,500
+sector 23 variante 3,real,config_mai,1,2,0.535828,0.535828,0.0,True,103.77,2.17,500
+sector 23 variante 3,real,config_mai,2,2,0.535828,0.535828,0.0,True,102.73,2.17,500
+sector 23 variante 3,real,config_zhang,0,2,0.535828,0.535828,0.0,True,5.56,2.17,26
+sector 23 variante 3,real,config_zhang,1,2,0.535828,0.535828,0.0,True,5.66,2.17,26
+sector 23 variante 3,real,config_zhang,2,2,0.535828,0.535828,0.0,True,5.56,2.17,26
+sector 27,real,config_mai,0,2,0.633553,0.633553,0.0,True,91.02,2.71,500
+sector 27,real,config_mai,1,2,0.633553,0.633553,0.0,True,90.13,2.71,500
+sector 27,real,config_mai,2,2,0.633553,0.633553,0.0,True,89.93,2.71,500
+sector 27,real,config_zhang,0,2,0.633553,0.633553,0.0,True,4.82,2.71,26
+sector 27,real,config_zhang,1,2,0.633553,0.633553,0.0,True,4.8,2.71,26
+sector 27,real,config_zhang,2,2,0.633553,0.633553,0.0,True,4.85,2.71,26
+sector 27 variante 1,real,config_mai,0,2,0.633558,0.633558,0.0,True,101.15,2.83,500
+sector 27 variante 1,real,config_mai,1,2,0.633558,0.633558,0.0,True,93.16,2.83,500
+sector 27 variante 1,real,config_mai,2,2,0.633558,0.633558,0.0,True,88.83,2.83,500
+sector 27 variante 1,real,config_zhang,0,2,0.633558,0.633558,0.0,True,4.84,2.83,26
+sector 27 variante 1,real,config_zhang,1,2,0.633558,0.633558,0.0,True,4.73,2.83,26
+sector 27 variante 1,real,config_zhang,2,2,0.633558,0.633558,0.0,True,4.84,2.83,26
+sector 27 variante 2,real,config_mai,0,2,0.6339,0.6339,0.0,True,88.6,2.72,500
+sector 27 variante 2,real,config_mai,1,2,0.6339,0.6339,0.0,True,89.75,2.72,500
+sector 27 variante 2,real,config_mai,2,2,0.6339,0.6339,0.0,True,89.69,2.72,500
+sector 27 variante 2,real,config_zhang,0,2,0.6339,0.6339,0.0,True,4.8,2.72,26
+sector 27 variante 2,real,config_zhang,1,2,0.6339,0.6339,0.0,True,4.77,2.72,26
+sector 27 variante 2,real,config_zhang,2,2,0.6339,0.6339,0.0,True,4.99,2.72,26
+sector 27 variante 3,real,config_mai,0,2,0.749629,0.749629,0.0,True,106.08,2.4,500
+sector 27 variante 3,real,config_mai,1,2,0.749629,0.749629,0.0,True,103.85,2.4,500
+sector 27 variante 3,real,config_mai,2,2,0.749629,0.749629,0.0,True,104.25,2.4,500
+sector 27 variante 3,real,config_zhang,0,2,0.749629,0.749629,0.0,True,5.72,2.4,26
+sector 27 variante 3,real,config_zhang,1,2,0.749629,0.749629,0.0,True,6.57,2.4,26
+sector 27 variante 3,real,config_zhang,2,2,0.749629,0.749629,0.0,True,5.76,2.4,26
+sector 30,real,config_mai,0,2,0.528628,0.528628,0.0,True,93.83,2.61,500
+sector 30,real,config_mai,1,2,0.528628,0.528628,0.0,True,91.79,2.61,500
+sector 30,real,config_mai,2,2,0.528628,0.528628,0.0,True,90.5,2.61,500
+sector 30,real,config_zhang,0,2,0.528628,0.528628,0.0,True,5.02,2.61,26
+sector 30,real,config_zhang,1,2,0.528628,0.528628,0.0,True,5.33,2.61,26
+sector 30,real,config_zhang,2,2,0.528628,0.528628,0.0,True,5.01,2.61,26
+sector 30 variante 1,real,config_mai,0,2,0.528628,0.528628,0.0,True,90.24,2.53,500
+sector 30 variante 1,real,config_mai,1,2,0.528628,0.528628,0.0,True,89.82,2.53,500
+sector 30 variante 1,real,config_mai,2,2,0.528628,0.528628,0.0,True,90.32,2.53,500
+sector 30 variante 1,real,config_zhang,0,2,0.528628,0.528628,0.0,True,4.8,2.53,26
+sector 30 variante 1,real,config_zhang,1,2,0.528628,0.528628,0.0,True,4.82,2.53,26
+sector 30 variante 1,real,config_zhang,2,2,0.528628,0.528628,0.0,True,4.84,2.53,26
+sector 30 variante 2,real,config_mai,0,2,0.528628,0.528628,0.0,True,91.64,2.49,500
+sector 30 variante 2,real,config_mai,1,2,0.528628,0.528628,0.0,True,89.94,2.49,500
+sector 30 variante 2,real,config_mai,2,2,0.528628,0.528628,0.0,True,90.6,2.49,500
+sector 30 variante 2,real,config_zhang,0,2,0.528628,0.528628,0.0,True,4.89,2.49,26
+sector 30 variante 2,real,config_zhang,1,2,0.528628,0.528628,0.0,True,4.84,2.49,26
+sector 30 variante 2,real,config_zhang,2,2,0.528628,0.528628,0.0,True,4.81,2.49,26
+sector 30 variante 3,real,config_mai,0,2,0.557256,0.557256,0.0,True,103.86,2.49,500
+sector 30 variante 3,real,config_mai,1,2,0.557256,0.557256,0.0,True,105.0,2.49,500
+sector 30 variante 3,real,config_mai,2,2,0.557256,0.557256,0.0,True,106.57,2.49,500
+sector 30 variante 3,real,config_zhang,0,2,0.557256,0.557256,0.0,True,5.66,2.49,26
+sector 30 variante 3,real,config_zhang,1,2,0.557256,0.557256,0.0,True,5.7,2.49,26
+sector 30 variante 3,real,config_zhang,2,2,0.557256,0.557256,0.0,True,5.6,2.49,26
+sector 31,real,config_mai,0,3,0.557256,0.557256,0.0,True,161.81,5.36,500
+sector 31,real,config_mai,1,3,0.557256,0.557256,0.0,True,164.54,5.36,500
+sector 31,real,config_mai,2,3,0.557256,0.557256,0.0,True,162.33,5.36,500
+sector 31,real,config_zhang,0,3,0.557256,0.557256,0.0,True,8.67,5.36,26
+sector 31,real,config_zhang,1,3,0.557256,0.557256,0.0,True,8.98,5.36,26
+sector 31,real,config_zhang,2,3,0.557256,0.557256,0.0,True,8.66,5.36,26
+sector 31 variante 1,real,config_mai,0,3,0.557256,0.557256,0.0,True,163.73,5.29,500
+sector 31 variante 1,real,config_mai,1,3,0.557256,0.557256,0.0,True,157.57,5.29,500
+sector 31 variante 1,real,config_mai,2,3,0.557256,0.557256,0.0,True,159.62,5.29,500
+sector 31 variante 1,real,config_zhang,0,3,0.557256,0.557256,0.0,True,9.07,5.29,26
+sector 31 variante 1,real,config_zhang,1,3,0.557256,0.557256,0.0,True,8.37,5.29,26
+sector 31 variante 1,real,config_zhang,2,3,0.557256,0.557256,0.0,True,8.43,5.29,26
+sector 31 variante 2,real,config_mai,0,3,0.633607,0.633607,0.0,True,157.21,5.61,500
+sector 31 variante 2,real,config_mai,1,3,0.633607,0.633607,0.0,True,159.44,5.61,500
+sector 31 variante 2,real,config_mai,2,3,0.633607,0.633607,0.0,True,157.94,5.61,500
+sector 31 variante 2,real,config_zhang,0,3,0.633607,0.633607,0.0,True,8.64,5.61,26
+sector 31 variante 2,real,config_zhang,1,3,0.633607,0.633607,0.0,True,8.74,5.61,26
+sector 31 variante 2,real,config_zhang,2,3,0.633607,0.633607,0.0,True,9.03,5.61,26
+sector 31 variante 3,real,config_mai,0,3,0.585883,0.585883,0.0,True,144.48,4.24,500
+sector 31 variante 3,real,config_mai,1,3,0.585883,0.585883,0.0,True,146.42,4.24,500
+sector 31 variante 3,real,config_mai,2,3,0.585883,0.585883,0.0,True,146.35,4.24,500
+sector 31 variante 3,real,config_zhang,0,3,0.585883,0.585883,0.0,True,8.65,4.24,26
+sector 31 variante 3,real,config_zhang,1,3,0.585883,0.585883,0.0,True,7.85,4.24,26
+sector 31 variante 3,real,config_zhang,2,3,0.585883,0.585883,0.0,True,7.78,4.24,26
+sintética 1 (6 cámaras),sintética,config_mai,0,6,0.566415,0.566415,0.0,True,279.07,171.57,500
+sintética 1 (6 cámaras),sintética,config_mai,1,6,0.566415,0.566415,0.0,True,280.94,171.57,500
+sintética 1 (6 cámaras),sintética,config_mai,2,6,0.566415,0.566415,0.0,True,280.1,171.57,500
+sintética 1 (6 cámaras),sintética,config_zhang,0,6,0.566415,0.566415,0.0,True,16.09,171.57,26
+sintética 1 (6 cámaras),sintética,config_zhang,1,6,0.566415,0.566415,0.0,True,16.13,171.57,26
+sintética 1 (6 cámaras),sintética,config_zhang,2,6,0.566415,0.566415,0.0,True,15.75,171.57,26
+sintética 2 (8 cámaras),sintética,config_mai,0,8,0.456239,0.456239,0.0,True,385.0,716.72,500
+sintética 2 (8 cámaras),sintética,config_mai,1,8,0.456239,0.456239,0.0,True,385.95,716.72,500
+sintética 2 (8 cámaras),sintética,config_mai,2,8,0.456239,0.456239,0.0,True,398.04,716.72,500
+sintética 2 (8 cámaras),sintética,config_zhang,0,8,0.456239,0.456239,0.0,True,21.96,716.72,26
+sintética 2 (8 cámaras),sintética,config_zhang,1,8,0.456239,0.456239,0.0,True,25.1,716.72,26
+sintética 2 (8 cámaras),sintética,config_zhang,2,8,0.456239,0.456239,0.0,True,22.35,716.72,26
+sintética 3 (6 cámaras),sintética,config_mai,0,6,0.583261,0.583261,0.0,True,289.58,121.2,500
+sintética 3 (6 cámaras),sintética,config_mai,1,6,0.583261,0.583261,0.0,True,317.21,121.2,500
+sintética 3 (6 cámaras),sintética,config_mai,2,6,0.583261,0.583261,0.0,True,290.23,121.2,500
+sintética 3 (6 cámaras),sintética,config_zhang,0,6,0.583261,0.583261,0.0,True,16.55,121.2,27
+sintética 3 (6 cámaras),sintética,config_zhang,1,6,0.583261,0.583261,0.0,True,16.06,121.2,26
+sintética 3 (6 cámaras),sintética,config_zhang,2,6,0.583261,0.583261,0.0,True,15.8,121.2,26
+sintética 4 (7 cámaras),sintética,config_mai,0,7,1.007022,1.007022,0.0,True,344.98,419.38,500
+sintética 4 (7 cámaras),sintética,config_mai,1,7,1.007022,1.007022,0.0,True,341.12,419.38,500
+sintética 4 (7 cámaras),sintética,config_mai,2,7,1.007022,1.007022,0.0,True,346.4,419.38,500
+sintética 4 (7 cámaras),sintética,config_zhang,0,7,1.007022,1.007022,0.0,True,23.14,419.38,31
+sintética 4 (7 cámaras),sintética,config_zhang,1,7,1.007022,1.007022,0.0,True,19.65,419.38,26
+sintética 4 (7 cámaras),sintética,config_zhang,2,7,1.007022,1.007022,0.0,True,20.83,419.38,28
+sintética 5 (6 cámaras),sintética,config_mai,0,6,0.546968,0.546968,0.0,True,285.46,68.46,500
+sintética 5 (6 cámaras),sintética,config_mai,1,6,0.546968,0.546968,0.0,True,296.07,68.46,500
+sintética 5 (6 cámaras),sintética,config_mai,2,6,0.546968,0.546968,0.0,True,283.32,68.46,500
+sintética 5 (6 cámaras),sintética,config_zhang,0,6,0.546968,0.546968,0.0,True,16.07,68.46,26
+sintética 5 (6 cámaras),sintética,config_zhang,1,6,0.546968,0.546968,0.0,True,16.59,68.46,27
+sintética 5 (6 cámaras),sintética,config_zhang,2,6,0.546968,0.546968,0.0,True,15.98,68.46,26
+sintética 6 (7 cámaras),sintética,config_mai,0,7,0.660761,0.660761,0.0,True,336.18,349.62,500
+sintética 6 (7 cámaras),sintética,config_mai,1,7,0.660761,0.660761,0.0,True,336.07,349.62,500
+sintética 6 (7 cámaras),sintética,config_mai,2,7,0.660761,0.660761,0.0,True,339.48,349.62,500
+sintética 6 (7 cámaras),sintética,config_zhang,0,7,0.660761,0.660761,0.0,True,19.55,349.62,26
+sintética 6 (7 cámaras),sintética,config_zhang,1,7,0.660761,0.660761,0.0,True,19.44,349.62,26
+sintética 6 (7 cámaras),sintética,config_zhang,2,7,0.660761,0.660761,0.0,True,19.21,349.62,26
+sintética 7 (7 cámaras),sintética,config_mai,0,7,0.607611,0.607611,-0.0,True,340.34,283.26,500
+sintética 7 (7 cámaras),sintética,config_mai,1,7,0.607611,0.607611,0.0,True,341.2,283.26,500
+sintética 7 (7 cámaras),sintética,config_mai,2,7,0.607611,0.607611,-0.0,True,340.82,283.26,500
+sintética 7 (7 cámaras),sintética,config_zhang,0,7,0.607611,0.607611,0.0,True,20.71,283.26,28
+sintética 7 (7 cámaras),sintética,config_zhang,1,7,0.607611,0.607611,0.0,True,20.94,283.26,28
+sintética 7 (7 cámaras),sintética,config_zhang,2,7,0.607611,0.614303,1.1013,False,19.81,283.26,26
+sintética 8 (7 cámaras),sintética,config_mai,0,7,0.485582,0.485582,0.0,True,342.51,319.81,500
+sintética 8 (7 cámaras),sintética,config_mai,1,7,0.485582,0.485582,0.0,True,340.7,319.81,500
+sintética 8 (7 cámaras),sintética,config_mai,2,7,0.485582,0.485582,0.0,True,342.13,319.81,500
+sintética 8 (7 cámaras),sintética,config_zhang,0,7,0.485582,0.485582,0.0,True,22.97,319.81,30
+sintética 8 (7 cámaras),sintética,config_zhang,1,7,0.485582,0.485582,0.0,True,23.15,319.81,31
+sintética 8 (7 cámaras),sintética,config_zhang,2,7,0.485582,0.485582,0.0,True,19.45,319.81,26
+sintética 9 (8 cámaras),sintética,config_mai,0,8,0.460407,0.460407,-0.0,True,382.54,887.62,500
+sintética 9 (8 cámaras),sintética,config_mai,1,8,0.460407,0.460407,0.0,True,386.72,887.62,500
+sintética 9 (8 cámaras),sintética,config_mai,2,8,0.460407,0.460407,0.0,True,381.79,887.62,500
+sintética 9 (8 cámaras),sintética,config_zhang,0,8,0.460407,0.460407,-0.0,True,22.23,887.62,26
+sintética 9 (8 cámaras),sintética,config_zhang,1,8,0.460407,0.460407,0.0,True,24.29,887.62,26
+sintética 9 (8 cámaras),sintética,config_zhang,2,8,0.460407,0.460407,-0.0,True,24.3,887.62,29
+sintética 10 (7 cámaras),sintética,config_mai,0,7,0.605209,0.605209,0.0,True,365.29,261.39,500
+sintética 10 (7 cámaras),sintética,config_mai,1,7,0.605209,0.605209,-0.0,True,346.1,261.39,500
+sintética 10 (7 cámaras),sintética,config_mai,2,7,0.605209,0.605209,0.0,True,339.17,261.39,500
+sintética 10 (7 cámaras),sintética,config_zhang,0,7,0.605209,0.605209,-0.0,True,21.73,261.39,29
+sintética 10 (7 cámaras),sintética,config_zhang,1,7,0.605209,0.605209,-0.0,True,19.92,261.39,27
+sintética 10 (7 cámaras),sintética,config_zhang,2,7,0.605209,0.605209,-0.0,True,19.59,261.39,26

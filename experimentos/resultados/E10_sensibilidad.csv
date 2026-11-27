@@ -1,0 +1,13 @@
+parametro,valor,mas_resiliente,R_dijkstra_distancia,R_milp,R_dijkstra_ponderado,R_aco
+p0 aves,0.3,T3 Dijkstra ponderado,0.3181,0.3779,0.4092,0.3779
+p0 aves,0.5,T3 Dijkstra ponderado,0.3181,0.3779,0.4092,0.3779
+p0 aves,0.7,T3 Dijkstra ponderado,0.3181,0.3779,0.4092,0.3779
+r_mov (m),1000,T3 Dijkstra ponderado,0.3181,0.3779,0.4092,0.3779
+r_mov (m),2000,T3 Dijkstra ponderado,0.3181,0.3779,0.4092,0.3779
+r_mov (m),5000,T3 Dijkstra ponderado,0.3181,0.3779,0.4092,0.3779
+radio incendio (m),500,T3 Dijkstra ponderado,0.9223,0.9223,0.9223,0.9223
+radio incendio (m),1000,T3 Dijkstra ponderado,0.3181,0.3779,0.4092,0.3779
+radio incendio (m),1500,T1 Dijkstra distancia,0.0088,0.0088,0.008,0.0088
+alpha viento,0.2,T3 Dijkstra ponderado,0.328,0.3897,0.4219,0.3897
+alpha viento,0.25,T3 Dijkstra ponderado,0.3181,0.3779,0.4092,0.3779
+alpha viento,0.3,T3 Dijkstra ponderado,0.3022,0.3591,0.3888,0.3591

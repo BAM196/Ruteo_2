@@ -1,0 +1,34 @@
+sector,camaras,n_camaras,base,tipo_base,dist_max_base_m,cumple_alcance,vuelos,min_vuelo,min_con_cambios,ascenso_m
+1,AI03,1,Camara AI03,camara,0.0,True,1,8.9,8.9,0.0
+2,AH08,1,Camara AH08,camara,0.0,True,1,8.9,8.9,0.0
+3,AM27,1,Camara AM27,camara,0.0,True,1,8.9,8.9,0.0
+4,AF56 AF54,2,Entre Camara AF56 y Camara AF54,camino_camaras,1299.9,True,1,26.01,26.01,288.3
+5,AD57 AC56,2,Entre Camara AD57 y Camara AC56,camino_camaras,1314.2,True,1,23.51,23.51,170.9
+6,Z59,1,Camara Z59,camara,0.0,True,1,8.9,8.9,0.0
+7,AA60,1,Camara AA60,camara,0.0,True,1,8.9,8.9,0.0
+8,T60,1,sin base,—,,,,,,
+9,Z61,1,Camara Z61,camara,0.0,True,1,8.9,8.9,0.0
+10,T62 S61,2,Entre Camara T62 y Camara S61,camino_camaras,1314.3,True,1,23.23,23.23,67.7
+11,R61,1,Camara R61,camara,0.0,True,1,8.9,8.9,0.0
+12,C63,1,Camara C63,camara,0.0,True,1,8.9,8.9,0.0
+13,U65,1,Camara U65,camara,0.0,True,1,8.9,8.9,0.0
+14,B66,1,Camara B66,camara,0.0,True,1,8.9,8.9,0.0
+15,U72 U70,2,Sendero Tronador,sendero,1224.1,True,1,25.66,25.66,91.8
+16,S71,1,Camara S71,camara,0.0,True,1,8.9,8.9,0.0
+17,T75,1,sin base,—,,,,,,
+18,T79 U78 T77,3,Sendero Punta del Lago,sendero,1228.4,True,2,37.05,42.05,330.4
+19,Q83 R82,2,Entre Camara Q83 y Camara R82,camino_camaras,1314.2,True,1,23.08,23.08,16.1
+20,Q86 R85 R84,3,Entre Camara Q86 y Camara R85,camino_camaras,1200.0,True,2,36.26,41.26,257.9
+21,O84,1,Camara O84,camara,0.0,True,1,8.9,8.9,0.0
+22,O88 O86,2,Entre Camara O88 y Camara O86,camino_camaras,1099.9,True,1,26.18,26.18,350.9
+23,I88 K87,2,Entre Camara I88 y Camara K87,camino_camaras,1336.0,True,1,26.1,26.1,5.8
+24,D91,1,Camara D91,camara,0.0,True,1,8.9,8.9,0.0
+25,AI95,1,Camara AI95,camara,0.0,True,1,8.9,8.9,0.0
+26,AE97,1,Camara AE97,camara,0.0,True,1,8.9,8.9,0.0
+27,AD101 AD99,2,Entre Camara AD101 y Camara AD99,camino_camaras,1000.0,True,1,26.13,26.13,332.3
+28,AC103,1,Camara AC103,camara,0.0,True,1,8.9,8.9,0.0
+29,Q104,1,Camara Q104,camara,0.0,True,1,8.9,8.9,0.0
+30,AB106 AB105,2,Entre Camara AC107 y Camara AB105,camino_camaras,640.4,True,1,21.92,21.92,98.2
+31,AB109 AB108 AC107,3,Entre Camara AB108 y Camara AC107,camino_camaras,1214.2,True,2,35.69,40.69,51.4
+32,AE108,1,Camara AE108,camara,0.0,True,1,8.9,8.9,0.0
+33,AC110,1,Camara AC110,camara,0.0,True,1,8.9,8.9,0.0

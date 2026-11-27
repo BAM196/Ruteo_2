@@ -1,0 +1,143 @@
+{
+ "campanas": [
+  {
+   "nombre": "Sector 23 (verano 2024)",
+   "tipo": "ronda",
+   "modo": "sector",
+   "consulta": {
+    "modo": "sector",
+    "sector_id": 23
+   },
+   "temporada": "verano",
+   "fecha_inicio": "2024-01-15",
+   "fecha_limite": "2024-02-29",
+   "visitas_objetivo": 3,
+   "estado": "completa",
+   "completa": true,
+   "motivo": null,
+   "id": 1
+  }
+ ],
+ "dias": [
+  {
+   "visita": 1,
+   "fecha": "2024-01-16",
+   "estado": "volada",
+   "id": 1,
+   "campana_id": 1,
+   "decision": "Volar: R del plan 0,950 ≥ 0,90",
+   "r_plan": 0.9501861374548285,
+   "plan": {
+    "tecnica": "dijkstra_ponderado",
+    "leyendas": [
+     "pgr_dijkstra (distancia) | 1 vuelo | 4,5 km | 26 min | R plan = 0,950 | 8 ms",
+     "Gurobi (MILP) | 1 vuelo | 4,5 km | 26 min | R plan = 0,950 | 6 ms",
+     "pgr_dijkstra (ponderado) | 1 vuelo | 4,5 km | 26 min | R plan = 0,950 | 3 ms",
+     "ACO (config_zhang) | 1 vuelo | 4,5 km | 26 min | R plan = 0,950 | 8 ms"
+    ],
+    "vuelos": [
+     {
+      "vuelo": 1,
+      "camaras": [
+       15,
+       17
+      ],
+      "nodos": [
+       100587,
+       15,
+       100587,
+       17,
+       100587
+      ],
+      "aristas": [
+       101935,
+       101935,
+       101936,
+       101936
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "visita": 2,
+   "fecha": "2024-01-17",
+   "estado": "volada",
+   "id": 2,
+   "campana_id": 1,
+   "decision": "Volar: R del plan 0,956 ≥ 0,90",
+   "r_plan": 0.9555202883012249,
+   "plan": {
+    "tecnica": "dijkstra_ponderado",
+    "leyendas": [
+     "pgr_dijkstra (distancia) | 1 vuelo | 4,5 km | 26 min | R plan = 0,956 | 6 ms",
+     "Gurobi (MILP) | 1 vuelo | 4,5 km | 26 min | R plan = 0,956 | 5 ms",
+     "pgr_dijkstra (ponderado) | 1 vuelo | 4,5 km | 26 min | R plan = 0,956 | 2 ms",
+     "ACO (config_zhang) | 1 vuelo | 4,5 km | 26 min | R plan = 0,956 | 7 ms"
+    ],
+    "vuelos": [
+     {
+      "vuelo": 1,
+      "camaras": [
+       15,
+       17
+      ],
+      "nodos": [
+       100587,
+       15,
+       100587,
+       17,
+       100587
+      ],
+      "aristas": [
+       101935,
+       101935,
+       101936,
+       101936
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "visita": 3,
+   "fecha": "2024-01-23",
+   "estado": "volada",
+   "id": 3,
+   "campana_id": 1,
+   "decision": "Volar: R del plan 0,976 ≥ 0,90",
+   "r_plan": 0.9757048633360311,
+   "plan": {
+    "tecnica": "dijkstra_ponderado",
+    "leyendas": [
+     "pgr_dijkstra (distancia) | 1 vuelo | 4,5 km | 26 min | R plan = 0,976 | 6 ms",
+     "Gurobi (MILP) | 1 vuelo | 4,5 km | 26 min | R plan = 0,976 | 5 ms",
+     "pgr_dijkstra (ponderado) | 1 vuelo | 4,5 km | 26 min | R plan = 0,976 | 2 ms",
+     "ACO (config_zhang) | 1 vuelo | 4,5 km | 26 min | R plan = 0,976 | 7 ms"
+    ],
+    "vuelos": [
+     {
+      "vuelo": 1,
+      "camaras": [
+       15,
+       17
+      ],
+      "nodos": [
+       100587,
+       15,
+       100587,
+       17,
+       100587
+      ],
+      "aristas": [
+       101935,
+       101935,
+       101936,
+       101936
+      ]
+     }
+    ]
+   }
+  }
+ ]
+}

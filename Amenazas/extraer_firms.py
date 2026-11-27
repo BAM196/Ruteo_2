@@ -1,7 +1,8 @@
+import argparse
 import json
 import os
 import sys
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from io import StringIO
 from pathlib import Path
 
@@ -17,11 +18,12 @@ ARISTAS_PATH = Path(os.getenv("ARISTAS_PATH", RAIZ / "Infraestructura" / "arista
 SALIDA = AQUI / "amenaza_firms.json"
 
 SOURCE = os.getenv("FIRMS_SOURCE", "VIIRS_SNPP_NRT")
+SOURCE_HISTORICO = os.getenv("FIRMS_SOURCE_HISTORICO", "VIIRS_SNPP_SP")
+DIAS_NRT = 60
 DAY_RANGE = int(os.getenv("FIRMS_DAY_RANGE", "5"))
-FECHA = os.getenv("FIRMS_FECHA", "").strip()
+FECHA = os.getenv("ESCENARIO_FECHA", os.getenv("FIRMS_FECHA", "")).strip()
 MARGEN = float(os.getenv("FIRMS_MARGEN_GRADOS", "0.05"))
 UMBRAL_M = float(os.getenv("UMBRAL_AMENAZA_M", "1000"))
-PENALIZACION_KM = float(os.getenv("PENALIZACION_KM", "1000"))
 CRS_METRICO = "EPSG:32718"
 API = "https://firms.modaps.eosdis.nasa.gov/api/area/csv"
 
@@ -62,7 +64,16 @@ def bbox_de_nodos(nodos: list[dict]) -> tuple[float, float, float, float]:
     )
 
 
-def descargar(bbox: tuple[float, float, float, float]) -> pd.DataFrame:
+def fuente_y_desde(fecha: str) -> tuple[str, str | None]:
+    if not fecha:
+        return SOURCE, None
+    f = date.fromisoformat(fecha)
+    desde = (f - timedelta(days=DAY_RANGE - 1)).isoformat()
+    fuente = SOURCE_HISTORICO if (date.today() - f).days > DIAS_NRT else SOURCE
+    return fuente, desde
+
+
+def descargar(bbox: tuple[float, float, float, float], fuente: str, desde: str | None) -> pd.DataFrame:
     key = os.getenv("FIRMS_MAP_KEY", "").strip()
     if not key:
         sys.exit(
@@ -73,10 +84,10 @@ def descargar(bbox: tuple[float, float, float, float]) -> pd.DataFrame:
     if not 1 <= DAY_RANGE <= 5:
         sys.exit("FIRMS_DAY_RANGE debe estar entre 1 y 5.")
     area = ",".join(f"{v:.4f}" for v in bbox)
-    url = f"{API}/{key}/{SOURCE}/{area}/{DAY_RANGE}"
-    if FECHA:
-        url = f"{url}/{FECHA}"
-    print(f"Consultando {SOURCE} bbox={area} dias={DAY_RANGE} fecha={FECHA or 'reciente'}")
+    url = f"{API}/{key}/{fuente}/{area}/{DAY_RANGE}"
+    if desde:
+        url = f"{url}/{desde}"
+    print(f"Consultando {fuente} bbox={area} dias={DAY_RANGE} desde={desde or 'hoy'}")
     resp = requests.get(url, timeout=60)
     texto = resp.text.strip()
     if resp.status_code != 200 or texto.lower().startswith("<") or "invalid" in texto.lower():
@@ -141,7 +152,7 @@ def afectados(focos: list[dict], aristas: list[dict]) -> tuple[list[dict], list[
                 "distancia_min_m": item["distancia_m"],
                 "focos": [],
                 "evitar": True,
-                "motivo": "Foco activo dentro del umbral: no se espera fauna en esa cámara.",
+                "motivo": "Foco activo dentro del radio de la amenaza.",
             })
             bloque["distancia_min_m"] = min(bloque["distancia_min_m"], item["distancia_m"])
             bloque["focos"].append(foco["id"])
@@ -158,8 +169,6 @@ def afectados(focos: list[dict], aristas: list[dict]) -> tuple[list[dict], list[
             })
             bloque["distancia_min_m"] = min(bloque["distancia_min_m"], item["distancia_m"])
             bloque["focos"].append(foco["id"])
-    for bloque in ars.values():
-        bloque["costo_resiliente_km"] = round(bloque["costo_km"] + PENALIZACION_KM, 4)
     return list(nodos.values()), list(ars.values())
 
 
@@ -197,11 +206,16 @@ def filas_a_focos(df: pd.DataFrame) -> list[dict]:
 
 
 def main():
+    ap = argparse.ArgumentParser(description="Focos de incendio de NASA FIRMS cerca de la red.")
+    ap.add_argument("--fecha", default=FECHA or None,
+                    help="YYYY-MM-DD: focos de los 5 días que terminan en esa fecha; sin fecha, los últimos 5 días")
+    args = ap.parse_args()
     cargar_env()
     nodos = leer_json(NODOS_PATH, "nodos")
     aristas = leer_json(ARISTAS_PATH, "aristas")
     bbox = bbox_de_nodos(nodos)
-    df = descargar(bbox)
+    fuente, desde = fuente_y_desde(args.fecha or "")
+    df = descargar(bbox, fuente, desde)
     focos = filas_a_focos(df) if not df.empty else []
     cruzar(focos, nodos, aristas)
     nodos_af, aristas_af = afectados(focos, aristas)
@@ -210,23 +224,22 @@ def main():
     documento = {
         "meta": {
             "fuente": "NASA FIRMS",
-            "source": SOURCE,
+            "source": fuente,
             "endpoint": API,
+            "modo": "historico" if args.fecha else "reciente",
+            "fecha_escenario": args.fecha,
             "bbox": {"west": bbox[0], "south": bbox[1], "east": bbox[2], "north": bbox[3]},
             "margen_grados": MARGEN,
             "day_range": DAY_RANGE,
-            "fecha": FECHA or None,
+            "desde": desde,
             "generado": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "nodos_origen": ruta_repo(NODOS_PATH),
             "aristas_origen": ruta_repo(ARISTAS_PATH),
             "crs_metrico": CRS_METRICO,
             "umbral_amenaza_m": UMBRAL_M,
-            "penalizacion_km": PENALIZACION_KM,
-            "regla_peso": (
-                f"Si la distancia de un tramo al foco es <= {UMBRAL_M:.0f} m, "
-                f"evitar = true y costo_resiliente_km = costo_km + {PENALIZACION_KM:.0f}. "
-                "El Dijkstra de la fase 2 no usa este costo: solo costo_km. "
-                "El costo penalizado queda para el algoritmo de la fase 3."
+            "regla": (
+                f"Se listan los nodos y aristas a <= {UMBRAL_M:.0f} m de cada foco. La probabilidad "
+                "de falla se calcula en el motor (Motor/config/amenazas.yaml)."
             ),
             "n_focos": len(focos),
             "n_nodos_afectados": len(nodos_af),

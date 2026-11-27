@@ -1,6 +1,6 @@
 # nodosv2.json
 
-Cada nodo es una cámara de fotomonitoreo CONAF en el Parque Nacional Pumalín. Sale de `occurrence.txt` (GBIF Chile). La misma latitud y longitud se agrupa en una sola cámara, con las especies que registró.
+Cada nodo es una cámara de fotomonitoreo CONAF en el Parque Nacional Pumalín. Sale de `occurrence.txt`, del conjunto *Programa de fotomonitoreo de objetos de conservación y amenazas en el Sistema Nacional de Áreas Protegidas (SNAP)* (Corporación Nacional Forestal, 2024, v1.9, GBIF Chile, clave 9f7ed5a4-f73a-4d74-b0be-cef5bd700a37, CC BY-NC 4.0). El conjunto cubre todo el SNAP; aquí se filtra a las estaciones de Pumalín. La misma latitud y longitud se agrupa en una sola cámara, con las especies que registró.
 
 La cámara está donde CONAF la instaló. La ruta del dron visita esas estaciones.
 
